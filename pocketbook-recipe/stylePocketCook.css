@@ -1,0 +1,233 @@
+body{
+    background-color: #F2EEE2;
+    margin-left: 0;
+}
+
+#main{
+    position: absolute;
+  top: 20%;
+  left: 28%;
+   font-size: 2.2em;
+}
+
+#hr{
+    margin-top:-1em;
+    border: none;
+    border-top:solid;
+    color: #474B4B;
+    width: 100%;
+}
+
+#hr:after {
+    content: "§";
+    display: inline-block;
+    position: relative;
+    -webkit-transform: rotate(40deg); 
+    transform: rotate(40deg);
+    top: -1em;
+    font-size: 0.7em;
+    left: 13em;
+    padding: 0 0.30em;
+    background: #F2EEE2;
+}
+#main button{
+    width: 32vh;
+    padding: 3vh 7vh;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.9em;
+    margin: 10vh 2vh;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#signUp {
+    background-color: white; 
+    color: black; 
+    margin-left: 2vh;
+    border: 2px solid #F81884;
+}
+
+#signUp:hover {
+    background-color: #F81884;
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+#logIn {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #43C0f6;
+}
+
+#logIn:hover {
+    background-color: #43C0f6;
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+/**-----LogIn ---**/
+
+
+
+#logForm input[type=text] {
+    width: 100%; 
+    padding: 2vh; 
+    border: 1px solid #8B8D90; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+    margin-top: 1vh; 
+    margin-bottom: 3vh;
+}
+
+
+#logForm input[type=text]:focus{
+    outline: none !important;
+    border:1px solid #43C0f6;
+    box-shadow: 0 0 0.7vh #323ECE;
+}
+
+
+
+
+#logForm input[type="submit"] {
+	border:none;
+	background:#F5CE28;
+    border-radius: 4px; 
+    font-size: 1em;
+	color:#FFF;
+	padding:1.4vh;;
+    cursor:pointer;
+	width:100%;
+    margin-top:5vh;
+}
+
+#logForm input[type="submit"]:hover {
+	background:#2876F5;
+	-webkit-transition:background 0.4s ease-in-out;
+	-moz-transition:background 0.4s ease-in-out;
+	transition:background-color 0.4s ease-in-out;
+   
+}
+
+
+#logForm {
+    border-radius: 5px;
+    padding: 20px;
+    width: 30%;
+    position: absolute;
+    color: #202020;
+   top: 2%;
+    left: 33%;
+    min-height: 100%;
+   margin-bottom: -10vh;
+}
+
+
+#logForm p{
+    font-size: 1.2em;
+}
+
+#logForm h1{
+    text-align: center;
+    padding-bottom: 3vh;
+}
+
+#logForm:after{
+    display: block;
+}
+
+
+
+
+
+/**-----Save ---**/
+.save select{
+    width: 50%;
+}
+.save button{
+    width: 10vh;
+    padding: 1vh 3vh;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.9em;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 4px;
+    
+    
+}
+
+.save textarea{
+    resize: vertical;
+    overflow: auto;
+    width: 100%;
+    height: 15vh;
+    border: 1px solid #8B8D90; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+}
+
+.save textarea:focus{
+    outline: none !important;
+    border:1px solid #43C0f6;
+    box-shadow: 0 0 0.7vh #323ECE;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #5E6969;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration:none;
+    font-size: 25px;
+    color: #F5CE28;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+
+/**-----Search ---**/
+    
+#searchForm span {
+    display: inline;
+        float: left;
+}
+
+#suggested{
+ margin-top: 50vh;
+}
+
