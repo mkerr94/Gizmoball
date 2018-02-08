@@ -2,11 +2,13 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 
 public class RunView extends JFrame {
 
     private JLabel statusbar;
+    private AnimationWindow animationWindow;
 
     public RunView() {
         runGUI();
@@ -14,12 +16,29 @@ public class RunView extends JFrame {
 
     private void runGUI() {
 
-        makeMenuBar();
-        makeButtons();
 
-        JPanel box = new JPanel(new GridLayout(20, 20));
-        box.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-        add(box, BorderLayout.CENTER);
+        JPanel buttonPanel = new JPanel(new GridLayout(10, 1, 5, 5));
+        makeMenuBar();
+        makeButtons(buttonPanel);
+
+        //Create animation area used for input
+        animationWindow = new AnimationWindow();
+
+        //Put it in a scrollpane (makes a border)
+        JScrollPane scrollPane = new JScrollPane(animationWindow);
+
+        //Lay out the content pane
+       /* JPanel contentPane = new JPanel(new GridLayout(20, 20));
+        contentPane.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+        add(contentPane, BorderLayout.CENTER);
+        setContentPane(contentPane);*/
+
+        JPanel contentPane = new JPanel();
+        contentPane.setLayout(new BorderLayout());
+        contentPane.setPreferredSize(new Dimension(500, 500));
+        contentPane.add(buttonPanel, BorderLayout.EAST);
+        contentPane.add(scrollPane, BorderLayout.CENTER);
+        setContentPane(contentPane);
 
         statusbar = new JLabel("Run Mode");
         statusbar.setBorder(BorderFactory.createEtchedBorder());
@@ -69,26 +88,35 @@ public class RunView extends JFrame {
             }
         });
 
-
         modeGroup.add(buildMode);
         modeGroup.add(runMode);
         menuBar.add(buildMenu);
         setJMenuBar(menuBar);
     }
 
-    private void makeButtons(){
+    protected void makeButtons(JPanel panel) {
 
-        JPanel panel = new JPanel(new GridLayout(10,1, 5, 5));
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         JButton startB = new JButton("Start");
         JButton stopB = new JButton("Stop");
-        JButton tickB = new JButton("Tick");
+
+        startB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                animationWindow.setMode(true);
+            }
+        });
+
+        stopB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                animationWindow.setMode(false);
+            }
+        });
 
         panel.add(startB);
         panel.add(stopB);
-        panel.add(tickB);
-        add(panel, BorderLayout.EAST);
     }
 
     public static void main(String[] args) {
