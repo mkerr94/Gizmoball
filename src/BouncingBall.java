@@ -7,13 +7,9 @@ class BouncingBall {
     // ball as it moves.
 
     private int x = (int) ((Math.random() * 100.0) + 100.0);
-
     private int y = (int) ((Math.random() * 100.0) + 100.0);
-
     private int vx = (int) ((Math.random() * 10.0) + 10.0);
-
     private int vy = (int) ((Math.random() * 10.0) + 10.0);
-
     private int radius = 6;
 
     private Color color = new Color(255, 0, 0);
@@ -23,7 +19,7 @@ class BouncingBall {
         // effects: Move the ball according to its velocity. Reflections off
         // walls cause the ball to change direction.
 
-        x += vx;
+/*        x += vx;
         if (x <= radius) {
             x = radius;
             vx = -vx;
@@ -31,7 +27,7 @@ class BouncingBall {
         if (x >= 500 - radius) {
             x = 500 - radius;
             vx = -vx;
-        }
+        }*/
 
         y += vy;
         if (y <= radius) {

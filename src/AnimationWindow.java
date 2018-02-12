@@ -40,11 +40,9 @@ class AnimationWindow extends JPanel {
     // mode the ball doesn't move.
 
     private AnimationEventListener eventListener;
-
     private BouncingBall ball;
-
+    private Absorber absorber;
     private Timer timer;
-
     private boolean mode;
 
     public AnimationWindow() {
@@ -52,6 +50,7 @@ class AnimationWindow extends JPanel {
 
         super(); // do the standard JPanel setup stuff
         ball = new BouncingBall();
+        absorber = new Absorber();
 
         // this only initializes the timer, we actually start and stop the
         // timer in the setMode() method
@@ -76,7 +75,7 @@ class AnimationWindow extends JPanel {
         // first repaint the proper background color (controlled by
         // the windowing system)
         super.paint(g);
-
+        absorber.paint(g);
         ball.paint(g);
     }
 
