@@ -2,18 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cae7b810-d3cd-4921-b82a-37852034a026" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/View/AnimationWindow.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/View/BouncingBall.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/View/CircleGizmo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/View/SquareGizmo.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/AnimationWindow.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/BouncingBall.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/CircleGizmo.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/SquareGizmo.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/BuildView.java" afterPath="$PROJECT_DIR$/src/View/BuildView.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/RunView.java" afterPath="$PROJECT_DIR$/src/View/RunView.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/TriangleGizmo.java" afterPath="$PROJECT_DIR$/src/View/TriangleGizmo.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GizmoballDesign/BuildView.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GizmoballDesign/RunView.class" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/View/AnimationWindow.java" afterPath="$PROJECT_DIR$/src/Model/AnimationWindow.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/View/BouncingBall.java" afterPath="$PROJECT_DIR$/src/Model/BouncingBall.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/View/CircleGizmo.java" afterPath="$PROJECT_DIR$/src/Model/CircleGizmo.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/View/SquareGizmo.java" afterPath="$PROJECT_DIR$/src/Model/SquareGizmo.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/View/TriangleGizmo.java" afterPath="$PROJECT_DIR$/src/Model/TriangleGizmo.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/View/RunView.java" afterPath="$PROJECT_DIR$/src/View/RunView.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,9 +34,9 @@
   <component name="FileEditorManager">
     <leaf>
       <file leaf-file-name="SquareGizmo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/View/SquareGizmo.java">
+        <entry file="file://$PROJECT_DIR$/src/Model/SquareGizmo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
+            <state relative-caret-position="85">
               <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -49,36 +46,36 @@
         </entry>
       </file>
       <file leaf-file-name="CircleGizmo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/View/CircleGizmo.java">
+        <entry file="file://$PROJECT_DIR$/src/Model/CircleGizmo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
+            <state relative-caret-position="85">
               <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#646#647#0" expanded="true" />
-                <element signature="e#670#671#0" expanded="true" />
-                <element signature="e#698#699#0" expanded="true" />
-                <element signature="e#722#723#0" expanded="true" />
+                <element signature="e#647#648#0" expanded="true" />
+                <element signature="e#671#672#0" expanded="true" />
+                <element signature="e#699#700#0" expanded="true" />
+                <element signature="e#723#724#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TriangleGizmo.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/View/TriangleGizmo.java">
+      <file leaf-file-name="TriangleGizmo.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Model/TriangleGizmo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+            <state relative-caret-position="68">
+              <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="BouncingBall.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/View/BouncingBall.java">
+        <entry file="file://$PROJECT_DIR$/src/Model/BouncingBall.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="526">
-              <caret line="86" column="1" lean-forward="false" selection-start-line="86" selection-start-column="1" selection-end-line="86" selection-end-column="1" />
+            <state relative-caret-position="68">
+              <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -87,8 +84,8 @@
       <file leaf-file-name="RunView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/View/RunView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="25" column="30" lean-forward="false" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
+            <state relative-caret-position="-918">
+              <caret line="38" column="17" lean-forward="true" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -96,11 +93,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AnimationWindow.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/View/AnimationWindow.java">
+      <file leaf-file-name="BuildView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/View/BuildView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+            <state relative-caret-position="325">
+              <caret line="49" column="13" lean-forward="true" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AnimationWindow.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Model/AnimationWindow.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="901">
+              <caret line="57" column="36" lean-forward="true" selection-start-line="57" selection-start-column="36" selection-end-line="57" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -159,6 +166,8 @@
         <option value="$PROJECT_DIR$/src/View/BouncingBall.java" />
         <option value="$PROJECT_DIR$/src/View/AnimationWindow.java" />
         <option value="$PROJECT_DIR$/src/View/TriangleGizmo.java" />
+        <option value="$PROJECT_DIR$/src/Model/TriangleGizmo.java" />
+        <option value="$PROJECT_DIR$/src/Model/AnimationWindow.java" />
       </list>
     </option>
   </component>
@@ -202,6 +211,12 @@
               <item name="CS308-Gizmoball" type="b2602c69:ProjectViewProjectNode" />
               <item name="CS308-Gizmoball" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CS308-Gizmoball" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CS308-Gizmoball" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CS308-Gizmoball" type="b2602c69:ProjectViewProjectNode" />
@@ -386,15 +401,21 @@
       <option name="project" value="LOCAL" />
       <updated>1518469111829</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Fixed triangle gizmo&#10;All gizmos now added to playing area.">
+      <created>1518471113798</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1518471113799</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48186000" />
+    <option name="totallyTimeSpent" value="48562000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -404,12 +425,12 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14566284" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14566284" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20574887" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20574887" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -483,7 +504,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Started added gizmos to the playing area" />
-    <option name="LAST_COMMIT_MESSAGE" value="Started added gizmos to the playing area" />
+    <MESSAGE value="Fixed triangle gizmo&#10;All gizmos now added to playing area." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed triangle gizmo&#10;All gizmos now added to playing area." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -835,14 +857,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/BuildView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AnimationWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
@@ -859,60 +873,68 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/BouncingBall.java">
+    <entry file="file://$PROJECT_DIR$/src/Model/BouncingBall.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="526">
-          <caret line="86" column="1" lean-forward="false" selection-start-line="86" selection-start-column="1" selection-end-line="86" selection-end-column="1" />
+        <state relative-caret-position="68">
+          <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/CircleGizmo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#647#648#0" expanded="true" />
+            <element signature="e#671#672#0" expanded="true" />
+            <element signature="e#699#700#0" expanded="true" />
+            <element signature="e#723#724#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/SquareGizmo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/TriangleGizmo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/BuildView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="49" column="13" lean-forward="true" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/View/RunView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="25" column="30" lean-forward="false" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
+        <state relative-caret-position="-918">
+          <caret line="38" column="17" lean-forward="true" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/AnimationWindow.java">
+    <entry file="file://$PROJECT_DIR$/src/Model/AnimationWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/CircleGizmo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#646#647#0" expanded="true" />
-            <element signature="e#670#671#0" expanded="true" />
-            <element signature="e#698#699#0" expanded="true" />
-            <element signature="e#722#723#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/SquareGizmo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/TriangleGizmo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        <state relative-caret-position="901">
+          <caret line="57" column="36" lean-forward="true" selection-start-line="57" selection-start-column="36" selection-end-line="57" selection-end-column="36" />
           <folding />
         </state>
       </provider>

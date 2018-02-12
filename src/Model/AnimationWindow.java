@@ -1,14 +1,10 @@
-package View;
+package Model;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-class AnimationWindow extends JPanel {
-    // overview: an AnimationWindow is an area on the screen in which a
-    // bouncing ball animation occurs. AnimationWindows have two modes:
-    // on and off. During the on mode the ball moves, during the off
-    // mode the ball doesn't move.
+public class AnimationWindow extends JPanel {
 
     private AnimationEventListener eventListener;
 
@@ -24,7 +20,6 @@ class AnimationWindow extends JPanel {
     public AnimationWindow() {
         // effects: initializes this to be in the off mode.
 
-        super(); // do the standard JPanel setup stuff
         ball = new BouncingBall();
         rectangle = new SquareGizmo();
         circle = new CircleGizmo();
