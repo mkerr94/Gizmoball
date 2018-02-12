@@ -42,6 +42,9 @@ class AnimationWindow extends JPanel {
     private AnimationEventListener eventListener;
 
     private BouncingBall ball;
+    private SquareGizmo rectangle;
+    private CircleGizmo circle;
+    private TriangleGizmo triangle;
 
     private Timer timer;
 
@@ -52,6 +55,9 @@ class AnimationWindow extends JPanel {
 
         super(); // do the standard JPanel setup stuff
         ball = new BouncingBall();
+        rectangle = new SquareGizmo();
+        circle = new CircleGizmo();
+        triangle = new TriangleGizmo();
 
         // this only initializes the timer, we actually start and stop the
         // timer in the setMode() method
@@ -78,6 +84,9 @@ class AnimationWindow extends JPanel {
         super.paint(g);
 
         ball.paint(g);
+        rectangle.paint(g);
+        circle.paint(g);
+        triangle.paint(g);
     }
 
     public void setMode(boolean m) {

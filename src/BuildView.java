@@ -80,7 +80,7 @@ public class BuildView extends JFrame {
         JPanel panel = new JPanel(new GridLayout(10, 1, 10, 10));
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        String[] bumpers = {"Circle", "Square", "Triangle"};
+        String[] bumpers = {"Circle", "Square" ,"Triangle"};
         JComboBox bumperList = new JComboBox(bumpers);
         ((JLabel) bumperList.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
 

@@ -27,12 +27,6 @@ public class RunView extends JFrame {
         //Put it in a scrollpane (makes a border)
         JScrollPane scrollPane = new JScrollPane(animationWindow);
 
-        //Lay out the content pane
-       /* JPanel contentPane = new JPanel(new GridLayout(20, 20));
-        contentPane.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-        add(contentPane, BorderLayout.CENTER);
-        setContentPane(contentPane);*/
-
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new BorderLayout());
         contentPane.setPreferredSize(new Dimension(500, 500));
