@@ -1,33 +1,4 @@
-// Note the very indirect way control flow works during an animation:
-//
-// (1) We set up an eventListener with a reference to the animationWindow.
-// (2) We set up a timer with a reference to the eventListener.
-// (3) We call timer.start().
-// (4) Every 20 milliseconds the timer calls eventListener.actionPerformed()
-// (5) eventListener.actionPerformed() modifies the logical
-//     datastructure (e.g. changes the coordinates of the ball).
-// (6) eventListener.actionPerformed() calls myWindow.repaint.
-// (7) Swing schedules, at some point in the future, a call to
-//      myWindow.paint()
-// (8) myWindow.paint() tells various objects to paint
-//     themselves on the provided Graphics context.
-//
-// This may seem very complicated, but it makes the coordination of
-// all the various different kinds of user input much easier. For
-// example here is how control flow works when the user presses the
-// mouse button:
-//
-// (1) We set up an eventListener (actually we just use the same
-//     eventListener that is being used by the timer.)
-// (2) We register the eventListener with the window using the
-//     addMouseListener() method.
-// (3) Every time the mouse button is pressed inside the window the
-//     window calls eventListener.mouseClicked().
-// (4) eventListener.mouseClicked() modifies the logical
-//     datastructures. (In this example it calls ball.randomBump(), but
-//     in other programs it might do something else, including request a
-//     repaint operation).
-//
+package View;
 
 import javax.swing.*;
 import java.awt.*;
