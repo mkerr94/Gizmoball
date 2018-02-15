@@ -31,9 +31,11 @@ public class Absorber {
     public ArrayList<LineSegment> getLines() {
 
         ArrayList<LineSegment> lines = new ArrayList<LineSegment>();
+        LineSegment l1 = new LineSegment(xpos, ypos, xpos + width, ypos);
+        lines.add(l1);
+
         return lines;
     }
-
 
 
     public int getX() {

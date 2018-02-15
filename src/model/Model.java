@@ -29,7 +29,7 @@ public class Model extends Observable {
 		// Wall size 500 x 500 pixels
 		gws = new Walls(0, 0, 500, 500);
 
-		absorber = new Absorber(0,450, 20, 500);
+		absorber = new Absorber(0,480, 20, 500);
 
 		// Lines added in Main
 		lines = new ArrayList<VerticalLine>();
@@ -105,6 +105,16 @@ public class Model extends Observable {
 				newVelo = Geometry.reflectWall(ls, ball.getVelo(), 1.0);
 			}
 		}
+
+		ArrayList<LineSegment> ls = absorber.getLines();
+		for(LineSegment line : ls){
+			time = Geometry.timeUntilWallCollision(line, ballCircle, ballVelocity);
+			if (time < shortestTime) {
+				shortestTime = time;
+				newVelo = Geometry.reflectWall(line, ball.getVelo(), 1.0);
+			}
+		}
+
 		return new CollisionDetails(shortestTime, newVelo);
 	}
 
