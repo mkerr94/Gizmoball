@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -63,14 +62,10 @@ public  class Board extends JPanel implements Observer {
 		Absorber a = gm.getAbsorber();
 		if (a != null) {
 			g2.setColor(a.getColour());
-			int x = a.getX();
-			System.out.println(x);
+			int x = (int) (a.getX());
 			int y = a.getY();
-			System.out.println(y);
 			int width = a.getWidth();
-			System.out.println(width);
 			int height = a.getHeight();
-			System.out.println(height);
 
 			g2.fillRect(x, y, width, height);
 		}

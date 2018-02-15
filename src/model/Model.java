@@ -3,7 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.Observable;
 import view.Board;
-
 import physics.Circle;
 import physics.Geometry;
 import physics.LineSegment;
@@ -16,6 +15,7 @@ import physics.Vect;
 public class Model extends Observable {
 
 	private ArrayList<VerticalLine> lines;
+	private ArrayList<Absorber> ls;
 	private Ball ball;
 	private Absorber absorber;
 	private Walls gws;
@@ -29,10 +29,12 @@ public class Model extends Observable {
 		// Wall size 500 x 500 pixels
 		gws = new Walls(0, 0, 500, 500);
 
+		absorber = new Absorber(0,450, 20, 500);
+
 		// Lines added in Main
 		lines = new ArrayList<VerticalLine>();
+		ls = new ArrayList<Absorber>();
 
-		absorber = new Absorber(0, 0, 10, 500);
 	}
 
 	public void moveBall() {
