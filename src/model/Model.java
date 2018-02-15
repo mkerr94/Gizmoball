@@ -20,6 +20,7 @@ public class Model extends Observable {
 	private Absorber absorber;
 	private Walls gws;
 	public Board board;
+	private int tickCounter;
 
 	public Model() {
 
@@ -28,15 +29,28 @@ public class Model extends Observable {
 
 		// Wall size 500 x 500 pixels
 		gws = new Walls(0, 0, 500, 500);
-
 		absorber = new Absorber(0,480, 20, 500);
 
 		// Lines added in Main
 		lines = new ArrayList<VerticalLine>();
 		ls = new ArrayList<Absorber>();
+		tickCounter = 0;
 
 	}
 
+	public void applyGravity(){
+
+		double gravAcc = 8;
+
+		Vect gravVelocity = new Vect(ball.getVelo().x(), ball.getVelo().y() + gravAcc);
+		ball.setVelo(gravVelocity);
+
+	}
+
+	public void applyFriction (){
+		double mu = 0.0025;
+		double mu2 = 0.0025;
+	}
 	public void moveBall() {
 
 		double moveTime = 0.05; // 0.05 = 20 times per second as per Gizmoball
@@ -45,19 +59,28 @@ public class Model extends Observable {
 
 			CollisionDetails cd = timeUntilCollision();
 			double tuc = cd.getTuc();
-			if (tuc > moveTime) {
-				// No collision ...
-				ball = movelBallForTime(ball, moveTime);
-			} else {
-				// We've got a collision in tuc
-				ball = movelBallForTime(ball, tuc);
-				// Post collision velocity ...
-				ball.setVelo(cd.getVelo());
-			}
 
-			// Notify observers ... redraw updated view
-			this.setChanged();
-			this.notifyObservers();
+			if (cd != null) {
+				applyGravity();
+				System.out.println("Velocity =  " + ball.getVelo());
+				if (tuc > moveTime) {
+					// No collision ...
+					ball = movelBallForTime(ball, moveTime);
+				} else {
+					// We've got a collision in tuc
+					ball = movelBallForTime(ball, tuc);
+					// Post collision velocity ...
+					ball.setVelo(cd.getVelo());
+					applyFriction();
+					tickCounter = 0;
+				}
+
+				// Notify observers ... redraw updated view
+				this.setChanged();
+				this.notifyObservers();
+				tickCounter++;
+				System.out.println(tickCounter);
+			}
 		}
 
 	}

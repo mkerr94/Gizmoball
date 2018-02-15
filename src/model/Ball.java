@@ -1,7 +1,6 @@
 package model;
 
 import java.awt.Color;
-
 import physics.Circle;
 import physics.Vect;
 
