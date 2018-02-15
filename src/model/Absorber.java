@@ -1,10 +1,7 @@
 package model;
 import java.awt.*;
 import java.util.ArrayList;
-import physics.Circle;
 import physics.LineSegment;
-
-import javax.sound.sampled.Line;
 
 public class Absorber {
 
@@ -29,11 +26,9 @@ public class Absorber {
     }
 
     public ArrayList<LineSegment> getLines() {
-
         ArrayList<LineSegment> lines = new ArrayList<LineSegment>();
         LineSegment l1 = new LineSegment(xpos, ypos, xpos + width, ypos);
         lines.add(l1);
-
         return lines;
     }
 

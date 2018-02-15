@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import controller.KeyListener;
 import model.Model;
 import controller.RunListener;
 
@@ -23,6 +24,7 @@ public class RunGui {
 	private Model model;
 	private JFrame frame;
 	private ActionListener listener;
+	private KeyListener keyListener;
 	private Board board;
 
 	public RunGui(Model m) {
@@ -30,6 +32,7 @@ public class RunGui {
 
 		// RunListener catches all GUI events. In reality might have many listeners.
 		listener = new RunListener(m);
+		keyListener = new KeyListener(model);
 	}
 
 	public void createAndShowGUI() {
@@ -65,7 +68,7 @@ public class RunGui {
 		button4.setMaximumSize(new Dimension(100, 100));
 		buttons.add(button4);
 
-		JButton button3 = new JButton("Quit");
+		JButton button3 = new JButton("Fire");
 		button3.setFont(gf);
 		button3.addActionListener(listener);
 		button3.setMaximumSize(new Dimension(100, 100));
@@ -74,9 +77,12 @@ public class RunGui {
 		cp.add(buttons, BorderLayout.LINE_START);
 		cp.add(board, BorderLayout.CENTER);
 
+		board.addKeyListener(keyListener);
+
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		frame.addKeyListener(keyListener);
 	}
 
 }

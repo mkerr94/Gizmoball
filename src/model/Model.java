@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Observable;
-import view.Board;
 import physics.Circle;
 import physics.Geometry;
 import physics.LineSegment;
@@ -19,7 +18,6 @@ public class Model extends Observable {
 	private Ball ball;
 	private Absorber absorber;
 	private Walls gws;
-	public Board board;
 	private int tickCounter;
 
 	public Model() {
@@ -29,7 +27,8 @@ public class Model extends Observable {
 
 		// Wall size 500 x 500 pixels
 		gws = new Walls(0, 0, 500, 500);
-		absorber = new Absorber(0,480, 20, 500);
+
+		absorber = new Absorber(0,490, 40, 500);
 
 		// Lines added in Main
 		lines = new ArrayList<VerticalLine>();
@@ -40,7 +39,9 @@ public class Model extends Observable {
 
 	public void applyGravity(){
 
-		double gravAcc = 8;
+		//Vnew = Vold + gravity * delta_t. (delta-t is tick time or tuc).
+
+		double gravAcc = 25;
 
 		Vect gravVelocity = new Vect(ball.getVelo().x(), ball.getVelo().y() + gravAcc);
 		ball.setVelo(gravVelocity);
@@ -48,8 +49,24 @@ public class Model extends Observable {
 	}
 
 	public void applyFriction (){
+
+		//Vnew = Vold * (1 - mu * delta_t - mu2 * |Vold| * delta_t) Once for X and once for Y
+		//The default value of mu should be 0.025 per second.
+		//The default value of mu2 should be 0.025 per L.
 		double mu = 0.0025;
-		double mu2 = 0.0025;
+		double mu2 = 0.0025 * tickCounter;
+		//delta_t is the time the ball is moving for - tick time or tuc.
+		double delta_time = 0;
+
+		double fricVelX = ball.getVelo().x() * ((1 - (mu * delta_time - mu2) * ball.getVelo().x()) * delta_time);
+		double fricVelY = ball.getVelo().y() * ((1 - (mu * delta_time - mu2) * ball.getVelo().y()) * delta_time);
+
+		//You apply this equation to both the x component of velocity and the y component - 2 lines of code.
+
+		Vect fricVelo = new Vect(ball.getVelo().x() + fricVelX, ball.getVelo().y() + fricVelY);
+		ball.setVelo(fricVelo);
+		System.out.println("New Veloicty = " + fricVelo);
+
 	}
 	public void moveBall() {
 
@@ -136,9 +153,21 @@ public class Model extends Observable {
 				shortestTime = time;
 				newVelo = Geometry.reflectWall(line, ball.getVelo(), 1.0);
 			}
+			if(time <= 0.1 && !ball.stopped()) {
+				ball = new Ball(350, 520, 0, -700);
+				this.setChanged();
+				this.notifyObservers();
+				ball.stop();
+			}
 		}
 
 		return new CollisionDetails(shortestTime, newVelo);
+	}
+
+	public void fireBall() {
+		if (ball.stopped()) {
+			ball.start();
+		}
 	}
 
 	public Ball getBall() {
