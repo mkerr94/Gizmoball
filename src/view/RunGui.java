@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import controller.KeyListener;
+import controller.keyListener;
 import model.Model;
 import controller.RunListener;
 
@@ -24,7 +24,7 @@ public class RunGui {
 	private Model model;
 	private JFrame frame;
 	private ActionListener listener;
-	private KeyListener keyListener;
+	private controller.keyListener keyListener;
 	private Board board;
 
 	public RunGui(Model m) {
@@ -32,7 +32,7 @@ public class RunGui {
 
 		// RunListener catches all GUI events. In reality might have many listeners.
 		listener = new RunListener(m);
-		keyListener = new KeyListener(model);
+		keyListener = new keyListener(model);
 	}
 
 	public void createAndShowGUI() {
