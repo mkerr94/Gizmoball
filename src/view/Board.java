@@ -1,0 +1,86 @@
+package view;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
+import java.util.Observable;
+import java.util.Observer;
+
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+
+import model.Ball;
+import model.Model;
+import model.VerticalLine;
+import model.Absorber;
+
+/**
+ * @author Murray Wood Demonstration of MVC and MIT Physics Collisions 2014
+ */
+
+public  class Board extends JPanel implements Observer {
+
+	private static final long serialVersionUID = 1L;
+	protected int width;
+	protected int height;
+	protected Model gm;
+
+	public Board(int w, int h, Model m) {
+		// Observe changes in model
+		m.addObserver(this);
+		width = w;
+		height = h;
+		gm = m;
+		this.setBorder(BorderFactory.createLineBorder(Color.black));
+	}
+
+	// Fix onscreen size
+	public Dimension getPreferredSize() {
+		return new Dimension(width, height);
+	}
+
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		Graphics2D g2 = (Graphics2D) g;
+		
+		// Draw all the vertical lines
+		for (VerticalLine vl : gm.getLines()) {
+			g2.fillRect(vl.getX(), vl.getY(), vl.getWidth(), 1);
+		}
+		
+		Ball b = gm.getBall();
+		if (b != null) {
+			g2.setColor(b.getColour());
+			int x = (int) (b.getExactX() - b.getRadius());
+			int y = (int) (b.getExactY() - b.getRadius());
+			int width = (int) (2 * b.getRadius());
+			g2.fillOval(x, y, width, width);
+		}
+
+		Absorber a = gm.getAbsorber();
+		if (a != null) {
+			g2.setColor(a.getColour());
+			int x = a.getX();
+			System.out.println(x);
+			int y = a.getY();
+			System.out.println(y);
+			int width = a.getWidth();
+			System.out.println(width);
+			int height = a.getHeight();
+			System.out.println(height);
+
+			g2.fillRect(x, y, width, height);
+		}
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+			repaint();
+		}
+
+	public int getWidth() {return width; }
+	
+}
