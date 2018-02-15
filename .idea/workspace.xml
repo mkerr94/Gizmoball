@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cae7b810-d3cd-4921-b82a-37852034a026" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GizmoballDesign/BuildView.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GizmoballDesign/RunView.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/AnimationWindow.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/BouncingBall.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/BuildView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/RunView.java" afterPath="" />
+    <list default="true" id="cae7b810-d3cd-4921-b82a-37852034a026" name="Default" comment="Added some files">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -395,11 +389,18 @@
       <option name="project" value="LOCAL" />
       <updated>1518532190399</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added some files">
+      <created>1518690274651</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1518690274651</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44635000" />
+    <option name="totallyTimeSpent" value="44692000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1279" height="726" extended-state="6" />
