@@ -1,41 +1,40 @@
+package View;
+
+import Controller.FlipperController;
+import Model.Flipper;
+import Model.LeftFlipper;
+import Model.RightFlipper;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import java.util.ArrayList;
+import java.util.List;
 
-public class RunView extends JFrame {
-
+public class GUI extends JFrame {
     private JLabel statusbar;
-    private AnimationWindow animationWindow;
+    private List<Flipper> model;
+    private FlipperController controller;
 
-    public RunView() {
-        runGUI();
+    public GUI(){
+        model = new ArrayList<>();
+        model.add(new LeftFlipper(100, 100));
+        model.add(new RightFlipper(277, 100));
+        controller = new FlipperController(model);
+        init();
     }
 
-    private void runGUI() {
-
-
+    private void init() {
         JPanel buttonPanel = new JPanel(new GridLayout(10, 1, 5, 5));
         makeMenuBar();
         makeButtons(buttonPanel);
-
-        //Create animation area used for input
-        animationWindow = new AnimationWindow();
-
         //Put it in a scrollpane (makes a border)
-        JScrollPane scrollPane = new JScrollPane(animationWindow);
-
-        //Lay out the content pane
-       /* JPanel contentPane = new JPanel(new GridLayout(20, 20));
-        contentPane.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-        add(contentPane, BorderLayout.CENTER);
-        setContentPane(contentPane);*/
-
+        JScrollPane scrollPane = new JScrollPane(new FlipperPanel(model, controller));
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new BorderLayout());
-        contentPane.setPreferredSize(new Dimension(500, 500));
+        contentPane.setPreferredSize(new Dimension(800, 800));
         contentPane.add(buttonPanel, BorderLayout.EAST);
         contentPane.add(scrollPane, BorderLayout.CENTER);
         setContentPane(contentPane);
@@ -44,10 +43,10 @@ public class RunView extends JFrame {
         statusbar.setBorder(BorderFactory.createEtchedBorder());
         add(statusbar, BorderLayout.SOUTH);
 
-        setTitle("Gizmoball!");
-        setSize(600, 500);
+        setTitle("Gizmoball");
+        setSize(800, 800);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     private void makeMenuBar() {
@@ -63,9 +62,7 @@ public class RunView extends JFrame {
         file.add(save);
         file.add(exit);
 
-        exit.addActionListener((ActionEvent event) -> {
-            System.exit(0);
-        });
+        exit.addActionListener((ActionEvent event) -> System.exit(0));
 
         ButtonGroup modeGroup = new ButtonGroup();
 
@@ -93,37 +90,11 @@ public class RunView extends JFrame {
         menuBar.add(buildMenu);
         setJMenuBar(menuBar);
     }
-
-    protected void makeButtons(JPanel panel) {
-
+    private void makeButtons(JPanel panel) {
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
-
         JButton startB = new JButton("Start");
         JButton stopB = new JButton("Stop");
-
-        startB.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                animationWindow.setMode(true);
-            }
-        });
-
-        stopB.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                animationWindow.setMode(false);
-            }
-        });
-
         panel.add(startB);
         panel.add(stopB);
     }
-
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            RunView ex = new RunView();
-            ex.setVisible(true);
-        });
-    }
 }
-
