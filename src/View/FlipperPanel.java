@@ -44,7 +44,7 @@ public class FlipperPanel extends JPanel implements Observer, ActionListener {
             double angle = flipper.getAngle();
             int width = flipper.getWidth();
             int height = flipper.getHeight();
-            drawLines(g, flipper);
+            //drawLines(g, flipper);
             if (flipper.getClass().equals(LeftFlipper.class)){
                 Graphics2D g2d = (Graphics2D) g.create();
                 AffineTransform transform = new AffineTransform();
@@ -66,10 +66,13 @@ public class FlipperPanel extends JPanel implements Observer, ActionListener {
 
     private void drawLines(Graphics g, Flipper flipper) {
         // TODO update so this draws all the line segments
-        LineSegment right = flipper.getLines().get(0);
-        g.create();
-        g.drawLine((int)right.p1().x(), (int)right.p1().y(), (int)right.p2().x(), (int)right.p2().y());
-        g.setColor(Color.RED);
+        ArrayList<LineSegment> lineSegments = flipper.getLines();
+        for (LineSegment line :
+                lineSegments) {
+            g.create();
+            g.drawLine((int)line.p1().x(), (int)line.p1().y(), (int)line.p2().x(), (int)line.p2().y());
+            g.setColor(Color.WHITE);
+        }
     }
 
     @Override
