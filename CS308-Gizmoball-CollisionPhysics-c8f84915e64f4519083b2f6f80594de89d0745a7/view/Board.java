@@ -75,6 +75,16 @@ public  class Board extends JPanel implements Observer {
 				g2.fillOval(x, y, width, width);
 			}
 
+			if (b != null && b.getClass().equals(Triangle.class)) {
+				System.out.println(b.getType());
+				int x= (int) (b.getX() * 20);
+				int y= (int) (b.getY() * 20);
+				int width = (int)(b.getWidth());
+				int x2Points[] = {x, x+10,x+20};
+				int y2Points[] = {y,y+20,y};
+				g2.fillPolygon(x2Points,y2Points,3);
+			}
+
 			CircleGizmo cg = new CircleGizmo("meh", 5, 5);
 			if (cg != null) {
 				g2.setColor(cg.getColour());
