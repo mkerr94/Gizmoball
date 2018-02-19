@@ -19,7 +19,7 @@ import controller.RunListener;
  * @author Murray Wood Demonstration of MVC and MIT Physics Collisions 2014
  */
 
-public class RunGui {
+public class RunGui extends JFrame{
 
 	private Model model;
 	private JFrame frame;
@@ -33,6 +33,7 @@ public class RunGui {
 		// RunListener catches all GUI events. In reality might have many listeners.
 		listener = new RunListener(m);
 		keyListener = new keyListener(model);
+		this.addKeyListener(keyListener);
 	}
 
 	public void createAndShowGUI() {

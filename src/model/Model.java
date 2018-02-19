@@ -161,7 +161,7 @@ public class Model extends Observable {
 				newVelo = Geometry.reflectWall(line, ball.getVelo(), 1.0);
 			}
 			if(time <= 0.1 && !ball.stopped()) {
-				ball = new Ball(460, 490, 0, 0);
+				ball = new Ball(487, 485, 0, 0);
 				this.setChanged();
 				this.notifyObservers();
 				ball.stop();

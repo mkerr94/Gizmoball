@@ -14,17 +14,11 @@ public class keyListener implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        if (e.getKeyCode() == globalKeyTrigger) {
-            System.out.println("PRESSED and FIRED");
-            m.moveBall(0);
-            m.fireBall();
-        }
     }
 
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == globalKeyTrigger) {
             System.out.println("PRESSED and FIRED");
-            m.moveBall(0);
             m.fireBall();
         }
     }

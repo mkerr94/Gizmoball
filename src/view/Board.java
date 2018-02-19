@@ -49,15 +49,6 @@ public  class Board extends JPanel implements Observer {
 		for (VerticalLine vl : gm.getLines()) {
 			g2.fillRect(vl.getX(), vl.getY(), vl.getWidth(), 1);
 		}
-		
-		Ball b = gm.getBall();
-		if (b != null) {
-			g2.setColor(b.getColour());
-			int x = (int) (b.getExactX() - b.getRadius());
-			int y = (int) (b.getExactY() - b.getRadius());
-			int width = (int) (2 * b.getRadius());
-			g2.fillOval(x, y, width, width);
-		}
 
 		Absorber a = gm.getAbsorber();
 		if (a != null) {
@@ -68,6 +59,15 @@ public  class Board extends JPanel implements Observer {
 			int height = a.getHeight();
 
 			g2.fillRect(x, y, width, height);
+		}
+		
+		Ball b = gm.getBall();
+		if (b != null) {
+			g2.setColor(b.getColour());
+			int x = (int) (b.getExactX() - b.getRadius());
+			int y = (int) (b.getExactY() - b.getRadius());
+			int width = (int) (2 * b.getRadius());
+			g2.fillOval(x, y, width, width);
 		}
 	}
 
