@@ -82,6 +82,7 @@ public class Model extends Observable {
 			CollisionDetails cd = timeUntilCollision();
 			double tuc = cd.getTuc();
 			if (cd != null) {
+				applyGravity(time);
 				System.out.println("Velocity =  " + ball.getVelo());
 				if (tuc > moveTime) {
 					// No collision ...
