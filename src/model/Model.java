@@ -18,7 +18,7 @@ public class Model extends Observable {
 	private Ball ball;
 	private Absorber absorber;
 	private Walls gws;
-	private int tickCounter;
+	private Vect newVelo;
 
 	public Model() {
 
@@ -33,52 +33,58 @@ public class Model extends Observable {
 		// Lines added in Main
 		lines = new ArrayList<VerticalLine>();
 		ls = new ArrayList<Absorber>();
-		tickCounter = 0;
 
 	}
 
-	public void applyGravity(){
+	public void applyGravity(double time){
 
 		//Vnew = Vold + gravity * delta_t. (delta-t is tick time or tuc).
 
 		double gravAcc = 25;
 
-		Vect gravVelocity = new Vect(ball.getVelo().x(), ball.getVelo().y() + gravAcc);
+		Vect gravVelocity = new Vect(ball.getVelo().x(), (ball.getVelo().y() + (gravAcc)));
 		ball.setVelo(gravVelocity);
 
 	}
 
-	public void applyFriction (){
+	public void applyFriction (double time){
 
 		//Vnew = Vold * (1 - mu * delta_t - mu2 * |Vold| * delta_t) Once for X and once for Y
 		//The default value of mu should be 0.025 per second.
 		//The default value of mu2 should be 0.025 per L.
-		double mu = 0.0025;
-		double mu2 = 0.0025 * tickCounter;
+		double mu = 0.025;
+		double mu2 = 0.025;
 		//delta_t is the time the ball is moving for - tick time or tuc.
-		double delta_time = 0;
 
-		double fricVelX = ball.getVelo().x() * ((1 - (mu * delta_time - mu2) * ball.getVelo().x()) * delta_time);
-		double fricVelY = ball.getVelo().y() * ((1 - (mu * delta_time - mu2) * ball.getVelo().y()) * delta_time);
+		double vOldX = ball.getVelo().x();
+		double vOldY = ball.getVelo().y();
+
+		Vect oldVelo = new Vect(vOldX, vOldY);
+		Vect newVelo = oldVelo.times(1 - mu * time - mu2 * time);
+
+		double fricVelX = vOldX * (1 - mu * time - (mu2 * vOldX) * time);
+		double fricVelY = vOldY * (1 - mu * time - mu2 * vOldY * time);
 
 		//You apply this equation to both the x component of velocity and the y component - 2 lines of code.
 
-		Vect fricVelo = new Vect(ball.getVelo().x() + fricVelX, ball.getVelo().y() + fricVelY);
-		ball.setVelo(fricVelo);
+		Vect fricVelo = new Vect(fricVelX, fricVelY);
+		ball.setVelo(newVelo);
+
 		System.out.println("New Veloicty = " + fricVelo);
 
 	}
-	public void moveBall() {
+
+
+
+	public void moveBall(double time) {
 
 		double moveTime = 0.05; // 0.05 = 20 times per second as per Gizmoball
 
-		if (ball != null && !ball.stopped()) {
+		if (ball != null && !ball.stopped() ) {
 
 			CollisionDetails cd = timeUntilCollision();
 			double tuc = cd.getTuc();
-
 			if (cd != null) {
-				applyGravity();
 				System.out.println("Velocity =  " + ball.getVelo());
 				if (tuc > moveTime) {
 					// No collision ...
@@ -86,17 +92,15 @@ public class Model extends Observable {
 				} else {
 					// We've got a collision in tuc
 					ball = movelBallForTime(ball, tuc);
+					applyGravity(time);
+					applyFriction(time);
 					// Post collision velocity ...
 					ball.setVelo(cd.getVelo());
-					applyFriction();
-					tickCounter = 0;
 				}
 
 				// Notify observers ... redraw updated view
 				this.setChanged();
 				this.notifyObservers();
-				tickCounter++;
-				System.out.println(tickCounter);
 			}
 		}
 
@@ -112,6 +116,8 @@ public class Model extends Observable {
 		newY = ball.getExactY() + (yVel * time);
 		ball.setExactX(newX);
 		ball.setExactY(newY);
+		applyFriction(time);
+		applyGravity(time);
 		return ball;
 	}
 
@@ -154,7 +160,7 @@ public class Model extends Observable {
 				newVelo = Geometry.reflectWall(line, ball.getVelo(), 1.0);
 			}
 			if(time <= 0.1 && !ball.stopped()) {
-				ball = new Ball(350, 520, 0, -700);
+				ball = new Ball(480, absorber.getY(), 0, 0);
 				this.setChanged();
 				this.notifyObservers();
 				ball.stop();
@@ -167,7 +173,9 @@ public class Model extends Observable {
 	public void fireBall() {
 		if (ball.stopped()) {
 			ball.start();
-			tickCounter = 0;
+
+			Vect ballFire = new Vect(0, 200);
+			ball.setVelo(ballFire);
 		}
 	}
 

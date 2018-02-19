@@ -62,7 +62,7 @@ public  class Board extends JPanel implements Observer {
 		Absorber a = gm.getAbsorber();
 		if (a != null) {
 			g2.setColor(a.getColour());
-			int x = (int) (a.getX());
+			int x = a.getX();
 			int y = a.getY();
 			int width = a.getWidth();
 			int height = a.getHeight();

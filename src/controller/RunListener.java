@@ -28,7 +28,7 @@ public class RunListener implements ActionListener {
 	public final void actionPerformed(final ActionEvent e) {
 
 		if (e.getSource() == timer) {
-			model.moveBall();
+			model.moveBall(0);
 		} else
 			switch (e.getActionCommand()) {
 			case "Start":
@@ -38,7 +38,7 @@ public class RunListener implements ActionListener {
 				timer.stop();
 				break;
 			case "Tick":
-				model.moveBall();
+				model.moveBall(0);
 				break;
 			case "Quit":
 				System.exit(0);
