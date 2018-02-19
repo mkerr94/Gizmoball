@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cae7b810-d3cd-4921-b82a-37852034a026" name="Default" comment="Added some files">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/keyListener.java" afterPath="$PROJECT_DIR$/src/controller/keyListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/Model.java" afterPath="$PROJECT_DIR$/src/model/Model.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/RunGui.java" afterPath="$PROJECT_DIR$/src/view/RunGui.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,8 +38,8 @@
       <file leaf-file-name="Model.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/model/Model.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="179" column="9" lean-forward="true" selection-start-line="179" selection-start-column="9" selection-end-line="179" selection-end-column="9" />
+            <state relative-caret-position="299">
+              <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -490,10 +487,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73089000" />
+    <option name="totallyTimeSpent" value="73423000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="726" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
@@ -787,8 +785,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/Model.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="179" column="9" lean-forward="true" selection-start-line="179" selection-start-column="9" selection-end-line="179" selection-end-column="9" />
+        <state relative-caret-position="299">
+          <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

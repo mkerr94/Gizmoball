@@ -45,6 +45,7 @@ public class Model extends Observable {
 
 		Vect gravVelocity = new Vect(ball.getVelo().x(), (ball.getVelo().y() + (gravAcc)));
 		ball.setVelo(gravVelocity);
+		System.out.println(time);
 
 	}
 
