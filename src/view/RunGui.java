@@ -37,7 +37,7 @@ public class RunGui {
 
 	public void createAndShowGUI() {
 
-		frame = new JFrame("Murray's MIT Ball and VerticalLine Collision Demo");
+		frame = new JFrame("Absorber Prototype GROUP: ");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Board is passed the model so it can act as Observer

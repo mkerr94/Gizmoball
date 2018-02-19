@@ -53,7 +53,7 @@ public class Model extends Observable {
 		//Vnew = Vold * (1 - mu * delta_t - mu2 * |Vold| * delta_t) Once for X and once for Y
 		//delta_t is the time the ball is moving for - tick time or tuc.
 		double mu = 0.025; 		//The default value of mu should be 0.025 per second.
-		double mu2 = 0.025;		//The default value of mu2 should be 0.025 per L.
+		double mu2 = 0.00041;		//The default value of mu2 should be 0.025 per L.
 		double vOldX = ball.getVelo().x();
 		double vOldY = ball.getVelo().y();
 		double fricVelX = 0.0;
@@ -69,7 +69,10 @@ public class Model extends Observable {
 
 		Vect fricVelo = new Vect(fricVelX, fricVelY);
 		ball.setVelo(fricVelo);
-		System.out.println("New Veloicty = " + fricVelo);
+		//System.out.println("New Veloicty = " + fricVelo);
+		System.out.println("Old X Speed: " + vOldX/25 + "L/s New X Speed: " + Math.round(fricVelX/25) + "L/s");
+		System.out.println("Old Y Speed: " + vOldY/25 + "L/s New Y Speed " + fricVelY/25 + "L/s");
+
 
 	}
 
@@ -83,7 +86,7 @@ public class Model extends Observable {
 			double tuc = cd.getTuc();
 			if (cd != null) {
 				applyGravity(time);
-				System.out.println("Velocity =  " + ball.getVelo());
+				//System.out.println("Velocity =  " + ball.getVelo());
 				if (tuc > moveTime) {
 					// No collision ...
 					ball = movelBallForTime(ball, moveTime);
