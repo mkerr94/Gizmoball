@@ -27,7 +27,7 @@ public class Absorber {
 
     public ArrayList<LineSegment> getLines() {
         ArrayList<LineSegment> lines = new ArrayList<LineSegment>();
-        LineSegment l1 = new LineSegment(xpos, ypos, xpos + width, ypos);
+        LineSegment l1 = new LineSegment(xpos, ypos + height , xpos + width, ypos + height);
         lines.add(l1);
         return lines;
     }

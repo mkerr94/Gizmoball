@@ -39,6 +39,7 @@ public class RunListener implements ActionListener {
 				break;
 			case "Tick":
 				model.moveBall(0);
+				model.fireBall();
 				break;
 			case "Quit":
 				System.exit(0);

@@ -28,7 +28,7 @@ public class Model extends Observable {
 		// Wall size 500 x 500 pixels
 		gws = new Walls(0, 0, 500, 500);
 
-		absorber = new Absorber(0,490, 10, 500);
+		absorber = new Absorber(0,475, 25, 500);
 
 		// Lines added in Main
 		lines = new ArrayList<VerticalLine>();
@@ -50,31 +50,27 @@ public class Model extends Observable {
 	public void applyFriction (double time){
 
 		//Vnew = Vold * (1 - mu * delta_t - mu2 * |Vold| * delta_t) Once for X and once for Y
-		//The default value of mu should be 0.025 per second.
-		//The default value of mu2 should be 0.025 per L.
-		double mu = 0.025;
-		double mu2 = 0.025;
 		//delta_t is the time the ball is moving for - tick time or tuc.
-
+		double mu = 0.025; 		//The default value of mu should be 0.025 per second.
+		double mu2 = 0.025;		//The default value of mu2 should be 0.025 per L.
 		double vOldX = ball.getVelo().x();
 		double vOldY = ball.getVelo().y();
+		double fricVelX = 0.0;
+		double fricVelY = 0.0;
 
-		Vect oldVelo = new Vect(vOldX, vOldY);
-		Vect newVelo = oldVelo.times(1 - mu * time - mu2 * time);
+//		Vect oldVelo = new Vect(vOldX, vOldY);
+//		Vect newVelo = oldVelo.times(1 - (mu * time) - (mu2 * time));
 
-		double fricVelX = vOldX * (1 - mu * time - (mu2 * vOldX) * time);
-		double fricVelY = vOldY * (1 - mu * time - mu2 * vOldY * time);
+		fricVelX = vOldX * (1 - (mu/20 * time) - ((mu2 * 0.05) * vOldX) * time);
+		fricVelY = vOldY * (1 - (mu/20 * time) - ((mu2 * 0.05) * vOldY) * time);
 
 		//You apply this equation to both the x component of velocity and the y component - 2 lines of code.
 
 		Vect fricVelo = new Vect(fricVelX, fricVelY);
-		ball.setVelo(newVelo);
-
+		ball.setVelo(fricVelo);
 		System.out.println("New Veloicty = " + fricVelo);
 
 	}
-
-
 
 	public void moveBall(double time) {
 
@@ -116,8 +112,8 @@ public class Model extends Observable {
 		newY = ball.getExactY() + (yVel * time);
 		ball.setExactX(newX);
 		ball.setExactY(newY);
-		applyFriction(time);
 		applyGravity(time);
+		applyFriction(time);
 		return ball;
 	}
 
@@ -160,7 +156,7 @@ public class Model extends Observable {
 				newVelo = Geometry.reflectWall(line, ball.getVelo(), 1.0);
 			}
 			if(time <= 0.1 && !ball.stopped()) {
-				ball = new Ball(480, absorber.getY(), 0, 0);
+				ball = new Ball(460, 490, 0, 0);
 				this.setChanged();
 				this.notifyObservers();
 				ball.stop();
@@ -174,7 +170,7 @@ public class Model extends Observable {
 		if (ball.stopped()) {
 			ball.start();
 
-			Vect ballFire = new Vect(0, 200);
+			Vect ballFire = new Vect(0, -50*20);
 			ball.setVelo(ballFire);
 		}
 	}
