@@ -28,7 +28,7 @@ public class Model extends Observable {
 		// Wall size 500 x 500 pixels
 		gws = new Walls(0, 0, 500, 500);
 
-		absorber = new Absorber(0,490, 40, 500);
+		absorber = new Absorber(0,490, 10, 500);
 
 		// Lines added in Main
 		lines = new ArrayList<VerticalLine>();
@@ -167,6 +167,7 @@ public class Model extends Observable {
 	public void fireBall() {
 		if (ball.stopped()) {
 			ball.start();
+			tickCounter = 0;
 		}
 	}
 

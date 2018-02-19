@@ -27,7 +27,7 @@ public class Main {
 		// Vertical line at (100,100), width 300
 //		model.addLine(new VerticalLine(100, 100, 350));
 //		model.addLine(new VerticalLine(100, 200, 200));
-//		model.addLine(new VerticalLine(100, 300, 250));
+//		model.addLine(new VerticalLine(100, 300, 350));
 //		model.addLine(new VerticalLine(100, 400, 300));
 
 		RunGui gui = new RunGui(model);
