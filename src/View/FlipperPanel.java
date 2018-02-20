@@ -19,16 +19,14 @@ import java.util.Observer;
 public class FlipperPanel extends JPanel implements Observer, ActionListener {
     private static final int TICK_TIME = 5;
     private List<Flipper> flippers; // model
-    private FlipperController flipperController;
 
     FlipperPanel(List<Flipper> model, FlipperController controller){
         this.flippers = model;
-        this.flipperController = controller;
         this.setBackground(Color.BLACK);
         for (Flipper flipper : flippers) {
             flipper.addObserver(this);
         }
-        MagicKeyListener magicKeyListener = new MagicKeyListener(flipperController);
+        MagicKeyListener magicKeyListener = new MagicKeyListener(controller);
         addKeyListener(magicKeyListener);
         Timer tickTimer = new Timer(TICK_TIME, this);
         tickTimer.start();
@@ -44,7 +42,7 @@ public class FlipperPanel extends JPanel implements Observer, ActionListener {
             double angle = flipper.getAngle();
             int width = flipper.getWidth();
             int height = flipper.getHeight();
-            //drawLines(g, flipper);
+            drawLines(g, flipper);
             if (flipper.getClass().equals(LeftFlipper.class)){
                 Graphics2D g2d = (Graphics2D) g.create();
                 AffineTransform transform = new AffineTransform();
