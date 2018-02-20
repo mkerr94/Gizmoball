@@ -51,23 +51,6 @@ public class RunGui extends JFrame{
 		JPanel buttons = new JPanel();
 		buttons.setLayout(new GridLayout(4, 1));
 
-		JButton button1 = new JButton("Start");
-		button1.setFont(gf);
-		button1.addActionListener(listener);
-		button1.setMaximumSize(new Dimension(100, 100));
-		buttons.add(button1);
-
-		JButton button2 = new JButton("Stop");
-		button2.setFont(gf);
-		button2.addActionListener(listener);
-		button2.setMaximumSize(new Dimension(100, 100));
-		buttons.add(button2);
-
-		JButton button4 = new JButton("Tick");
-		button4.setFont(gf);
-		button4.addActionListener(listener);
-		button4.setMaximumSize(new Dimension(100, 100));
-		buttons.add(button4);
 
 		JButton button3 = new JButton("Fire");
 		button3.setFont(gf);

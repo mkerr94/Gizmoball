@@ -23,7 +23,7 @@ public class Main {
 		Model model = new Model();
 
 		model.setBallSpeed(200, 200);
-
+		model.moveBall(0);
 		// Vertical line at (100,100), width 300
 //		model.addLine(new VerticalLine(100, 100, 350));
 //		model.addLine(new VerticalLine(100, 200, 200));
