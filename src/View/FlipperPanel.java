@@ -42,7 +42,7 @@ public class FlipperPanel extends JPanel implements Observer, ActionListener {
             double angle = flipper.getAngle();
             int width = flipper.getWidth();
             int height = flipper.getHeight();
-            drawLines(g, flipper);
+            //drawLines(g, flipper);
             if (flipper.getClass().equals(LeftFlipper.class)){
                 Graphics2D g2d = (Graphics2D) g.create();
                 AffineTransform transform = new AffineTransform();
