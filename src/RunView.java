@@ -1,3 +1,4 @@
+/*
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -28,10 +29,12 @@ public class RunView extends JFrame {
         JScrollPane scrollPane = new JScrollPane(animationWindow);
 
         //Lay out the content pane
-       /* JPanel contentPane = new JPanel(new GridLayout(20, 20));
+       */
+/* JPanel contentPane = new JPanel(new GridLayout(20, 20));
         contentPane.setBorder(BorderFactory.createLineBorder(Color.black, 1));
         add(contentPane, BorderLayout.CENTER);
-        setContentPane(contentPane);*/
+        setContentPane(contentPane);*//*
+
 
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new BorderLayout());
@@ -127,3 +130,4 @@ public class RunView extends JFrame {
     }
 }
 
+*/

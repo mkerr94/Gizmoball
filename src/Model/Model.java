@@ -12,6 +12,20 @@ public class Model implements Observer {
     private List<Gizmo> gizmos;
     private List<LineSegment> lineSegments;
 
+    public List<Gizmo> getGizmos(){
+        return gizmos;
+    }
+
+    public Model(){
+    }
+
+    public void addGizmo(Gizmo gizmo) {
+        if (gizmo != null){
+            gizmos.add(gizmo);
+        }else{
+            System.out.println("null gizmo");
+        }
+    }
 
     @Override
     public void update(Observable o, Object arg) {

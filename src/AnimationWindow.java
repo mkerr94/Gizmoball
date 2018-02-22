@@ -1,3 +1,4 @@
+/*
 // Note the very indirect way control flow works during an animation:
 //
 // (1) We set up an eventListener with a reference to the animationWindow.
@@ -28,6 +29,8 @@
 //     in other programs it might do something else, including request a
 //     repaint operation).
 //
+
+import Model.Absorber;
 
 import javax.swing.*;
 import java.awt.*;
@@ -170,3 +173,4 @@ class AnimationWindow extends JPanel {
         }
     }
 }
+*/
