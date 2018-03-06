@@ -7,17 +7,18 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.Observable;
-import java.util.Observer;
+import Controller.BuildListener;
+
+
 
 class BuildView extends JPanel {
     private Model model;
     private JLabel statusbar;
+    private ActionListener listener;
 
     BuildView(Model model) {
         this.model = model;
+        listener = new BuildListener();
         init();
     }
 
@@ -55,21 +56,23 @@ class BuildView extends JPanel {
         JComboBox flipperList = new JComboBox(flippers);
         ((JLabel) flipperList.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
 
+        //Create buttons
         JButton addB = new JButton("Add gizmo");
         JButton flipperB = new JButton("Add flipper");
-        JButton addBall = new JButton("Add Ball");
-        JButton addAbsorber = new JButton("Add Absorber");
+        JButton addBall = new JButton("Add ball");
+        JButton addAbsorber = new JButton("Add absorber");
         JButton moveB = new JButton("Move");
         JButton rotateB = new JButton("Rotate");
         JButton deleteB = new JButton("Delete");
         JButton clearB = new JButton("Clear");
-        JButton frictionB = new JButton("Change Friction");
-        JButton gravityB = new JButton("Change Gravity");
+        JButton frictionB = new JButton("Change friction");
+        JButton gravityB = new JButton("Change gravity");
         JButton connectB = new JButton("Connect");
         JButton disconnectB = new JButton("Disconnect");
-        JButton keyConnectB = new JButton("Key Connect");
-        JButton keyDisconnectB = new JButton("Key Disconnect");
+        JButton keyConnectB = new JButton("Key connect");
+        JButton keyDisconnectB = new JButton("Key disconnect");
 
+        //Add buttons to screen
         panel.add(bumperList);
         panel.add(addB);
         panel.add(flipperList);
@@ -88,32 +91,21 @@ class BuildView extends JPanel {
         panel.add(keyDisconnectB);
         add(panel, BorderLayout.EAST);
 
-        clearB.addActionListener((ActionEvent event) -> {
-            JOptionPane.showConfirmDialog(panel,"Are you sure you want to clear the board?","Clear board",JOptionPane.YES_NO_OPTION);
-        });
-
-        addBall.addActionListener((ActionEvent event) -> {
-            JTextField xField = new JTextField(2);
-            JTextField yField = new JTextField(2);
-            JTextField vField = new JTextField(2);
-            JPanel myPanel = new JPanel();
-            myPanel.add(new JLabel("X co-ordinate: "));
-            myPanel.add(xField);
-            myPanel.add(new JLabel("Y co-ordinate: "));
-            myPanel.add(yField);
-            myPanel.add(new JLabel("Velocity: "));
-            myPanel.add(vField);
-
-            int result = JOptionPane.showConfirmDialog(null, myPanel, "Add ball", JOptionPane.OK_CANCEL_OPTION);
-        });
-
-        frictionB.addActionListener((ActionEvent event) -> {
-            String frictionPopUp = JOptionPane.showInputDialog("Please enter a value for friction: ");
-        });
-
-        gravityB.addActionListener((ActionEvent event) -> {
-            String gravityPopUp = JOptionPane.showInputDialog("Please enter a value for gravity: ");
-        });
+        //Action listeners
+        addB.addActionListener(listener);
+        flipperB.addActionListener(listener);
+        addBall.addActionListener(listener);
+        addAbsorber.addActionListener(listener);
+        moveB.addActionListener(listener);
+        rotateB.addActionListener(listener);
+        deleteB.addActionListener(listener);
+        clearB.addActionListener(listener);
+        frictionB.addActionListener(listener);
+        gravityB.addActionListener(listener);
+        connectB.addActionListener(listener);
+        disconnectB.addActionListener(listener);
+        keyConnectB.addActionListener(listener);
+        keyDisconnectB.addActionListener(listener);
     }
 
 }
