@@ -1,17 +1,19 @@
 package Controller;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import View.MainGUI;
+import java.awt.geom.Ellipse2D;
+
+import Model.Ball;
 
 //Listener class for BuildView
-public class BuildListener implements ActionListener {
+public class BuildListener implements ActionListener{
 
     @Override
     public final void actionPerformed(final ActionEvent e) {
+
         switch(e.getActionCommand()){
 
             case "Add gizmo":
@@ -25,7 +27,11 @@ public class BuildListener implements ActionListener {
             case "Add ball":
                 System.out.println("Add ball button pressed");
 
-                JTextField xField = new JTextField(2);
+                //doesn't work yet!
+                Ball ball = new Ball(10,10,10);
+                ball.makeBall();
+
+                /*JTextField xField = new JTextField(2);
                 JTextField yField = new JTextField(2);
                 JTextField vField = new JTextField(2);
                 JPanel myPanel = new JPanel();
@@ -37,6 +43,8 @@ public class BuildListener implements ActionListener {
                 myPanel.add(vField);
 
                 int result = JOptionPane.showConfirmDialog(null, myPanel, "Add ball", JOptionPane.OK_CANCEL_OPTION);
+                */
+
                 break;
 
             case "Add absorber":
