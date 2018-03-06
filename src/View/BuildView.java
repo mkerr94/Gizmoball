@@ -20,6 +20,6 @@ class BuildView extends JPanel {
     }
 
     private void init() {
-        add(new GameBoard(model));
+
     }
 }
