@@ -3,26 +3,23 @@ package View;
 import Model.LeftFlipper;
 import Model.Model;
 import Model.RightFlipper;
-import org.omg.CORBA.BAD_INV_ORDER;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Observable;
-import java.util.Observer;
+import Controller.RunListener;
 
 class RunView extends JPanel {
     private Model model;
     private JLabel statusbar;
+    private ActionListener listener;
 
     RunView(Model model) {
         this.model = model;
         model.addGizmo(new LeftFlipper(100, 100)); // hard-coding for testing
         model.addGizmo(new RightFlipper(277, 100));
-        System.out.println("now in the runview content pane");
+        listener = new RunListener();
         init();
     }
 
@@ -47,14 +44,20 @@ class RunView extends JPanel {
         statusbar.setBorder(BorderFactory.createEtchedBorder());
         add(statusbar, BorderLayout.SOUTH);
 
-        //add(new GameBoard(model));
     }
 
     private void makeButtons(JPanel panel) {
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
+
         JButton startB = new JButton("Start");
+        startB.addActionListener(listener);
+
         JButton stopB = new JButton("Stop");
+        stopB.addActionListener(listener);
+
         JButton tickB = new JButton("Tick");
+        tickB.addActionListener(listener);
+
         panel.add(startB);
         panel.add(stopB);
         panel.add(tickB);
