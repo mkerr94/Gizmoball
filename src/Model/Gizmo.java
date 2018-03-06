@@ -1,5 +1,6 @@
 package Model;
 
+
 public interface Gizmo {
     int L = 25;
 

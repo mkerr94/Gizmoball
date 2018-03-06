@@ -2,11 +2,7 @@ package View;
 
 import Controller.MainGUIListener;
 import Model.Model;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 

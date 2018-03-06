@@ -26,7 +26,7 @@ class RunView extends JPanel {
         init();
     }
 
-    private void init() {
+     private void init() {
 
         setLayout(new BorderLayout());
 

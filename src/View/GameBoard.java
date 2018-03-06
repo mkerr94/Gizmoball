@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.List;
@@ -18,17 +19,24 @@ class GameBoard extends JPanel implements Observer, ActionListener {
     private Model model; // model
     private FlipperListener controller;
     private List<Gizmo> gizmos;
+    private List<Flipper> flippers;
 
     GameBoard(Model model){
         this.model = model;
         this.gizmos = this.model.getGizmos();
+        flippers = new ArrayList<>();
+        for (Gizmo gizmo : gizmos) {
+            if (gizmo.getClass().equals(RightFlipper.class) || gizmo.getClass().equals(LeftFlipper.class)) {
+                flippers.add((Flipper)gizmo);
+            }
+        }
+        System.out.println("flippers size = " + flippers.size());
         setLayout(new FlowLayout(4));
         for (int i = 0; i < 4; i++) {
             add(new JLabel(Integer.toString(i)));
         }
+        model.addObserver(this);
         setBorder(new LineBorder(Color.RED));
-        MagicKeyListener magicKeyListener = new MagicKeyListener(controller);
-        addKeyListener(magicKeyListener);
         Timer tickTimer = new Timer(TICK_TIME, this);
         tickTimer.start();
         requestFocus();
@@ -37,10 +45,11 @@ class GameBoard extends JPanel implements Observer, ActionListener {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+        System.out.println("test");
         for (Gizmo gizmo : gizmos) {
             // paint flippers
             if (gizmo.getClass().equals(Flipper.class)) {
-                System.out.println("instanceof worked");
+                System.out.println("worked");
                 Flipper flipper = (Flipper) gizmo;
                 int x = flipper.getX();
                 int y = flipper.getY();

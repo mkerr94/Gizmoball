@@ -4,7 +4,7 @@ import Physics.LineSegment;
 
 import java.util.*;
 
-public class Model implements Observer {
+public class Model extends Observable {
     private static final int L = 25;
     private List<Gizmo> gizmos;
     private List<LineSegment> lineSegments;
@@ -27,10 +27,5 @@ public class Model implements Observer {
         }else{
             System.out.println("null gizmo");
         }
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-
     }
 }
