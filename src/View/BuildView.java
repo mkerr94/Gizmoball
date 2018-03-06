@@ -3,6 +3,7 @@ package View;
 import Model.Model;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -15,18 +16,10 @@ class BuildView extends JPanel {
 
     BuildView(Model model) {
         this.model = model;
-        System.out.println("now in the buildview content pane");
+        init();
     }
 
-    private class GameBoard extends JPanel implements Observer, ActionListener{
-        @Override
-        public void update(Observable o, Object arg) {
-
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-        }
+    private void init() {
+        add(new GameBoard(model));
     }
 }

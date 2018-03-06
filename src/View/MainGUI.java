@@ -54,7 +54,6 @@ public class MainGUI extends JFrame {
 
         buildMode.addItemListener((ItemEvent e) -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
-                System.out.println("....switching to build mode....");
                 setTitle("GizmoBall - Build Mode");
                 viewMode.setVisible(false);
                 viewMode = new BuildView(model);
@@ -64,7 +63,6 @@ public class MainGUI extends JFrame {
         });
         runMode.addItemListener((ItemEvent e) -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
-                System.out.println("....switching to run mode....");
                 setTitle("GizmoBall - Run Mode");
                 viewMode.setVisible(false);
                 viewMode = new RunView(model);
@@ -72,7 +70,6 @@ public class MainGUI extends JFrame {
                 setContentPane(viewMode);
             }
         });
-
         modeGroup.add(buildMode);
         modeGroup.add(runMode);
         menuBar.add(modeMenu);

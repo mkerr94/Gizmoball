@@ -17,9 +17,8 @@ class RunView extends JPanel {
 
     RunView(Model model) {
         this.model = model;
-        //model.addGizmo(new LeftFlipper(100, 100)); // hard-coding for testing
-       // model.addGizmo(new RightFlipper(277, 100));
-        System.out.println("now in the runview content pane");
+        model.addGizmo(new LeftFlipper(100, 100)); // hard-coding for testing
+        model.addGizmo(new RightFlipper(277, 100));
         init();
     }
 
@@ -27,8 +26,7 @@ class RunView extends JPanel {
         JPanel buttonPanel = new JPanel(new GridLayout(1, 3, 20, 5));
         makeButtons(buttonPanel);
         add(buttonPanel);
-        add(new GameBoard());
-
+        add(new GameBoard(model));
     }
 
     private void makeButtons(JPanel panel) {
@@ -41,22 +39,4 @@ class RunView extends JPanel {
         panel.add(tickB);
     }
 
-    private class GameBoard extends JPanel implements Observer, ActionListener{
-        public GameBoard(){
-            setLayout(new FlowLayout(4));
-            for (int i = 0; i < 4; i++) {
-                add(new JLabel(Integer.toString(i)));
-            }
-            setBorder(new LineBorder(Color.RED));
-        }
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-        }
-
-        @Override
-        public void update(Observable o, Object arg) {
-
-        }
-    }
 }
