@@ -35,16 +35,19 @@ class RunView extends JPanel {
         makeButtons(buttonPanel);
         add(buttonPanel, BorderLayout.EAST);
 
-        JPanel board = new JPanel(new GridLayout(20,20));
+        //Generic board area
+        /*JPanel board = new JPanel(new GridLayout(20,20));
         board.setBorder(BorderFactory.createLineBorder(Color.black,1));
-        add(board, BorderLayout.CENTER);
+        add(board, BorderLayout.CENTER);*/
+
+        //Board panel from GameBoard
+        add(new GameBoard(model), BorderLayout.CENTER);
 
         statusbar = new JLabel("Run Mode");
         statusbar.setBorder(BorderFactory.createEtchedBorder());
         add(statusbar, BorderLayout.SOUTH);
 
         //add(new GameBoard(model));
-
     }
 
     private void makeButtons(JPanel panel) {
