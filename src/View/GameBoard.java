@@ -53,12 +53,14 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
             Graphics2D g2 = (Graphics2D) g;
 
             int lines = (2*L) / 2;
-
+        if (mode == 'b') {
             for (int i = 1; i < lines; i++) {
                 int x = i * lines;
                 g2.drawLine(x, 0, x, height);
                 g2.drawLine(0, x, width, x);
             }
+        }
+
 
             for(IGizmo b : gizmos) {
                 if (b != null && b.getClass().equals(Square.class)) {
