@@ -1,15 +1,42 @@
 package Model;
 
+public class Gizmo implements IGizmo{
 
-public interface Gizmo {
-    int L = 25;
+    private int x;
+    private int y;
+    private int rotation;
 
-    int getX();
 
-    int getY();
+    public Gizmo(int x, int y)
+    {
+        this.x = x;
+        this.y = y;
+        this.rotation = 0;
+    }
 
-    void rotate();
 
-    void move(int newX, int newY);
+    @Override
+    public int getX() {
+        return 0;
+    }
 
+    @Override
+    public int getY() {
+        return 0;
+    }
+
+    @Override
+    public void rotate() {
+
+    }
+
+    @Override
+    public void move(int newX, int newY) {
+
+    }
+
+    @Override
+    public int getRotation() {
+        return 0;
+    }
 }

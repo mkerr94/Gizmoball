@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.Flipper;
-import Model.Gizmo;
+import Model.IGizmo;
 import Model.Model;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -14,8 +14,8 @@ public class FlipperListener implements KeyListener{
 
     public FlipperListener(Model model){
         flippers = new ArrayList<>();
-        List<Gizmo> gizmos = model.getGizmos();
-        for (Gizmo gizmo :
+        List<IGizmo> gizmos = model.getGizmos();
+        for (IGizmo gizmo :
                 gizmos) {
             if (gizmo.getClass().getSuperclass().equals(Flipper.class)) {
                 flippers.add((Flipper)gizmo);

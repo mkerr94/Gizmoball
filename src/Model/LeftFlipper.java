@@ -15,4 +15,9 @@ public class LeftFlipper extends Flipper {
     public void move(int newX, int newY) {
 
     }
+
+    @Override
+    public int getRotation() {
+        return 0;
+    }
 }

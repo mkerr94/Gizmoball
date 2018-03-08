@@ -6,14 +6,14 @@ import java.util.*;
 
 public class Model extends Observable {
     private static final int L = 25;
-    private List<Gizmo> gizmos;
+    private List<IGizmo> gizmos;
     private List<LineSegment> lineSegments;
 
     public Model(){
         gizmos = new ArrayList<>();
     }
 
-    public List<Gizmo> getGizmos(){
+    public List<IGizmo> getGizmos(){
         return gizmos;
     }
 

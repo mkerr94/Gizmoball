@@ -3,7 +3,7 @@ package Model;
 import Physics.LineSegment;
 
 
-public class Absorber implements Gizmo {
+public class Absorber implements IGizmo {
     private int xOrdinate;
     private int yOrdinate;
     private int width;
@@ -49,5 +49,8 @@ public class Absorber implements Gizmo {
     public void move(int newX, int newY) {
 
     }
-
+    @Override
+    public int getRotation() {
+        return 0;
+    }
 }

@@ -6,7 +6,7 @@ import Physics.LineSegment;
 import java.util.ArrayList;
 import java.util.Observable;
 
-public abstract class Flipper extends Observable implements Gizmo {
+public abstract class Flipper extends Observable implements IGizmo {
     private ArrayList<LineSegment> lineSegments;
     private ArrayList<Circle> collisionCircles;
     private int x, y, height, width;

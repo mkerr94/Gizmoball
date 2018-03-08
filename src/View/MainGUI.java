@@ -5,6 +5,7 @@ import Model.Model;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
+import java.io.FileNotFoundException;
 
 public class MainGUI extends JFrame {
     private Model model;
@@ -27,6 +28,7 @@ public class MainGUI extends JFrame {
     }
 
     private void makeMenuBar() {
+        LoadFile lf = new LoadFile();
         setTitle("GizmoBall - Run Mode");
         JMenuBar menuBar = new JMenuBar();
         JMenu file = new JMenu("File");
@@ -38,7 +40,16 @@ public class MainGUI extends JFrame {
         file.add(save);
         file.add(exit);
         menuBar.add(file);
+        open.addActionListener(evt -> {
+            try {
+                lf.getLoadFile();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
+
         exit.addActionListener((ActionEvent event) -> System.exit(0));
+
 
         ButtonGroup modeGroup = new ButtonGroup();
         JMenu modeMenu = new JMenu("Mode");
