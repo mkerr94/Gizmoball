@@ -29,10 +29,11 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
     private Color blue = new Color(0, 0, 255);
     private Color yellow = new Color(255,255,0);
 
-    public GameBoard(LoadFile lf, Model model){
-        this.loadedFile = lf;
+    public GameBoard(int w, int h, Model model){
         this.setBorder(BorderFactory.createLineBorder(Color.black));
         this.model = model;
+        width = w;
+        height = h;
         flippers = new ArrayList<>();
         gizmos = model.getGizmos();
         for (IGizmo gizmo : gizmos) {
