@@ -38,7 +38,6 @@ class GameBoard extends JPanel implements Observer, ActionListener {
                 flippers.add((Flipper)gizmo);
             }
         }
-        System.out.println("flippers size = " + flippers.size());
         setLayout(new FlowLayout(4));
         for (int i = 0; i < 4; i++) {
             add(new JLabel(Integer.toString(i)));

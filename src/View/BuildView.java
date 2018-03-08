@@ -1,5 +1,6 @@
 package View;
 
+import Controller.AddGizmoListener;
 import Model.Model;
 
 import javax.swing.*;
@@ -57,7 +58,7 @@ class BuildView extends JPanel {
         ((JLabel) flipperList.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
 
         //Create buttons
-        JButton addB = new JButton("Add gizmo");
+        JButton addGizmoButton = new JButton("Add gizmo");
         JButton flipperB = new JButton("Add flipper");
         JButton addBall = new JButton("Add ball");
         JButton addAbsorber = new JButton("Add absorber");
@@ -74,7 +75,7 @@ class BuildView extends JPanel {
 
         //Add buttons to screen
         panel.add(bumperList);
-        panel.add(addB);
+        panel.add(addGizmoButton);
         panel.add(flipperList);
         panel.add(flipperB);
         panel.add(addBall);
@@ -92,7 +93,7 @@ class BuildView extends JPanel {
         add(panel, BorderLayout.EAST);
 
         //Action listeners
-        addB.addActionListener(listener);
+        addGizmoButton.addActionListener(new AddGizmoListener(bumperList));
         flipperB.addActionListener(listener);
         addBall.addActionListener(listener);
         addAbsorber.addActionListener(listener);
