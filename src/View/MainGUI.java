@@ -11,16 +11,17 @@ public class MainGUI extends JFrame {
     private Model model;
     private MainGUIListener controller;
     private JPanel viewMode;
+    private LoadFile loadedFile;
 
-    public MainGUI(Model model){
-        this.model = model;
+    public MainGUI(LoadFile lf){
+        this.loadedFile = lf;
         controller = new MainGUIListener(this);
         init();
     }
 
     private void init() {
         makeMenuBar();
-        viewMode = new RunView(model);
+        viewMode = new RunView(loadedFile);
         setContentPane(viewMode);
         setSize(600, 600);
         setLocationRelativeTo(null);
@@ -63,7 +64,7 @@ public class MainGUI extends JFrame {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 setTitle("GizmoBall - Build Mode");
                 viewMode.setVisible(false);
-                viewMode = new BuildView(model);
+                viewMode = new BuildView(loadedFile);
                 viewMode.setVisible(true);
                 setContentPane(viewMode);
             }
@@ -72,7 +73,7 @@ public class MainGUI extends JFrame {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 setTitle("GizmoBall - Run Mode");
                 viewMode.setVisible(false);
-                viewMode = new RunView(model);
+                viewMode = new RunView(loadedFile);
                 viewMode.setVisible(true);
                 setContentPane(viewMode);
             }
