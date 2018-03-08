@@ -59,6 +59,7 @@ public class MainGUI extends JFrame {
                 setContentPane(viewMode);
             }
         });
+
         runMode.addItemListener((ItemEvent e) -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 setTitle("GizmoBall - Run Mode");

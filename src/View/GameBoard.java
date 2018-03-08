@@ -54,7 +54,7 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
 
             int lines = (2*L) / 2;
         if (mode == 'b') {
-            for (int i = 1; i < lines; i++) {
+            for (int i = 1; i < lines - 4; i++) {
                 int x = i * lines;
                 g2.drawLine(x, 0, x, height);
                 g2.drawLine(0, x, width, x);
@@ -93,16 +93,17 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
                     }
                 }
                 if (b != null && b.getClass().equals(Ball.class)) {
-                    g2.setColor(red);
-                    int x = (b.getX());
-                    int y = (b.getY());
+                    System.out.println("drawing ball...");
+                    g2.setColor(black);
+                    int x = (b.getX()* L);
+                    int y = (b.getY()* L);
                     g2.fillOval(x, y, L, L);
                 }
                 if (b != null && b.getClass().equals(Absorber.class)) {
                     g2.setColor(black);
                     int x =(b.getX() * L);;
                     int y =(b.getY() * L);
-                    g2.fillRect(x, y, 20, L);
+                    g2.fillRect(x, y, 20*L, L);
                 }
                 if (b != null && b.getClass().equals(LeftFlipper.class)) {
                     g2.setColor(yellow);
