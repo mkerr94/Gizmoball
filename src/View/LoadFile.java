@@ -16,10 +16,14 @@ public class LoadFile {
     public LoadFile(Model model) {
         fc = new JFileChooser(FILE_PATH);
         this.model = model;
+        try {
+            getLoadFile();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
-    LoadFile getLoadFile() throws FileNotFoundException {
+    void getLoadFile() throws FileNotFoundException {
         int returnValue = fc.showOpenDialog(null);
-
         if (returnValue == JFileChooser.APPROVE_OPTION){
             System.out.println("Success!");
             tokenizeFile(); }
@@ -29,10 +33,9 @@ public class LoadFile {
         else {
             System.out.println("Failed");
         }
-        return null;
     }
 
-    HashMap<String, IGizmo> loadedGizmos = new HashMap<>();
+    private HashMap<String, IGizmo> loadedGizmos = new HashMap<>();
 
     private void tokenizeFile(){
 
