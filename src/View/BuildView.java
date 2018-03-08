@@ -16,10 +16,8 @@ class BuildView extends JPanel {
     private Model model;
     private JLabel statusbar;
     private ActionListener listener;
-    private LoadFile loadedFile;
 
-    BuildView(LoadFile lf, Model model) {
-        this.loadedFile = lf;
+    BuildView(Model model) {
         this.model = model;
         listener = new BuildListener();
         init();
@@ -40,7 +38,7 @@ class BuildView extends JPanel {
         add(board, BorderLayout.CENTER);*/
 
        //Board panel from GameBoard
-       add(new GameBoard(loadedFile, model), BorderLayout.CENTER);
+       add(new GameBoard(model), BorderLayout.CENTER);
 
         statusbar = new JLabel("Build Mode");
         statusbar.setBorder(BorderFactory.createEtchedBorder());
