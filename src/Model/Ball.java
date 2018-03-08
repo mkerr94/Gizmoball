@@ -26,6 +26,6 @@ public class Ball {
     }
 
     public Ellipse2D makeBall(){
-        return new Ellipse2D.Double(x, y, 10,2);
+       return new Ellipse2D.Double(x, y, 10,2);
     }
 }

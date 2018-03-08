@@ -7,7 +7,7 @@ public class Gizmo implements IGizmo{
     private int rotation;
 
 
-    Gizmo(int x, int y)
+    public Gizmo(int x, int y)
     {
         this.x = x;
         this.y = y;

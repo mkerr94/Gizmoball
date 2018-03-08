@@ -1,12 +1,14 @@
 package View;
 
 import Controller.FlipperListener;
+import Controller.MagicKeyListener;
 import Model.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -18,7 +20,7 @@ class GameBoard extends JPanel implements Observer, ActionListener {
     private FlipperListener controller;
     private List<IGizmo> gizmos;
     private List<Flipper> flippers;
-    private int L = 25;
+    private int l = 25;
     private LoadFile fl = new LoadFile();
 
     private Color green = new Color(0, 255, 0);
@@ -30,6 +32,17 @@ class GameBoard extends JPanel implements Observer, ActionListener {
     GameBoard(Model model){
         this.model = model;
         this.gizmos = this.model.getGizmos();
+        flippers = new ArrayList<>();
+        for (IGizmo gizmo : gizmos) {
+            if (gizmo.getClass().equals(RightFlipper.class) || gizmo.getClass().equals(LeftFlipper.class)) {
+                flippers.add((Flipper)gizmo);
+            }
+        }
+        System.out.println("flippers size = " + flippers.size());
+        setLayout(new FlowLayout(4));
+        for (int i = 0; i < 4; i++) {
+            add(new JLabel(Integer.toString(i)));
+        }
         model.addObserver(this);
         setBorder(new LineBorder(Color.RED));
         Timer tickTimer = new Timer(TICK_TIME, this);
@@ -47,31 +60,31 @@ class GameBoard extends JPanel implements Observer, ActionListener {
                 if (b != null && b.getClass().equals(Square.class)) {
                     g2.setColor(red);
                     System.out.println("found Square: paint method");
-                    int x= (b.getX() * L);
-                    int y= (b.getY() * L);
-                    g2.fillRect(x, y, L, L);
+                    int x= (b.getX() * l);
+                    int y= (b.getY() * l);
+                    g2.fillRect(x, y, l, l);
                 }
 
                 if (b != null && b.getClass().equals(Circle.class)) {
                     g2.setColor(green);
-                    int x= (b.getX() * L);
-                    int y= (b.getY() * L);
-                    g2.fillOval(x, y, L, L);
+                    int x= (b.getX() * l);
+                    int y= (b.getY() * l);
+                    g2.fillOval(x, y, l, l);
                 }
 
                 if (b != null && b.getClass().equals(Triangle.class)) {
                     g2.setColor(blue);
-                    int x= (b.getX() * L);
-                    int y= (b.getY() * L);
+                    int x= (b.getX() * l);
+                    int y= (b.getY() * l);
                     if(b.getRotation() == 0){
-                        int x2Points[] = {x+ L, x,x};
-                        int y2Points[] = {y,y+ L,y};
+                        int x2Points[] = {x+l, x,x};
+                        int y2Points[] = {y,y+l,y};
                         g2.fillPolygon(x2Points,y2Points,3);
                     }
 
                     else if(b.getRotation() == 1){
-                        int x2Points1[] = {x+ L, x,x+ L};
-                        int y2Points1[] = {y,y,y+ L};
+                        int x2Points1[] = {x+l, x,x+l};
+                        int y2Points1[] = {y,y,y+l};
                         g2.fillPolygon(x2Points1,y2Points1,3);
                     }
                 }
@@ -80,35 +93,70 @@ class GameBoard extends JPanel implements Observer, ActionListener {
                     g2.setColor(red);
                     int x = (b.getX());
                     int y = (b.getY());
-                    g2.fillOval(x, y, L, L);
+                    g2.fillOval(x, y,l,l);
                 }
 
                 if (b != null && b.getClass().equals(Absorber.class)) {
                     g2.setColor(black);
-                    int x =(b.getX() * L);;
-                    int y =(b.getY() * L);
-                    g2.fillRect(x, y, 20, L);
+                    int x =(b.getX() * l);;
+                    int y =(b.getY() * l);
+                    g2.fillRect(x, y, 20, l);
                 }
 
                 if (b != null && b.getClass().equals(LeftFlipper.class)) {
                     g2.setColor(yellow);
-                    int x =(b.getX() * L);;
-                    int y =(b.getY() * L);
-                    g2.fillRect(x, y, (L /2), (L *2));
+                    int x =(b.getX() * l);;
+                    int y =(b.getY() * l);
+                    g2.fillRect(x, y, (l/2), (l*2));
                     g2.fillOval(x, y-4, 10, 15);
                     g2.fillOval(x, y+30, 10, 15);
                 }
 
                 if (b != null && b.getClass().equals(RightFlipper.class)) {
                     g2.setColor(yellow);
-                    int x =(b.getX() * L);;
-                    int y =(b.getY() * L);
-                    g2.fillRect(x+30, y, (L /2), (L *2));
+                    int x =(b.getX() * l);;
+                    int y =(b.getY() * l);
+                    g2.fillRect(x+30, y, (l/2), (l*2));
                     g2.fillOval(x+30, y-4, 10, 15);
                     g2.fillOval(x+30, y+30, 10, 15);
                 }
             }
-    }
+        }
+
+
+        /*for (IGizmo gizmo : fl.getLoadedGizmos().values()) {
+            System.out.println("entered paint loop. " + gizmo.toString());
+            if (gizmo.getClass().equals(Square.class)){
+                System.out.println("Square found: pain method");
+            }
+            // paint flippers
+            if (gizmo.getClass().equals(Flipper.class)) {
+                System.out.println("worked");
+                Flipper flipper = (Flipper) gizmo;
+                int x = flipper.getX();
+                int y = flipper.getY();
+                double angle = flipper.getAngle();
+                int width = flipper.getWidth();
+                int height = flipper.getHeight();
+                if (flipper.getClass().equals(LeftFlipper.class)) {
+                    Graphics2D g2d = (Graphics2D) g.create();
+                    AffineTransform transform = new AffineTransform();
+                    transform.rotate(-Math.toRadians(angle), x + width / 2, y + width / 2);
+                    g2d.setColor(Color.cyan);
+                    g2d.setTransform(transform);
+                    g2d.fillRoundRect(x, y, width, height, 20, 20);
+                }
+                if (flipper.getClass().equals(RightFlipper.class)) {
+                    Graphics2D g2d = (Graphics2D) g.create();
+                    AffineTransform transform = new AffineTransform();
+                    transform.rotate(Math.toRadians(angle), x + width / 2, y + width / 2);
+                    g2d.setColor(Color.cyan);
+                    g2d.setTransform(transform);
+                    g2d.fillRoundRect(x, y, width, height, 20, 20);
+                }
+            }
+        }
+    }*/
 
     @Override
     public void actionPerformed(ActionEvent e) {
