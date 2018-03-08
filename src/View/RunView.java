@@ -15,10 +15,9 @@ class RunView extends JPanel {
     private JLabel statusbar;
     private ActionListener listener;
 
-    RunView(LoadFile lf) {
+    RunView(LoadFile lf, Model model) {
         this.file = lf;
-        //model.addGizmo(new LeftFlipper(100, 100)); // hard-coding for testing
-        //model.addGizmo(new RightFlipper(277, 100));
+        this.model = model;
         listener = new RunListener();
         init();
     }
@@ -39,7 +38,7 @@ class RunView extends JPanel {
         add(board, BorderLayout.CENTER);*/
 
         //Board panel from GameBoard
-        add(new GameBoard(file), BorderLayout.CENTER);
+        add(new GameBoard(file, model), BorderLayout.CENTER);
 
         statusbar = new JLabel("Run Mode");
         statusbar.setBorder(BorderFactory.createEtchedBorder());

@@ -18,8 +18,9 @@ class BuildView extends JPanel {
     private ActionListener listener;
     private LoadFile loadedFile;
 
-    BuildView(LoadFile lf) {
+    BuildView(LoadFile lf, Model model) {
         this.loadedFile = lf;
+        this.model = model;
         listener = new BuildListener();
         init();
     }
@@ -39,7 +40,7 @@ class BuildView extends JPanel {
         add(board, BorderLayout.CENTER);*/
 
        //Board panel from GameBoard
-       add(new GameBoard(loadedFile), BorderLayout.CENTER);
+       add(new GameBoard(loadedFile, model), BorderLayout.CENTER);
 
         statusbar = new JLabel("Build Mode");
         statusbar.setBorder(BorderFactory.createEtchedBorder());
@@ -94,7 +95,7 @@ class BuildView extends JPanel {
         add(panel, BorderLayout.EAST);
 
         //Action listeners
-        addGizmoButton.addActionListener(new AddGizmoListener(bumperList));
+        addGizmoButton.addActionListener(new AddGizmoListener(bumperList, model));
         flipperB.addActionListener(listener);
         addBall.addActionListener(listener);
         addAbsorber.addActionListener(listener);
