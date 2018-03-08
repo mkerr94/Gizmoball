@@ -13,13 +13,11 @@ class RunView extends JPanel {
     private Model model;
     private JLabel statusbar;
     private ActionListener listener;
-    private Board board;
 
     RunView(Model model) {
         this.model = model;
         //model.addGizmo(new LeftFlipper(100, 100)); // hard-coding for testing
         //model.addGizmo(new RightFlipper(277, 100));
-        //here
         listener = new RunListener();
         init();
     }
@@ -39,7 +37,6 @@ class RunView extends JPanel {
         add(board, BorderLayout.CENTER);*/
 
         //Board panel from GameBoard
-         board = new Board(500, 500, model);
         add(new GameBoard(model), BorderLayout.CENTER);
 
         statusbar = new JLabel("Run Mode");
