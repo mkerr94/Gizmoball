@@ -21,7 +21,7 @@ public class Model extends Observable {
      * Adds anything that implements the Gizmo interface to Model's collection of gizmos
      * @param gizmo Gizmo to add to the model's collection
      */
-    public void addGizmo(Gizmo gizmo) {
+    public void addGizmo(IGizmo gizmo) {
         if (gizmo != null){
             gizmos.add(gizmo);
         }else{

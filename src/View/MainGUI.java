@@ -5,23 +5,21 @@ import Model.Model;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
-import java.io.FileNotFoundException;
 
 public class MainGUI extends JFrame {
     private Model model;
     private MainGUIListener controller;
     private JPanel viewMode;
-    private LoadFile loadedFile;
 
-    public MainGUI(LoadFile lf){
-        this.loadedFile = lf;
+    public MainGUI(Model model){
+        this.model = model;
         controller = new MainGUIListener(this);
         init();
     }
 
     private void init() {
         makeMenuBar();
-        viewMode = new RunView(loadedFile);
+        viewMode = new RunView(model);
         setContentPane(viewMode);
         setSize(600, 600);
         setLocationRelativeTo(null);
@@ -29,7 +27,6 @@ public class MainGUI extends JFrame {
     }
 
     private void makeMenuBar() {
-        LoadFile lf = new LoadFile();
         setTitle("GizmoBall - Run Mode");
         JMenuBar menuBar = new JMenuBar();
         JMenu file = new JMenu("File");
@@ -42,11 +39,7 @@ public class MainGUI extends JFrame {
         file.add(exit);
         menuBar.add(file);
         open.addActionListener(evt -> {
-            try {
-                lf.getLoadFile();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+                new LoadFile(model);
         });
 
         exit.addActionListener((ActionEvent event) -> System.exit(0));
@@ -64,7 +57,7 @@ public class MainGUI extends JFrame {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 setTitle("GizmoBall - Build Mode");
                 viewMode.setVisible(false);
-                viewMode = new BuildView(loadedFile);
+                viewMode = new BuildView( model);
                 viewMode.setVisible(true);
                 setContentPane(viewMode);
             }
@@ -73,7 +66,7 @@ public class MainGUI extends JFrame {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 setTitle("GizmoBall - Run Mode");
                 viewMode.setVisible(false);
-                viewMode = new RunView(loadedFile);
+                viewMode = new RunView(model);
                 viewMode.setVisible(true);
                 setContentPane(viewMode);
             }

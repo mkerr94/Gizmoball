@@ -1,5 +1,6 @@
 package View;
 
+import Controller.AddGizmoListener;
 import Model.Model;
 
 import javax.swing.*;
@@ -15,10 +16,9 @@ class BuildView extends JPanel {
     private Model model;
     private JLabel statusbar;
     private ActionListener listener;
-    private LoadFile loadedFile;
 
-    BuildView(LoadFile lf) {
-        this.loadedFile = lf;
+    BuildView(Model model) {
+        this.model = model;
         listener = new BuildListener();
         init();
     }
@@ -38,7 +38,7 @@ class BuildView extends JPanel {
         add(board, BorderLayout.CENTER);*/
 
        //Board panel from GameBoard
-       add(new GameBoard(loadedFile), BorderLayout.CENTER);
+       add(new GameBoard(model), BorderLayout.CENTER);
 
         statusbar = new JLabel("Build Mode");
         statusbar.setBorder(BorderFactory.createEtchedBorder());
@@ -58,7 +58,7 @@ class BuildView extends JPanel {
         ((JLabel) flipperList.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
 
         //Create buttons
-        JButton addB = new JButton("Add gizmo");
+        JButton addGizmoButton = new JButton("Add gizmo");
         JButton flipperB = new JButton("Add flipper");
         JButton addBall = new JButton("Add ball");
         JButton addAbsorber = new JButton("Add absorber");
@@ -75,7 +75,7 @@ class BuildView extends JPanel {
 
         //Add buttons to screen
         panel.add(bumperList);
-        panel.add(addB);
+        panel.add(addGizmoButton);
         panel.add(flipperList);
         panel.add(flipperB);
         panel.add(addBall);
@@ -93,7 +93,7 @@ class BuildView extends JPanel {
         add(panel, BorderLayout.EAST);
 
         //Action listeners
-        addB.addActionListener(listener);
+        addGizmoButton.addActionListener(new AddGizmoListener(bumperList, model));
         flipperB.addActionListener(listener);
         addBall.addActionListener(listener);
         addAbsorber.addActionListener(listener);

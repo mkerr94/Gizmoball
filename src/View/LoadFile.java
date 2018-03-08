@@ -11,13 +11,19 @@ public class LoadFile {
 
     private JFileChooser fc;
     private static final String FILE_PATH = System.getProperty("user.home") + "/Documents";
+    private Model model;
 
-    public LoadFile() {
+    public LoadFile(Model model) {
         fc = new JFileChooser(FILE_PATH);
+        this.model = model;
+        try {
+            getLoadFile();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
-    public LoadFile getLoadFile() throws FileNotFoundException {
+    void getLoadFile() throws FileNotFoundException {
         int returnValue = fc.showOpenDialog(null);
-
         if (returnValue == JFileChooser.APPROVE_OPTION){
             System.out.println("Success!");
             tokenizeFile(); }
@@ -27,12 +33,11 @@ public class LoadFile {
         else {
             System.out.println("Failed");
         }
-        return null;
     }
 
-    HashMap<String, IGizmo> loadedGizmos = new HashMap<>();
+    private HashMap<String, IGizmo> loadedGizmos = new HashMap<>();
 
-    public void tokenizeFile(){
+    private void tokenizeFile(){
 
         int x, y, x1, y1, x2, y2;
         String lineRead, gName;
@@ -51,6 +56,7 @@ public class LoadFile {
                         x = Integer.parseInt(gizmoGroup[2]);
                         y = Integer.parseInt(gizmoGroup[3]);
                         loadedGizmos.put(gName, new Square(x, y));
+                        model.addGizmo(new Square(x, y));
                         break;
                     case "Circle":
                         System.out.println("found");
@@ -58,6 +64,7 @@ public class LoadFile {
                         x = Integer.parseInt(gizmoGroup[2]);
                         y = Integer.parseInt(gizmoGroup[3]);
                         loadedGizmos.put(gName, new Circle(x, y));
+                        model.addGizmo(new Circle(x, y));
                         break;
                     case "Triangle":
                         System.out.println("found");
@@ -65,6 +72,7 @@ public class LoadFile {
                         x = Integer.parseInt(gizmoGroup[2]);
                         y = Integer.parseInt(gizmoGroup[3]);
                         loadedGizmos.put(gName, new Triangle(x, y));
+                        model.addGizmo(new Triangle(x, y));
                         break;
                     case "RightFlipper":
                         System.out.println("found");
@@ -88,6 +96,7 @@ public class LoadFile {
                         x2 = Integer.parseInt(gizmoGroup[4]);
                         y2 = Integer.parseInt(gizmoGroup[5]);
                         loadedGizmos.put(gName, new Absorber(x1, y1, x2, y2));
+                        model.addGizmo(new Absorber(x1, y1, x2, y2));
                         break;
                     case "Balle":
                         System.out.println("found");
@@ -115,7 +124,7 @@ public class LoadFile {
 
     }
 
-    public HashMap<String, IGizmo> getLoadedGizmos() {
+    HashMap<String, IGizmo> getLoadedGizmos() {
         return loadedGizmos;
     }
 
