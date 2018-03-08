@@ -29,10 +29,10 @@ public class AddGizmoListener implements ActionListener {
                 model.addGizmo(new Circle(5, 5));
                 break;
             case "Square":
-                model.addGizmo(new Square(5, 5));
+                model.addGizmo(new Square(5, 50));
                 break;
             case "Triangle":
-                model.addGizmo(new Triangle(5, 5));
+                model.addGizmo(new Triangle(150, 150));
                 break;
         }
     }
