@@ -90,9 +90,10 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
                     }
                 }
                 if (b != null && b.getClass().equals(Ball.class)) {
-                    g2.setColor(red);
-                    int x = (b.getX());
-                    int y = (b.getY());
+                    System.out.println("drawing ball...");
+                    g2.setColor(black);
+                    int x = (b.getX()* L);
+                    int y = (b.getY()* L);
                     g2.fillOval(x, y, L, L);
                 }
                 if (b != null && b.getClass().equals(Absorber.class)) {

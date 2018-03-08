@@ -3,7 +3,7 @@ package Model;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
-public class Ball {
+public class Ball implements IGizmo{
 
     private int x, y, v;
 
@@ -19,6 +19,21 @@ public class Ball {
 
     public int getY(){
         return y;
+    }
+
+    @Override
+    public void rotate() {
+
+    }
+
+    @Override
+    public void move(int newX, int newY) {
+
+    }
+
+    @Override
+    public int getRotation() {
+        return 0;
     }
 
     public int getV(){
