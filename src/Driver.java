@@ -8,8 +8,7 @@ public class Driver {
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             Model model = new Model();
-            LoadFile file = new LoadFile(model);
-            MainGUI view = new MainGUI(file, model);
+            MainGUI view = new MainGUI(model);
             view.setVisible(true);
         });
     }
