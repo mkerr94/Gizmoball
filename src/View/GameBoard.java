@@ -32,6 +32,7 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
     GameBoard(int w, int h, Model model, char mode){
         this.setBorder(BorderFactory.createLineBorder(Color.black));
         this.model = model;
+        this.mode = mode;
         width = w;
         height = h;
         flippers = new ArrayList<>();
