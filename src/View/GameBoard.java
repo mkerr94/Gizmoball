@@ -1,27 +1,26 @@
 package View;
 
 import Controller.FlipperListener;
-import Controller.MagicKeyListener;
 import Model.*;
 import javax.swing.*;
+import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.AffineTransform;
-import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 import java.util.List;
 
 class GameBoard extends JPanel implements Observer, ActionListener {
     private static final int TICK_TIME = 5;
     private Model model; // model
     private FlipperListener controller;
-    private List<IGizmo> gizmos;
+    //private HashMap<String, Model.IGizmo> gizmos;
     private List<Flipper> flippers;
     private int l = 25;
-    private LoadFile fl = new LoadFile();
+    private int width;
+    private int height;
+    private LoadFile loadedFile;
 
     private Color green = new Color(0, 255, 0);
     private Color red = new Color(255, 0, 0);
@@ -29,9 +28,11 @@ class GameBoard extends JPanel implements Observer, ActionListener {
     private Color blue = new Color(0, 0, 255);
     private Color yellow = new Color(255,255,0);
 
-    GameBoard(Model model){
-        this.model = model;
-        this.gizmos = this.model.getGizmos();
+    GameBoard(LoadFile lf){
+        this.loadedFile = lf;
+        this.setBorder(BorderFactory.createLineBorder(Color.black));
+        //this.
+        /*this.gizmos = this.loadedFile.getLoadedGizmos();
         flippers = new ArrayList<>();
         for (IGizmo gizmo : gizmos) {
             if (gizmo.getClass().equals(RightFlipper.class) || gizmo.getClass().equals(LeftFlipper.class)) {
@@ -46,7 +47,7 @@ class GameBoard extends JPanel implements Observer, ActionListener {
         setBorder(new LineBorder(Color.RED));
         Timer tickTimer = new Timer(TICK_TIME, this);
         tickTimer.start();
-        requestFocus();
+        requestFocus();*/
     }
 
     @Override
@@ -54,8 +55,8 @@ class GameBoard extends JPanel implements Observer, ActionListener {
         super.paint(g);
         System.out.println("test: paint method");
             Graphics2D g2 = (Graphics2D) g;
-            fl.getLoadedGizmos();
-            for(IGizmo b : fl.getLoadedGizmos().values()) {
+            loadedFile.getLoadedGizmos();
+            for(IGizmo b : loadedFile.getLoadedGizmos().values()) {
                 if (b != null && b.getClass().equals(Square.class)) {
                     g2.setColor(red);
                     System.out.println("found Square: paint method");
@@ -159,12 +160,12 @@ class GameBoard extends JPanel implements Observer, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        for (IGizmo gizmo : gizmos) {
+        /*for (IGizmo gizmo : gizmos) {
             if (gizmo instanceof Flipper) {
                 Flipper flipper = (Flipper) gizmo;
                 flipper.setAngle(flipper.getAngle() + flipper.getAngularMomentum() * (double) TICK_TIME/10);
             }
-        }
+        }*/
     }
 
     @Override
