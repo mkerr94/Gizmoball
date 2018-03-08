@@ -1,31 +1,83 @@
 package Model;
 
-import java.awt.*;
-import java.awt.geom.Ellipse2D;
+import java.awt.Color;
+
+import Physics.Circle;
+import Physics.Vect;
+
+/**
+ * @author Murray Wood Demonstration of MVC and MIT Physics Collisions 2014
+ */
 
 public class Ball {
 
-    private int x, y, v;
+    private Vect velocity;
+    private double radius;
+    private double xpos;
+    private double ypos;
+    private Color colour;
 
-    public Ball(int x, int y, int v){
-        this.x = x;
-        this.y = y;
-        this.v = v;
+    private boolean stopped;
+
+    // x, y coordinates and x,y velocity
+    public Ball(double x, double y, double xv, double yv) {
+        xpos = x; // Centre coordinates
+        ypos = y;
+        colour = Color.BLUE;
+        velocity = new Vect(xv, yv);
+        radius = 10;
+        stopped = false;
     }
 
-    public int getX(){
-        return x;
+    public Vect getVelo() {
+        return velocity;
     }
 
-    public int getY(){
-        return y;
+    public void setVelo(Vect v) {
+        velocity = v;
     }
 
-    public int getV(){
-        return v;
+    public double getRadius() {
+        return radius;
     }
 
-    public Ellipse2D makeBall(){
-       return new Ellipse2D.Double(x, y, 10,2);
+    public Circle getCircle() {
+        return new Circle(xpos, ypos, radius);
+
     }
+
+    // Ball specific methods that deal with double precision.
+    public double getExactX() {
+        return xpos;
+    }
+
+    public double getExactY() {
+        return ypos;
+    }
+
+    public void setExactX(double x) {
+        xpos = x;
+    }
+
+    public void setExactY(double y) {
+        ypos = y;
+    }
+
+    public void stop() {
+        stopped = true;
+    }
+
+    public void start() {
+        stopped = false;
+    }
+
+    public boolean stopped() {
+        return stopped;
+    }
+
+    public Color getColour() {
+        return colour;
+    }
+
 }
+
