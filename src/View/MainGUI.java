@@ -21,7 +21,7 @@ public class MainGUI extends JFrame {
         makeMenuBar();
         viewMode = new RunView(model);
         setContentPane(viewMode);
-        setSize(600, 600);
+        setSize(900, 700);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }

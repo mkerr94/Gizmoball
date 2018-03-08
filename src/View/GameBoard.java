@@ -28,15 +28,16 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
     private Color blue = new Color(0, 0, 255);
     private Color yellow = new Color(255,255,0);
 
-    GameBoard(Model model, char mode){
+
+    GameBoard(int w, int h, Model model, char mode){
         this.setBorder(BorderFactory.createLineBorder(Color.black));
         this.model = model;
-        this.mode = mode;
+        width = w;
+        height = h;
         flippers = new ArrayList<>();
         gizmos = model.getGizmos();
         model.addObserver(this);
         setBorder(new LineBorder(Color.RED));
-
         if (mode == 'r') {
             Timer tickTimer = new Timer(TICK_TIME, this);
             tickTimer.start();
