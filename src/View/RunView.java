@@ -13,7 +13,6 @@ class RunView extends JPanel {
     private Model model;
     private JLabel statusbar;
     private ActionListener listener;
-    private Board board;
 
     RunView(Model model) {
         this.model = model;
@@ -23,7 +22,7 @@ class RunView extends JPanel {
         init();
     }
 
-     private void init() {
+    private void init() {
 
         setLayout(new BorderLayout());
 
@@ -38,7 +37,6 @@ class RunView extends JPanel {
         add(board, BorderLayout.CENTER);*/
 
         //Board panel from GameBoard
-         board = new Board(500, 500, model);
         add(new GameBoard(model), BorderLayout.CENTER);
 
         statusbar = new JLabel("Run Mode");
