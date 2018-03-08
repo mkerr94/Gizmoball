@@ -13,6 +13,7 @@ import java.util.List;
 
 public class GameBoard extends JPanel implements Observer, ActionListener {
     private static final int TICK_TIME = 5;
+    private char mode;
     private Model model; // model
     private FlipperListener controller;
     private List<Flipper> flippers;
@@ -27,20 +28,20 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
     private Color blue = new Color(0, 0, 255);
     private Color yellow = new Color(255,255,0);
 
-    GameBoard(Model model){
+    GameBoard(Model model, char mode){
         this.setBorder(BorderFactory.createLineBorder(Color.black));
         this.model = model;
+        this.mode = mode;
         flippers = new ArrayList<>();
         gizmos = model.getGizmos();
-        for (IGizmo gizmo : gizmos) {
-            if (gizmo.getClass().equals(RightFlipper.class) || gizmo.getClass().equals(LeftFlipper.class)) {
-                flippers.add((Flipper)gizmo);
-            }
-        }
         model.addObserver(this);
         setBorder(new LineBorder(Color.RED));
-        Timer tickTimer = new Timer(TICK_TIME, this);
-        tickTimer.start();
+
+        if (mode == 'r') {
+            Timer tickTimer = new Timer(TICK_TIME, this);
+            tickTimer.start();
+        }
+        printGizmoList();
         requestFocus();
     }
 
@@ -51,7 +52,6 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
             for(IGizmo b : gizmos) {
                 if (b != null && b.getClass().equals(Square.class)) {
                     g2.setColor(red);
-                    System.out.println("found Square: paint method");
                     int x= (b.getX() * L);
                     int y= (b.getY() * L);
                     g2.fillRect(x, y, L, L);
@@ -111,20 +111,20 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
         }
 
 
+    private void printGizmoList(){
+        for (IGizmo gizmo : gizmos) {
+            System.out.println("GizmoList: "+ gizmo.getClass().toString());
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        for (IGizmo gizmo : gizmos) {
-            if (gizmo instanceof Flipper) {
-                Flipper flipper = (Flipper) gizmo;
-                flipper.setAngle(flipper.getAngle() + flipper.getAngularMomentum() * (double) TICK_TIME/10);
-            }
-        }
     }
 
     @Override
     public void update(Observable o, Object arg) {
         this.repaint();
+        printGizmoList();
     }
 
 

@@ -37,7 +37,7 @@ class RunView extends JPanel {
         add(board, BorderLayout.CENTER);*/
 
         //Board panel from GameBoard
-        add(new GameBoard(model), BorderLayout.CENTER);
+        add(new GameBoard(model, 'r'), BorderLayout.CENTER);
 
         statusbar = new JLabel("Run Mode");
         statusbar.setBorder(BorderFactory.createEtchedBorder());
