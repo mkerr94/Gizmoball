@@ -19,6 +19,7 @@ class RunView extends JPanel {
         this.model = model;
         //model.addGizmo(new LeftFlipper(100, 100)); // hard-coding for testing
         //model.addGizmo(new RightFlipper(277, 100));
+        //here
         listener = new RunListener();
         init();
     }
