@@ -6,6 +6,8 @@ import View.GameBoard;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
+
 import Model.*;
 
 public class AddGizmoListener implements ActionListener {
@@ -24,15 +26,17 @@ public class AddGizmoListener implements ActionListener {
         if (gizmoList.getSelectedItem() != null) {
             gizmoToAdd = gizmoList.getSelectedItem().toString();
         }
+        int x = (int) (Math.random() * (20 - 1)) + 1;
+        int y = (int) (Math.random() * (20 - 1)) + 1;
         switch (gizmoToAdd) {
             case "Circle":
-                model.addGizmo(new Circle(5, 5));
+                model.addGizmo(new Circle(x, y));
                 break;
             case "Square":
-                model.addGizmo(new Square(5, 5));
+                model.addGizmo(new Square(x, y));
                 break;
             case "Triangle":
-                model.addGizmo(new Triangle(5, 5));
+                model.addGizmo(new Triangle(x, y));
                 break;
         }
     }
