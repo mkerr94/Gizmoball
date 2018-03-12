@@ -38,7 +38,7 @@ public class MainGUI extends JFrame {
         file.add(save);
         file.add(exit);
         menuBar.add(file);
-        open.addActionListener(evt -> new LoadFile(model));
+       // open.addActionListener(evt -> new LoadFile(model));
 
         exit.addActionListener((ActionEvent event) -> System.exit(0));
 

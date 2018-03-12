@@ -106,8 +106,8 @@ public class LoadFile {
                         d2 = Double.parseDouble(gizmoGroup[3]);
                         x2 = ((int) d);
                         y2 = ((int) d2);
-                        loadedGizmos.put(gName, new Ball(x2, y2, x2));
-                        model.addGizmo(new Ball(x2, y2, x2));
+                        loadedGizmos.put(gName, new Circle(x2, y2));
+                        model.addGizmo(new Circle(x2, y2));
                         break;
                     case "Rotate":
                         //System.out.println("found");
@@ -131,4 +131,3 @@ public class LoadFile {
     }
 
 }
-
