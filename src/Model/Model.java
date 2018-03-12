@@ -30,4 +30,9 @@ public class Model extends Observable {
         }
     }
 
+    public void clearGizmos() {
+        gizmos.clear();
+        setChanged();
+        notifyObservers();
+    }
 }

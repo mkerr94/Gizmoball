@@ -2,6 +2,7 @@ package View;
 
 import Controller.AddAbsorberListener;
 import Controller.AddGizmoListener;
+import Controller.ClearBoardListener;
 import Model.Model;
 
 import javax.swing.*;
@@ -25,23 +26,12 @@ class BuildView extends JPanel {
     }
 
     private void init() {
-
         setLayout(new BorderLayout());
-
         JPanel buttonPanel = new JPanel(new GridLayout(10, 1, 5, 5));
         buttonPanel.setBorder(new EmptyBorder(10,10,10,10));
         makeButtons(buttonPanel);
         add(buttonPanel, BorderLayout.EAST);
-
-        //Generic board area
-       /* JPanel board = new JPanel(new GridLayout(20,20));
-        board.setBorder(BorderFactory.createLineBorder(Color.black,1));
-        add(board, BorderLayout.CENTER);*/
-
-       //Board panel from GameBoard
-
-       add(new GameBoard(500, 500, model, 'b'), BorderLayout.CENTER);
-
+        add(new GameBoard(500, 500, model, 'b'), BorderLayout.CENTER);
         statusbar = new JLabel("Build Mode");
         statusbar.setBorder(BorderFactory.createEtchedBorder());
         add(statusbar, BorderLayout.SOUTH);
@@ -102,7 +92,7 @@ class BuildView extends JPanel {
         moveB.addActionListener(listener);
         rotateB.addActionListener(listener);
         deleteB.addActionListener(listener);
-        clearB.addActionListener(listener);
+        clearB.addActionListener(new ClearBoardListener(model));
         frictionB.addActionListener(listener);
         gravityB.addActionListener(listener);
         connectB.addActionListener(listener);
@@ -110,5 +100,4 @@ class BuildView extends JPanel {
         keyConnectB.addActionListener(listener);
         keyDisconnectB.addActionListener(listener);
     }
-
 }
