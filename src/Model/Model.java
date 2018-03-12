@@ -5,7 +5,6 @@ import Physics.LineSegment;
 import java.util.*;
 
 public class Model extends Observable {
-    private static final int L = 25;
     private List<IGizmo> gizmos;
     private List<LineSegment> lineSegments;
 

@@ -18,7 +18,7 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
     private FlipperListener controller;
     private List<Flipper> flippers;
     private List<IGizmo> gizmos;
-    private int L = 25;
+    private int L = 30;
     private int width;
     private int height;
 
@@ -50,16 +50,9 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-            Graphics2D g2 = (Graphics2D) g;
+        Graphics2D g2 = (Graphics2D) g;
 
-            int lines = (2*L) / 2;
-        if (mode == 'b') {
-            for (int i = 1; i < lines - 4; i++) {
-                int x = i * lines;
-                g2.drawLine(x, 0, x, height);
-                g2.drawLine(0, x, width, x);
-            }
-        }
+        printGridLines(g2);
 
 
             for(IGizmo b : gizmos) {
@@ -123,6 +116,25 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
                 }
             }
         }
+
+    private void printGridLines(Graphics2D g2) {
+        if (mode == 'b') {
+            int i;
+            width = getWidth();
+            height = getHeight();
+
+            // draw the rows
+            int rowHt = height / (20);
+            for (i = 0; i < 20; i++) {
+                g2.drawLine(0, i * rowHt, width, i * rowHt);
+            }
+            // draw the columns
+            int rowWid = width / (20);
+            for (i = 0; i < 20; i++){
+                g2.drawLine(i * rowWid, 0, i * rowWid, height);
+        }
+        }
+    }
 
 
     private void printGizmoList(){
