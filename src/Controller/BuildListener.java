@@ -27,7 +27,6 @@ public class BuildListener implements ActionListener{
 
                 //doesn't work yet!
                 Ball ball = new Ball(10,10,10);
-                ball.createBall();
 
                 /*JTextField xField = new JTextField(2);
                 JTextField yField = new JTextField(2);
