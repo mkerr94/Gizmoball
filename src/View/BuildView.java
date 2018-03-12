@@ -1,5 +1,6 @@
 package View;
 
+import Controller.AddAbsorberListener;
 import Controller.AddGizmoListener;
 import Model.Model;
 
@@ -97,7 +98,7 @@ class BuildView extends JPanel {
         addGizmoButton.addActionListener(new AddGizmoListener(bumperList, model));
         flipperB.addActionListener(listener);
         addBall.addActionListener(listener);
-        addAbsorber.addActionListener(listener);
+        addAbsorber.addActionListener(new AddAbsorberListener(model));
         moveB.addActionListener(listener);
         rotateB.addActionListener(listener);
         deleteB.addActionListener(listener);

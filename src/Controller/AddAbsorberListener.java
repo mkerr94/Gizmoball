@@ -10,16 +10,14 @@ import java.awt.event.ActionListener;
 public class AddAbsorberListener implements ActionListener {
 
     private Model model;
-    private JComboBox gizmoList;
 
-    public AddAbsorberListener(JComboBox gizmoList, Model model){
+    public AddAbsorberListener(Model model){
         this.model = model;
-        this.gizmoList = gizmoList;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-            gizmoList.getSelectedItem();
-            model.addGizmo(new Absorber(0, 20, 20, 1));
-        }
+        System.out.println("Absorber added");
+        model.addGizmo(new Absorber(0, 20, 20, 1));
+    }
 }
