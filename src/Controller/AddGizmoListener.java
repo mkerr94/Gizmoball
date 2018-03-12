@@ -6,15 +6,18 @@ import View.GameBoard;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Random;
 
 import Model.*;
 
-public class AddGizmoListener implements ActionListener {
+public class AddGizmoListener implements ActionListener, MouseListener {
 
     private JComboBox gizmoList;
     private String gizmoToAdd;
     private Model model;
+    private int x, y;
 
     public AddGizmoListener(JComboBox gizmoList, Model model){
         this.gizmoList = gizmoList;
@@ -26,8 +29,10 @@ public class AddGizmoListener implements ActionListener {
         if (gizmoList.getSelectedItem() != null) {
             gizmoToAdd = gizmoList.getSelectedItem().toString();
         }
-        int x = (int) (Math.random() * (20 - 1)) + 1;
-        int y = (int) (Math.random() * (20 - 1)) + 1;
+
+        x = (int) (Math.random() * (20 - 1)) + 1;
+        y = (int) (Math.random() * (20 - 1)) + 1;
+
         switch (gizmoToAdd) {
             case "Circle":
                 model.addGizmo(new Circle(x, y));
@@ -39,5 +44,32 @@ public class AddGizmoListener implements ActionListener {
                 model.addGizmo(new Triangle(x, y));
                 break;
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        x = e.getX();
+        y = e.getY();
+        System.out.println(x + "," + y);//these co-ords are relative to the component
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }

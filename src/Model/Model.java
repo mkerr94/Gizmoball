@@ -1,12 +1,9 @@
 package Model;
 
-import Physics.LineSegment;
-
 import java.util.*;
 
 public class Model extends Observable {
     private List<IGizmo> gizmos;
-    private List<LineSegment> lineSegments;
 
     public Model(){
         gizmos = new ArrayList<>();
@@ -30,6 +27,10 @@ public class Model extends Observable {
         }
     }
 
+    /***
+     * Empties the collection of gizmos and notifies the view,
+     * so that when it repaints there is nothing to paint.
+     */
     public void clearGizmos() {
         gizmos.clear();
         setChanged();
