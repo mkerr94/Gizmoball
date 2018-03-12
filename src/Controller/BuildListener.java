@@ -1,10 +1,8 @@
 package Controller;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Ellipse2D;
 
 import Model.Ball;
 
@@ -29,7 +27,6 @@ public class BuildListener implements ActionListener{
 
                 //doesn't work yet!
                 Ball ball = new Ball(10,10,10);
-                ball.makeBall();
 
                 /*JTextField xField = new JTextField(2);
                 JTextField yField = new JTextField(2);
@@ -48,6 +45,7 @@ public class BuildListener implements ActionListener{
                 break;
 
             case "Add absorber":
+                System.out.println("Add absorber button pressed");
                 break;
 
             case "Move":

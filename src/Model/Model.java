@@ -29,4 +29,5 @@ public class Model extends Observable {
             System.out.println("null gizmo");
         }
     }
+
 }

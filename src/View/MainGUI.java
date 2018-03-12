@@ -67,6 +67,7 @@ public class MainGUI extends JFrame {
                 viewMode = new RunView(model);
                 viewMode.setVisible(true);
                 setContentPane(viewMode);
+
             }
         });
         modeGroup.add(buildMode);

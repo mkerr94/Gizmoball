@@ -59,7 +59,7 @@ public class LoadFile {
                         loadedGizmos.put(gName, new Square(x, y));
                         model.addGizmo(new Square(x, y));
                         break;
-                    case "Circle":
+                    case "PhysicsCircle":
                         //System.out.println("found");
                         gName = gizmoGroup[1];
                         x = Integer.parseInt(gizmoGroup[2]);

@@ -1,6 +1,6 @@
 package Model;
 
-import Physics.Circle;
+import Physics.PhysicsCircle;
 import Physics.LineSegment;
 
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.Observable;
 
 public abstract class Flipper extends Observable implements IGizmo {
     private ArrayList<LineSegment> lineSegments;
-    private ArrayList<Circle> collisionCircles;
+    private ArrayList<PhysicsCircle> collisionCircles;
     private int x, y, height, width;
     private double angle;
     private final double initialAngle;
@@ -41,12 +41,12 @@ public abstract class Flipper extends Observable implements IGizmo {
         return arrayList;
     }
 
-    private ArrayList<Circle> initCircles() {
-        ArrayList<Circle> arrayList = new ArrayList<>();
-        Circle topLeft = new Circle(x, y, 0);
-        Circle botLeft = new Circle(x, y + height, 0);
-        Circle topRight = new Circle(x + width, y, 0);
-        Circle botRight = new Circle(x + width, y + height, 0);
+    private ArrayList<PhysicsCircle> initCircles() {
+        ArrayList<PhysicsCircle> arrayList = new ArrayList<>();
+        PhysicsCircle topLeft = new PhysicsCircle(x, y, 0);
+        PhysicsCircle botLeft = new PhysicsCircle(x, y + height, 0);
+        PhysicsCircle topRight = new PhysicsCircle(x + width, y, 0);
+        PhysicsCircle botRight = new PhysicsCircle(x + width, y + height, 0);
         arrayList.add(topLeft);
         arrayList.add(botLeft);
         arrayList.add(topRight);
@@ -117,7 +117,7 @@ public abstract class Flipper extends Observable implements IGizmo {
         return lineSegments;
     }
 
-    public ArrayList<Circle> getCollisionCircles() {
+    public ArrayList<PhysicsCircle> getCollisionCircles() {
         return collisionCircles;
     }
 
