@@ -25,9 +25,6 @@ public class BuildListener implements ActionListener{
             case "Add ball":
                 System.out.println("Add ball button pressed");
 
-                //doesn't work yet!
-                Ball ball = new Ball(10,10,10);
-
                 /*JTextField xField = new JTextField(2);
                 JTextField yField = new JTextField(2);
                 JTextField vField = new JTextField(2);

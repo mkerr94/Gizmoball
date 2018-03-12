@@ -10,14 +10,14 @@ import java.awt.event.ActionListener;
 import Controller.RunListener;
 
 class RunView extends JPanel {
-    private LoadFile file;
+   // private LoadFile file;
     private Model model;
     private JLabel statusbar;
     private ActionListener listener;
 
     RunView(Model model) {
         this.model = model;
-        listener = new RunListener();
+        listener = new RunListener(model);
         init();
     }
 
@@ -40,7 +40,7 @@ class RunView extends JPanel {
 
         add(new GameBoard(500, 500, model, 'r'), BorderLayout.CENTER);
 
-        statusbar = new JLabel("Run Mode");
+       statusbar = new JLabel("Run Mode");
         statusbar.setBorder(BorderFactory.createEtchedBorder());
         add(statusbar, BorderLayout.SOUTH);
 

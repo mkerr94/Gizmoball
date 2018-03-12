@@ -1,46 +1,79 @@
 package Model;
 
-import java.awt.*;
-import java.awt.geom.Ellipse2D;
+import java.awt.Color;
 
-public class Ball implements IGizmo{
+import Physics.PhysicsCircle;
+import Physics.Vect;
 
-    private int x, y, v;
 
-    public Ball(int x, int y, int v){
-        this.x = x;
-        this.y = y;
-        this.v = v;
+public class Ball {
+
+    private Vect velocity;
+    private double radius;
+    private double xpos;
+    private double ypos;
+    private Color colour;
+
+    private boolean stopped;
+
+    // x, y coordinates and x,y velocity
+    public Ball(double x, double y, double xv, double yv) {
+        xpos = x; // Centre coordinates
+        ypos = y;
+        colour = Color.BLUE;
+        velocity = new Vect(xv, yv);
+        radius = 12.5;
+        stopped = false;
     }
 
-    public int getX(){
-        return x;
+    public Vect getVelo() {
+        return velocity;
     }
 
-    public int getY(){
-        return y;
+    public void setVelo(Vect v) {
+        velocity = v;
     }
 
-    @Override
-    public void rotate() {
+    public double getRadius() {
+        return radius;
+    }
+
+    public PhysicsCircle getCircle() {
+        return new PhysicsCircle(xpos, ypos, radius);
 
     }
 
-    @Override
-    public void move(int newX, int newY) {
-
+    // Ball specific methods that deal with double precision.
+    public double getExactX() {
+        return xpos;
     }
 
-    @Override
-    public int getRotation() {
-        return 0;
+    public double getExactY() {
+        return ypos;
     }
 
-    public int getV(){
-        return v;
+    public void setExactX(double x) {
+        xpos = x;
     }
 
-    public Ellipse2D makeBall(){
-       return new Ellipse2D.Double(x, y, 10,2);
+    public void setExactY(double y) {
+        ypos = y;
     }
+
+    public void stop() {
+        stopped = true;
+    }
+
+    public void start() {
+        stopped = false;
+    }
+
+    public boolean stopped() {
+        return stopped;
+    }
+
+    public Color getColour() {
+        return colour;
+    }
+
 }
