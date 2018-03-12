@@ -24,6 +24,8 @@ public class Model extends Observable {
     public void addGizmo(IGizmo gizmo) {
         if (gizmo != null){
             gizmos.add(gizmo);
+            setChanged();
+            notifyObservers();
         }else{
             System.out.println("null gizmo");
         }

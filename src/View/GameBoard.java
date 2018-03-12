@@ -13,6 +13,7 @@ import java.util.List;
 
 public class GameBoard extends JPanel implements Observer, ActionListener {
     private static final int TICK_TIME = 5;
+    private char mode;
     private Model model; // model
     private FlipperListener controller;
     private List<Flipper> flippers;
@@ -27,20 +28,22 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
     private Color blue = new Color(0, 0, 255);
     private Color yellow = new Color(255,255,0);
 
-    GameBoard(Model model){
+
+    GameBoard(int w, int h, Model model, char mode){
         this.setBorder(BorderFactory.createLineBorder(Color.black));
         this.model = model;
+        this.mode = mode;
+        width = w;
+        height = h;
         flippers = new ArrayList<>();
         gizmos = model.getGizmos();
-        for (IGizmo gizmo : gizmos) {
-            if (gizmo.getClass().equals(RightFlipper.class) || gizmo.getClass().equals(LeftFlipper.class)) {
-                flippers.add((Flipper)gizmo);
-            }
-        }
         model.addObserver(this);
         setBorder(new LineBorder(Color.RED));
-        Timer tickTimer = new Timer(TICK_TIME, this);
-        tickTimer.start();
+        if (mode == 'r') {
+            Timer tickTimer = new Timer(TICK_TIME, this);
+            tickTimer.start();
+        }
+        printGizmoList();
         requestFocus();
     }
 
@@ -48,10 +51,20 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
     public void paint(Graphics g) {
         super.paint(g);
             Graphics2D g2 = (Graphics2D) g;
+
+            int lines = (2*L) / 2;
+        if (mode == 'b') {
+            for (int i = 1; i < lines - 4; i++) {
+                int x = i * lines;
+                g2.drawLine(x, 0, x, height);
+                g2.drawLine(0, x, width, x);
+            }
+        }
+
+
             for(IGizmo b : gizmos) {
                 if (b != null && b.getClass().equals(Square.class)) {
                     g2.setColor(red);
-                    System.out.println("found Square: paint method");
                     int x= (b.getX() * L);
                     int y= (b.getY() * L);
                     g2.fillRect(x, y, L, L);
@@ -80,16 +93,17 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
                     }
                 }
                 if (b != null && b.getClass().equals(Ball.class)) {
-                    g2.setColor(red);
-                    int x = (b.getX());
-                    int y = (b.getY());
+                    System.out.println("drawing ball...");
+                    g2.setColor(black);
+                    int x = (b.getX()* L);
+                    int y = (b.getY()* L);
                     g2.fillOval(x, y, L, L);
                 }
                 if (b != null && b.getClass().equals(Absorber.class)) {
                     g2.setColor(black);
                     int x =(b.getX() * L);;
                     int y =(b.getY() * L);
-                    g2.fillRect(x, y, 20, L);
+                    g2.fillRect(x, y, 20*L, L);
                 }
                 if (b != null && b.getClass().equals(LeftFlipper.class)) {
                     g2.setColor(yellow);
@@ -111,20 +125,20 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
         }
 
 
+    private void printGizmoList(){
+        for (IGizmo gizmo : gizmos) {
+            System.out.println("GizmoList: "+ gizmo.getClass().toString());
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        for (IGizmo gizmo : gizmos) {
-            if (gizmo instanceof Flipper) {
-                Flipper flipper = (Flipper) gizmo;
-                flipper.setAngle(flipper.getAngle() + flipper.getAngularMomentum() * (double) TICK_TIME/10);
-            }
-        }
     }
 
     @Override
     public void update(Observable o, Object arg) {
         this.repaint();
+        printGizmoList();
     }
 
 

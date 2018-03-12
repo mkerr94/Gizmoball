@@ -21,7 +21,7 @@ public class MainGUI extends JFrame {
         makeMenuBar();
         viewMode = new RunView(model);
         setContentPane(viewMode);
-        setSize(600, 600);
+        setSize(600, 570);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
@@ -38,9 +38,7 @@ public class MainGUI extends JFrame {
         file.add(save);
         file.add(exit);
         menuBar.add(file);
-        open.addActionListener(evt -> {
-                new LoadFile(model);
-        });
+        open.addActionListener(evt -> new LoadFile(model));
 
         exit.addActionListener((ActionEvent event) -> System.exit(0));
 
@@ -52,7 +50,6 @@ public class MainGUI extends JFrame {
         modeMenu.add(buildMode);
         modeMenu.add(runMode);
         runMode.setSelected(true);
-
         buildMode.addItemListener((ItemEvent e) -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 setTitle("GizmoBall - Build Mode");
@@ -62,6 +59,7 @@ public class MainGUI extends JFrame {
                 setContentPane(viewMode);
             }
         });
+
         runMode.addItemListener((ItemEvent e) -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 setTitle("GizmoBall - Run Mode");
