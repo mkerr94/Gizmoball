@@ -3,7 +3,8 @@ package Model;
 import Physics.LineSegment;
 
 
-public class Absorber implements IGizmo {
+public class Absorber extends Gizmo implements IGizmo {
+
     private int xOrdinate;
     private int yOrdinate;
     private int width;
@@ -11,6 +12,7 @@ public class Absorber implements IGizmo {
     private LineSegment collisionLine;
 
     public Absorber(int xOrdinate, int yOrdinate, int width, int height) {
+        super (xOrdinate, yOrdinate);
         this.xOrdinate = xOrdinate;
         this.yOrdinate = yOrdinate;
         this.width = width;

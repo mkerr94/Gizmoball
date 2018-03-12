@@ -48,6 +48,7 @@ public class BuildListener implements ActionListener{
                 break;
 
             case "Add absorber":
+                System.out.println("Add absorber button pressed");
                 break;
 
             case "Move":
