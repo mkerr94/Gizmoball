@@ -16,12 +16,11 @@ public class Model extends Observable {
     private List<IGizmo> gizmos;
     private Ball ball;
     private Walls walls;
+    private final int L = 30;
 
     public Model(){
         gizmos = new ArrayList<>();
-        // Ball position (25, 25) in pixels. Ball velocity (100, 100) pixels per tick
-        ball = new Ball(30, 30, 100, 100);
-        this.setBallSpeed(100, 100);
+        ball = new Ball(30, 30, 50, 50);
     }
 
     public List<IGizmo> getGizmos(){
@@ -48,17 +47,30 @@ public class Model extends Observable {
             }
             // Notify observers ... redraw updated view
             // todo apply gravity and friction
-            applyGravity();
-            applyFriction();
             this.setChanged();
             this.notifyObservers();
         }
     }
 
-    private void applyFriction() {
+    private void applyFriction(double time) {
+        double mu = 0.025;
+        double mu2 = 0.025 / L;
+
+        double vOldX = ball.getVelo().x();
+        double vOldY = ball.getVelo().y();
+
+        double vNewX = vOldX * (1 - (mu * time) - (mu2 * vOldX) * time);
+        double vNewY = vOldY * (1 - (mu * time) - (mu2 * vOldY) * time);
+
+        Vect vNew = new Vect(vNewX, vNewY);
+
+        ball.setVelo(vNew);
+
     }
 
-    private void applyGravity() {
+    private void applyGravity(double time) {
+        Vect gravityAlteredVelocity = new Vect(ball.getVelo().x(), (ball.getVelo().y() + (25 *L * time)));
+        ball.setVelo(gravityAlteredVelocity);
     }
 
     private Ball moveBallForTime(Ball ball, double time) {
@@ -70,6 +82,8 @@ public class Model extends Observable {
         newY = ball.getExactY() + (yVel * time);
         ball.setExactX(newX);
         ball.setExactY(newY);
+        applyGravity(time);
+        applyFriction(time);
         return ball;
     }
 
@@ -100,7 +114,7 @@ public class Model extends Observable {
         for (IGizmo gizmo : gizmos) {
             // Circle collisions
             if (gizmo instanceof Circle){
-                Circle circle = new Circle(gizmo.getX()*30, gizmo.getY()*30);
+                Circle circle = new Circle(gizmo.getX()*L, gizmo.getY()*L);
                 PhysicsCircle physicsCircle = circle.getCircle();
                 time = Geometry.timeUntilCircleCollision(physicsCircle, ballCircle, ballVelocity);
                 if (time < shortestTime) {
@@ -110,7 +124,7 @@ public class Model extends Observable {
             }
             // Square collisions
             if (gizmo instanceof Square){
-                Square square = new Square(gizmo.getX()*30, gizmo.getY()*30);
+                Square square = new Square(gizmo.getX()*L, gizmo.getY()*L);
                 ArrayList<LineSegment> lineSegments1 = square.getLines();
                 for (LineSegment lineSegment : lineSegments1){
                     time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
@@ -130,7 +144,7 @@ public class Model extends Observable {
             }
             // Triangle collisions
             if (gizmo instanceof Triangle){
-                Triangle triangle = new Triangle(gizmo.getX()*30, gizmo.getY()*30);
+                Triangle triangle = new Triangle(gizmo.getX()*L, gizmo.getY()*L);
                 ArrayList<LineSegment> lineSegments1 = triangle.getLines();
                 for (LineSegment lineSegment : lineSegments1){
                     time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
@@ -154,10 +168,6 @@ public class Model extends Observable {
 
     public Ball getBall() {
         return ball;
-    }
-
-    private void setBallSpeed(int x, int y) {
-        ball.setVelo(new Vect(x, y));
     }
 
     /***

@@ -47,7 +47,7 @@ public class MainGUI extends JFrame {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 setTitle("GizmoBall - Build Mode");
                 viewMode.setVisible(false);
-                viewMode = new BuildView( model);
+                viewMode = new BuildView(model);
                 viewMode.setVisible(true);
                 setContentPane(viewMode);
             }
