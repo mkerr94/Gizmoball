@@ -1,9 +1,19 @@
 package Model;
 
+import Physics.PhysicsCircle;
+
+import java.awt.*;
+import java.util.ArrayList;
+
 public class RightFlipper extends Flipper {
 
     public RightFlipper(int x, int y) {
         super(x, y);
+    }
+
+    @Override
+    public int getRotation() {
+        return 0;
     }
 
     @Override
@@ -12,12 +22,12 @@ public class RightFlipper extends Flipper {
     }
 
     @Override
-    public void move(int newX, int newY) {
-
+    public Color getColour() {
+        return null;
     }
 
     @Override
-    public int getRotation() {
-        return 0;
+    public ArrayList<PhysicsCircle> getEndCircles() {
+        return null;
     }
 }

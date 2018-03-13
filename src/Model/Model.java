@@ -7,39 +7,30 @@ import java.util.Observable;
 import Physics.PhysicsCircle;
 import Physics.Geometry;
 import Physics.Vect;
+import sun.plugin2.message.GetAppletMessage;
+
+import javax.sound.sampled.Line;
 
 
 public class Model extends Observable {
-    private static final int L = 25;
     private List<IGizmo> gizmos;
-    private ArrayList<VerticalLine> lines;
     private Ball ball;
-    private Circle circleGizmo;
-    private Walls gws;
-    private ArrayList<Square> ls;
-    private ArrayList<Triangle> tg;
-    private Triangle triangleGizmo;
-    private Square squareGizmo;
+    private Walls walls;
+
 
     public Model(){
         gizmos = new ArrayList<>();
-
-        ball = new Ball(120, 30, 100, 100);
-
-        // Wall size 500 x 500 pixels
-        gws = new Walls(0, 0, 600, 600);
-
-
-
-
-        // Lines added in Main
-        lines = new ArrayList<VerticalLine>();
-        ls = new ArrayList<Square>();
-        tg = new ArrayList<Triangle>();
+        // Ball position (25, 25) in pixels. Ball velocity (100, 100) pixels per tick
+        ball = new Ball(30, 30, 100, 100);
+        this.setBallSpeed(100, 100);
     }
 
     public List<IGizmo> getGizmos(){
         return gizmos;
+    }
+
+    public void setWalls(Walls walls){
+        this.walls = walls;
     }
 
     /***
@@ -52,39 +43,34 @@ public class Model extends Observable {
             setChanged();
             notifyObservers();
         }else{
-            System.out.println("null gizmo");
+            throw new NullPointerException("Null Gizmo when calling addGizmo()");
         }
     }
 
     public void moveBall() {
-
         double moveTime = 0.05; // 0.05 = 20 times per second as per Gizmoball
-
         if (ball != null && !ball.stopped()) {
-
             CollisionDetails cd = timeUntilCollision();
             double tuc = cd.getTuc();
             if (tuc > moveTime) {
                 // No collision ...
-                ball = movelBallForTime(ball, moveTime);
+                ball = moveBallForTime(ball, moveTime);
             } else {
                 // We've got a collision in tuc
-                ball = movelBallForTime(ball, tuc);
+                ball = moveBallForTime(ball, tuc);
                 // Post collision velocity ...
                 ball.setVelo(cd.getVelo());
             }
-
             // Notify observers ... redraw updated view
+            // todo apply gravity and friction
             this.setChanged();
             this.notifyObservers();
         }
-
     }
 
-    private Ball movelBallForTime(Ball ball, double time) {
-
-        double newX = 0.0;
-        double newY = 0.0;
+    private Ball moveBallForTime(Ball ball, double time) {
+        double newX;
+        double newY;
         double xVel = ball.getVelo().x();
         double yVel = ball.getVelo().y();
         newX = ball.getExactX() + (xVel * time);
@@ -100,103 +86,81 @@ public class Model extends Observable {
         PhysicsCircle ballCircle = ball.getCircle();
         Vect ballVelocity = ball.getVelo();
         Vect newVelo = new Vect(0, 0);
-
-
+        ArrayList<LineSegment> collisionLines;
+        ArrayList<PhysicsCircle> collisionCircles;
 
         // Now find shortest time to hit a vertical line or a wall line
         double shortestTime = Double.MAX_VALUE;
         double time = 0.0;
 
         // Time to collide with 4 walls
-        ArrayList<LineSegment> lss = gws.getLineSegments();
-        for (LineSegment line : lss) {
-            time = Geometry.timeUntilWallCollision(line, ballCircle, ballVelocity);
+        ArrayList<LineSegment> lineSegments = walls.getLineSegments();
+        for (LineSegment lineSegment : lineSegments) {
+            time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
             if (time < shortestTime) {
                 shortestTime = time;
-                newVelo = Geometry.reflectWall(line, ball.getVelo(), 1.0);
+                newVelo = Geometry.reflectWall(lineSegment, ball.getVelo(), 1.0);
             }
         }
 
-
-		for(IGizmo gizmo : gizmos){
-
-		    if(gizmo instanceof Square) {
-
-                squareGizmo = new Square(gizmo.getX()*30, gizmo.getY()*30);
-
-                ArrayList<LineSegment> ls = squareGizmo.getLines();
-                for (LineSegment line : ls) {
-                    time = Geometry.timeUntilWallCollision(line, ballCircle, ballVelocity);
-                    if (time < shortestTime) {
+        // Handle gizmo collisions
+        for (IGizmo gizmo : gizmos) {
+            // Circle collisions
+            if (gizmo instanceof Circle){
+                Circle circle = new Circle(gizmo.getX()*30, gizmo.getY()*30);
+                PhysicsCircle physicsCircle = circle.getCircle();
+                time = Geometry.timeUntilCircleCollision(physicsCircle, ballCircle, ballVelocity);
+                if (time < shortestTime) {
+                    shortestTime = time;
+                    newVelo = Geometry.reflectCircle(physicsCircle.getCenter(),ballCircle.getCenter(), ball.getVelo(), 1);
+                }
+            }
+            // Square collisions
+            if (gizmo instanceof Square){
+                Square square = new Square(gizmo.getX()*30, gizmo.getY()*30);
+                ArrayList<LineSegment> lineSegments1 = square.getLines();
+                for (LineSegment lineSegment : lineSegments1){
+                    time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
+                    if (time < shortestTime){
                         shortestTime = time;
-                        newVelo = Geometry.reflectWall(line, ball.getVelo(), 1.0);
+                        newVelo = Geometry.reflectWall(lineSegment, ball.getVelo(), 1.0);
                     }
                 }
-
-                ArrayList<PhysicsCircle> c = squareGizmo.getEndCircles();
-                for (PhysicsCircle circle : c) {
-                    time = Geometry.timeUntilCircleCollision(circle, ballCircle, ballVelocity);
-                    if (time < shortestTime) {
+                ArrayList<PhysicsCircle> physicsCircles = square.getEndCircles();
+                for (PhysicsCircle physicsCircle : physicsCircles){
+                    time = Geometry.timeUntilCircleCollision(physicsCircle, ballCircle, ballVelocity);
+                    if (time < shortestTime){
                         shortestTime = time;
-                        newVelo = Geometry.reflectCircle(circle.getCenter(), ballCircle.getCenter(), ball.getVelo(), 1);
+                        newVelo = Geometry.reflectCircle(physicsCircle.getCenter(), ballCircle.getCenter(), ball.getVelo(), 1.0);
                     }
                 }
             }
-
-            if(gizmo instanceof Triangle) {
-
-                triangleGizmo = new Triangle(gizmo.getX()*30,gizmo.getY()*30);
-
-
-        ArrayList<LineSegment> tg = triangleGizmo.getLines();
-        for(LineSegment line : tg){
-            time = Geometry.timeUntilWallCollision(line, ballCircle, ballVelocity);
-            if (time < shortestTime) {
-                shortestTime = time;
-                newVelo = Geometry.reflectWall(line, ball.getVelo(), 1.0);
+            // Triangle collisions
+            if (gizmo instanceof Triangle){
+                Triangle triangle = new Triangle(gizmo.getX()*30, gizmo.getY()*30);
+                ArrayList<LineSegment> lineSegments1 = triangle.getLines();
+                for (LineSegment lineSegment : lineSegments1){
+                    time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
+                    if (time < shortestTime){
+                        shortestTime = time;
+                        newVelo = Geometry.reflectWall(lineSegment, ball.getVelo(), 1.0);
+                    }
+                }
+                ArrayList<PhysicsCircle> physicsCircles = triangle.getEndCircles();
+                for (PhysicsCircle physicsCircle : physicsCircles){
+                    time = Geometry.timeUntilCircleCollision(physicsCircle, ballCircle, ballVelocity);
+                    if (time < shortestTime){
+                        shortestTime = time;
+                        newVelo = Geometry.reflectCircle(physicsCircle.getCenter(), ballCircle.getCenter(), ball.getVelo(), 1.0);
+                    }
+                }
             }
         }
-
-        ArrayList<PhysicsCircle> ci = triangleGizmo.getEndCircles();
-        for(PhysicsCircle circle : ci){
-            time  = Geometry.timeUntilCircleCollision(circle, ballCircle, ballVelocity);
-            if (time < shortestTime) {
-                shortestTime = time;
-                newVelo = Geometry.reflectCircle(circle.getCenter(),ballCircle.getCenter(), ball.getVelo(), 1);
-            }
-        }}
-
-        if(gizmo instanceof Circle){
-            circleGizmo = new Circle(gizmo.getX()*30, gizmo.getY()*30);
-            PhysicsCircle gizmoCircle = circleGizmo.getCircle();
-
-            time = Geometry.timeUntilCircleCollision(gizmoCircle, ballCircle, ballVelocity);
-            if (time < shortestTime) {
-                shortestTime = time;
-
-                newVelo = Geometry.reflectCircle(gizmoCircle.getCenter(),ballCircle.getCenter(), ball.getVelo(), 1);
-            }
-        }}
-
         return new CollisionDetails(shortestTime, newVelo);
     }
 
     public Ball getBall() {
         return ball;
-    }
-
-    public Circle getCircleGizmo(){return circleGizmo;}
-
-    public Square getSquareGizmo(){return squareGizmo;}
-
-    public Triangle getTriangleGizmo(){return triangleGizmo;}
-
-    public ArrayList<VerticalLine> getLines() {
-        return lines;
-    }
-
-    public void addLine(VerticalLine l) {
-        lines.add(l);
     }
 
     public void setBallSpeed(int x, int y) {

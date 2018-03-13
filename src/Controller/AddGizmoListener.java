@@ -12,7 +12,7 @@ import java.util.Random;
 
 import Model.*;
 
-public class AddGizmoListener implements ActionListener, MouseListener {
+public class AddGizmoListener implements ActionListener {
 
     private JComboBox gizmoList;
     private String gizmoToAdd;
@@ -44,33 +44,5 @@ public class AddGizmoListener implements ActionListener, MouseListener {
                 model.addGizmo(new Triangle(x, y));
                 break;
         }
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        int x1 = e.getX();
-        int y1 = e.getY();
-        System.out.println(x1 + "," + y1);//these co-ords are relative to the component
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
     }
 }

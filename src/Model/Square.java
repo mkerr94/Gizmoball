@@ -7,17 +7,15 @@ import java.awt.*;
 import java.util.ArrayList;
 
 
-public class Square extends Gizmo implements IGizmo {
+public class Square implements IGizmo {
 
     private int xpos;
     private int ypos;
     private int width;
-    private LineSegment ls;
     private Color colour;
 
 
     public Square(int x, int y) {
-        super(x,y);
         xpos = x;
         ypos = y;
         width = 30;
@@ -26,12 +24,7 @@ public class Square extends Gizmo implements IGizmo {
         getEndCircles();
     }
 
-    public LineSegment getLineSegs() {
-        return ls;
-    }
-
     public ArrayList<LineSegment> getLines() {
-
         ArrayList<LineSegment> lines = new ArrayList<LineSegment>();
         LineSegment l1 = new LineSegment(xpos, ypos, xpos, ypos + width);
         LineSegment l2 = new LineSegment(xpos + width, ypos, xpos + width, ypos + width);
@@ -42,7 +35,6 @@ public class Square extends Gizmo implements IGizmo {
         lines.add(l3);
         lines.add(l4);
         return lines;
-
     }
 
 
@@ -65,6 +57,16 @@ public class Square extends Gizmo implements IGizmo {
         endCircles.add(c7);
         endCircles.add(c8);
         return endCircles;
+    }
+
+    @Override
+    public int getRotation() {
+        return 0;
+    }
+
+    @Override
+    public void rotate() {
+
     }
 
 

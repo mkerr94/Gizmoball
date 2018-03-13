@@ -6,19 +6,20 @@ import Physics.LineSegment;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Triangle extends Gizmo implements IGizmo{
+public class Triangle implements IGizmo{
 
     private int xpos;
     private int ypos;
+    private int rotation;
     private int width;
     private LineSegment ls;
     private Color colour;
 
 
     public Triangle(int x, int y) {
-        super(x,y);
         xpos = x;
         ypos = y;
+        rotation = 0;
         width = 30;
         colour = Color.GREEN;
         getLines();
@@ -60,6 +61,16 @@ public class Triangle extends Gizmo implements IGizmo{
         endCircles.add(c5);
         endCircles.add(c6);
         return endCircles;
+    }
+
+    @Override
+    public int getRotation() {
+        return rotation;
+    }
+
+    @Override
+    public void rotate() {
+
     }
 
 

@@ -1,16 +1,25 @@
 package Model;
 
 
+import Physics.LineSegment;
+import Physics.PhysicsCircle;
+
+import java.awt.*;
+import java.util.ArrayList;
+
 public interface IGizmo {
-    double L = 25;
 
     int getX();
 
     int getY();
 
-    void rotate();
+    ArrayList<LineSegment> getLines();
 
-    void move(int newX, int newY);
+    ArrayList<PhysicsCircle> getEndCircles();
 
     int getRotation();
+
+    void rotate();
+
+    Color getColour();
 }

@@ -110,7 +110,6 @@ public class LoadFile {
                         model.addGizmo(new Circle(x2, y2));
                         break;
                     case "Rotate":
-                        //System.out.println("found");
                         gName = gizmoGroup[1];
                         loadedGizmos.get(gName).rotate();
                         break;

@@ -31,7 +31,7 @@ class BuildView extends JPanel {
         buttonPanel.setBorder(new EmptyBorder(10,10,10,10));
         makeButtons(buttonPanel);
         add(buttonPanel, BorderLayout.EAST);
-        add(new GameBoard(600, 600, model, 'b'), BorderLayout.CENTER);
+        add(new GameBoard(600, 600, model, Mode.BUILD), BorderLayout.CENTER);
         statusbar = new JLabel("Build Mode");
         statusbar.setBorder(BorderFactory.createEtchedBorder());
         add(statusbar, BorderLayout.SOUTH);

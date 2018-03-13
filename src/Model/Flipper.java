@@ -6,7 +6,7 @@ import Physics.LineSegment;
 import java.util.ArrayList;
 import java.util.Observable;
 
-public abstract class Flipper extends Observable implements IGizmo {
+public abstract class Flipper implements IGizmo {
     private ArrayList<LineSegment> lineSegments;
     private ArrayList<PhysicsCircle> collisionCircles;
     private int x, y, height, width;
@@ -56,14 +56,10 @@ public abstract class Flipper extends Observable implements IGizmo {
 
     public void flip() {
         angularMomentum = 5;
-        setChanged();
-        notifyObservers();
     }
 
     public void unflip() {
         angularMomentum = -5;
-        setChanged();
-        notifyObservers();
     }
 
     public int getHeight() {
@@ -97,8 +93,6 @@ public abstract class Flipper extends Observable implements IGizmo {
             this.angle = getInitialAngle();
             angularMomentum = 0;
         }
-        setChanged();
-        notifyObservers();
     }
 
     private double getInitialAngle() {

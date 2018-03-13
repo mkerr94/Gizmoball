@@ -1,59 +1,44 @@
 package View;
 
-import Model.LeftFlipper;
 import Model.Model;
-import Model.RightFlipper;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import Controller.RunListener;
 
 class RunView extends JPanel {
-   // private LoadFile file;
     private Model model;
-    private JLabel statusbar;
-    private ActionListener listener;
+    private RunListener runListener;
 
     RunView(Model model) {
         this.model = model;
-        listener = new RunListener(model);
+        runListener = new RunListener(model);
         init();
     }
 
     private void init() {
-
         setLayout(new BorderLayout());
-
-        JPanel buttonPanel = new JPanel(new GridLayout(5, 1, 5, 5));
-        buttonPanel.setBorder(new EmptyBorder(10,10,10,10));
+        JPanel buttonPanel = new JPanel(new GridLayout(10, 1, 5, 5));
+        buttonPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         makeButtons(buttonPanel);
         add(buttonPanel, BorderLayout.EAST);
-
-
-        add(new GameBoard(600, 600, model, 'r'), BorderLayout.CENTER);
-
-       statusbar = new JLabel("Run Mode");
-        statusbar.setBorder(BorderFactory.createEtchedBorder());
-        add(statusbar, BorderLayout.SOUTH);
-
+        add(new GameBoard(600, 600, model, Mode.RUN), BorderLayout.CENTER);
+        JLabel statusBar = new JLabel("Run Mode");
+        statusBar.setBorder(BorderFactory.createEtchedBorder());
+        add(statusBar, BorderLayout.SOUTH);
     }
 
     private void makeButtons(JPanel panel) {
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
-
-        JButton startB = new JButton("                                Start                              ");
-        startB.addActionListener(listener);
-
+        JButton startB = new JButton("Start");
+        startB.setPreferredSize(new Dimension(245, 100));
+        startB.addActionListener(runListener);
         JButton stopB = new JButton("Stop");
-        stopB.addActionListener(listener);
-
+        stopB.addActionListener(runListener);
         JButton tickB = new JButton("Tick");
-        tickB.addActionListener(listener);
-
+        tickB.addActionListener(runListener);
         panel.add(startB);
         panel.add(stopB);
         panel.add(tickB);
     }
-
 }

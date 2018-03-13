@@ -18,6 +18,6 @@ public class AddAbsorberListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("Absorber added");
-        model.addGizmo(new Absorber(0, 20, 20, 1));
+        model.addGizmo(new Absorber(0, 19, 20, 1));
     }
 }
