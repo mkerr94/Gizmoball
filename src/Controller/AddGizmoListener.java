@@ -35,13 +35,28 @@ public class AddGizmoListener implements ActionListener {
 
         switch (gizmoToAdd) {
             case "Circle":
-                model.addGizmo(new Circle(x, y));
+                Circle circle = new Circle(x, y);
+                if (model.checkGizmoLocation(circle)){
+                    model.addGizmo(circle);
+                } else{
+                    System.out.println("Gizmo already exists on that location");
+                }
                 break;
             case "Square":
-                model.addGizmo(new Square(x, y));
+                Square square = new Square(x, y);
+                if (model.checkGizmoLocation(square)){
+                    model.addGizmo(square);
+                } else{
+                    System.out.println("Gizmo already exists on that location");
+                }
                 break;
             case "Triangle":
-                model.addGizmo(new Triangle(x, y));
+                Triangle triangle = new Triangle(x, y);
+                if (model.checkGizmoLocation(triangle)){
+                    model.addGizmo(triangle);
+                } else{
+                    System.out.println("Gizmo already exists on that location");
+                }
                 break;
         }
     }

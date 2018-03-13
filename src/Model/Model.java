@@ -47,6 +47,15 @@ public class Model extends Observable {
         }
     }
 
+    public boolean checkGizmoLocation(IGizmo gizmo) {
+        for (IGizmo iGizmo : gizmos){
+            if (iGizmo.getX() == gizmo.getX() && iGizmo.getY() == gizmo.getY()){ // if a gizmo already exists in that location
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void moveBall() {
         double moveTime = 0.05; // 0.05 = 20 times per second as per Gizmoball
         if (ball != null && !ball.stopped()) {
@@ -176,5 +185,6 @@ public class Model extends Observable {
         setChanged();
         notifyObservers();
     }
+
 
 }

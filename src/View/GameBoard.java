@@ -34,7 +34,7 @@ public class GameBoard extends JPanel implements Observer {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         Color yellow = new Color(255,255,0);
-        printGridLines(g2);
+        if (mode == Mode.BUILD) printGridLines(g2);
         drawBall(g2);
 
         for(IGizmo gizmo : gizmos) {
@@ -113,14 +113,12 @@ public class GameBoard extends JPanel implements Observer {
     }
 
     private void printGridLines(Graphics2D g2) {
-        // todo fix the grid lines
-        if (mode == Mode.BUILD) {
-            int lines = L;
-            for (int i = 1; i <= 20; i++) {
-                int x = i * lines;
-                g2.drawLine(x, 0, x, height);
-                g2.drawLine(0, x, width, x);
-            }
+    // todo fix the grid lines
+        int lines = L;
+        for (int i = 1; i <= 20; i++) {
+            int x = i * lines;
+            g2.drawLine(x, 0, x, height);
+            g2.drawLine(0, x, width, x);
         }
     }
 
