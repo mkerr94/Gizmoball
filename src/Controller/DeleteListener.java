@@ -28,16 +28,17 @@ public class DeleteListener implements ActionListener{
                 y = e.getY() / 30; // L = 30
 
                model.deleteGizmo(x,y);
+               e.consume();
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-                e.consume();
+
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                e.consume();
+
             }
 
             @Override

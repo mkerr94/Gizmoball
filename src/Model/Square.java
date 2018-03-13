@@ -85,4 +85,12 @@ public class Square implements IGizmo {
     public Color getColour() {
         return colour;
     }
+
+    public void updateX(int x){
+        this.xpos = x;
+    }
+
+    public void updateY(int y){
+        this.ypos = y;
+    }
 }
