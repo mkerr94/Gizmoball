@@ -218,9 +218,9 @@ public class Model extends Observable {
             if (iGizmo.getX() == x && iGizmo.getY() == y) {
 
                 gizmos.remove(iGizmo);
-
                 setChanged();
                 notifyObservers();
+                break;
             }
         }
     }
