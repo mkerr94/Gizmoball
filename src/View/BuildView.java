@@ -90,7 +90,7 @@ class BuildView extends JPanel {
         addGizmoButton.addActionListener(new AddGizmoListener(bumperList, model, gameBoard));
         flipperB.addActionListener(listener);
         addBall.addActionListener(listener);
-        addAbsorber.addActionListener(new AddAbsorberListener(model));
+        addAbsorber.addActionListener(new AddAbsorberListener(model, gameBoard));
         moveB.addActionListener(listener);
         rotateB.addActionListener(listener);
         deleteB.addActionListener(listener);
