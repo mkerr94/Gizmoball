@@ -79,7 +79,7 @@ public class GameBoard extends JPanel implements Observer {
                 g2.setColor(gizmo.getColour());
                 int x =(gizmo.getX() * L);
                 int y =(gizmo.getY() * L);
-                g2.fillRect(x, y, 20*L, L);
+                g2.fillRect(x, y, ((Absorber) gizmo).getWidth() * L, ((Absorber) gizmo).getHeight() * L);
             }
             if (gizmo instanceof LeftFlipper) {
                 g2.setColor(yellow);

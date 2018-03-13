@@ -31,7 +31,6 @@ public class AddAbsorberListener implements ActionListener {
         gameBoard.addMouseListener(new MouseInputListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
             }
 
             @Override
@@ -46,6 +45,8 @@ public class AddAbsorberListener implements ActionListener {
                 y2 = e.getY()/30;
                 int dx = x2 - x1;
                 int dy = y2 - y1;
+                System.out.println("dx = " + dx);
+                System.out.println("dy = " + dy);
                 model.addGizmo(new Absorber(x1, y1, dx, dy));
             }
 

@@ -43,7 +43,6 @@ class BuildView extends JPanel {
     }
 
     private void makeButtons(JPanel panel) {
-
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         String[] bumpers = {"Circle", "Square", "Triangle"};
@@ -55,10 +54,6 @@ class BuildView extends JPanel {
         JComboBox flipperList = new JComboBox(flippers);
         flipperList.setBackground(Color.white);
         ((JLabel) flipperList.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
-
-
-
-
 
         //Create buttons
         JButton addGizmoButton = new JButton("Add gizmo");

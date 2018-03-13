@@ -33,12 +33,12 @@ public class AddGizmoListener implements ActionListener {
         gameBoard.addMouseListener(new MouseInputListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                e.consume();
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-
+                e.consume();
             }
 
             @Override
@@ -74,6 +74,7 @@ public class AddGizmoListener implements ActionListener {
                         }
                         break;
                 }
+                e.consume();
             }
 
             @Override
