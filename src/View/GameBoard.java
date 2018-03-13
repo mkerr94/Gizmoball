@@ -26,7 +26,8 @@ public class GameBoard extends JPanel implements Observer {
         gizmos = model.getGizmos();
         model.setWalls(new Walls(0, 0, this.width, this.height));
         model.addObserver(this);
-        setBorder(new LineBorder(Color.RED));
+        setBorder(new LineBorder(Color.BLACK));
+        setBackground(Color.white);
         requestFocus();
     }
 

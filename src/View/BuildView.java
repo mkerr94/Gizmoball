@@ -30,12 +30,15 @@ class BuildView extends JPanel {
     private void init() {
         setLayout(new BorderLayout());
         JPanel buttonPanel = new JPanel(new GridLayout(10, 1, 5, 5));
+        buttonPanel.setBackground(Color.black);
         buttonPanel.setBorder(new EmptyBorder(10,10,10,10));
         makeButtons(buttonPanel);
         add(buttonPanel, BorderLayout.EAST);
         add(gameBoard, BorderLayout.CENTER);
         statusbar = new JLabel("Build Mode");
-        statusbar.setBorder(BorderFactory.createEtchedBorder());
+        statusbar.setBorder(BorderFactory.createEtchedBorder(Color.black, Color.black));
+        setBackground(Color.black);
+        statusbar.setForeground(Color.magenta);
         add(statusbar, BorderLayout.SOUTH);
     }
 
@@ -45,27 +48,47 @@ class BuildView extends JPanel {
 
         String[] bumpers = {"Circle", "Square", "Triangle"};
         JComboBox bumperList = new JComboBox(bumpers);
+        bumperList.setBackground(Color.white);
         ((JLabel) bumperList.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
 
         String[] flippers = {"Right flipper", "Left flipper"};
         JComboBox flipperList = new JComboBox(flippers);
+        flipperList.setBackground(Color.white);
         ((JLabel) flipperList.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
+
+
+
+
 
         //Create buttons
         JButton addGizmoButton = new JButton("Add gizmo");
+        addGizmoButton.setBackground(Color.white);
         JButton flipperB = new JButton("Add flipper");
+        flipperB.setBackground(Color.white);
         JButton addBall = new JButton("Add ball");
+        addBall.setBackground(Color.white);
         JButton addAbsorber = new JButton("Add absorber");
+        addAbsorber.setBackground(Color.white);
         JButton moveB = new JButton("Move");
+        moveB.setBackground(Color.white);
         JButton rotateB = new JButton("Rotate");
+        rotateB.setBackground(Color.white);
         JButton deleteB = new JButton("Delete");
+        deleteB.setBackground(Color.white);
         JButton clearB = new JButton("Clear");
+        clearB.setBackground(Color.white);
         JButton frictionB = new JButton("Change friction");
+        frictionB.setBackground(Color.white);
         JButton gravityB = new JButton("Change gravity");
+        gravityB.setBackground(Color.white);
         JButton connectB = new JButton("Connect");
+        connectB.setBackground(Color.white);
         JButton disconnectB = new JButton("Disconnect");
+        disconnectB.setBackground(Color.white);
         JButton keyConnectB = new JButton("Key connect");
+        keyConnectB.setBackground(Color.white);
         JButton keyDisconnectB = new JButton("Key disconnect");
+        keyDisconnectB.setBackground(Color.white);
 
         //Add buttons to screen
         panel.add(bumperList);

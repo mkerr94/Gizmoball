@@ -20,22 +20,32 @@ class RunView extends JPanel {
         setLayout(new BorderLayout());
         JPanel buttonPanel = new JPanel(new GridLayout(10, 1, 5, 5));
         buttonPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        buttonPanel.setBackground(Color.black);
         makeButtons(buttonPanel);
         add(buttonPanel, BorderLayout.EAST);
         add(new GameBoard(600, 600, model, Mode.RUN), BorderLayout.CENTER);
         JLabel statusBar = new JLabel("Run Mode");
-        statusBar.setBorder(BorderFactory.createEtchedBorder());
+        statusBar.setBorder(BorderFactory.createEtchedBorder(Color.black, Color.black));
+        setBackground(Color.black);
+        statusBar.setForeground(Color.magenta);
         add(statusBar, BorderLayout.SOUTH);
+
     }
 
     private void makeButtons(JPanel panel) {
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
         JButton startB = new JButton("Start");
+        startB.setFont(new Font("Arial", Font.PLAIN, 24));
+        startB.setBackground(Color.white);
         startB.setPreferredSize(new Dimension(245, 100));
         startB.addActionListener(runListener);
         JButton stopB = new JButton("Stop");
+        stopB.setFont(new Font("Arial", Font.PLAIN, 24));
+        stopB.setBackground(Color.white);
         stopB.addActionListener(runListener);
         JButton tickB = new JButton("Tick");
+        tickB.setFont(new Font("Arial", Font.PLAIN, 24));
+        tickB.setBackground(Color.white);
         tickB.addActionListener(runListener);
         panel.add(startB);
         panel.add(stopB);
