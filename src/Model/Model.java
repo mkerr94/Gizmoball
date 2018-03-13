@@ -216,7 +216,6 @@ public class Model extends Observable {
     public void deleteGizmo(int x, int y) {
         for (IGizmo iGizmo : gizmos) {
             if (iGizmo.getX() == x && iGizmo.getY() == y) {
-
                 gizmos.remove(iGizmo);
                 setChanged();
                 notifyObservers();
@@ -224,5 +223,4 @@ public class Model extends Observable {
             }
         }
     }
-
 }
