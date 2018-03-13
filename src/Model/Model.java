@@ -33,29 +33,6 @@ public class Model extends Observable {
         this.walls = walls;
     }
 
-    /***
-     * Adds anything that implements the Gizmo interface to Model's collection of gizmos
-     * @param gizmo Gizmo to add to the model's collection
-     */
-    public void addGizmo(IGizmo gizmo) {
-        if (gizmo != null){
-            gizmos.add(gizmo);
-            setChanged();
-            notifyObservers();
-        }else{
-            throw new NullPointerException("Null Gizmo when calling addGizmo()");
-        }
-    }
-
-    public boolean checkGizmoLocation(IGizmo gizmo) {
-        for (IGizmo iGizmo : gizmos){
-            if (iGizmo.getX() == gizmo.getX() && iGizmo.getY() == gizmo.getY()){ // if a gizmo already exists in that location
-                return false;
-            }
-        }
-        return true;
-    }
-
     public void moveBall() {
         double moveTime = 0.05; // 0.05 = 20 times per second as per Gizmoball
         if (ball != null && !ball.stopped()) {
@@ -174,6 +151,36 @@ public class Model extends Observable {
 
     public void setBallSpeed(int x, int y) {
         ball.setVelo(new Vect(x, y));
+    }
+
+    /***
+     * Adds anything that implements the Gizmo interface to Model's collection of gizmos
+     * @param gizmo Gizmo to add to the model's collection
+     */
+    public void addGizmo(IGizmo gizmo) {
+        if (gizmo != null){
+            gizmos.add(gizmo);
+            setChanged();
+            notifyObservers();
+        }else{
+            throw new NullPointerException("Null Gizmo when calling addGizmo()");
+        }
+    }
+
+    /**
+     * Checks if a gizmo already exists at the location of the passed in gizmo.
+     * Returns false if a gizmo already exists at the target location and returns true
+     * if nothing exists at the target location
+     * @param gizmo gizmo to be added to the board
+     * @return true if valid placement, false if invalid placement
+     */
+    public boolean checkGizmoLocation(IGizmo gizmo) {
+        for (IGizmo iGizmo : gizmos){
+            if (iGizmo.getX() == gizmo.getX() && iGizmo.getY() == gizmo.getY()){ // if a gizmo already exists in that location
+                return false;
+            }
+        }
+        return true;
     }
 
     /***

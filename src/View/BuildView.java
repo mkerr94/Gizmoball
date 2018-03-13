@@ -18,10 +18,12 @@ class BuildView extends JPanel {
     private Model model;
     private JLabel statusbar;
     private ActionListener listener;
+    private GameBoard gameBoard;
 
     BuildView(Model model) {
         this.model = model;
         listener = new BuildListener();
+        gameBoard = new GameBoard(600, 600, model, Mode.BUILD);
         init();
     }
 
@@ -31,7 +33,7 @@ class BuildView extends JPanel {
         buttonPanel.setBorder(new EmptyBorder(10,10,10,10));
         makeButtons(buttonPanel);
         add(buttonPanel, BorderLayout.EAST);
-        add(new GameBoard(600, 600, model, Mode.BUILD), BorderLayout.CENTER);
+        add(gameBoard, BorderLayout.CENTER);
         statusbar = new JLabel("Build Mode");
         statusbar.setBorder(BorderFactory.createEtchedBorder());
         add(statusbar, BorderLayout.SOUTH);
@@ -85,7 +87,7 @@ class BuildView extends JPanel {
         add(panel, BorderLayout.EAST);
 
         //Action listeners
-        addGizmoButton.addActionListener(new AddGizmoListener(bumperList, model));
+        addGizmoButton.addActionListener(new AddGizmoListener(bumperList, model, gameBoard));
         flipperB.addActionListener(listener);
         addBall.addActionListener(listener);
         addAbsorber.addActionListener(new AddAbsorberListener(model));
