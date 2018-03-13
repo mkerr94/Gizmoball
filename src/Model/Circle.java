@@ -23,7 +23,7 @@ public class Circle extends Gizmo implements IGizmo {
         xpos = x; // Centre coordinates
         ypos = y;
         colour = Color.RED;
-        radius = 12.5;
+        radius = 15;
         stopped = true;
     }
 

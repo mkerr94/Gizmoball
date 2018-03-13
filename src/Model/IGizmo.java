@@ -2,7 +2,7 @@ package Model;
 
 
 public interface IGizmo {
-    int L = 25;
+    double L = 25;
 
     int getX();
 

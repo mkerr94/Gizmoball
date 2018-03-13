@@ -1,14 +1,13 @@
 package Model;
 
-public class Gizmo implements IGizmo{
+public class Gizmo implements IGizmo {
 
     private int x;
     private int y;
     private int rotation;
 
 
-    public Gizmo(int x, int y)
-    {
+    public Gizmo(int x, int y) {
         this.x = x;
         this.y = y;
         this.rotation = 0;
@@ -39,4 +38,5 @@ public class Gizmo implements IGizmo{
     public int getRotation() {
         return 0;
     }
+
 }

@@ -46,7 +46,7 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
             Timer tickTimer = new Timer(TICK_TIME, this);
             tickTimer.start();
         }
-        printGizmoList();
+        //printGizmoList();
         requestFocus();
     }
 
@@ -68,8 +68,8 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
 
                 if (b != null && b.getClass().equals(Circle.class)) {
                     g2.setColor(green);
-                    int x= (b.getX() * L);
-                    int y= (b.getY() * L);
+                    int x= (b.getX() * L  - 15);
+                    int y= (b.getY() * L  - 15);
                     g2.fillOval(x, y, L, L);
                 }
 
@@ -132,11 +132,11 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
     }
 
 
-    private void printGizmoList(){
+   /* private void printGizmoList(){
         for (IGizmo gizmo : gizmos) {
             System.out.println("GizmoList: "+ gizmo.getClass().toString());
         }
-    }
+    }*/
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -163,45 +163,12 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
             int y = (int) (b.getExactY() - b.getRadius());
             int width = (int) (2 * b.getRadius());
             g2.fillOval(x, y, width, width);
-        }
+        }}
 
-        Circle cg = gm.getCircleGizmo();
-        if (cg != null) {
-            g2.setColor(cg.getColour());
-            int x = (int) (cg.getExactX() - cg.getRadius());
-            int y = (int) (cg.getExactY() - cg.getRadius());
-            int width = (int) (2 * cg.getRadius());
-            g2.fillOval(x, y, width, width);
-        }
-
-
-        Square sg = gm.getSquareGizmo();
-        if (sg != null) {
-            g2.setColor(sg.getColour());
-            int x= (int) (sg.getX());
-            int y= (int) (sg.getY());
-            int width = (int)(sg.getWidth());
-            g2.fillRect(x,y,width,width);
-        }
-
-        Triangle tg = gm.getTriangleGizmo();
-
-        if (tg != null) {
-            g2.setColor(tg.getColour());
-            int x= (int) (tg.getX());
-            int y= (int) (tg.getY());
-            int width = (int)(tg.getWidth());
-            int x2Points[] = {x, x,x+25};
-            int y2Points[] = {y+25,y,y};
-            g2.fillPolygon(x2Points,y2Points,3);
-
-        }
-
-    }
     @Override
     public void update(Observable arg0, Object arg1) {
         this.repaint();
-        printGizmoList();
+       // printGizmoList();
     }
 
     public boolean isFocusable() {

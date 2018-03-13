@@ -11,7 +11,7 @@ public class Driver {
 
         Model Model = new Model();
 
-        Model.setBallSpeed(200, 200);
+        Model.setBallSpeed(100, 100);
 
 
         EventQueue.invokeLater(() -> {
@@ -19,5 +19,7 @@ public class Driver {
             MainGUI view = new MainGUI(model);
             view.setVisible(true);
         });
+
+
     }
 }

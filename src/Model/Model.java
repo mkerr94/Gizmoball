@@ -23,17 +23,12 @@ public class Model extends Observable {
 
     public Model(){
         gizmos = new ArrayList<>();
-        // Ball position (25, 25) in pixels. Ball velocity (100, 100) pixels per tick
-        ball = new Ball(25, 25, 100, 100);
+
+        ball = new Ball(30, 30, 100, 100);
 
         // Wall size 500 x 500 pixels
         gws = new Walls(0, 0, 500, 500);
 
-        circleGizmo = new Circle(150,50); //, 100,100
-
-        squareGizmo = new Square(50, 300); //, 20
-
-        triangleGizmo = new Triangle(275, 300); //, 20
 
 
 
@@ -106,7 +101,7 @@ public class Model extends Observable {
         Vect ballVelocity = ball.getVelo();
         Vect newVelo = new Vect(0, 0);
 
-        PhysicsCircle gizmoCircle = circleGizmo.getCircle();
+
 
         // Now find shortest time to hit a vertical line or a wall line
         double shortestTime = Double.MAX_VALUE;
@@ -122,32 +117,36 @@ public class Model extends Observable {
             }
         }
 
-        // Time to collide with any vertical lines
-		/*for (VerticalLine line : lines) {
-			LineSegment ls = line.getLineSeg();
-			time = Geometry.timeUntilWallCollision(ls, ballCircle, ballVelocity);
-			if (time < shortestTime) {
-				shortestTime = time;
-				newVelo = Geometry.reflectWall(ls, ball.getVelo(), 1.0);
-			}
-		}*/
-        ArrayList<LineSegment> ls = squareGizmo.getLines();
-        for(LineSegment line : ls){
-            time = Geometry.timeUntilWallCollision(line, ballCircle, ballVelocity);
-            if (time < shortestTime) {
-                shortestTime = time;
-                newVelo = Geometry.reflectWall(line, ball.getVelo(), 1.0);
-            }
-        }
 
-        ArrayList<PhysicsCircle> c = squareGizmo.getEndCircles();
-        for(PhysicsCircle circle : c){
-            time  = Geometry.timeUntilCircleCollision(circle, ballCircle, ballVelocity);
-            if (time < shortestTime) {
-                shortestTime = time;
-                newVelo = Geometry.reflectCircle(circle.getCenter(),ballCircle.getCenter(), ball.getVelo(), 1);
+		for(IGizmo gizmo : gizmos){
+
+		    if(gizmo instanceof Square) {
+
+                squareGizmo = new Square(gizmo.getX()*30, gizmo.getY()*30);
+
+                ArrayList<LineSegment> ls = squareGizmo.getLines();
+                for (LineSegment line : ls) {
+                    time = Geometry.timeUntilWallCollision(line, ballCircle, ballVelocity);
+                    if (time < shortestTime) {
+                        shortestTime = time;
+                        newVelo = Geometry.reflectWall(line, ball.getVelo(), 1.0);
+                    }
+                }
+
+                ArrayList<PhysicsCircle> c = squareGizmo.getEndCircles();
+                for (PhysicsCircle circle : c) {
+                    time = Geometry.timeUntilCircleCollision(circle, ballCircle, ballVelocity);
+                    if (time < shortestTime) {
+                        shortestTime = time;
+                        newVelo = Geometry.reflectCircle(circle.getCenter(), ballCircle.getCenter(), ball.getVelo(), 1);
+                    }
+                }
             }
-        }
+
+            if(gizmo instanceof Triangle) {
+
+                triangleGizmo = new Triangle(gizmo.getX()*30,gizmo.getY()*30);
+
 
         ArrayList<LineSegment> tg = triangleGizmo.getLines();
         for(LineSegment line : tg){
@@ -165,9 +164,11 @@ public class Model extends Observable {
                 shortestTime = time;
                 newVelo = Geometry.reflectCircle(circle.getCenter(),ballCircle.getCenter(), ball.getVelo(), 1);
             }
-        }
+        }}
 
-        if(circleGizmo != null){
+        if(gizmo instanceof Circle){
+            circleGizmo = new Circle(gizmo.getX()*30, gizmo.getY()*30);
+            PhysicsCircle gizmoCircle = circleGizmo.getCircle();
 
             time = Geometry.timeUntilCircleCollision(gizmoCircle, ballCircle, ballVelocity);
             if (time < shortestTime) {
@@ -175,7 +176,7 @@ public class Model extends Observable {
 
                 newVelo = Geometry.reflectCircle(gizmoCircle.getCenter(),ballCircle.getCenter(), ball.getVelo(), 1);
             }
-        }
+        }}
 
         return new CollisionDetails(shortestTime, newVelo);
     }

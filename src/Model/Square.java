@@ -20,7 +20,7 @@ public class Square extends Gizmo implements IGizmo {
         super(x,y);
         xpos = x;
         ypos = y;
-        width = 25;
+        width = 30;
         colour = Color.MAGENTA;
         getLines();
         getEndCircles();
