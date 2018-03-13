@@ -17,6 +17,14 @@ public class GameBoard extends JPanel implements Observer {
     private int width;
     private int height;
 
+    /***
+     * Initialises a board, builds collisions walls on the board, registers the board
+     * as an observer of the model.
+     * @param w width of the game board
+     * @param h height of the game board
+     * @param model reference of Model
+     * @param mode the mode the game is in, can either be BUILD or RUN. See View.Mode
+     */
     GameBoard(int w, int h, Model model, Mode mode){
         this.setBorder(BorderFactory.createLineBorder(Color.black));
         this.model = model;
@@ -32,13 +40,18 @@ public class GameBoard extends JPanel implements Observer {
         requestFocus();
     }
 
+    /***
+     * Paints all of the gizmos from the model. See Model.gizmos.
+     * Also draws the ball (see drawBall(g2)) and gridlines if the game
+     * is in buildmode.
+     * @param g Java2d Graphics object
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        Color yellow = new Color(255,255,0);
         if (mode == Mode.BUILD) printGridLines(g2);
         drawBall(g2);
-
+        // paint all of the gizmos from the model
         for(IGizmo gizmo : gizmos) {
             assert gizmo != null;
             if (gizmo instanceof Square) {
@@ -47,7 +60,6 @@ public class GameBoard extends JPanel implements Observer {
                 int y= (gizmo.getY() * L);
                 g2.fillRect(x, y, L, L);
             }
-
             if (gizmo instanceof Circle) {
                 g2.setColor(gizmo.getColour());
                 /*
@@ -60,7 +72,6 @@ public class GameBoard extends JPanel implements Observer {
                 int y= (gizmo.getY() * L - 15);
                 g2.fillOval(x, y, L, L);
             }
-
             if (gizmo instanceof Triangle) {
                 g2.setColor(gizmo.getColour());
                 int x= (gizmo.getX() * L);
@@ -83,7 +94,7 @@ public class GameBoard extends JPanel implements Observer {
                 g2.fillRect(x, y, ((Absorber) gizmo).getWidth() * L, ((Absorber) gizmo).getHeight() * L);
             }
             if (gizmo instanceof LeftFlipper) {
-                g2.setColor(yellow);
+                g2.setColor(gizmo.getColour());
                 int x =(gizmo.getX() * L);
                 int y =(gizmo.getY() * L);
                 g2.fillRect(x, y, (L /2), (L *2));
@@ -91,7 +102,7 @@ public class GameBoard extends JPanel implements Observer {
                 g2.fillOval(x, y+30, 10, 15);
             }
             if (gizmo instanceof RightFlipper) {
-                g2.setColor(yellow);
+                g2.setColor(gizmo.getColour());
                 int x =(gizmo.getX() * L);;
                 int y =(gizmo.getY() * L);
                 g2.fillRect(x+30, y, (L /2), (L *2));
@@ -102,6 +113,10 @@ public class GameBoard extends JPanel implements Observer {
 
     }
 
+    /**
+     * Draws the ball on the board
+     * @param g2 JavaGraphics2d object from paintComponent
+     */
     private void drawBall(Graphics2D g2) {
         g2.setColor(ball.getColour());
         int x = (int) (ball.getExactX() - ball.getRadius());
@@ -109,13 +124,12 @@ public class GameBoard extends JPanel implements Observer {
         g2.fillOval(x, y, L, L);
     }
 
-    @Override
-    public void update(Observable arg0, Object arg1) {
-        this.repaint();
-    }
-
+    /***
+     * Prints gridlines on the board, creating a 20x20 grid.
+     * Each grid square is of length L.
+     * @param g2 JavaGraphics2d object from paintComponent
+     */
     private void printGridLines(Graphics2D g2) {
-    // todo fix the grid lines
         int lines = L;
         for (int i = 1; i <= 20; i++) {
             int x = i * lines;
@@ -129,13 +143,16 @@ public class GameBoard extends JPanel implements Observer {
         return new Dimension(width, height);
     }
 
-    private void printGizmoList(){
-        for (IGizmo gizmo : gizmos) {
-            System.out.println("gizmo.getClass().toString() = " + gizmo.getClass().toString());
-        }
-    }
-
+    /***
+     * Needed to make the board have default key focus
+     * @return true if focusable, false if not focusable. Should always be true for GameBoard.
+     */
     public boolean isFocusable() {
         return true;
+    }
+
+    @Override
+    public void update(Observable arg0, Object arg1) {
+        this.repaint();
     }
 }

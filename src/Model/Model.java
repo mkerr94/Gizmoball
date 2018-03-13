@@ -17,7 +17,6 @@ public class Model extends Observable {
     private Ball ball;
     private Walls walls;
 
-
     public Model(){
         gizmos = new ArrayList<>();
         // Ball position (25, 25) in pixels. Ball velocity (100, 100) pixels per tick
@@ -49,9 +48,17 @@ public class Model extends Observable {
             }
             // Notify observers ... redraw updated view
             // todo apply gravity and friction
+            applyGravity();
+            applyFriction();
             this.setChanged();
             this.notifyObservers();
         }
+    }
+
+    private void applyFriction() {
+    }
+
+    private void applyGravity() {
     }
 
     private Ball moveBallForTime(Ball ball, double time) {
@@ -149,7 +156,7 @@ public class Model extends Observable {
         return ball;
     }
 
-    public void setBallSpeed(int x, int y) {
+    private void setBallSpeed(int x, int y) {
         ball.setVelo(new Vect(x, y));
     }
 

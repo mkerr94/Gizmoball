@@ -14,8 +14,6 @@ public class AddAbsorberListener implements ActionListener {
 
     private GameBoard gameBoard;
     private Model model;
-    private int x;
-    private int y;
     private int x1;
     private int x2;
     private int y1;
@@ -41,8 +39,8 @@ public class AddAbsorberListener implements ActionListener {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                x2 = e.getX()/30;
-                y2 = e.getY()/30;
+                x2 = e.getX()/30; // L = 30
+                y2 = e.getY()/30; // L = 30
                 int dx = x2 - x1;
                 int dy = y2 - y1;
                 System.out.println("dx = " + dx);
