@@ -1,9 +1,11 @@
 package Model;
 
 import Physics.LineSegment;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+
 import Physics.PhysicsCircle;
 import Physics.Geometry;
 import Physics.Vect;
@@ -18,16 +20,16 @@ public class Model extends Observable {
     private Walls walls;
     private final int L = 30;
 
-    public Model(){
+    public Model() {
         gizmos = new ArrayList<>();
         ball = new Ball(30, 30, 50, 50);
     }
 
-    public List<IGizmo> getGizmos(){
+    public List<IGizmo> getGizmos() {
         return gizmos;
     }
 
-    public void setWalls(Walls walls){
+    public void setWalls(Walls walls) {
         this.walls = walls;
     }
 
@@ -69,7 +71,7 @@ public class Model extends Observable {
     }
 
     private void applyGravity(double time) {
-        Vect gravityAlteredVelocity = new Vect(ball.getVelo().x(), (ball.getVelo().y() + (25 *L * time)));
+        Vect gravityAlteredVelocity = new Vect(ball.getVelo().x(), (ball.getVelo().y() + (25 * L * time)));
         ball.setVelo(gravityAlteredVelocity);
     }
 
@@ -113,50 +115,50 @@ public class Model extends Observable {
         // Handle gizmo collisions
         for (IGizmo gizmo : gizmos) {
             // Circle collisions
-            if (gizmo instanceof Circle){
-                Circle circle = new Circle(gizmo.getX()*L, gizmo.getY()*L);
+            if (gizmo instanceof Circle) {
+                Circle circle = new Circle(gizmo.getX() * L, gizmo.getY() * L);
                 PhysicsCircle physicsCircle = circle.getCircle();
                 time = Geometry.timeUntilCircleCollision(physicsCircle, ballCircle, ballVelocity);
                 if (time < shortestTime) {
                     shortestTime = time;
-                    newVelo = Geometry.reflectCircle(physicsCircle.getCenter(),ballCircle.getCenter(), ball.getVelo(), 1);
+                    newVelo = Geometry.reflectCircle(physicsCircle.getCenter(), ballCircle.getCenter(), ball.getVelo(), 1);
                 }
             }
             // Square collisions
-            if (gizmo instanceof Square){
-                Square square = new Square(gizmo.getX()*L, gizmo.getY()*L);
+            if (gizmo instanceof Square) {
+                Square square = new Square(gizmo.getX() * L, gizmo.getY() * L);
                 ArrayList<LineSegment> lineSegments1 = square.getLines();
-                for (LineSegment lineSegment : lineSegments1){
+                for (LineSegment lineSegment : lineSegments1) {
                     time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
-                    if (time < shortestTime){
+                    if (time < shortestTime) {
                         shortestTime = time;
                         newVelo = Geometry.reflectWall(lineSegment, ball.getVelo(), 1.0);
                     }
                 }
                 ArrayList<PhysicsCircle> physicsCircles = square.getEndCircles();
-                for (PhysicsCircle physicsCircle : physicsCircles){
+                for (PhysicsCircle physicsCircle : physicsCircles) {
                     time = Geometry.timeUntilCircleCollision(physicsCircle, ballCircle, ballVelocity);
-                    if (time < shortestTime){
+                    if (time < shortestTime) {
                         shortestTime = time;
                         newVelo = Geometry.reflectCircle(physicsCircle.getCenter(), ballCircle.getCenter(), ball.getVelo(), 1.0);
                     }
                 }
             }
             // Triangle collisions
-            if (gizmo instanceof Triangle){
-                Triangle triangle = new Triangle(gizmo.getX()*L, gizmo.getY()*L);
+            if (gizmo instanceof Triangle) {
+                Triangle triangle = new Triangle(gizmo.getX() * L, gizmo.getY() * L);
                 ArrayList<LineSegment> lineSegments1 = triangle.getLines();
-                for (LineSegment lineSegment : lineSegments1){
+                for (LineSegment lineSegment : lineSegments1) {
                     time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
-                    if (time < shortestTime){
+                    if (time < shortestTime) {
                         shortestTime = time;
                         newVelo = Geometry.reflectWall(lineSegment, ball.getVelo(), 1.0);
                     }
                 }
                 ArrayList<PhysicsCircle> physicsCircles = triangle.getEndCircles();
-                for (PhysicsCircle physicsCircle : physicsCircles){
+                for (PhysicsCircle physicsCircle : physicsCircles) {
                     time = Geometry.timeUntilCircleCollision(physicsCircle, ballCircle, ballVelocity);
-                    if (time < shortestTime){
+                    if (time < shortestTime) {
                         shortestTime = time;
                         newVelo = Geometry.reflectCircle(physicsCircle.getCenter(), ballCircle.getCenter(), ball.getVelo(), 1.0);
                     }
@@ -175,11 +177,11 @@ public class Model extends Observable {
      * @param gizmo Gizmo to add to the model's collection
      */
     public void addGizmo(IGizmo gizmo) {
-        if (gizmo != null){
+        if (gizmo != null) {
             gizmos.add(gizmo);
             setChanged();
             notifyObservers();
-        }else{
+        } else {
             throw new NullPointerException("Null Gizmo when calling addGizmo()");
         }
     }
@@ -188,12 +190,13 @@ public class Model extends Observable {
      * Checks if a gizmo already exists at the location of the passed in gizmo.
      * Returns false if a gizmo already exists at the target location and returns true
      * if nothing exists at the target location
+     *
      * @param gizmo gizmo to be added to the board
      * @return true if valid placement, false if invalid placement
      */
     public boolean checkGizmoLocation(IGizmo gizmo) {
-        for (IGizmo iGizmo : gizmos){
-            if (iGizmo.getX() == gizmo.getX() && iGizmo.getY() == gizmo.getY()){ // if a gizmo already exists in that location
+        for (IGizmo iGizmo : gizmos) {
+            if (iGizmo.getX() == gizmo.getX() && iGizmo.getY() == gizmo.getY()) { // if a gizmo already exists in that location
                 return false;
             }
         }
@@ -210,5 +213,16 @@ public class Model extends Observable {
         notifyObservers();
     }
 
+    public void deleteGizmo(int x, int y) {
+        for (IGizmo iGizmo : gizmos) {
+            if (iGizmo.getX() == x && iGizmo.getY() == y) {
+
+                gizmos.remove(iGizmo);
+
+                setChanged();
+                notifyObservers();
+            }
+        }
+    }
 
 }

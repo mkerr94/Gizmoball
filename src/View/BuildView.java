@@ -1,8 +1,6 @@
 package View;
 
-import Controller.AddAbsorberListener;
-import Controller.AddGizmoListener;
-import Controller.ClearBoardListener;
+import Controller.*;
 import Model.Model;
 
 import javax.swing.*;
@@ -10,8 +8,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import Controller.BuildListener;
-
 
 
 class BuildView extends JPanel {
@@ -111,7 +107,7 @@ class BuildView extends JPanel {
         addAbsorber.addActionListener(new AddAbsorberListener(model, gameBoard));
         moveB.addActionListener(listener);
         rotateB.addActionListener(listener);
-        deleteB.addActionListener(listener);
+        deleteB.addActionListener(new DeleteListener(model,gameBoard));
         clearB.addActionListener(new ClearBoardListener(model));
         frictionB.addActionListener(listener);
         gravityB.addActionListener(listener);

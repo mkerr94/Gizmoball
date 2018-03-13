@@ -35,7 +35,6 @@ public class MainGUI extends JFrame {
 
         exit.addActionListener((ActionEvent event) -> System.exit(0));
 
-
         ButtonGroup modeGroup = new ButtonGroup();
         JMenu modeMenu = new JMenu("Mode");
         JRadioButtonMenuItem buildMode = new JRadioButtonMenuItem("Build Mode");
