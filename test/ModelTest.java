@@ -1,20 +1,18 @@
 package JUnit;
 
 import Model.Circle;
-import org.junit.Before;
-import org.junit.Test;
 import Model.Model;
-import Model.Triangle;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.Assert.*;
-
-public class ModelTest {
+class ModelTest {
 
     private Model model;
 
     //doesn't work? idk why
     @Test
-    public void addGizmo() throws Exception {
+    void addGizmo() throws Exception {
+        model = new Model();
         Circle circle = new Circle(0,0);
         model.addGizmo(circle);
         System.out.println(model.getGizmos().size());
