@@ -2,6 +2,7 @@ package View;
 
 import Model.*;
 import javax.swing.*;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.*;
@@ -26,7 +27,7 @@ public class GameBoard extends JPanel implements Observer {
         gizmos = model.getGizmos();
         model.setWalls(new Walls(0, 0, this.width, this.height));
         model.addObserver(this);
-        setBorder(new LineBorder(Color.BLACK));
+        setBorder(new EtchedBorder(Color.black, Color.black));
         setBackground(Color.white);
         requestFocus();
     }

@@ -37,7 +37,7 @@ class RunView extends JPanel {
         JButton startB = new JButton("Start");
         startB.setFont(new Font("Arial", Font.PLAIN, 24));
         startB.setBackground(Color.white);
-        startB.setPreferredSize(new Dimension(245, 100));
+        startB.setPreferredSize(new Dimension(247, 100));
         startB.addActionListener(runListener);
         JButton stopB = new JButton("Stop");
         stopB.setFont(new Font("Arial", Font.PLAIN, 24));
