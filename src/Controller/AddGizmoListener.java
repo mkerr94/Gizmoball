@@ -48,9 +48,7 @@ public class AddGizmoListener implements ActionListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        x = e.getX();
-        y = e.getY();
-        System.out.println(x + "," + y);//these co-ords are relative to the component
+
     }
 
     @Override
@@ -60,6 +58,9 @@ public class AddGizmoListener implements ActionListener, MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        int x1 = e.getX();
+        int y1 = e.getY();
+        System.out.println(x1 + "," + y1);//these co-ords are relative to the component
 
     }
 

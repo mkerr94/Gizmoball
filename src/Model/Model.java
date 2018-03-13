@@ -24,10 +24,10 @@ public class Model extends Observable {
     public Model(){
         gizmos = new ArrayList<>();
 
-        ball = new Ball(30, 30, 100, 100);
+        ball = new Ball(120, 30, 100, 100);
 
         // Wall size 500 x 500 pixels
-        gws = new Walls(0, 0, 500, 500);
+        gws = new Walls(0, 0, 600, 600);
 
 
 

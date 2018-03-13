@@ -122,8 +122,8 @@ public class GameBoard extends JPanel implements Observer, ActionListener {
 
     private void printGridLines(Graphics2D g2) {
         if (mode == 'b') {
-            int lines = (2*L) / 2;
-            for (int i = 1; i < lines - 4; i++) {
+            int lines = 30;
+            for (int i = 1; i < 21; i++) {
                 int x = i * lines;
                 g2.drawLine(x, 0, x, height);
                 g2.drawLine(0, x, width, x);

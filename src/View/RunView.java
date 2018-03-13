@@ -21,24 +21,17 @@ class RunView extends JPanel {
         init();
     }
 
-
     private void init() {
 
         setLayout(new BorderLayout());
 
-        JPanel buttonPanel = new JPanel(new GridLayout(10, 1, 5, 5));
+        JPanel buttonPanel = new JPanel(new GridLayout(5, 1, 5, 5));
         buttonPanel.setBorder(new EmptyBorder(10,10,10,10));
         makeButtons(buttonPanel);
         add(buttonPanel, BorderLayout.EAST);
 
-        //Generic board area
-        /*JPanel board = new JPanel(new GridLayout(20,20));
-        board.setBorder(BorderFactory.createLineBorder(Color.black,1));
-        add(board, BorderLayout.CENTER);*/
 
-        //Board panel from GameBoard
-
-        add(new GameBoard(500, 500, model, 'r'), BorderLayout.CENTER);
+        add(new GameBoard(600, 600, model, 'r'), BorderLayout.CENTER);
 
        statusbar = new JLabel("Run Mode");
         statusbar.setBorder(BorderFactory.createEtchedBorder());
@@ -49,7 +42,7 @@ class RunView extends JPanel {
     private void makeButtons(JPanel panel) {
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        JButton startB = new JButton("Start");
+        JButton startB = new JButton("                                Start                              ");
         startB.addActionListener(listener);
 
         JButton stopB = new JButton("Stop");

@@ -26,7 +26,7 @@ public class RunListener implements ActionListener {
             model.moveBall();
         } else
             switch (e.getActionCommand()) {
-                case "Start":
+                case "                                Start                              ":
                     timer.start();
                     break;
                 case "Stop":
