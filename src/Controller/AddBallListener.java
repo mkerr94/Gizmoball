@@ -15,6 +15,5 @@ public class AddBallListener {
 
     public void actionPerformed(ActionEvent e) {
         System.out.println("Ball added");
-       // model.createBall(new Ball(10,10,20,20));
     }
 }

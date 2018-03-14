@@ -26,7 +26,10 @@ public class AddAbsorberListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //need to remove listeners here
+
         gameBoard.addMouseListener(new MouseInputListener() {
+
             @Override
             public void mouseClicked(MouseEvent e) {
             }
