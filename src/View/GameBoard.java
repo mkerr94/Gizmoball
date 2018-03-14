@@ -103,7 +103,7 @@ public class GameBoard extends JPanel implements Observer {
             }
             if (gizmo instanceof RightFlipper) {
                 g2.setColor(gizmo.getColour());
-                int x =(gizmo.getX() * L);;
+                int x =(gizmo.getX() * L);
                 int y =(gizmo.getY() * L);
                 g2.fillRect(x+30, y, (L /2), (L *2));
                 g2.fillOval(x+30, y-4, 10, 15);
@@ -121,7 +121,7 @@ public class GameBoard extends JPanel implements Observer {
         g2.setColor(ball.getColour());
         int x = (int) (ball.getExactX() - ball.getRadius());
         int y = (int) (ball.getExactY() - ball.getRadius());
-        g2.fillOval(x, y, L, L);
+        g2.fillOval(x, y, L/2, L/2);
     }
 
     /***

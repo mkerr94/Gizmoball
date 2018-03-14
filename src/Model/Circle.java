@@ -14,7 +14,6 @@ public class Circle implements IGizmo {
     private double ypos;
     private int y;
     private Color colour;
-    private boolean stopped;
 
     // x, y coordinates and x,y velocity
     public Circle(int x, int y) {
@@ -24,7 +23,6 @@ public class Circle implements IGizmo {
         this.y = y;
         colour = Color.RED;
         radius = 15;
-        stopped = true;
     }
 
     public PhysicsCircle getCircle() {

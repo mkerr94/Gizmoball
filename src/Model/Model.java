@@ -28,7 +28,9 @@ public class Model extends Observable {
     public List<IGizmo> getGizmos() {
         return gizmos;
     }
-
+    public Ball getBall() {
+        return ball;
+    }
     public void setWalls(Walls walls) {
         this.walls = walls;
     }
@@ -47,32 +49,12 @@ public class Model extends Observable {
                 // Post collision velocity ...
                 ball.setVelo(cd.getVelo());
             }
+            applyGravity(moveTime);
+            applyFriction(moveTime);
             // Notify observers ... redraw updated view
-            // todo apply gravity and friction
             this.setChanged();
             this.notifyObservers();
         }
-    }
-
-    private void applyFriction(double time) {
-        double mu = 0.025;
-        double mu2 = 0.025 / L;
-
-        double vOldX = ball.getVelo().x();
-        double vOldY = ball.getVelo().y();
-
-        double vNewX = vOldX * (1 - (mu * time) - (mu2 * vOldX) * time);
-        double vNewY = vOldY * (1 - (mu * time) - (mu2 * vOldY) * time);
-
-        Vect vNew = new Vect(vNewX, vNewY);
-
-        ball.setVelo(vNew);
-
-    }
-
-    private void applyGravity(double time) {
-        Vect gravityAlteredVelocity = new Vect(ball.getVelo().x(), (ball.getVelo().y() + (25 * L * time)));
-        ball.setVelo(gravityAlteredVelocity);
     }
 
     private Ball moveBallForTime(Ball ball, double time) {
@@ -84,8 +66,6 @@ public class Model extends Observable {
         newY = ball.getExactY() + (yVel * time);
         ball.setExactX(newX);
         ball.setExactY(newY);
-        applyGravity(time);
-        applyFriction(time);
         return ball;
     }
 
@@ -164,12 +144,44 @@ public class Model extends Observable {
                     }
                 }
             }
+            // Absorber collisions todo implement proper absorber functionality
+            if (gizmo instanceof Absorber){
+                Absorber absorber = new Absorber(gizmo.getX() * L, gizmo.getY() * L, ((Absorber) gizmo).getWidth() * L, ((Absorber) gizmo).getHeight() * L);
+                LineSegment lineSegment = absorber.getCollisionLine();
+                time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
+                if (time < shortestTime){
+                    shortestTime = time;
+                    newVelo = Geometry.reflectWall(lineSegment, ball.getVelo(), 1.0);
+                }
+            }
         }
         return new CollisionDetails(shortestTime, newVelo);
     }
 
-    public Ball getBall() {
-        return ball;
+    /***
+     * Applies friction to the velocity of the ball so it slows down
+     * over time. Simulates friction of a pinball machine.
+     * @param time How often the timer updates. Aim for 20 times per second (0.05)
+     */
+    private void applyFriction(double time) {
+        double mu = 0.025;
+        double mu2 = 0.025 / L; //todo check these values
+        double vxOld = ball.getVelo().x();
+        double vyOld = ball.getVelo().y();
+        double vxNew = vxOld * (1 - (mu * time) - (mu2 * vxOld) * time);
+        double vyNew = vyOld * (1 - (mu * time) - (mu2 * vyOld) * time);
+        Vect vNew = new Vect(vxNew, vyNew);
+        ball.setVelo(vNew);
+    }
+
+    /***
+     * Applies gravity to the y component of the ball's velocity, such that the y component
+     * slows down over time.
+     * @param time How often the timer updates. Aim for 20 times per second (0.05)
+     */
+    private void applyGravity(double time) {
+        Vect gravityAlteredVelocity = new Vect(ball.getVelo().x(), (ball.getVelo().y() + (25 * L * time)));
+        ball.setVelo(gravityAlteredVelocity);
     }
 
     /***
@@ -213,6 +225,11 @@ public class Model extends Observable {
         notifyObservers();
     }
 
+    /***
+     * Deletes the gizmo at the given location
+     * @param x x ordinate of target gizmo
+     * @param y y ordinate of target gizmo
+     */
     public void deleteGizmo(int x, int y) {
         for (IGizmo iGizmo : gizmos) {
             if (iGizmo.getX() == x && iGizmo.getY() == y) {

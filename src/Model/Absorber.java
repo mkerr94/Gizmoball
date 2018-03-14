@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 
 public class Absorber implements IGizmo {
-
     private int xOrdinate;
     private int yOrdinate;
     private int width;
@@ -21,7 +20,7 @@ public class Absorber implements IGizmo {
         this.yOrdinate = yOrdinate;
         this.width = width;
         this.height = height;
-        collisionLine = new LineSegment(xOrdinate, yOrdinate + height, xOrdinate + width, yOrdinate + height);
+        collisionLine = new LineSegment(xOrdinate, yOrdinate, xOrdinate + width, yOrdinate);
         color = Color.cyan;
     }
 
@@ -52,7 +51,7 @@ public class Absorber implements IGizmo {
 
     @Override
     public void rotate() {
-
+        // cannot rotate an absorber
     }
 
     @Override

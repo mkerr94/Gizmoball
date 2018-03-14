@@ -9,7 +9,6 @@ class ModelTest {
 
     private Model model;
 
-    //doesn't work? idk why
     @Test
     void addGizmo() throws Exception {
         model = new Model();

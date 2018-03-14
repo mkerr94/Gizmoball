@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 
 class BuildView extends JPanel {
     private Model model;
-    private JLabel statusbar;
     private ActionListener listener;
     private GameBoard gameBoard;
 
@@ -31,7 +30,7 @@ class BuildView extends JPanel {
         makeButtons(buttonPanel);
         add(buttonPanel, BorderLayout.EAST);
         add(gameBoard, BorderLayout.CENTER);
-        statusbar = new JLabel("Build Mode");
+        JLabel statusbar = new JLabel("Build Mode");
         statusbar.setBorder(BorderFactory.createEtchedBorder(Color.black, Color.black));
         setBackground(Color.black);
         statusbar.setForeground(Color.magenta);
