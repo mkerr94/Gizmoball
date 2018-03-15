@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-class BuildView extends JPanel {
+public class BuildView extends JPanel {
     private Model model;
     private ActionListener listener;
     private GameBoard gameBoard;
@@ -115,28 +115,8 @@ class BuildView extends JPanel {
         flipperB.addActionListener(e -> statusbar.setText("Add Flipper"));
         flipperB.addActionListener(new AddFlipperListener(flipperList, model, gameBoard));
         addBall.addActionListener(e -> statusbar.setText("Add Ball"));
-        addBall.addActionListener(e -> {
-            JTextField vxField = new JTextField(1);
-            JTextField vyField = new JTextField(1);
-            JPanel myPanel = new JPanel();
 
-            myPanel.add(new JLabel("Velocity of x: "));
-            myPanel.add(vxField);
-
-            myPanel.add(new JLabel("Velocity of y: "));
-            myPanel.add(vyField);
-
-            int result = JOptionPane.showConfirmDialog(null, myPanel, "Add ball", JOptionPane.OK_CANCEL_OPTION);
-
-            if(result == 0) {
-                xv = Double.parseDouble(vxField.getText());
-                xy = Double.parseDouble(vyField.getText());
-            }
-
-            System.out.println(xv);
-            System.out.println(xy);
-        });
-        addBall.addActionListener(new AddBallListener(model,gameBoard, xv, xy));
+        addBall.addActionListener(new AddBallListener(model,gameBoard,this));
         addAbsorber.addActionListener(e -> statusbar.setText("Add Absorber"));
         addAbsorber.addActionListener(new AddAbsorberListener(model, gameBoard));
         moveB.addActionListener(e -> statusbar.setText("Move Gizmo"));
@@ -161,4 +141,29 @@ class BuildView extends JPanel {
         keyDisconnectB.addActionListener(e -> statusbar.setText("Disconnect Key"));
     }
 
+    public void ballVelocityAlert(){
+        JTextField vxField = new JTextField(1);
+        JTextField vyField = new JTextField(1);
+        JPanel myPanel = new JPanel();
+
+        myPanel.add(new JLabel("Velocity of x: "));
+        myPanel.add(vxField);
+
+        myPanel.add(new JLabel("Velocity of y: "));
+        myPanel.add(vyField);
+
+        int result = JOptionPane.showConfirmDialog(null, myPanel, "Add ball", JOptionPane.OK_CANCEL_OPTION);
+
+        if(result == 0) {
+            xv = Double.parseDouble(vxField.getText());
+            xy = Double.parseDouble(vyField.getText());
+        }
+    }
+    public double getBallxv(){
+        return xv;
+    }
+
+    public double getBallxy(){
+        return xy;
+    }
 }

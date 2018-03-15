@@ -8,6 +8,7 @@ import javax.swing.event.MouseInputListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import View.BuildView;
 
 public class AddBallListener implements ActionListener {
 
@@ -16,12 +17,13 @@ public class AddBallListener implements ActionListener {
     private GameBoard gameBoard;
     private MouseInputListener mouseInputListener;
     double xv,xy;
+    BuildView buildView;
 
-    public AddBallListener(Model model, GameBoard gameBoard, double xv, double xy){
+    public AddBallListener(Model model, GameBoard gameBoard, BuildView bv){
         this.model = model;
         this.gameBoard = gameBoard;
-        this.xv = xv;
-        this.xy = xy;
+        this.buildView = bv;
+
         mouseInputListener = new MouseInputListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -35,6 +37,11 @@ public class AddBallListener implements ActionListener {
 
             @Override
             public void mouseReleased(MouseEvent e) {
+
+                buildView.ballVelocityAlert();
+                xv = buildView.getBallxv();
+                xy = buildView.getBallxy();
+
                 System.out.println(xv);
                 System.out.println(xy);
                 x = e.getX();
