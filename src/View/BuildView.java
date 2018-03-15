@@ -15,6 +15,7 @@ class BuildView extends JPanel {
     private ActionListener listener;
     private GameBoard gameBoard;
     private Color purple;
+    JLabel statusbar;
     String result1;
     String result2;
     double xv;
@@ -33,14 +34,14 @@ class BuildView extends JPanel {
         JPanel buttonPanel = new JPanel(new GridLayout(10, 1, 5, 5));
         buttonPanel.setBackground(purple = new Color(128,0,128));
         buttonPanel.setBorder(new EmptyBorder(10,10,10,10));
-        makeButtons(buttonPanel);
         add(buttonPanel, BorderLayout.EAST);
         add(gameBoard, BorderLayout.CENTER);
-        JLabel statusbar = new JLabel("Build Mode");
-        statusbar.setBorder(BorderFactory.createEtchedBorder(purple, purple));
         setBackground(purple);
+        statusbar = new JLabel("Build Mode");
+        statusbar.setBorder(BorderFactory.createEtchedBorder(purple, purple));
         statusbar.setForeground(Color.white);
         add(statusbar, BorderLayout.SOUTH);
+        makeButtons(buttonPanel);
     }
 
     private void makeButtons(JPanel panel) {
@@ -109,43 +110,55 @@ class BuildView extends JPanel {
         add(panel, BorderLayout.EAST);
 
         //Action listenersw
+        addGizmoButton.addActionListener(e -> statusbar.setText("Add Gizmo"));
         addGizmoButton.addActionListener(new AddGizmoListener(bumperList, model, gameBoard));
+        flipperB.addActionListener(e -> statusbar.setText("Add Flipper"));
         flipperB.addActionListener(listener);
-        addBall.addActionListener(new ActionListener()  {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                JTextField vxField = new JTextField(1);
-                JTextField vyField = new JTextField(1);
-                JPanel myPanel = new JPanel();
+        addBall.addActionListener(e -> statusbar.setText("Add Ball"));
+        addBall.addActionListener(e -> {
+            JTextField vxField = new JTextField(1);
+            JTextField vyField = new JTextField(1);
+            JPanel myPanel = new JPanel();
 
-                myPanel.add(new JLabel("Velocity of x: "));
-                myPanel.add(vxField);
+            myPanel.add(new JLabel("Velocity of x: "));
+            myPanel.add(vxField);
 
-                myPanel.add(new JLabel("Velocity of y: "));
-                myPanel.add(vyField);
+            myPanel.add(new JLabel("Velocity of y: "));
+            myPanel.add(vyField);
 
-                int result = JOptionPane.showConfirmDialog(null, myPanel, "Add ball", JOptionPane.OK_CANCEL_OPTION);
+            int result = JOptionPane.showConfirmDialog(null, myPanel, "Add ball", JOptionPane.OK_CANCEL_OPTION);
 
-                if(result == 0) {
-                    xv = Double.parseDouble(vxField.getText());
-                    xy = Double.parseDouble(vyField.getText());
-                }
-
-                System.out.println(xv);
-                System.out.println(xy);
+            if(result == 0) {
+                xv = Double.parseDouble(vxField.getText());
+                xy = Double.parseDouble(vyField.getText());
             }
+
+            System.out.println(xv);
+            System.out.println(xy);
         });
         addBall.addActionListener(new AddBallListener(model,gameBoard, xv, xy));
+        addAbsorber.addActionListener(e -> statusbar.setText("Add Absorber"));
         addAbsorber.addActionListener(new AddAbsorberListener(model, gameBoard));
+        moveB.addActionListener(e -> statusbar.setText("Move Gizmo"));
         moveB.addActionListener(listener);
+        rotateB.addActionListener(e -> statusbar.setText("Rotate Gizmo"));
         rotateB.addActionListener(listener);
+        deleteB.addActionListener(e -> statusbar.setText("Delete Gizmo"));
         deleteB.addActionListener(new DeleteListener(model,gameBoard));
+        clearB.addActionListener(e -> statusbar.setText("Clear Board"));
         clearB.addActionListener(new ClearBoardListener(model));
+        frictionB.addActionListener(e -> statusbar.setText("Change Friction"));
         frictionB.addActionListener(listener);
+        gravityB.addActionListener(e -> statusbar.setText("Change Gravity"));
         gravityB.addActionListener(listener);
         connectB.addActionListener(listener);
+        connectB.addActionListener(e -> statusbar.setText("Add Connection"));
         disconnectB.addActionListener(listener);
+        disconnectB.addActionListener(e -> statusbar.setText("Disconnect Gizmo"));
         keyConnectB.addActionListener(listener);
+        keyConnectB.addActionListener(e -> statusbar.setText("Add Key Connection"));
         keyDisconnectB.addActionListener(listener);
+        keyDisconnectB.addActionListener(e -> statusbar.setText("Disconnect Key"));
     }
+
 }
