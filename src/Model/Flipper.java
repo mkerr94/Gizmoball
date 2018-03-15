@@ -15,33 +15,30 @@ public abstract class Flipper implements IGizmo {
     private final double finalAngle;
     private double angularMomentum;
     private int rotation;
-    private int xpos;
-    private int ypos;
     private int width;
     private int height;
 
     Flipper(int x, int y) {
-
         this.color = Color.black;
         angle = 0;
         initialAngle = (double) 0;
         finalAngle = 90;
         angularMomentum = 0;
-        xpos = x;
-        ypos = y;
+        this.x = x;
+        this.y = y;
         width= 15;
         height=30;
-       getLines();
-       getCircles();
-       getEndCircles();
+        getLines();
+        getCircles();
+        getEndCircles();
     }
 
     public ArrayList<LineSegment> getLines() {
         ArrayList<LineSegment> lines = new ArrayList<LineSegment>();
-        LineSegment l1 = new LineSegment(xpos, ypos, xpos, ypos + height);
-        LineSegment l2 = new LineSegment(xpos + width, ypos, xpos + width, ypos + height);
-        LineSegment l3 = new LineSegment(xpos, ypos + height, xpos + width, ypos + height);
-        LineSegment l4 = new LineSegment(xpos, ypos, xpos + width, ypos);
+        LineSegment l1 = new LineSegment(x, y, x, y + height);
+        LineSegment l2 = new LineSegment(x + width, y, x + width, y + height);
+        LineSegment l3 = new LineSegment(x, y + height, x + width, y + height);
+        LineSegment l4 = new LineSegment(x, y, x + width, y);
         lines.add(l1);
         lines.add(l2);
         lines.add(l3);
@@ -51,21 +48,21 @@ public abstract class Flipper implements IGizmo {
 
     public ArrayList<PhysicsCircle> getCircles() {
         ArrayList<PhysicsCircle> Circles = new ArrayList<PhysicsCircle>();
-        PhysicsCircle c1 = new PhysicsCircle(xpos +7.5, ypos , 7.5);
-        PhysicsCircle c2 = new PhysicsCircle(xpos+7.5, ypos+height, 7.5);
+        PhysicsCircle c1 = new PhysicsCircle(x +7.5, y , 7.5);
+        PhysicsCircle c2 = new PhysicsCircle(x+7.5, y+height, 7.5);
             return Circles;
         }
 
     public ArrayList<PhysicsCircle> getEndCircles() {
         ArrayList<PhysicsCircle> endCircles = new ArrayList<PhysicsCircle>();
-        PhysicsCircle c1 = new PhysicsCircle(xpos, ypos + height, 0);
-        PhysicsCircle c2 = new PhysicsCircle(xpos, ypos, 0);
-        PhysicsCircle c3 = new PhysicsCircle(xpos + width, ypos, 0);
-        PhysicsCircle c4 = new PhysicsCircle(xpos + width, ypos + height, 0);
-        PhysicsCircle c5 = new PhysicsCircle(xpos, ypos , 0);
-        PhysicsCircle c6 = new PhysicsCircle(xpos, ypos + height, 0);
-        PhysicsCircle c7 = new PhysicsCircle(xpos + width, ypos, 0);
-        PhysicsCircle c8 = new PhysicsCircle(xpos + width, ypos + height, 0);
+        PhysicsCircle c1 = new PhysicsCircle(x, y + height, 0);
+        PhysicsCircle c2 = new PhysicsCircle(x, y, 0);
+        PhysicsCircle c3 = new PhysicsCircle(x + width, y, 0);
+        PhysicsCircle c4 = new PhysicsCircle(x + width, y + height, 0);
+        PhysicsCircle c5 = new PhysicsCircle(x, y , 0);
+        PhysicsCircle c6 = new PhysicsCircle(x, y + height, 0);
+        PhysicsCircle c7 = new PhysicsCircle(x + width, y, 0);
+        PhysicsCircle c8 = new PhysicsCircle(x + width, y + height, 0);
         endCircles.add(c1);
         endCircles.add(c2);
         endCircles.add(c3);
@@ -135,7 +132,6 @@ public abstract class Flipper implements IGizmo {
     public double getAngularMomentum() {
         return angularMomentum;
     }
-
 
     @Override
     public Color getColour(){

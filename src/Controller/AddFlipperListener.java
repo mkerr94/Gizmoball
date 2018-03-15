@@ -46,6 +46,7 @@ public class AddFlipperListener implements ActionListener {
                         RightFlipper rightFlipper = new RightFlipper(x, y);
                         if (model.checkGizmoLocation(rightFlipper)){
                             model.addGizmo(rightFlipper);
+                            System.out.println("rightflipper: x - " + x + "; y - " + y);
                         }else{
                             System.out.println("Gizmo already exists in that location");
                         }
@@ -54,6 +55,7 @@ public class AddFlipperListener implements ActionListener {
                         LeftFlipper leftFlipper = new LeftFlipper(x, y);
                         if (model.checkGizmoLocation(leftFlipper)){
                             model.addGizmo(leftFlipper);
+                            System.out.println("leftflipper: x - " + x + "; y - " + y);
                         }else{
                             System.out.println("Gizmo already exists in that location");
                         }

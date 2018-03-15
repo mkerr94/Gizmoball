@@ -37,11 +37,9 @@ public class AddBallListener implements ActionListener {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-
                 buildView.ballVelocityAlert();
                 xv = buildView.getBallxv();
                 xy = buildView.getBallxy();
-
                 System.out.println(xv);
                 System.out.println(xy);
                 x = e.getX();
