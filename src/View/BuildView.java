@@ -15,6 +15,10 @@ class BuildView extends JPanel {
     private ActionListener listener;
     private GameBoard gameBoard;
     private Color purple;
+    String result1;
+    String result2;
+    double xv;
+    double xy;
 
     BuildView(Model model) {
         this.model = model;
@@ -107,7 +111,31 @@ class BuildView extends JPanel {
         //Action listenersw
         addGizmoButton.addActionListener(new AddGizmoListener(bumperList, model, gameBoard));
         flipperB.addActionListener(listener);
-        addBall.addActionListener(new AddBallListener(model,gameBoard));
+        addBall.addActionListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                JTextField vxField = new JTextField(1);
+                JTextField vyField = new JTextField(1);
+                JPanel myPanel = new JPanel();
+
+                myPanel.add(new JLabel("Velocity of x: "));
+                myPanel.add(vxField);
+
+                myPanel.add(new JLabel("Velocity of y: "));
+                myPanel.add(vyField);
+
+                int result = JOptionPane.showConfirmDialog(null, myPanel, "Add ball", JOptionPane.OK_CANCEL_OPTION);
+
+                if(result == 0) {
+                    xv = Double.parseDouble(vxField.getText());
+                    xy = Double.parseDouble(vyField.getText());
+                }
+
+                System.out.println(xv);
+                System.out.println(xy);
+            }
+        });
+        addBall.addActionListener(new AddBallListener(model,gameBoard, xv, xy));
         addAbsorber.addActionListener(new AddAbsorberListener(model, gameBoard));
         moveB.addActionListener(listener);
         rotateB.addActionListener(listener);

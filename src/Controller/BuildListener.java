@@ -25,19 +25,6 @@ public class BuildListener implements ActionListener{
             case "Add ball":
                 System.out.println("Add ball button pressed");
 
-                /*JTextField xField = new JTextField(2);
-                JTextField yField = new JTextField(2);
-                JTextField vField = new JTextField(2);
-                JPanel myPanel = new JPanel();
-                myPanel.add(new JLabel("X co-ordinate: "));
-                myPanel.add(xField);
-                myPanel.add(new JLabel("Y co-ordinate: "));
-                myPanel.add(yField);
-                myPanel.add(new JLabel("Velocity: "));
-                myPanel.add(vField);
-
-                int result = JOptionPane.showConfirmDialog(null, myPanel, "Add ball", JOptionPane.OK_CANCEL_OPTION);
-                */
 
                 break;
 
