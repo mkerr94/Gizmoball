@@ -25,13 +25,13 @@ class BuildView extends JPanel {
     private void init() {
         setLayout(new BorderLayout());
         JPanel buttonPanel = new JPanel(new GridLayout(10, 1, 5, 5));
-        buttonPanel.setBackground(Color.black);
+        //buttonPanel.setBackground(Color.black);
         buttonPanel.setBorder(new EmptyBorder(10,10,10,10));
         makeButtons(buttonPanel);
         add(buttonPanel, BorderLayout.EAST);
         add(gameBoard, BorderLayout.CENTER);
         JLabel statusbar = new JLabel("Build Mode");
-        statusbar.setBorder(BorderFactory.createEtchedBorder(Color.black, Color.black));
+        statusbar.setBorder(BorderFactory.createEtchedBorder(Color.gray, Color.gray));
         setBackground(Color.black);
         statusbar.setForeground(Color.magenta);
         add(statusbar, BorderLayout.SOUTH);

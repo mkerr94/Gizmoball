@@ -40,6 +40,17 @@ public class GameBoard extends JPanel implements Observer {
         requestFocus();
     }
 
+    /**
+     * Draws the ball on the board
+     * @param g2 JavaGraphics2d object from paintComponent
+     */
+    private void drawBall(Graphics2D g2) {
+        g2.setColor(ball.getColour());
+        int x = (int) (ball.getExactX() - ball.getRadius());
+        int y = (int) (ball.getExactY() - ball.getRadius());
+        g2.fillOval(x, y, L/2, L/2);
+    }
+
     /***
      * Paints all of the gizmos from the model. See Model.gizmos.
      * Also draws the ball (see drawBall(g2)) and gridlines if the game
@@ -91,7 +102,7 @@ public class GameBoard extends JPanel implements Observer {
                 g2.setColor(gizmo.getColour());
                 int x =(gizmo.getX() * L);
                 int y =(gizmo.getY() * L);
-                g2.fillRect(x, y, ((Absorber) gizmo).getWidth() * L, ((Absorber) gizmo).getHeight() * L);
+                g2.fillRect(x, y, ((Absorber) gizmo).getWidth() * L , ((Absorber) gizmo).getHeight() * L );
             }
             if (gizmo instanceof LeftFlipper) {
                 g2.setColor(gizmo.getColour());
@@ -113,16 +124,7 @@ public class GameBoard extends JPanel implements Observer {
 
     }
 
-    /**
-     * Draws the ball on the board
-     * @param g2 JavaGraphics2d object from paintComponent
-     */
-    private void drawBall(Graphics2D g2) {
-        g2.setColor(ball.getColour());
-        int x = (int) (ball.getExactX() - ball.getRadius());
-        int y = (int) (ball.getExactY() - ball.getRadius());
-        g2.fillOval(x, y, L/2, L/2);
-    }
+
 
     /***
      * Prints gridlines on the board, creating a 20x20 grid.

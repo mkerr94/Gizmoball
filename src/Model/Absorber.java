@@ -20,7 +20,7 @@ public class Absorber implements IGizmo {
         this.yOrdinate = yOrdinate;
         this.width = width;
         this.height = height;
-        collisionLine = new LineSegment(xOrdinate, yOrdinate, xOrdinate + width, yOrdinate);
+        collisionLine = new LineSegment(xOrdinate, yOrdinate + height , xOrdinate + width, yOrdinate + height);
         color = Color.cyan;
     }
 

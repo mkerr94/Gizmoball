@@ -22,12 +22,13 @@ public class Model extends Observable {
 
     public Model() {
         gizmos = new ArrayList<>();
-        ball = new Ball(30, 30, 50, 50);
+        ball = new Ball(6 * L, 1 * L, 50, 50);
     }
 
     public List<IGizmo> getGizmos() {
         return gizmos;
     }
+
     public Ball getBall() {
         return ball;
     }
@@ -145,13 +146,20 @@ public class Model extends Observable {
                 }
             }
             // Absorber collisions todo implement proper absorber functionality
-            if (gizmo instanceof Absorber){
+            if (gizmo instanceof Absorber) {
                 Absorber absorber = new Absorber(gizmo.getX() * L, gizmo.getY() * L, ((Absorber) gizmo).getWidth() * L, ((Absorber) gizmo).getHeight() * L);
                 LineSegment lineSegment = absorber.getCollisionLine();
                 time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
-                if (time < shortestTime){
+                if (time < shortestTime) {
                     shortestTime = time;
                     newVelo = Geometry.reflectWall(lineSegment, ball.getVelo(), 1.0);
+                }
+                if (time <= 0.1 && !ball.stopped()) {
+                    ball = new Ball(absorber.getWidth() - 1 * L , absorber.getHeight() - 0.5 * L, -10 * L, -10 * L);
+                    System.out.println("Ball hit absorber");
+                    this.setChanged();
+                    this.notifyObservers();
+                    ball.stop();
                 }
             }
         }
@@ -239,5 +247,20 @@ public class Model extends Observable {
                 break;
             }
         }
+    }
+
+    public void fireBall() {
+        if (ball.stopped()) {
+            ball.start();
+
+            Vect ballFire = new Vect(0, -50*20);
+            ball.setVelo(ballFire);
+        }
+    }
+
+
+    public void resetBall() {
+
+        ball = new Ball(30, 30, 50, 50);
     }
 }
