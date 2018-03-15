@@ -1,12 +1,14 @@
 package ModelTests;
 
 import Model.Model;
-import org.junit.Test;
 import Model.Circle;
 import Model.Triangle;
 import Model.Square;
 import Model.Absorber;
+import org.junit.Test;
+
 import static org.junit.Assert.*;
+
 
 public class ModelTest {
 

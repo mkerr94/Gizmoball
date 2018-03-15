@@ -17,7 +17,6 @@ import javax.sound.sampled.Line;
 public class Model extends Observable {
     private List<IGizmo> gizmos;
     private List<Ball> balls;
-    private Ball ball;
     private Walls walls;
     private final int L = 30;
 
@@ -45,9 +44,9 @@ public class Model extends Observable {
 
     public void moveBall() {
         double moveTime = 0.05; // 0.05 = 20 times per second as per Gizmoball
-        for(Ball b : balls) {
+        for (Ball b : balls) {
             if (b != null && !b.stopped()) {
-                CollisionDetails cd = timeUntilCollision();
+                CollisionDetails cd = timeUntilCollision(b);
                 double tuc = cd.getTuc();
                 if (tuc > moveTime) {
                     // No collision ...
@@ -79,9 +78,11 @@ public class Model extends Observable {
         return ball;
     }
 
-    private CollisionDetails timeUntilCollision() {
+    private CollisionDetails timeUntilCollision(Ball ball) {
         // Find Time Until Collision and also, if there is a collision, the new speed vector.
         // Create a physics.CircleGizmo from Ball
+
+
         PhysicsCircle ballCircle = ball.getCircle();
         Vect ballVelocity = ball.getVelo();
         Vect newVelo = new Vect(0, 0);
@@ -101,6 +102,16 @@ public class Model extends Observable {
                 newVelo = Geometry.reflectWall(lineSegment, ball.getVelo(), 1.0);
             }
         }
+
+        /*for (Ball b: balls) {
+            Ball b2 = new Ball(b.getExactX() * L, b.getExactY() * L,50,50);
+            PhysicsCircle physicsCircle = b2.getCircle();
+            time = Geometry.timeUntilCircleCollision(physicsCircle, ballCircle, ballVelocity);
+            if (time < shortestTime) {
+                shortestTime = time;
+                newVelo = Geometry.reflectCircle(physicsCircle.getCenter(), ballCircle.getCenter(), b.getVelo(), 1);
+            }
+        }*/
 
         // Handle gizmo collisions
         for (IGizmo gizmo : gizmos) {
@@ -181,14 +192,16 @@ public class Model extends Observable {
      * @param time How often the timer updates. Aim for 20 times per second (0.05)
      */
     private void applyFriction(double time) {
-        double mu = 0.025;
-        double mu2 = 0.025 / L; //todo check these values
-        double vxOld = ball.getVelo().x();
-        double vyOld = ball.getVelo().y();
-        double vxNew = vxOld * (1 - (mu * time) - (mu2 * vxOld) * time);
-        double vyNew = vyOld * (1 - (mu * time) - (mu2 * vyOld) * time);
-        Vect vNew = new Vect(vxNew, vyNew);
-        ball.setVelo(vNew);
+        for(Ball ball: balls) {
+            double mu = 0.025;
+            double mu2 = 0.025 / L; //todo check these values
+            double vxOld = ball.getVelo().x();
+            double vyOld = ball.getVelo().y();
+            double vxNew = vxOld * (1 - (mu * time) - (mu2 * vxOld) * time);
+            double vyNew = vyOld * (1 - (mu * time) - (mu2 * vyOld) * time);
+            Vect vNew = new Vect(vxNew, vyNew);
+            ball.setVelo(vNew);
+        }
     }
 
     /***
@@ -197,8 +210,10 @@ public class Model extends Observable {
      * @param time How often the timer updates. Aim for 20 times per second (0.05)
      */
     private void applyGravity(double time) {
-        Vect gravityAlteredVelocity = new Vect(ball.getVelo().x(), (ball.getVelo().y() + (25 * L * time)));
-        ball.setVelo(gravityAlteredVelocity);
+        for(Ball ball: balls) {
+            Vect gravityAlteredVelocity = new Vect(ball.getVelo().x(), (ball.getVelo().y() + (25 * L * time)));
+            ball.setVelo(gravityAlteredVelocity);
+        }
     }
 
     /***
@@ -267,17 +282,20 @@ public class Model extends Observable {
     }
 
     public void fireBall() {
-        if (ball.stopped()) {
-            ball.start();
+        for(Ball ball:balls) {
+            if (ball.stopped()) {
+                ball.start();
 
-            Vect ballFire = new Vect(0, -50 * 20);
-            ball.setVelo(ballFire);
+                Vect ballFire = new Vect(0, -50 * 20);
+                ball.setVelo(ballFire);
+            }
         }
     }
 
 
     public void resetBall() {
-
-        ball = new Ball(30, 30, 50, 50);
+        for(Ball ball:balls) {
+            ball = new Ball(30, 30, 50, 50);
+        }
     }
 }
