@@ -6,7 +6,6 @@ import Model.Circle;
 import Model.Triangle;
 import Model.Square;
 import Model.Absorber;
-
 import static org.junit.Assert.*;
 
 public class ModelTest {
