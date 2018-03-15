@@ -117,7 +117,7 @@ public class Model extends Observable {
         for (IGizmo gizmo : gizmos) {
             // Circle collisions
             if (gizmo instanceof Circle) {
-                Circle circle = new Circle((gizmo.getX() * L) + 15, (gizmo.getY() * L) + 15);
+                Circle circle = new Circle((gizmo.getX() * L) + 15, (gizmo.getY() * L)+ 15);
                 PhysicsCircle physicsCircle = circle.getCircle();
                 time = Geometry.timeUntilCircleCollision(physicsCircle, ballCircle, ballVelocity);
                 if (time < shortestTime) {
@@ -261,6 +261,7 @@ public class Model extends Observable {
      */
     public void clearGizmos() {
         gizmos.clear();
+        balls.clear();
         setChanged();
         notifyObservers();
     }
@@ -277,6 +278,14 @@ public class Model extends Observable {
                 setChanged();
                 notifyObservers();
                 break;
+            }
+        }
+    }
+
+    public void getGizmo(int x, int y){
+        for(IGizmo iGizmo: gizmos){
+            if(iGizmo.getX() == x && iGizmo.getY() == y){
+
             }
         }
     }
