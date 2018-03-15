@@ -16,45 +16,54 @@ import javax.sound.sampled.Line;
 
 public class Model extends Observable {
     private List<IGizmo> gizmos;
+    private List<Ball> balls;
     private Ball ball;
     private Walls walls;
     private final int L = 30;
 
     public Model() {
         gizmos = new ArrayList<>();
-        ball = new Ball(6 * L, 1 * L, 50, 50);
+        balls = new ArrayList<>();
+        //ball = new Ball(6 * L, 1 * L, 50, 50);
     }
 
     public List<IGizmo> getGizmos() {
         return gizmos;
     }
 
-    public Ball getBall() {
-        return ball;
+    public List<Ball> getBalls() {
+        return balls;
     }
+
+   /* public Ball getBall() {
+        return ball;
+    }*/
+
     public void setWalls(Walls walls) {
         this.walls = walls;
     }
 
     public void moveBall() {
         double moveTime = 0.05; // 0.05 = 20 times per second as per Gizmoball
-        if (ball != null && !ball.stopped()) {
-            CollisionDetails cd = timeUntilCollision();
-            double tuc = cd.getTuc();
-            if (tuc > moveTime) {
-                // No collision ...
-                ball = moveBallForTime(ball, moveTime);
-            } else {
-                // We've got a collision in tuc
-                ball = moveBallForTime(ball, tuc);
-                // Post collision velocity ...
-                ball.setVelo(cd.getVelo());
+        for(Ball b : balls) {
+            if (b != null && !b.stopped()) {
+                CollisionDetails cd = timeUntilCollision();
+                double tuc = cd.getTuc();
+                if (tuc > moveTime) {
+                    // No collision ...
+                    b = moveBallForTime(b, moveTime);
+                } else {
+                    // We've got a collision in tuc
+                    b = moveBallForTime(b, tuc);
+                    // Post collision velocity ...
+                    b.setVelo(cd.getVelo());
+                }
+                applyGravity(moveTime);
+                applyFriction(moveTime);
+                // Notify observers ... redraw updated view
+                this.setChanged();
+                this.notifyObservers();
             }
-            applyGravity(moveTime);
-            applyFriction(moveTime);
-            // Notify observers ... redraw updated view
-            this.setChanged();
-            this.notifyObservers();
         }
     }
 
@@ -155,7 +164,7 @@ public class Model extends Observable {
                     newVelo = Geometry.reflectWall(lineSegment, ball.getVelo(), 1.0);
                 }
                 if (time <= 0.1 && !ball.stopped()) {
-                    ball = new Ball(absorber.getWidth() - 1 * L , absorber.getHeight() - 0.5 * L, -10 * L, -10 * L);
+                    ball = new Ball(absorber.getWidth() - 1 * L, absorber.getHeight() - 0.5 * L, -10 * L, -10 * L);
                     System.out.println("Ball hit absorber");
                     this.setChanged();
                     this.notifyObservers();
@@ -206,6 +215,14 @@ public class Model extends Observable {
         }
     }
 
+
+    public void addBall(int x, int y) {
+        Ball ball = new Ball(x, y, 50, 50);
+        balls.add(ball);
+        setChanged();
+        notifyObservers();
+    }
+
     /**
      * Checks if a gizmo already exists at the location of the passed in gizmo.
      * Returns false if a gizmo already exists at the target location and returns true
@@ -253,7 +270,7 @@ public class Model extends Observable {
         if (ball.stopped()) {
             ball.start();
 
-            Vect ballFire = new Vect(0, -50*20);
+            Vect ballFire = new Vect(0, -50 * 20);
             ball.setVelo(ballFire);
         }
     }

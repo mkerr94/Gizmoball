@@ -13,6 +13,7 @@ public class GameBoard extends JPanel implements Observer {
     private Model model;
     private Ball ball;
     private List<IGizmo> gizmos;
+    private List<Ball> balls;
     private int L = 30;
     private int width;
     private int height;
@@ -29,7 +30,8 @@ public class GameBoard extends JPanel implements Observer {
         this.setBorder(BorderFactory.createLineBorder(Color.black));
         this.model = model;
         this.mode = mode;
-        ball = model.getBall();
+        //ball = model.getBall();
+        balls = model.getBalls();
         width = w;
         height = h;
         gizmos = model.getGizmos();
@@ -45,10 +47,12 @@ public class GameBoard extends JPanel implements Observer {
      * @param g2 JavaGraphics2d object from paintComponent
      */
     private void drawBall(Graphics2D g2) {
-        g2.setColor(ball.getColour());
-        int x = (int) (ball.getExactX() - ball.getRadius());
-        int y = (int) (ball.getExactY() - ball.getRadius());
-        g2.fillOval(x, y, L/2, L/2);
+        for (Ball b : balls) {
+            g2.setColor(b.getColour());
+            int x = (int) (b.getExactX() - b.getRadius());
+            int y = (int) (b.getExactY() - b.getRadius());
+            g2.fillOval(x, y, L / 2, L / 2);
+        }
     }
 
     /***
