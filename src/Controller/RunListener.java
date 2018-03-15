@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 import Model.Model;
+import View.RunView;
 
 /**
  * @author Murray Wood Demonstration of MVC and MIT Physics Collisions 2014
@@ -13,10 +14,12 @@ public class RunListener implements ActionListener {
 
     private Timer timer;
     private Model model;
+    private RunView runView;
 
-    public RunListener(Model m) {
+    public RunListener(Model m, RunView rv) {
         model = m;
         timer = new Timer(50, this);
+        runView = rv;
     }
 
     @Override
@@ -26,7 +29,11 @@ public class RunListener implements ActionListener {
         } else
             switch (e.getActionCommand()) {
                 case "Start":
-                    timer.start();
+                    if(model.getBalls().size() != 0){
+                        timer.start();
+                    }else{
+                         runView.noBallAlert();
+                    }
                     break;
                 case "Stop":
                     timer.stop();

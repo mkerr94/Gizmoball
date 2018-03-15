@@ -6,14 +6,14 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import Controller.RunListener;
 
-class RunView extends JPanel {
+public class RunView extends JPanel {
     private Model model;
     private RunListener runListener;
     private Color purple;
 
-    RunView(Model model) {
+    public RunView(Model model) {
         this.model = model;
-        runListener = new RunListener(model);
+        runListener = new RunListener(model,this);
         init();
         purple = new Color(128,0,128);
     }
@@ -58,5 +58,9 @@ class RunView extends JPanel {
         panel.add(tickB);
         panel.add(resetB);
 
+    }
+
+    public void noBallAlert(){
+        JOptionPane.showMessageDialog(null,"Your board must contain at least one ball!");
     }
 }
