@@ -21,7 +21,6 @@ public class RunListener implements ActionListener {
 
     @Override
     public final void actionPerformed(final ActionEvent e) {
-
         if (e.getSource() == timer) {
             model.moveBall();
         } else

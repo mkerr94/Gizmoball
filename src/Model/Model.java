@@ -75,12 +75,9 @@ public class Model extends Observable {
         // Find Time Until Collision and also, if there is a collision, the new speed vector.
         // Create a physics.CircleGizmo from Ball
 
-
         PhysicsCircle ballCircle = ball.getCircle();
         Vect ballVelocity = ball.getVelo();
         Vect newVelo = new Vect(0, 0);
-        ArrayList<LineSegment> collisionLines;
-        ArrayList<PhysicsCircle> collisionCircles;
 
         // Now find shortest time to hit a vertical line or a wall line
         double shortestTime = Double.MAX_VALUE;
@@ -301,7 +298,6 @@ public class Model extends Observable {
             }
         }
     }
-
 
     public void resetBall() {
         for(Ball ball:balls) {

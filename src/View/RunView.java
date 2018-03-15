@@ -10,7 +10,6 @@ class RunView extends JPanel {
     private Model model;
     private RunListener runListener;
     private Color purple;
-    private Color pink;
 
     RunView(Model model) {
         this.model = model;
