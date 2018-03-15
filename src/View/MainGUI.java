@@ -36,6 +36,9 @@ public class MainGUI extends JFrame {
         menuBar.add(file);
         open.addActionListener(evt -> new LoadFile(model));
 
+        save.addActionListener(evt -> new SaveFile(model));
+
+
         exit.addActionListener((ActionEvent event) -> System.exit(0));
 
         ButtonGroup modeGroup = new ButtonGroup();

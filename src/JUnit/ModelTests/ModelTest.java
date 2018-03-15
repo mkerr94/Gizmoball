@@ -6,15 +6,9 @@ import Model.Triangle;
 import Model.Square;
 import Model.Absorber;
 import org.junit.Test;
-<<<<<<< HEAD
-
 import static org.junit.Assert.*;
-=======
-import org.junit.Assert.*;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
->>>>>>> 583655f76d336dcadba51017106444cd716b92e2
 
 
 public class ModelTest {
@@ -101,5 +95,7 @@ public class ModelTest {
 
         assertNotEquals(triangle,cirlcle);
     }
+
 }
 */
+

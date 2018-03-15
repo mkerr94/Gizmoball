@@ -1,28 +1,25 @@
 package Model;
 
+import Physics.Geometry;
 import Physics.LineSegment;
-
+import Physics.PhysicsCircle;
+import Physics.Vect;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-
-import Physics.PhysicsCircle;
-import Physics.Geometry;
-import Physics.Vect;
-import sun.plugin2.message.GetAppletMessage;
-
-import javax.sound.sampled.Line;
 
 
 public class Model extends Observable {
     private List<IGizmo> gizmos;
     private List<Ball> balls;
+    private List<Ball> fireQueue;
     private Walls walls;
     private final int L = 30;
 
     public Model() {
         gizmos = new ArrayList<>();
         balls = new ArrayList<>();
+        fireQueue = new ArrayList();
     }
 
     public List<IGizmo> getGizmos() {
@@ -52,13 +49,14 @@ public class Model extends Observable {
                     // Post collision velocity ...
                     b.setVelo(cd.getVelo());
                 }
-                applyGravity(moveTime);
-                applyFriction(moveTime);
+
                 // Notify observers ... redraw updated view
                 this.setChanged();
                 this.notifyObservers();
             }
         }
+        applyGravity(moveTime);
+        applyFriction(moveTime);
     }
 
     private Ball moveBallForTime(Ball ball, double time) {
@@ -129,6 +127,7 @@ public class Model extends Observable {
                     if (time < shortestTime) {
                         shortestTime = time;
                         newVelo = Geometry.reflectWall(lineSegment, ball.getVelo(), 1.0);
+
                     }
                 }
                 ArrayList<PhysicsCircle> physicsCircles = square.getEndCircles();
@@ -162,19 +161,23 @@ public class Model extends Observable {
             }
             // Absorber collisions todo implement proper absorber functionality
             if (gizmo instanceof Absorber) {
-                Absorber absorber = new Absorber(gizmo.getX() * L, gizmo.getY() * L, ((Absorber) gizmo).getWidth() * L, ((Absorber) gizmo).getHeight() * L);
-                LineSegment lineSegment = absorber.getCollisionLine();
-                time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
-                if (time < shortestTime) {
-                    shortestTime = time;
-                    newVelo = Geometry.reflectWall(lineSegment, ball.getVelo(), 1.0);
-                }
-                if (time <= 0.1 && !ball.stopped()) {
-                    ball = new Ball(absorber.getWidth() - 1 * L, absorber.getHeight() - 0.5 * L, -10 * L, -10 * L);
-                    System.out.println("Ball hit absorber");
-                    this.setChanged();
-                    this.notifyObservers();
-                    ball.stop();
+                for (Ball b : balls) {
+                    Absorber absorber = new Absorber(gizmo.getX() * L, gizmo.getY() * L, ((Absorber) gizmo).getWidth() * L, ((Absorber) gizmo).getHeight() * L);
+                    LineSegment lineSegment = absorber.getCollisionLine();
+                    time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
+                    if (time < shortestTime) {
+                        shortestTime = time;
+                        newVelo = Geometry.reflectWall(lineSegment, b.getVelo(), 1.0);
+                    }
+                    if (time <= 0.1 && !ball.stopped()) {
+                        //ball = new Ball(absorber.getWidth() - 1 * L, absorber.getHeight() - 0.5 * L, -10 * L, -10 * L);
+                        System.out.println("Ball hit absorber");
+                        this.setChanged();
+                        this.notifyObservers();
+                        b.stop();
+                        fireQueue.add(b);
+                        System.out.println("Balls to be fired" + fireQueue.size());
+                    }
                 }
             }
         }

@@ -2,7 +2,6 @@ package Model;
 
 import Physics.LineSegment;
 import Physics.PhysicsCircle;
-
 import java.awt.*;
 import java.util.ArrayList;
 

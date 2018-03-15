@@ -39,9 +39,9 @@ public class LoadFile {
 
     private void tokenizeFile(){
 
-        int x, y, x1, y1, x2, y2;
+        int x, y, x1, y1, x2, y2, kNo;
         double d, d2;
-        String lineRead, gName;
+        String lineRead, gName, gConnect1, gConnect2, upDown;
 
         try {
             FileReader fileReader = new FileReader(fc.getSelectedFile());
@@ -59,7 +59,7 @@ public class LoadFile {
                         loadedGizmos.put(gName, new Square(x, y));
                         model.addGizmo(new Square(x, y));
                         break;
-                    case "PhysicsCircle":
+                    case "Circle":
                         //System.out.println("found");
                         gName = gizmoGroup[1];
                         x = Integer.parseInt(gizmoGroup[2]);
@@ -81,6 +81,7 @@ public class LoadFile {
                         x = Integer.parseInt(gizmoGroup[2]);
                         y = Integer.parseInt(gizmoGroup[3]);
                         loadedGizmos.put(gName, new RightFlipper(x, y));
+                        model.addGizmo(new RightFlipper(x, y));
                         break;
                     case "LeftFlipper":
                         //System.out.println("found");
@@ -88,6 +89,7 @@ public class LoadFile {
                         x = Integer.parseInt(gizmoGroup[2]);
                         y = Integer.parseInt(gizmoGroup[3]);
                         loadedGizmos.put(gName, new LeftFlipper(x, y));
+                        model.addGizmo(new LeftFlipper(x, y));
                         break;
                     case "Absorber":
                        //System.out.println("found");
@@ -110,9 +112,22 @@ public class LoadFile {
                         model.addGizmo(new Circle(x2, y2));
                         break;
                     case "Rotate":
+                        System.out.println("found Rotate");
                         gName = gizmoGroup[1];
                         loadedGizmos.get(gName).rotate();
                         break;
+                    case "KeyConnect":
+                        System.out.println("found KeyConnect");
+                        kNo = Integer.parseInt(gizmoGroup[2]);
+                        upDown = gizmoGroup[3];
+                        gConnect1 = gizmoGroup[4];
+                        break;
+                    case "Connect":
+                        System.out.println("found Connect");
+                        gConnect1 = gizmoGroup[1];
+                        gConnect2 = gizmoGroup[2];
+                        break;
+
                 }
                 lineRead = buffReader.readLine();
             }
