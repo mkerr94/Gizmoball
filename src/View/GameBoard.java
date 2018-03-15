@@ -117,7 +117,7 @@ public class GameBoard extends JPanel implements Observer {
                 transform.rotate(-Math.toRadians(angle), x + width/2, y + width/2);
                 g2d.setColor(Color.red);
                 g2d.setTransform(transform);
-                g2d.fillRoundRect(x, y, L/2, 2*L, 20, 20);
+                g2d.fillRoundRect(x + L/2, y, L/2, 2*L, 20, 20);
             }
         }
         paintBalls(g2);
