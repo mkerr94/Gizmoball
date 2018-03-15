@@ -10,7 +10,6 @@ import java.util.List;
 public class GameBoard extends JPanel implements Observer {
     private Mode mode;
     private Model model;
-    private Ball ball;
     private List<IGizmo> gizmos;
     private List<Ball> balls;
     private int L = 30;
@@ -29,7 +28,6 @@ public class GameBoard extends JPanel implements Observer {
         this.setBorder(BorderFactory.createLineBorder(Color.black));
         this.model = model;
         this.mode = mode;
-        //ball = model.getBall();
         balls = model.getBalls();
         width = w;
         height = h;
@@ -41,30 +39,15 @@ public class GameBoard extends JPanel implements Observer {
         requestFocus();
     }
 
-    /**
-     * Draws the ball on the board
-     * @param g2 JavaGraphics2d object from paintComponent
-     */
-    private void drawBall(Graphics2D g2) {
-        for (Ball b : balls) {
-            g2.setColor(b.getColour());
-            int x = (int) (b.getExactX() - b.getRadius());
-            int y = (int) (b.getExactY() - b.getRadius());
-            g2.fillOval(x, y, L / 2, L / 2);
-        }
-    }
-
     /***
      * Paints all of the gizmos from the model. See Model.gizmos.
-     * Also draws the ball (see drawBall(g2)) and gridlines if the game
+     * Also draws the ball (see paintBalls(g2)) and gridlines if the game
      * is in buildmode.
      * @param g Java2d Graphics object
      */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        Graphics2D g3 = g2;
-        drawBall(g2);
         // paint all of the gizmos from the model
         for(IGizmo gizmo : gizmos) {
             assert gizmo != null;
@@ -118,10 +101,22 @@ public class GameBoard extends JPanel implements Observer {
                 g2.fillOval(x+30, y+30, 10, 15);
             }
         }
+        paintBalls(g2);
         if (mode == Mode.BUILD) paintGridLines(g2);
     }
 
-
+    /**
+     * Draws the ball on the board
+     * @param g2 JavaGraphics2d object from paintComponent
+     */
+    private void paintBalls(Graphics2D g2) {
+        for (Ball b : balls) {
+            g2.setColor(b.getColour());
+            int x = ((b.getxOrdinate())) ;
+            int y = ((b.getyOrdinate()));
+            g2.fillOval(x, y, L / 2, L / 2);
+        }
+    }
 
     /***
      * Prints gridlines on the board, creating a 20x20 grid.

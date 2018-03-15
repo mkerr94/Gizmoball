@@ -104,7 +104,7 @@ class BuildView extends JPanel {
         panel.add(keyDisconnectB);
         add(panel, BorderLayout.EAST);
 
-        //Action listeners
+        //Action listenersw
         addGizmoButton.addActionListener(new AddGizmoListener(bumperList, model, gameBoard));
         flipperB.addActionListener(listener);
         addBall.addActionListener(new AddBallListener(model,gameBoard));

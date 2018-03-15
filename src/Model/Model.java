@@ -23,7 +23,6 @@ public class Model extends Observable {
     public Model() {
         gizmos = new ArrayList<>();
         balls = new ArrayList<>();
-        //ball = new Ball(6 * L, 1 * L, 50, 50);
     }
 
     public List<IGizmo> getGizmos() {
@@ -33,10 +32,6 @@ public class Model extends Observable {
     public List<Ball> getBalls() {
         return balls;
     }
-
-   /* public Ball getBall() {
-        return ball;
-    }*/
 
     public void setWalls(Walls walls) {
         this.walls = walls;
@@ -103,7 +98,7 @@ public class Model extends Observable {
             }
         }
 
-        /*for (Ball b: balls) {
+        for (Ball b: balls) {
             Ball b2 = new Ball(b.getExactX() * L, b.getExactY() * L,50,50);
             PhysicsCircle physicsCircle = b2.getCircle();
             time = Geometry.timeUntilCircleCollision(physicsCircle, ballCircle, ballVelocity);
@@ -111,7 +106,7 @@ public class Model extends Observable {
                 shortestTime = time;
                 newVelo = Geometry.reflectCircle(physicsCircle.getCenter(), ballCircle.getCenter(), b.getVelo(), 1);
             }
-        }*/
+        }
 
         // Handle gizmo collisions
         for (IGizmo gizmo : gizmos) {
@@ -230,7 +225,11 @@ public class Model extends Observable {
         }
     }
 
-
+    /***
+     * Adds a new ball to the collection of balls
+     * @param x x-ordinate of ball to add
+     * @param y y-ordinate of ball to ad
+     */
     public void addBall(int x, int y) {
         Ball ball = new Ball(x, y, 50, 50);
         balls.add(ball);
@@ -242,7 +241,6 @@ public class Model extends Observable {
      * Checks if a gizmo already exists at the location of the passed in gizmo.
      * Returns false if a gizmo already exists at the target location and returns true
      * if nothing exists at the target location
-     *
      * @param gizmo gizmo to be added to the board
      * @return true if valid placement, false if invalid placement
      */
@@ -282,19 +280,19 @@ public class Model extends Observable {
         }
     }
 
-    public void getGizmo(int x, int y){
+    public IGizmo getGizmo(int x, int y){
         for(IGizmo iGizmo: gizmos){
             if(iGizmo.getX() == x && iGizmo.getY() == y){
-
+                return iGizmo;
             }
         }
+        return null;
     }
 
     public void fireBall() {
         for(Ball ball:balls) {
             if (ball.stopped()) {
                 ball.start();
-
                 Vect ballFire = new Vect(0, -50 * 20);
                 ball.setVelo(ballFire);
             }

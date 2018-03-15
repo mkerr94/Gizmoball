@@ -32,9 +32,6 @@ class RunView extends JPanel {
         setBackground(purple);
         statusBar.setForeground(Color.white);
         add(statusBar, BorderLayout.SOUTH);
-
-
-
     }
 
     private void makeButtons(JPanel panel) {

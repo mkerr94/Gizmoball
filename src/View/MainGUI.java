@@ -2,7 +2,9 @@ package View;
 
 import Model.Model;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 
 public class MainGUI extends JFrame {
@@ -17,6 +19,7 @@ public class MainGUI extends JFrame {
         setSize(885, 684);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
     }
 
     private void makeMenuBar() {
