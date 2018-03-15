@@ -1,13 +1,14 @@
 package ModelTests;
 
 import Model.Model;
-import org.junit.Test;
 import Model.Circle;
 import Model.Triangle;
 import Model.Square;
 import Model.Absorber;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class ModelTest {
 
