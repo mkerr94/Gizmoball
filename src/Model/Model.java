@@ -105,7 +105,6 @@ public class Model extends Observable {
 
         // Handle gizmo collisions
         for (IGizmo gizmo : gizmos) {
-
             if(gizmo instanceof LeftFlipper) {
                 LeftFlipper flipper = new LeftFlipper(gizmo.getX() * L, gizmo.getY() * L);
                 ArrayList<LineSegment> lineSegments1 = flipper.getLines();

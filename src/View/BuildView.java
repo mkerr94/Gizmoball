@@ -115,7 +115,6 @@ public class BuildView extends JPanel {
         flipperB.addActionListener(e -> statusbar.setText("Add Flipper"));
         flipperB.addActionListener(new AddFlipperListener(flipperList, model, gameBoard));
         addBall.addActionListener(e -> statusbar.setText("Add Ball"));
-
         addBall.addActionListener(new AddBallListener(model,gameBoard,this));
         addAbsorber.addActionListener(e -> statusbar.setText("Add Absorber"));
         addAbsorber.addActionListener(new AddAbsorberListener(model, gameBoard));
@@ -142,8 +141,8 @@ public class BuildView extends JPanel {
     }
 
     public void ballVelocityAlert(){
-        JTextField vxField = new JTextField(1);
-        JTextField vyField = new JTextField(1);
+        JTextField vxField = new JTextField(5);
+        JTextField vyField = new JTextField(5);
         JPanel myPanel = new JPanel();
 
         myPanel.add(new JLabel("Velocity of x: "));
