@@ -30,7 +30,6 @@ public class MoveListener implements ActionListener {
             public void mousePressed(MouseEvent e) {
                 x = e.getX();
                 y = e.getY();
-
             }
 
             @Override

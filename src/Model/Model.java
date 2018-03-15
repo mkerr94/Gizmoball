@@ -230,8 +230,8 @@ public class Model extends Observable {
      * @param x x-ordinate of ball to add
      * @param y y-ordinate of ball to ad
      */
-    public void addBall(int x, int y) {
-        Ball ball = new Ball(x, y, 50, 50);
+    public void addBall(double x, double y,double xv,double yv) {
+        Ball ball = new Ball(x, y, xv, yv);
         balls.add(ball);
         setChanged();
         notifyObservers();

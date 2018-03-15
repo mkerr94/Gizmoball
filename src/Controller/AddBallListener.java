@@ -15,11 +15,13 @@ public class AddBallListener implements ActionListener {
     private int x,y;
     private GameBoard gameBoard;
     private MouseInputListener mouseInputListener;
+    double xv,xy;
 
-
-    public AddBallListener(Model model, GameBoard gameBoard){
+    public AddBallListener(Model model, GameBoard gameBoard, double xv, double xy){
         this.model = model;
         this.gameBoard = gameBoard;
+        this.xv = xv;
+        this.xy = xy;
         mouseInputListener = new MouseInputListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -33,9 +35,11 @@ public class AddBallListener implements ActionListener {
 
             @Override
             public void mouseReleased(MouseEvent e) {
+                System.out.println(xv);
+                System.out.println(xy);
                 x = e.getX();
                 y = e.getY();
-                model.addBall(x,y);
+                model.addBall(x,y,xv,xy);
                 e.consume();
                 gameBoard.removeMouseListener(this);
             }
