@@ -12,7 +12,7 @@ public class MainGUI extends JFrame {
     public MainGUI(Model model){
         this.model = model;
         makeMenuBar();
-        viewMode = new RunView(model);
+        viewMode = new Welcome();
         setContentPane(viewMode);
         setSize(885, 684);
         setLocationRelativeTo(null);
@@ -20,7 +20,7 @@ public class MainGUI extends JFrame {
     }
 
     private void makeMenuBar() {
-        setTitle("GizmoBall - Run Mode");
+        setTitle("GizmoBall - Welcome Mode");
         JMenuBar menuBar = new JMenuBar();
         JMenu file = new JMenu("File");
         JMenuItem open = new JMenuItem("Load");
@@ -41,7 +41,7 @@ public class MainGUI extends JFrame {
         JRadioButtonMenuItem runMode = new JRadioButtonMenuItem("Run Mode");
         modeMenu.add(buildMode);
         modeMenu.add(runMode);
-        runMode.setSelected(true);
+        //runMode.setSelected(true);
         buildMode.addItemListener((ItemEvent e) -> { // if build mode has been selected
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 setTitle("GizmoBall - Build Mode");

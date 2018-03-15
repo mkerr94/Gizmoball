@@ -14,33 +14,38 @@ class BuildView extends JPanel {
     private Model model;
     private ActionListener listener;
     private GameBoard gameBoard;
+    private Color purple;
 
     BuildView(Model model) {
         this.model = model;
         listener = new BuildListener();
         gameBoard = new GameBoard(600, 600, model, Mode.BUILD);
         init();
+        purple = new Color(128,0,128);
     }
 
     private void init() {
         setLayout(new BorderLayout());
         JPanel buttonPanel = new JPanel(new GridLayout(10, 1, 5, 5));
-        //buttonPanel.setBackground(Color.black);
+        buttonPanel.setBackground(purple = new Color(128,0,128));
         buttonPanel.setBorder(new EmptyBorder(10,10,10,10));
         makeButtons(buttonPanel);
         add(buttonPanel, BorderLayout.EAST);
         add(gameBoard, BorderLayout.CENTER);
         JLabel statusbar = new JLabel("Build Mode");
-        statusbar.setBorder(BorderFactory.createEtchedBorder(Color.gray, Color.gray));
-        setBackground(Color.black);
-        statusbar.setForeground(Color.magenta);
+        statusbar.setBorder(BorderFactory.createEtchedBorder(purple, purple));
+        setBackground(purple);
+        statusbar.setForeground(Color.white);
         add(statusbar, BorderLayout.SOUTH);
     }
 
     private void makeButtons(JPanel panel) {
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
-
+        Icon circle = new ImageIcon((new ImageIcon("ball.png").getImage().getScaledInstance(15, 15, Image.SCALE_DEFAULT)));
+        Icon square = new ImageIcon((new ImageIcon("square.png").getImage().getScaledInstance(15, 15, Image.SCALE_DEFAULT)));
+        Icon triangle = new ImageIcon((new ImageIcon("triangle.png").getImage().getScaledInstance(15, 15, Image.SCALE_DEFAULT)));
         String[] bumpers = {"Circle", "Square", "Triangle"};
+        Icon[] images = {circle, square, triangle};
         JComboBox bumperList = new JComboBox(bumpers);
         bumperList.setBackground(Color.white);
         ((JLabel) bumperList.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
