@@ -173,16 +173,22 @@ public class BuildView extends JPanel {
     }
 
     public int changeGravityAlert(){
-        String result = JOptionPane.showInputDialog("Please enter a value for friction: ");
-        int gravity = Integer.parseInt(result);
-        System.out.println(gravity);
-        return gravity;
+        String result = JOptionPane.showInputDialog("Please enter a value for gravity: ");
+        if (result != null){
+            int gravity = Integer.parseInt(result);
+            System.out.println(gravity);
+            return gravity;
+        }
+        return 25;
     }
 
-    public int changeFrictionAlert(){
+    public double changeFrictionAlert(){
         String result = JOptionPane.showInputDialog("Please enter a value for friction: ");
-        int friction = Integer.parseInt(result);
-        System.out.println(friction);
-        return friction;
+        if (result != null){
+            double friction = Double.parseDouble(result);
+            System.out.println(friction);
+            return friction;
+        }
+        return 0.025;
     }
 }

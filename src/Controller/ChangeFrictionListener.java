@@ -18,6 +18,7 @@ public class ChangeFrictionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int result = buildView.changeFrictionAlert();
+        double result = buildView.changeFrictionAlert();
+        model.setFrictionValue(result);
     }
 }

@@ -17,7 +17,6 @@ public class ClearBoardListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         int result = buildView.clearBoardAlert();
-
         //if user clicks yes
         if (result == 0) {
             model.clearGizmos();

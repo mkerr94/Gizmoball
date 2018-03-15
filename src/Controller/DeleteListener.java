@@ -2,7 +2,6 @@ package Controller;
 
 import View.GameBoard;
 import Model.Model;
-
 import javax.swing.event.MouseInputListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,12 +22,10 @@ public class DeleteListener implements ActionListener{
         gameBoard.addMouseListener(new MouseInputListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
                 x = e.getX() / 30; // L = 30
                 y = e.getY() / 30; // L = 30
-
-               model.deleteGizmo(x,y);
-               e.consume();
+                model.deleteGizmoOrBall(x, y);
+                e.consume();
             }
 
             @Override

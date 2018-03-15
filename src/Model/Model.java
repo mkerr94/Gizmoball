@@ -15,11 +15,15 @@ public class Model extends Observable {
     private List<Ball> fireQueue;
     private Walls walls;
     private final int L = 30;
+    private int gravityValue;
+    private double frictionValue;
 
     public Model() {
         gizmos = new ArrayList<>();
         balls = new ArrayList<>();
         fireQueue = new ArrayList();
+        gravityValue = 25;
+        frictionValue = 0.025;
     }
 
     public List<IGizmo> getGizmos() {
@@ -32,6 +36,14 @@ public class Model extends Observable {
 
     public void setWalls(Walls walls) {
         this.walls = walls;
+    }
+
+    public void setGravityValue(int gravityValue) {
+        this.gravityValue = gravityValue;
+    }
+
+    public void setFrictionValue(double frictionValue) {
+        this.frictionValue = frictionValue;
     }
 
     public void moveBall() {
@@ -252,7 +264,7 @@ public class Model extends Observable {
     private void applyFriction(double time) {
         for(Ball ball: balls) {
             double mu = 0.025;
-            double mu2 = 0.025 / L; //todo check these values
+            double mu2 = frictionValue / L; //todo check these values
             double vxOld = ball.getVelo().x();
             double vyOld = ball.getVelo().y();
             double vxNew = vxOld * (1 - (mu * time) - (mu2 * vxOld) * time);
@@ -269,7 +281,7 @@ public class Model extends Observable {
      */
     private void applyGravity(double time) {
         for(Ball ball: balls) {
-            Vect gravityAlteredVelocity = new Vect(ball.getVelo().x(), (ball.getVelo().y() + (25 * L * time)));
+            Vect gravityAlteredVelocity = new Vect(ball.getVelo().x(), (ball.getVelo().y() + (gravityValue * L * time)));
             ball.setVelo(gravityAlteredVelocity);
         }
     }
@@ -328,14 +340,22 @@ public class Model extends Observable {
     }
 
     /***
-     * Deletes the gizmo at the given location
-     * @param x x ordinate of target gizmo
-     * @param y y ordinate of target gizmo
+     * Deletes the gizmo or ball at the given location
+     * @param x x ordinate of target gizmo/ball
+     * @param y y ordinate of target gizmo/ball
      */
-    public void deleteGizmo(int x, int y) {
+    public void deleteGizmoOrBall(int x, int y) {
         for (IGizmo iGizmo : gizmos) {
             if (iGizmo.getX() == x && iGizmo.getY() == y) {
                 gizmos.remove(iGizmo);
+                setChanged();
+                notifyObservers();
+                break;
+            }
+        }
+        for(Ball ball : balls){
+            if (ball.getxOrdinate() == x && ball.getyOrdinate() == y) {
+                balls.remove(ball);
                 setChanged();
                 notifyObservers();
                 break;
