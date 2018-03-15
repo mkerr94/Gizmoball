@@ -40,10 +40,12 @@ public class Welcome  extends JPanel {
             run.setForeground(purple = new Color(128,0,128));
             run.setPreferredSize(new Dimension(100, 200));
             run.setHorizontalAlignment(SwingConstants.CENTER);
-            Icon logo = new ImageIcon("logo3.png");
+            //logo 3 or 7
+            Icon logo = new ImageIcon("logo7.png");
             JLabel log = new JLabel(logo);
             panel.add(log);
             panel.add(run);
+           // log.setBorder(BorderFactory.createEtchedBorder( purple = new Color(128,0,128),  purple = new Color(128,0,128)));
 
 
     }

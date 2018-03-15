@@ -105,6 +105,67 @@ public class Model extends Observable {
 
         // Handle gizmo collisions
         for (IGizmo gizmo : gizmos) {
+
+            if(gizmo instanceof LeftFlipper) {
+                LeftFlipper flipper = new LeftFlipper(gizmo.getX() * L, gizmo.getY() * L);
+                ArrayList<LineSegment> lineSegments1 = flipper.getLines();
+                for (LineSegment lineSegment : lineSegments1) {
+                    time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
+                    if (time < shortestTime) {
+                        shortestTime = time;
+                        newVelo = Geometry.reflectWall(lineSegment, ball.getVelo(), 1.0);
+
+                    }
+                }
+                ArrayList<PhysicsCircle> physicsCircles = flipper.getEndCircles();
+                for (PhysicsCircle physicsCircle : physicsCircles) {
+                    time = Geometry.timeUntilCircleCollision(physicsCircle, ballCircle, ballVelocity);
+                    if (time < shortestTime) {
+                        shortestTime = time;
+                        newVelo = Geometry.reflectCircle(physicsCircle.getCenter(), ballCircle.getCenter(), ball.getVelo(), 1.0);
+                    }
+
+                }
+                ArrayList<PhysicsCircle> physicsCircles2 = flipper.getCircles();
+                Circle circle = new Circle((gizmo.getX() * L) + 15, (gizmo.getY() * L)+ 15);
+                for(PhysicsCircle physicsCircle : physicsCircles2){
+                time = Geometry.timeUntilCircleCollision(physicsCircle, ballCircle, ballVelocity);
+                if (time < shortestTime) {
+                    shortestTime = time;
+                    newVelo = Geometry.reflectCircle(physicsCircle.getCenter(), ballCircle.getCenter(), ball.getVelo(), 1);
+                }}
+            }
+
+            if(gizmo instanceof RightFlipper){
+                RightFlipper flipper = new RightFlipper(gizmo.getX() * L, gizmo.getY() * L);
+                ArrayList<LineSegment> lineSegments1 = flipper.getLines();
+                for (LineSegment lineSegment : lineSegments1) {
+                    time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
+                    if (time < shortestTime) {
+                        shortestTime = time;
+                        newVelo = Geometry.reflectWall(lineSegment, ball.getVelo(), 1.0);
+
+                    }
+                }
+                ArrayList<PhysicsCircle> physicsCircles = flipper.getEndCircles();
+                for (PhysicsCircle physicsCircle : physicsCircles) {
+                    time = Geometry.timeUntilCircleCollision(physicsCircle, ballCircle, ballVelocity);
+                    if (time < shortestTime) {
+                        shortestTime = time;
+                        newVelo = Geometry.reflectCircle(physicsCircle.getCenter(), ballCircle.getCenter(), ball.getVelo(), 1.0);
+                    }
+
+                }
+                ArrayList<PhysicsCircle> physicsCircles2 = flipper.getCircles();
+                Circle circle = new Circle((gizmo.getX() * L) + 15, (gizmo.getY() * L)+ 15);
+                for(PhysicsCircle physicsCircle : physicsCircles2){
+                    time = Geometry.timeUntilCircleCollision(physicsCircle, ballCircle, ballVelocity);
+                    if (time < shortestTime) {
+                        shortestTime = time;
+                        newVelo = Geometry.reflectCircle(physicsCircle.getCenter(), ballCircle.getCenter(), ball.getVelo(), 1);
+                    }}
+
+            }
             // Circle collisions
             if (gizmo instanceof Circle) {
                 Circle circle = new Circle((gizmo.getX() * L) + 15, (gizmo.getY() * L)+ 15);

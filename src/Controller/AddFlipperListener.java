@@ -38,8 +38,9 @@ public class AddFlipperListener implements ActionListener {
                 if (flipperList.getSelectedItem() != null){
                     flipperType = flipperList.getSelectedItem().toString();
                 }
-                x = e.getX()/30; // L = 30
-                y = e.getY()/30; // L = 30
+               x = e.getX()/30; // L = 30
+               y = e.getY()/30; // L = 30
+
                 switch (flipperType){
                     case "Right flipper":
                         RightFlipper rightFlipper = new RightFlipper(x, y);
