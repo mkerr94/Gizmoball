@@ -11,7 +11,7 @@ public abstract class Flipper implements IGizmo {
     private ArrayList<LineSegment> lineSegments;
     private ArrayList<PhysicsCircle> collisionCircles;
     private Color color;
-    private int x, y, height, width;
+    private int x, y;
     private double angle;
     private final double initialAngle;
     private final double finalAngle;
@@ -24,8 +24,6 @@ public abstract class Flipper implements IGizmo {
         initialAngle = (double) 0;
         finalAngle = 90;
         angularMomentum = 0;
-        this.width = 25;
-        this.height = 100;
         this.x = x;
         this.y = y;
         lineSegments = initLines();
@@ -33,29 +31,11 @@ public abstract class Flipper implements IGizmo {
     }
 
     private ArrayList<LineSegment> initLines() {
-        ArrayList<LineSegment> arrayList = new ArrayList<>();
-        LineSegment left = new LineSegment(x, y, x, y + height);
-        LineSegment top = new LineSegment(x, y, x + width, y);
-        LineSegment right = new LineSegment(x + width, y, x + width, y + width);
-        LineSegment bottom = new LineSegment(x, y + height, x + width, y + height);
-        arrayList.add(left);
-        arrayList.add(top);
-        arrayList.add(right);
-        arrayList.add(bottom);
-        return arrayList;
+        return null;
     }
 
     private ArrayList<PhysicsCircle> initCircles() {
-        ArrayList<PhysicsCircle> arrayList = new ArrayList<>();
-        PhysicsCircle topLeft = new PhysicsCircle(x, y, 0);
-        PhysicsCircle botLeft = new PhysicsCircle(x, y + height, 0);
-        PhysicsCircle topRight = new PhysicsCircle(x + width, y, 0);
-        PhysicsCircle botRight = new PhysicsCircle(x + width, y + height, 0);
-        arrayList.add(topLeft);
-        arrayList.add(botLeft);
-        arrayList.add(topRight);
-        arrayList.add(botRight);
-        return arrayList;
+        return null;
     }
 
     public void flip() {
@@ -77,14 +57,6 @@ public abstract class Flipper implements IGizmo {
         } else if (rotation == 3){
             rotation = 0;
         }
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public int getWidth() {
-        return width;
     }
 
     @Override
