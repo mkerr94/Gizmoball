@@ -13,6 +13,7 @@ public class SaveFile {
     private Model model;
     private int x;
     private int y;
+    int i = 0;
     private String gType;
     private int rotate;
     private JFileChooser fc;
@@ -53,7 +54,6 @@ public class SaveFile {
         }
         BufferedWriter writer = new BufferedWriter(fstream);
         for (IGizmo models : model.getGizmos()) {
-            int i = 0;
             x = models.getX();
             y = models.getY();
             gType = models.getClass().getTypeName().substring(6);
@@ -62,7 +62,7 @@ public class SaveFile {
             if(gType.equals("Absorber") || gType.equals("Ball")){
                 System.out.println("found ab or ball");
                 continue;}
-            writer.write(gType + " " +gType.substring(0, 0) + i + " " + x + " " + y);
+            writer.write(gType + " " +gType.substring(0, 1) + i + " " + x + " " + y);
             i++;
             writer.newLine();
         }
