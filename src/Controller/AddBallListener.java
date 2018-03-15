@@ -66,7 +66,6 @@ public class AddBallListener implements ActionListener {
 
             }
         });
-        //model.addGizmo(new Absorber(0, 19, 20, 1));
     }
 }
 
