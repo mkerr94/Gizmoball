@@ -13,6 +13,10 @@ public interface IGizmo {
 
     int getY();
 
+    void setX(int x);
+
+    void setY(int y);
+
     ArrayList<LineSegment> getLines();
 
     ArrayList<PhysicsCircle> getEndCircles();

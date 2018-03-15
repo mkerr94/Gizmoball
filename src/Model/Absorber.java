@@ -34,6 +34,16 @@ public class Absorber implements IGizmo {
     }
 
     @Override
+    public void setX(int x) {
+        this.xOrdinate = x;
+    }
+
+    @Override
+    public void setY(int y) {
+        this.yOrdinate = y;
+    }
+
+    @Override
     public ArrayList<LineSegment> getLines() {
         return null;
     }

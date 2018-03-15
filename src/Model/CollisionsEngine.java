@@ -178,18 +178,6 @@ class CollisionsEngine {
                         newVelo = Geometry.reflectWall(lineSegment, b.getVelo(), 1.0);
                     }
                     model.captureBallsInAbsorber(time, ball, absorber);
-                    /*if (time <= 0.1 && !ball.stopped()) {
-                        //ball = new Ball(absorber.getWidth() - 1 * L, absorber.getHeight() - 0.5 * L, -10 * L, -10 * L);
-                        System.out.println("Ball hit absorber");
-                        this.setChanged();
-                        this.notifyObservers();
-                        b.stop();
-                        b.setExactX(absorber.getWidth() - absorber.getX() - (0.25 * L));
-                        b.setExactY(510);
-                        fireQueue.add(b);
-                        //balls.remove(b);
-                        System.out.println("Balls to be fired" + fireQueue.size());
-                    }*/
                 }
             }
 

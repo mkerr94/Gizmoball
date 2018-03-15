@@ -44,6 +44,16 @@ public class Circle implements IGizmo {
     }
 
     @Override
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    @Override
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    @Override
     public ArrayList<LineSegment> getLines() {
         return null;
     }

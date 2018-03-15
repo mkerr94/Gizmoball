@@ -77,6 +77,16 @@ public class Square implements IGizmo {
         return ypos;
     }
 
+    @Override
+    public void setX(int x) {
+        this.xpos = x;
+    }
+
+    @Override
+    public void setY(int y) {
+        this.ypos = y;
+    }
+
     public int getWidth() {
         return width;
     }

@@ -86,6 +86,16 @@ public class Triangle implements IGizmo{
         return ypos;
     }
 
+    @Override
+    public void setX(int x) {
+
+    }
+
+    @Override
+    public void setY(int y) {
+
+    }
+
     public int getWidth() {
         return width;
     }

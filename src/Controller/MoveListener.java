@@ -1,8 +1,8 @@
 package Controller;
 
 import Model.Model;
+import Model.IGizmo;
 import View.GameBoard;
-
 import javax.swing.event.MouseInputListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +12,7 @@ public class MoveListener implements ActionListener {
 
     private Model model;
     private int x, y;
-    private int x1,y2;
+    private int newX, newY;
     private GameBoard gameBoard;
 
     public MoveListener(Model model, GameBoard gameBoard) {
@@ -29,16 +29,55 @@ public class MoveListener implements ActionListener {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                x = e.getX();
-                y = e.getY();
-
-                System.out.println(x + " " + y);
 
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
+                x = e.getX() / 30;
+                y = e.getY() / 30;
+                IGizmo gizmo = model.getGizmo(x, y);
+                if (gizmo == null) System.out.println("null gizmo");
+                gameBoard.addMouseListener(new MouseInputListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
 
+                    }
+
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+                        newX = e.getX() / 30;
+                        newY = e.getY() / 30;
+                        model.moveGizmo(gizmo, newX, newY);
+                        gameBoard.removeMouseListener(this);
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseDragged(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseMoved(MouseEvent e) {
+
+                    }
+                });
+                gameBoard.removeMouseListener(this);
             }
 
             @Override
@@ -59,10 +98,6 @@ public class MoveListener implements ActionListener {
             @Override
             public void mouseMoved(MouseEvent e) {
 
-                x1 = e.getX();
-                y2 = e.getY();
-
-                System.out.println(x1 + " " + y2);
             }
         });
     }
