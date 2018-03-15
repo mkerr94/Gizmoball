@@ -23,23 +23,28 @@ public class Welcome  extends JPanel {
             setLayout(new BorderLayout());
             JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 5, 5));
             buttonPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-            buttonPanel.setBackground(purple = new Color(128,0,128));
+            buttonPanel.setBackground(Color.white);
             makeButtons(buttonPanel);
             add(buttonPanel, BorderLayout.NORTH);
             JLabel statusBar = new JLabel("Welcome Mode");
-            statusBar.setBorder(BorderFactory.createEtchedBorder(purple, purple));
-            setBackground(purple);
-            statusBar.setForeground(Color.white);
+            statusBar.setBorder(BorderFactory.createEtchedBorder(Color.white, Color.white));
+            setBackground(Color.white);
+            statusBar.setForeground( purple = new Color(128,0,128));
             add(statusBar, BorderLayout.SOUTH);
         }
 
         private void makeButtons(JPanel panel) {
             panel.setBorder(new EmptyBorder(10, 10, 10, 10));
-            JLabel run = new JLabel("Please select mode from menu at top");
+            JLabel run = new JLabel("Please select a mode from the menu at the top");
             run.setFont(new Font("Arial", Font.PLAIN, 24));
-            run.setForeground(Color.white);
-            run.setPreferredSize(new Dimension(400, 200));
+            run.setForeground(purple = new Color(128,0,128));
+            run.setPreferredSize(new Dimension(100, 200));
+            run.setHorizontalAlignment(SwingConstants.CENTER);
+            Icon logo = new ImageIcon("logo3.png");
+            JLabel log = new JLabel(logo);
+            panel.add(log);
             panel.add(run);
+
 
     }
 
