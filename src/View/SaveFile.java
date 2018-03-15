@@ -59,11 +59,15 @@ public class SaveFile {
             gType = models.getClass().getTypeName().substring(6);
             System.out.println("Gizmo: " + gType + " X: " + x + " Y:" + y);
             //writer.write(gType + " name " + x + " " + y);
-            if(gType.equals("Absorber") || gType.equals("Ball")){
-                System.out.println("found ab or ball");
-                continue;}
-            writer.write(gType + " " +gType.substring(0, 1) + i + " " + x + " " + y);
-            i++;
+            if(gType.equals("Absorber")){
+                writer.write(gType + " " +gType.substring(0, 1) + " " + x + " " + (x+19) + " " + y + " " + y);
+                continue;
+            }
+            if(gType.equals("ball")){
+                writer.write(gType + " " +gType.substring(0, 1) + " " + x + " " + y + " toDo gravity and velocity" );
+                continue;
+            }
+            writer.write(gType + " " +gType.substring(0, 1) + x + + y + " " + x + " " + y);
             writer.newLine();
         }
         writer.close();
