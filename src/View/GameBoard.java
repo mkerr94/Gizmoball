@@ -3,7 +3,6 @@ package View;
 import Model.*;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -64,7 +63,8 @@ public class GameBoard extends JPanel implements Observer {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        if (mode == Mode.BUILD) printGridLines(g2);
+        Graphics2D g3 = g2;
+        if (mode == Mode.BUILD) paintGridLines(g2);
         drawBall(g2);
         // paint all of the gizmos from the model
         for(IGizmo gizmo : gizmos) {
@@ -77,14 +77,8 @@ public class GameBoard extends JPanel implements Observer {
             }
             if (gizmo instanceof Circle) {
                 g2.setColor(gizmo.getColour());
-                /*
-                -15 makes the collisions look much better.
-                Without -15 collisions are 15 pixels off, but the circle doesn't draw
-                in the middle of a grid-square, it draws on the cross section of 4 grid
-                squares. todo update circle collisions
-                 */
-                int x= (gizmo.getX() * L - 15);
-                int y= (gizmo.getY() * L - 15);
+                int x= (gizmo.getX() * L);
+                int y= (gizmo.getY() * L);
                 g2.fillOval(x, y, L, L);
             }
             if (gizmo instanceof Triangle) {
@@ -125,7 +119,7 @@ public class GameBoard extends JPanel implements Observer {
                 g2.fillOval(x+30, y+30, 10, 15);
             }
         }
-
+        this.paintGridLines(g2);
     }
 
 
@@ -135,8 +129,9 @@ public class GameBoard extends JPanel implements Observer {
      * Each grid square is of length L.
      * @param g2 JavaGraphics2d object from paintComponent
      */
-    private void printGridLines(Graphics2D g2) {
+    private void paintGridLines(Graphics2D g2) {
         int lines = L;
+        g2.setColor(Color.BLACK);
         for (int i = 1; i <= 20; i++) {
             int x = i * lines;
             g2.drawLine(x, 0, x, height);

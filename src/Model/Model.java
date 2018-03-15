@@ -117,7 +117,7 @@ public class Model extends Observable {
         for (IGizmo gizmo : gizmos) {
             // Circle collisions
             if (gizmo instanceof Circle) {
-                Circle circle = new Circle(gizmo.getX() * L, gizmo.getY() * L);
+                Circle circle = new Circle((gizmo.getX() * L) + 15, (gizmo.getY() * L) + 15);
                 PhysicsCircle physicsCircle = circle.getCircle();
                 time = Geometry.timeUntilCircleCollision(physicsCircle, ballCircle, ballVelocity);
                 if (time < shortestTime) {

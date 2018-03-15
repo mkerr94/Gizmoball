@@ -19,6 +19,7 @@ public class AddGizmoListener implements ActionListener {
     private GameBoard gameBoard;
     private JComboBox gizmoList;
     private String gizmoToAdd;
+    private MouseInputListener mouseInputListener;
     private Model model;
     private int x, y;
 
@@ -26,19 +27,15 @@ public class AddGizmoListener implements ActionListener {
         this.gizmoList = gizmoList;
         this.model = model;
         this.gameBoard = gameBoard;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        gameBoard.addMouseListener(new MouseInputListener() {
+        mouseInputListener = new MouseInputListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                e.consume();
+
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-                e.consume();
+
             }
 
             @Override
@@ -74,6 +71,7 @@ public class AddGizmoListener implements ActionListener {
                         }
                         break;
                 }
+                gameBoard.removeMouseListener(this);
                 e.consume();
             }
 
@@ -96,6 +94,11 @@ public class AddGizmoListener implements ActionListener {
             public void mouseMoved(MouseEvent e) {
 
             }
-        });
+        };
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        gameBoard.addMouseListener(mouseInputListener);
     }
 }
