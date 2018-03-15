@@ -47,7 +47,7 @@ public class Welcome  extends JPanel {
             panel.add(run);
            // log.setBorder(BorderFactory.createEtchedBorder( purple = new Color(128,0,128),  purple = new Color(128,0,128)));
 
-
     }
+
 
 }
