@@ -94,5 +94,9 @@ public class ModelTest {
 
         assertNotEquals(triangle,cirlcle);
     }
+<<<<<<< HEAD
 }
 */
+=======
+}*/
+>>>>>>> 25f897114da3a19d4c730c2897298955eb2e3b7b

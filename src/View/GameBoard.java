@@ -83,8 +83,8 @@ public class GameBoard extends JPanel implements Observer {
                 in the middle of a grid-square, it draws on the cross section of 4 grid
                 squares. todo update circle collisions
                  */
-                int x= (gizmo.getX() * L - 15);
-                int y= (gizmo.getY() * L - 15);
+                int x= (gizmo.getX() * L);
+                int y= (gizmo.getY() * L);
                 g2.fillOval(x, y, L, L);
             }
             if (gizmo instanceof Triangle) {

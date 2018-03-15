@@ -9,26 +9,31 @@ import Controller.RunListener;
 class RunView extends JPanel {
     private Model model;
     private RunListener runListener;
+    private Color purple;
+    private Color pink;
 
     RunView(Model model) {
         this.model = model;
         runListener = new RunListener(model);
         init();
+        purple = new Color(128,0,128);
     }
 
     private void init() {
         setLayout(new BorderLayout());
-        JPanel buttonPanel = new JPanel(new GridLayout(10, 1, 5, 5));
+        JPanel buttonPanel = new JPanel(new GridLayout(6, 1, 5, 5));
         buttonPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-        //buttonPanel.setBackground(Color.black);
+        buttonPanel.setBackground(purple = new Color(128,0,128));
         makeButtons(buttonPanel);
         add(buttonPanel, BorderLayout.EAST);
         add(new GameBoard(600, 600, model, Mode.RUN), BorderLayout.CENTER);
         JLabel statusBar = new JLabel("Run Mode");
-        statusBar.setBorder(BorderFactory.createEtchedBorder(Color.black, Color.black));
-        //setBackground(Color.black);
-        statusBar.setForeground(Color.magenta);
+        statusBar.setBorder(BorderFactory.createEtchedBorder(purple, purple));
+        setBackground(purple);
+        statusBar.setForeground(Color.white);
         add(statusBar, BorderLayout.SOUTH);
+
+
 
     }
 
@@ -37,7 +42,7 @@ class RunView extends JPanel {
         JButton startB = new JButton("Start");
         startB.setFont(new Font("Arial", Font.PLAIN, 24));
         startB.setBackground(Color.white);
-        startB.setPreferredSize(new Dimension(247, 100));
+        startB.setPreferredSize(new Dimension(247, 200));
         startB.addActionListener(runListener);
         JButton stopB = new JButton("Stop");
         stopB.setFont(new Font("Arial", Font.PLAIN, 24));
@@ -56,5 +61,6 @@ class RunView extends JPanel {
         panel.add(stopB);
         panel.add(tickB);
         panel.add(resetB);
+
     }
 }
