@@ -1,17 +1,13 @@
 package Model;
 
+import Physics.Geometry;
 import Physics.LineSegment;
+import Physics.PhysicsCircle;
+import Physics.Vect;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-
-import Physics.PhysicsCircle;
-import Physics.Geometry;
-import Physics.Vect;
-import sun.plugin2.message.GetAppletMessage;
-
-import javax.sound.sampled.Line;
 
 
 public class Model extends Observable {

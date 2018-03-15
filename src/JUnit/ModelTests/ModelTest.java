@@ -1,4 +1,4 @@
-package ModelTests;
+/*package ModelTests;
 
 import Model.Model;
 import Model.Circle;
@@ -95,3 +95,4 @@ public class ModelTest {
         assertNotEquals(triangle,cirlcle);
     }
 }
+*/
