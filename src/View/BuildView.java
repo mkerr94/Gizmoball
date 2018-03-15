@@ -113,7 +113,7 @@ class BuildView extends JPanel {
         addGizmoButton.addActionListener(e -> statusbar.setText("Add Gizmo"));
         addGizmoButton.addActionListener(new AddGizmoListener(bumperList, model, gameBoard));
         flipperB.addActionListener(e -> statusbar.setText("Add Flipper"));
-        flipperB.addActionListener(listener);
+        flipperB.addActionListener(new AddFlipperListener(flipperList, model, gameBoard));
         addBall.addActionListener(e -> statusbar.setText("Add Ball"));
         addBall.addActionListener(e -> {
             JTextField vxField = new JTextField(1);

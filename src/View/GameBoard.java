@@ -96,20 +96,28 @@ public class GameBoard extends JPanel implements Observer {
                 g2.fillRect(x, y, ((Absorber) gizmo).getWidth() * L , ((Absorber) gizmo).getHeight() * L );
             }
             if (gizmo instanceof LeftFlipper) {
-                g2.setColor(gizmo.getColour());
-                int x =(gizmo.getX() * L);
-                int y =(gizmo.getY() * L);
-                g2.fillRect(x, y, (L /2), (L *2));
-                g2.fillOval(x, y-4, 10, 15);
-                g2.fillOval(x, y+30, 10, 15);
+                LeftFlipper leftFlipper = new LeftFlipper(gizmo.getX(), gizmo.getY());
+                int x = leftFlipper.getX() * L;
+                int y = leftFlipper.getY() * L;
+                double angle = leftFlipper.getAngle();
+                Graphics2D g2d = (Graphics2D) g.create();
+                AffineTransform transform = new AffineTransform();
+                transform.rotate(-Math.toRadians(angle), x + width/2, y + width/2);
+                g2d.setColor(leftFlipper.getColour());
+                g2d.setTransform(transform);
+                g2d.fillRoundRect(x, y, L/2, 2*L, 20, 20);
             }
             if (gizmo instanceof RightFlipper) {
-                g2.setColor(gizmo.getColour());
-                int x =(gizmo.getX() * L);
-                int y =(gizmo.getY() * L);
-                g2.fillRect(x+30, y, (L /2), (L *2));
-                g2.fillOval(x+30, y-4, 10, 15);
-                g2.fillOval(x+30, y+30, 10, 15);
+                RightFlipper rightFlipper = new RightFlipper(gizmo.getX(), gizmo.getY());
+                int x = rightFlipper.getX() * L;
+                int y = rightFlipper.getY() * L;
+                double angle = rightFlipper.getAngle();
+                Graphics2D g2d = (Graphics2D) g.create();
+                AffineTransform transform = new AffineTransform();
+                transform.rotate(-Math.toRadians(angle), x + width/2, y + width/2);
+                g2d.setColor(Color.red);
+                g2d.setTransform(transform);
+                g2d.fillRoundRect(x, y, L/2, 2*L, 20, 20);
             }
         }
         paintBalls(g2);

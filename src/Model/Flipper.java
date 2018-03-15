@@ -3,19 +3,23 @@ package Model;
 import Physics.PhysicsCircle;
 import Physics.LineSegment;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Observable;
 
 public abstract class Flipper implements IGizmo {
     private ArrayList<LineSegment> lineSegments;
     private ArrayList<PhysicsCircle> collisionCircles;
+    private Color color;
     private int x, y, height, width;
     private double angle;
     private final double initialAngle;
     private final double finalAngle;
     private double angularMomentum;
+    private int rotation;
 
     Flipper(int x, int y) {
+        this.color = Color.black;
         angle = 0;
         initialAngle = (double) 0;
         finalAngle = 90;
@@ -60,6 +64,19 @@ public abstract class Flipper implements IGizmo {
 
     public void unflip() {
         angularMomentum = -5;
+    }
+
+    @Override
+    public void rotate(){
+        if (rotation == 0){
+            rotation = 1;
+        } else if (rotation == 1){
+            rotation = 2;
+        } else if (rotation == 2){
+            rotation = 3;
+        } else if (rotation == 3){
+            rotation = 0;
+        }
     }
 
     public int getHeight() {
@@ -111,8 +128,18 @@ public abstract class Flipper implements IGizmo {
         return lineSegments;
     }
 
-    public ArrayList<PhysicsCircle> getCollisionCircles() {
+    @Override
+    public ArrayList<PhysicsCircle> getEndCircles(){
         return collisionCircles;
+    }
+
+    @Override
+    public Color getColour(){
+        return color;
+    }
+
+    public int getRotation(){
+        return rotation;
     }
 
 

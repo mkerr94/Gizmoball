@@ -292,7 +292,12 @@ public class Model extends Observable {
             gizmo.rotate();
             setChanged();
             notifyObservers();
-        } else{
+        }
+        else if (gizmo instanceof Flipper){
+            //todo rotate flipper
+            System.out.println("rotate flipper");
+        }
+        else{
             System.out.println("cannot rotate this gizmo");
         }
     }
