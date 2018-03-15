@@ -283,6 +283,26 @@ public class Model extends Observable {
         }
     }
 
+    /***
+     * Rotates a gizmo around its square
+     * @param gizmo the gizmo to rotate. Must be either a triangle or flipper to rotate
+     */
+    public void rotateGizmo(IGizmo gizmo){
+        if (gizmo instanceof Triangle){
+            gizmo.rotate();
+            setChanged();
+            notifyObservers();
+        } else{
+            System.out.println("cannot rotate this gizmo");
+        }
+    }
+
+    /***
+     * Returns the gizmo at the given location if it exists
+     * @param x x ordinate of location of target gizmo
+     * @param y y ordinate of location of target gizmo
+     * @return the gizmo at the target location
+     */
     public IGizmo getGizmo(int x, int y){
         for(IGizmo iGizmo: gizmos){
             if(iGizmo.getX() == x && iGizmo.getY() == y){

@@ -1,48 +1,40 @@
 package Controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import Model.Model;
 import Model.*;
 import View.GameBoard;
 
-import javax.swing.*;
 import javax.swing.event.MouseInputListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 
-public class AddAbsorberListener implements ActionListener {
-
-    private GameBoard gameBoard;
+public class RotateListener implements ActionListener{
     private Model model;
+    private GameBoard gameBoard;
     private MouseInputListener mouseInputListener;
-    private int x1;
-    private int x2;
-    private int y1;
-    private int y2;
+    private int x, y;
 
-    public AddAbsorberListener(Model model, GameBoard gameBoard){
+    public RotateListener(Model model, GameBoard gameBoard){
         this.model = model;
         this.gameBoard = gameBoard;
         mouseInputListener = new MouseInputListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-                x1 = e.getX()/30;
-                y1 = e.getY()/30;
+
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                x2 = (e.getX()/30) + 1; // L = 30. +1 so that you don't need to bypass a square completely to add the absorber to it
-                y2 = (e.getY()/30) + 1; // L = 30
-                int dx = x2 - x1;
-                int dy = y2 - y1;
-                System.out.println("dx = " + dx);
-                System.out.println("dy = " + dy);
-                model.addGizmo(new Absorber(x1, y1, dx, dy));
+                x = e.getX() / 30;
+                y = e.getY() / 30;
+                IGizmo gizmo = model.getGizmo(x, y);
+                model.rotateGizmo(gizmo);
                 gameBoard.removeMouseListener(this);
             }
 
@@ -65,7 +57,7 @@ public class AddAbsorberListener implements ActionListener {
             public void mouseMoved(MouseEvent e) {
 
             }
-            };
+        };
     }
 
     @Override

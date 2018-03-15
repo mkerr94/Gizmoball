@@ -4,6 +4,7 @@ import Model.*;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.util.*;
 import java.util.List;
 
@@ -68,14 +69,24 @@ public class GameBoard extends JPanel implements Observer {
                 int x= (gizmo.getX() * L);
                 int y= (gizmo.getY() * L);
                 if(gizmo.getRotation() == 0){
-                    int x2Points[] = {x+ L, x,x};
-                    int y2Points[] = {y,y+ L,y};
-                    g2.fillPolygon(x2Points,y2Points,3);
+                    int x2Points[] = {x + L, x, x};
+                    int y2Points[] = {y, y + L, y};
+                    g2.fillPolygon(x2Points, y2Points,3);
                 }
                 else if(gizmo.getRotation() == 1){
-                    int x2Points1[] = {x+ L, x,x+ L};
-                    int y2Points1[] = {y,y,y+ L};
-                    g2.fillPolygon(x2Points1,y2Points1,3);
+                    int x2Points1[] = {x + L, x, x + L};
+                    int y2Points1[] = {y, y, y + L};
+                    g2.fillPolygon(x2Points1, y2Points1,3);
+                }
+                else if (gizmo.getRotation() == 2){
+                    int x2Points1[] = {x + L, x, x + L};
+                    int y2Points1[] = {y, y + L, y + L};
+                    g2.fillPolygon(x2Points1, y2Points1,3);
+                }
+                else if (gizmo.getRotation() == 3){
+                    int x2Points1[] = {x + L, x, x};
+                    int y2Points1[] = {y+L, y, y + L};
+                    g2.fillPolygon(x2Points1, y2Points1,3);
                 }
             }
             if (gizmo instanceof Absorber) {

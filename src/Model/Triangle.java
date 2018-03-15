@@ -12,7 +12,6 @@ public class Triangle implements IGizmo{
     private int ypos;
     private int rotation;
     private int width;
-    private LineSegment ls;
     private Color colour;
 
 
@@ -26,9 +25,6 @@ public class Triangle implements IGizmo{
         getEndCircles();
     }
 
-    public LineSegment getLineSegs() {
-        return ls;
-    }
 
     public ArrayList<LineSegment> getLines() {
 
@@ -70,7 +66,15 @@ public class Triangle implements IGizmo{
 
     @Override
     public void rotate() {
-
+        if (rotation == 0){
+            rotation = 1;
+        } else if (rotation == 1){
+            rotation = 2;
+        } else if (rotation == 2){
+            rotation = 3;
+        } else if (rotation == 3){
+            rotation = 0;
+        }
     }
 
 
