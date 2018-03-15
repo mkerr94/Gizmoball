@@ -47,7 +47,7 @@ public class BuildListener implements ActionListener{
 
             case "Change friction":
                 String frictionPopUp = JOptionPane.showInputDialog("Please enter a value for friction: ");
-                break;
+            break;
 
             case "Change gravity":
                 String gravityPopUp = JOptionPane.showInputDialog("Please enter a value for gravity: ");

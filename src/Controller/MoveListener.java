@@ -12,6 +12,7 @@ public class MoveListener implements ActionListener {
 
     private Model model;
     private int x, y;
+    private int x1,y2;
     private GameBoard gameBoard;
 
     public MoveListener(Model model, GameBoard gameBoard) {
@@ -30,6 +31,9 @@ public class MoveListener implements ActionListener {
             public void mousePressed(MouseEvent e) {
                 x = e.getX();
                 y = e.getY();
+
+                System.out.println(x + " " + y);
+
             }
 
             @Override
@@ -55,6 +59,10 @@ public class MoveListener implements ActionListener {
             @Override
             public void mouseMoved(MouseEvent e) {
 
+                x1 = e.getX();
+                y2 = e.getY();
+
+                System.out.println(x1 + " " + y2);
             }
         });
     }

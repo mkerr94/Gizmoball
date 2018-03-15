@@ -119,7 +119,7 @@ public class BuildView extends JPanel {
         addAbsorber.addActionListener(e -> statusbar.setText("Add Absorber"));
         addAbsorber.addActionListener(new AddAbsorberListener(model, gameBoard));
         moveB.addActionListener(e -> statusbar.setText("Move Gizmo"));
-        moveB.addActionListener(listener);
+        moveB.addActionListener(new MoveListener(model,gameBoard));
         rotateB.addActionListener(e -> statusbar.setText("Rotate Gizmo"));
         rotateB.addActionListener(new RotateListener(model, gameBoard));
         deleteB.addActionListener(e -> statusbar.setText("Delete Gizmo"));
@@ -127,9 +127,9 @@ public class BuildView extends JPanel {
         clearB.addActionListener(e -> statusbar.setText("Clear Board"));
         clearB.addActionListener(new ClearBoardListener(model,this));
         frictionB.addActionListener(e -> statusbar.setText("Change Friction"));
-        frictionB.addActionListener(listener);
+        frictionB.addActionListener(new ChangeFrictionListener(model,this));
         gravityB.addActionListener(e -> statusbar.setText("Change Gravity"));
-        gravityB.addActionListener(listener);
+        gravityB.addActionListener(new ChangeGravityListener(model,this));
         connectB.addActionListener(listener);
         connectB.addActionListener(e -> statusbar.setText("Add Connection"));
         disconnectB.addActionListener(listener);
@@ -170,5 +170,19 @@ public class BuildView extends JPanel {
         int result = JOptionPane.showConfirmDialog(null,"Are you sure you want to clear the board?","Clear board",JOptionPane.YES_NO_OPTION);
         System.out.println(result);
         return result;
+    }
+
+    public int changeGravityAlert(){
+        String result = JOptionPane.showInputDialog("Please enter a value for friction: ");
+        int gravity = Integer.parseInt(result);
+        System.out.println(gravity);
+        return gravity;
+    }
+
+    public int changeFrictionAlert(){
+        String result = JOptionPane.showInputDialog("Please enter a value for friction: ");
+        int friction = Integer.parseInt(result);
+        System.out.println(friction);
+        return friction;
     }
 }
