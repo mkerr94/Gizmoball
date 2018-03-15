@@ -48,7 +48,7 @@ class RunView extends JPanel {
         tickB.setFont(new Font("Arial", Font.PLAIN, 24));
         tickB.setBackground(Color.white);
         tickB.addActionListener(runListener);
-        JButton resetB = new JButton("Reset");
+        JButton resetB = new JButton("Fire");
         resetB.setFont(new Font("Arial", Font.PLAIN, 24));
         resetB.setBackground(Color.white);
         resetB.setPreferredSize(new Dimension(247, 100));

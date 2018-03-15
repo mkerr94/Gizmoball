@@ -69,7 +69,6 @@ public class Square implements IGizmo {
 
     }
 
-
     public int getX() {
         return xpos;
     }
@@ -93,4 +92,5 @@ public class Square implements IGizmo {
     public void updateY(int y){
         this.ypos = y;
     }
+
 }

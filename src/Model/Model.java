@@ -172,7 +172,10 @@ public class Model extends Observable {
                         this.setChanged();
                         this.notifyObservers();
                         b.stop();
+                        b.setExactX(absorber.getWidth() - absorber.getX() - (0.25 * L));
+                        b.setExactY(510);
                         fireQueue.add(b);
+                        //balls.remove(b);
                         System.out.println("Balls to be fired" + fireQueue.size());
                     }
                 }
@@ -293,6 +296,8 @@ public class Model extends Observable {
         for(Ball ball:balls) {
             if (ball.stopped()) {
                 ball.start();
+                fireQueue.remove(ball);
+
                 Vect ballFire = new Vect(0, -50 * 20);
                 ball.setVelo(ballFire);
             }
