@@ -17,12 +17,15 @@ import javax.sound.sampled.Line;
 public class Model extends Observable {
     private List<IGizmo> gizmos;
     private List<Ball> balls;
+    private List<Ball> fireQueue;
     private Walls walls;
     private final int L = 30;
 
     public Model() {
         gizmos = new ArrayList<>();
         balls = new ArrayList<>();
+        fireQueue = new ArrayList();
+
         //ball = new Ball(6 * L, 1 * L, 50, 50);
     }
 
@@ -57,13 +60,14 @@ public class Model extends Observable {
                     // Post collision velocity ...
                     b.setVelo(cd.getVelo());
                 }
-                applyGravity(moveTime);
-                applyFriction(moveTime);
+
                 // Notify observers ... redraw updated view
                 this.setChanged();
                 this.notifyObservers();
             }
         }
+        applyGravity(moveTime);
+        applyFriction(moveTime);
     }
 
     private Ball moveBallForTime(Ball ball, double time) {
@@ -134,6 +138,7 @@ public class Model extends Observable {
                     if (time < shortestTime) {
                         shortestTime = time;
                         newVelo = Geometry.reflectWall(lineSegment, ball.getVelo(), 1.0);
+
                     }
                 }
                 ArrayList<PhysicsCircle> physicsCircles = square.getEndCircles();
@@ -167,19 +172,23 @@ public class Model extends Observable {
             }
             // Absorber collisions todo implement proper absorber functionality
             if (gizmo instanceof Absorber) {
-                Absorber absorber = new Absorber(gizmo.getX() * L, gizmo.getY() * L, ((Absorber) gizmo).getWidth() * L, ((Absorber) gizmo).getHeight() * L);
-                LineSegment lineSegment = absorber.getCollisionLine();
-                time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
-                if (time < shortestTime) {
-                    shortestTime = time;
-                    newVelo = Geometry.reflectWall(lineSegment, ball.getVelo(), 1.0);
-                }
-                if (time <= 0.1 && !ball.stopped()) {
-                    ball = new Ball(absorber.getWidth() - 1 * L, absorber.getHeight() - 0.5 * L, -10 * L, -10 * L);
-                    System.out.println("Ball hit absorber");
-                    this.setChanged();
-                    this.notifyObservers();
-                    ball.stop();
+                for (Ball b : balls) {
+                    Absorber absorber = new Absorber(gizmo.getX() * L, gizmo.getY() * L, ((Absorber) gizmo).getWidth() * L, ((Absorber) gizmo).getHeight() * L);
+                    LineSegment lineSegment = absorber.getCollisionLine();
+                    time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
+                    if (time < shortestTime) {
+                        shortestTime = time;
+                        newVelo = Geometry.reflectWall(lineSegment, b.getVelo(), 1.0);
+                    }
+                    if (time <= 0.1 && !ball.stopped()) {
+                        //ball = new Ball(absorber.getWidth() - 1 * L, absorber.getHeight() - 0.5 * L, -10 * L, -10 * L);
+                        System.out.println("Ball hit absorber");
+                        this.setChanged();
+                        this.notifyObservers();
+                        b.stop();
+                        fireQueue.add(b);
+                        System.out.println("Balls to be fired" + fireQueue.size());
+                    }
                 }
             }
         }

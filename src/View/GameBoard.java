@@ -63,7 +63,6 @@ public class GameBoard extends JPanel implements Observer {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        Graphics2D g3 = g2;
         if (mode == Mode.BUILD) paintGridLines(g2);
         drawBall(g2);
         // paint all of the gizmos from the model
@@ -118,8 +117,8 @@ public class GameBoard extends JPanel implements Observer {
                 g2.fillOval(x+30, y-4, 10, 15);
                 g2.fillOval(x+30, y+30, 10, 15);
             }
+            this.paintGridLines(g2);
         }
-        this.paintGridLines(g2);
     }
 
 
