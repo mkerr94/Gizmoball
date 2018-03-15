@@ -1,10 +1,11 @@
 package JUnit;
 
 import Model.Model;
-import org.junit.Before;
 import org.junit.Test;
 import Model.Circle;
 import Model.Triangle;
+import Model.Square;
+import Model.Absorber;
 
 import static org.junit.Assert.*;
 
@@ -48,5 +49,48 @@ public class ModelTest {
 
         model.clearGizmos();
         assertEquals(model.getGizmos().size(),0);
+    }
+
+    @Test
+    public void circleTest(){
+        Circle circle1 = new Circle(100,100);
+        Circle circle2 = new Circle(200,200);
+
+        assertNotEquals(circle1,circle2);
+    }
+
+
+    @Test
+    public void squareTest(){
+        Square square1 = new Square(100,100);
+        Square square2 = new Square(200,200);
+
+        assertNotEquals(square1,square2);
+    }
+
+
+    @Test
+    public void triangleTest(){
+        Triangle triangle1 = new Triangle(100,100);
+        Triangle triangle2 = new Triangle(200,200);
+
+        assertNotEquals(triangle1,triangle2);
+    }
+
+
+    @Test
+    public void absorberTest(){
+        Absorber absorber1 = new Absorber(100,100,10,10);
+        Absorber absorber2 = new Absorber(200,200,10,10);
+
+        assertNotEquals(absorber1,absorber2);
+    }
+
+    @Test
+    public void differentGizmoTest(){
+        Triangle triangle = new Triangle(100,100);
+        Circle cirlcle = new Circle(200,200);
+
+        assertNotEquals(triangle,cirlcle);
     }
 }
