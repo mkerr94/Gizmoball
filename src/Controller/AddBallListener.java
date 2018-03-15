@@ -14,19 +14,13 @@ public class AddBallListener implements ActionListener {
     private Model model;
     private int x,y;
     private GameBoard gameBoard;
+    private MouseInputListener mouseInputListener;
 
 
     public AddBallListener(Model model, GameBoard gameBoard){
         this.model = model;
         this.gameBoard = gameBoard;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //need to remove listeners here
-
-        gameBoard.addMouseListener(new MouseInputListener() {
-
+        mouseInputListener = new MouseInputListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
 
@@ -41,9 +35,9 @@ public class AddBallListener implements ActionListener {
             public void mouseReleased(MouseEvent e) {
                 x = e.getX();
                 y = e.getY();
-
                 model.addBall(x,y);
                 e.consume();
+                gameBoard.removeMouseListener(this);
             }
 
             @Override
@@ -65,8 +59,12 @@ public class AddBallListener implements ActionListener {
             public void mouseMoved(MouseEvent e) {
 
             }
-        });
-        //model.addGizmo(new Absorber(0, 19, 20, 1));
+        };
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        gameBoard.addMouseListener(mouseInputListener);
     }
 }
 

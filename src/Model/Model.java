@@ -257,6 +257,7 @@ public class Model extends Observable {
      */
     public void clearGizmos() {
         gizmos.clear();
+        balls.clear();
         setChanged();
         notifyObservers();
     }
@@ -273,6 +274,14 @@ public class Model extends Observable {
                 setChanged();
                 notifyObservers();
                 break;
+            }
+        }
+    }
+
+    public void getGizmo(int x, int y){
+        for(IGizmo iGizmo: gizmos){
+            if(iGizmo.getX() == x && iGizmo.getY() == y){
+
             }
         }
     }

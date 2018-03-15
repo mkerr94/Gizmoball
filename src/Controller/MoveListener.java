@@ -24,12 +24,13 @@ public class MoveListener implements ActionListener {
         gameBoard.addMouseListener(new MouseInputListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                e.consume();
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-                e.consume();
+                x = e.getX();
+                y = e.getY();
+
             }
 
             @Override

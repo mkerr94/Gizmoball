@@ -5,10 +5,11 @@ import Model.Circle;
 import Model.Triangle;
 import Model.Square;
 import Model.Absorber;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class ModelTest {
 
@@ -94,9 +95,7 @@ public class ModelTest {
 
         assertNotEquals(triangle,cirlcle);
     }
-<<<<<<< HEAD
+
 }
 */
-=======
-}*/
->>>>>>> 25f897114da3a19d4c730c2897298955eb2e3b7b
+
