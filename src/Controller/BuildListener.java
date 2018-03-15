@@ -42,7 +42,7 @@ public class BuildListener implements ActionListener{
                 break;
 
             case "Clear":
-                JOptionPane.showConfirmDialog(null,"Are you sure you want to clear the board?","Clear board",JOptionPane.YES_NO_OPTION);
+
                 break;
 
             case "Change friction":

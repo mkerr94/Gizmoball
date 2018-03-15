@@ -109,7 +109,7 @@ public class BuildView extends JPanel {
         panel.add(keyDisconnectB);
         add(panel, BorderLayout.EAST);
 
-        //Action listenersw
+        //Action listeners
         addGizmoButton.addActionListener(e -> statusbar.setText("Add Gizmo"));
         addGizmoButton.addActionListener(new AddGizmoListener(bumperList, model, gameBoard));
         flipperB.addActionListener(e -> statusbar.setText("Add Flipper"));
@@ -126,7 +126,7 @@ public class BuildView extends JPanel {
         deleteB.addActionListener(e -> statusbar.setText("Delete Gizmo"));
         deleteB.addActionListener(new DeleteListener(model,gameBoard));
         clearB.addActionListener(e -> statusbar.setText("Clear Board"));
-        clearB.addActionListener(new ClearBoardListener(model));
+        clearB.addActionListener(new ClearBoardListener(model,this));
         frictionB.addActionListener(e -> statusbar.setText("Change Friction"));
         frictionB.addActionListener(listener);
         gravityB.addActionListener(e -> statusbar.setText("Change Gravity"));
@@ -165,5 +165,11 @@ public class BuildView extends JPanel {
 
     public double getBallxy(){
         return xy;
+    }
+
+    public int clearBoardAlert(){
+        int result = JOptionPane.showConfirmDialog(null,"Are you sure you want to clear the board?","Clear board",JOptionPane.YES_NO_OPTION);
+        System.out.println(result);
+        return result;
     }
 }
