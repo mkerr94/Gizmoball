@@ -4,9 +4,8 @@ import Physics.Geometry;
 import Physics.LineSegment;
 import Physics.PhysicsCircle;
 import Physics.Vect;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
+
+import java.util.*;
 
 
 public class Model extends Observable {
@@ -18,6 +17,7 @@ public class Model extends Observable {
     private int gravityValue;
     private double frictionValue;
     private CollisionsEngine collisionsEngine;
+    private Map<Integer, IGizmo> keyConnections;
 
     public Model() {
         gizmos = new ArrayList<>();
@@ -27,6 +27,7 @@ public class Model extends Observable {
         gravityValue = 25;
         frictionValue = 0.025;
         collisionsEngine = new CollisionsEngine(this);
+        keyConnections = new HashMap<>();
     }
 
     public List<IGizmo> getGizmos() {
@@ -270,7 +271,28 @@ public class Model extends Observable {
             setChanged();
             notifyObservers();
         }else{
-            System.out.println("ERROR");
+            throw new IllegalStateException("Gizmo already exists at target location");
+        }
+    }
+
+    /***
+     * connects a keyCode to a gizmo
+     * @param keyCode keycode that will trigget the gizmo
+     * @param gizmoToConnect gizmo to be connected to the keycode
+     */
+    public void addKeyConnection(int keyCode, IGizmo gizmoToConnect) {
+        if (gizmoToConnect != null){
+            keyConnections.put(keyCode, gizmoToConnect);
+        } else{
+            throw new NullPointerException("Null gizmo passed to addKeyConnection()");
+        }
+    }
+
+    private void printKeyConnections(){
+        if (keyConnections.size() == 0) System.out.println("no key connections");
+        for (Integer keycode : keyConnections.keySet()) {
+            System.out.print("keycode: " + keycode);
+            System.out.println("gizmo: " + keyConnections.get(keycode).getClass().toString());
         }
     }
 }

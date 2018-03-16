@@ -134,7 +134,7 @@ public class BuildView extends JPanel {
         connectB.addActionListener(e -> statusbar.setText("Add Connection"));
         disconnectB.addActionListener(listener);
         disconnectB.addActionListener(e -> statusbar.setText("Disconnect Gizmo"));
-        keyConnectB.addActionListener(listener);
+        keyConnectB.addActionListener(new KeyConnectListener(model, gameBoard));
         keyConnectB.addActionListener(e -> statusbar.setText("Add Key Connection"));
         keyDisconnectB.addActionListener(listener);
         keyDisconnectB.addActionListener(e -> statusbar.setText("Disconnect Key"));
@@ -158,6 +158,7 @@ public class BuildView extends JPanel {
             xy = Double.parseDouble(vyField.getText());
         }
     }
+
     public double getBallxv(){
         return xv;
     }
@@ -191,4 +192,5 @@ public class BuildView extends JPanel {
         }
         return 0.025;
     }
+
 }

@@ -53,7 +53,11 @@ public class MoveListener implements ActionListener {
                     public void mouseReleased(MouseEvent e) {
                         newX = e.getX() / 30;
                         newY = e.getY() / 30;
-                        model.moveGizmo(gizmo, newX, newY);
+                        try{
+                            model.moveGizmo(gizmo, newX, newY);
+                        }catch (IllegalStateException exception){
+                            System.out.println("Gizmo already exists at the target location");
+                        }
                         gameBoard.removeMouseListener(this);
                     }
 
