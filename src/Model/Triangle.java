@@ -7,13 +7,11 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Triangle implements IGizmo{
-
     private int xpos;
     private int ypos;
     private int rotation;
     private int width;
     private Color colour;
-
 
     public Triangle(int x, int y) {
         xpos = x;
@@ -25,25 +23,19 @@ public class Triangle implements IGizmo{
         getEndCircles();
     }
 
-
     public ArrayList<LineSegment> getLines() {
-
-        ArrayList<LineSegment> lines = new ArrayList<LineSegment>();
+        ArrayList<LineSegment> lines = new ArrayList<>();
         LineSegment l1 = new LineSegment(xpos, ypos + width, xpos + width, ypos);
         LineSegment l2 = new LineSegment(xpos, ypos, xpos, ypos + width);
         LineSegment l3 = new LineSegment(xpos, ypos, xpos + width, ypos);
-
         lines.add(l1);
         lines.add(l2);
         lines.add(l3);
-
         return lines;
-
     }
 
-
     public ArrayList<PhysicsCircle> getEndCircles() {
-        ArrayList<PhysicsCircle> endCircles = new ArrayList<PhysicsCircle>();
+        ArrayList<PhysicsCircle> endCircles = new ArrayList<>();
         PhysicsCircle c1 = new PhysicsCircle(xpos, ypos, 0);
         PhysicsCircle c2 = new PhysicsCircle(xpos, ypos, 0);
         PhysicsCircle c3 = new PhysicsCircle(xpos, ypos + width, 0);
@@ -77,7 +69,6 @@ public class Triangle implements IGizmo{
         }
     }
 
-
     public int getX() {
         return xpos;
     }
@@ -88,12 +79,12 @@ public class Triangle implements IGizmo{
 
     @Override
     public void setX(int x) {
-
+        this.xpos = x;
     }
 
     @Override
     public void setY(int y) {
-
+        this.ypos = y;
     }
 
     public int getWidth() {

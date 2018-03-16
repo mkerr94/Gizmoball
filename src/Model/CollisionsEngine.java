@@ -147,7 +147,7 @@ class CollisionsEngine {
                     }
                 }
             }
-            // Triangle collisions
+            // Triangle collisions todo handle rotated triangle collisions
             if (gizmo instanceof Triangle) {
                 Triangle triangle = new Triangle(gizmo.getX() * L, gizmo.getY() * L);
                 ArrayList<LineSegment> lineSegments1 = triangle.getLines();
@@ -167,7 +167,7 @@ class CollisionsEngine {
                     }
                 }
             }
-            // Absorber collisions todo implement proper absorber functionality
+            // Absorber collisions todo make sure absorber functions properly
             if (gizmo instanceof Absorber) {
                 for (Ball b : balls) {
                     Absorber absorber = new Absorber(gizmo.getX() * L, gizmo.getY() * L, ((Absorber) gizmo).getWidth() * L, ((Absorber) gizmo).getHeight() * L);

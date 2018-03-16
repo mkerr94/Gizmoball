@@ -19,9 +19,11 @@ public class MainGUI extends JFrame {
         setSize(885, 684);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
     }
 
+    /***
+     * Constructs the menu bar of the application.
+     */
     private void makeMenuBar() {
         setTitle("GizmoBall - Welcome Mode");
         JMenuBar menuBar = new JMenuBar();
@@ -34,11 +36,9 @@ public class MainGUI extends JFrame {
         file.add(save);
         file.add(exit);
         menuBar.add(file);
+
         open.addActionListener(evt -> new LoadFile(model));
-
         save.addActionListener(evt -> new SaveFile(model));
-
-
         exit.addActionListener((ActionEvent event) -> System.exit(0));
 
         ButtonGroup modeGroup = new ButtonGroup();
@@ -47,7 +47,6 @@ public class MainGUI extends JFrame {
         JRadioButtonMenuItem runMode = new JRadioButtonMenuItem("Run Mode");
         modeMenu.add(buildMode);
         modeMenu.add(runMode);
-        //runMode.setSelected(true);
         buildMode.addItemListener((ItemEvent e) -> { // if build mode has been selected
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 setTitle("GizmoBall - Build Mode");

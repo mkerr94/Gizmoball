@@ -1,12 +1,7 @@
 package Model;
 
-import Physics.Geometry;
-import Physics.LineSegment;
-import Physics.PhysicsCircle;
 import Physics.Vect;
-
 import java.util.*;
-
 
 public class Model extends Observable {
     private List<IGizmo> gizmos;
@@ -38,7 +33,7 @@ public class Model extends Observable {
         return balls;
     }
 
-    public Walls getWalls(){return walls;}
+    Walls getWalls(){return walls;}
 
     public void setWalls(Walls walls) {
         this.walls = walls;
@@ -52,6 +47,12 @@ public class Model extends Observable {
         this.frictionValue = frictionValue;
     }
 
+    /***
+     * This method is called inside the run listener for every timer tick.
+     * This is the main physics loop - checks for collisions using the collisions engine
+     * and either handles the collision or moves the ball in the usual fashion.
+     * See CollisionsEngine.timeUntilCollision and this.moveBallForTime
+     */
     public void moveBall() {
         double moveTime = 0.05; // 0.05 = 20 times per second as per Gizmoball
         for (Ball b : balls) {
@@ -76,6 +77,12 @@ public class Model extends Observable {
         applyFriction(moveTime);
     }
 
+    /***
+     * Moves a given ball for a given period of time
+     * @param ball the ball to move
+     * @param time the time to move the ball for. Should be 0.05 according to spec
+     * @return the ball with an updated position according to its velocity and the time to move for
+     */
     private Ball moveBallForTime(Ball ball, double time) {
         double newX;
         double newY;
@@ -96,7 +103,7 @@ public class Model extends Observable {
     private void applyFriction(double time) {
         for(Ball ball: balls) {
             double mu = 0.025;
-            double mu2 = frictionValue / L; //todo check these values
+            double mu2 = frictionValue / L;
             double vxOld = ball.getVelo().x();
             double vyOld = ball.getVelo().y();
             double vxNew = vxOld * (1 - (mu * time) - (mu2 * vxOld) * time);
@@ -229,6 +236,13 @@ public class Model extends Observable {
         return null;
     }
 
+    /***
+     * Method that's called inside CollisionsEngine.timeUntilCollision which handles the
+     * behaviour of a ball colliding with an absorber.
+     * @param time the tick time, should be 0.05 according to spec
+     * @param ball the ball to handle
+     * @param absorber the absorber to handle
+     */
     void captureBallsInAbsorber(double time, Ball ball, Absorber absorber){
         for (Ball b : balls) {
             if (time <= 0.1 && !ball.stopped()) {
@@ -246,6 +260,10 @@ public class Model extends Observable {
         }
     }
 
+    /***
+     * Fires the ball from an absorber. This is called inside the RunListener when
+     * the user triggers the fire option.
+     */
     public void fireBall() {
         for(Ball ball:balls) {
             if (ball.stopped()) {
@@ -263,6 +281,13 @@ public class Model extends Observable {
         }
     }
 
+    /***
+     * Moves a given gizmo to a new location. First checks if a gizmo already exists
+     * in the target location.
+     * @param gizmo Gizmo you're trying to move
+     * @param newX x-ordinate of the target destination
+     * @param newY y-ordinate of the target destination
+     */
     public void moveGizmo(IGizmo gizmo, int newX, int newY) {
         IGizmo iGizmo = getGizmo(newX, newY);
         if (iGizmo == null){

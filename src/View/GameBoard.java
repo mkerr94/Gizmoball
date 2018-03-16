@@ -43,7 +43,7 @@ public class GameBoard extends JPanel implements Observer {
     /***
      * Paints all of the gizmos from the model. See Model.gizmos.
      * Also draws the ball (see paintBalls(g2)) and gridlines if the game
-     * is in buildmode.
+     * is in buildmode. todo fix painting glitch where everything moves down an L between modes
      * @param g Java2d Graphics object
      */
     public void paintComponent(Graphics g) {
@@ -132,8 +132,8 @@ public class GameBoard extends JPanel implements Observer {
         for (Ball b : balls) {
             g2.setColor(b.getColour());
             int x = (int) b.getExactX() - L/4;
-            int y = (int) b.getExactY()- L/4;
-            g2.fillOval(x, y, L / 2, L / 2);
+            int y = (int) b.getExactY() - L/4;
+            g2.fillOval(x, y, L/2, L/2);
         }
     }
 
@@ -152,7 +152,10 @@ public class GameBoard extends JPanel implements Observer {
         }
     }
 
-    // Fix onscreen size
+    /***
+     * Used to maintain the size of the gameBoard
+     * @return the dimension of the fixed size of the GameBoard
+     */
     public Dimension getPreferredSize() {
         return new Dimension(width, height);
     }

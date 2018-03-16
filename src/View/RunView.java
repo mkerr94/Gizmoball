@@ -11,7 +11,7 @@ public class RunView extends JPanel {
     private RunListener runListener;
     private Color purple;
 
-    public RunView(Model model) {
+    RunView(Model model) {
         this.model = model;
         runListener = new RunListener(model,this);
         init();
