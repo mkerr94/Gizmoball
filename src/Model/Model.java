@@ -167,6 +167,21 @@ public class Model extends Observable {
         return true;
     }
 
+    /**
+     * Checks if gizmo already exists at the x and y location passed in.
+     * @param x
+     * @param y
+     * @return true if valid placement, false if invalid placement
+     */
+    public boolean checkGizmoLocation(int x, int y){
+        for(IGizmo iGizmo: gizmos){
+            if(iGizmo.getX1() == x && iGizmo.getY1() == y){
+                return false;
+            }
+        }
+        return true;
+    }
+
     /***
      * Empties the collection of gizmos and notifies the view,
      * so that when it repaints there is nothing to paint.

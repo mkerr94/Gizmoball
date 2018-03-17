@@ -26,14 +26,14 @@ public class BuildView extends JPanel {
         listener = new BuildListener();
         gameBoard = new GameBoard(600, 600, model, Mode.BUILD);
         init();
-        purple = new Color(128,0,128);
+        purple = new Color(128, 0, 128);
     }
 
     private void init() {
         setLayout(new BorderLayout());
         JPanel buttonPanel = new JPanel(new GridLayout(10, 1, 5, 5));
-        buttonPanel.setBackground(purple = new Color(128,0,128));
-        buttonPanel.setBorder(new EmptyBorder(10,10,10,10));
+        buttonPanel.setBackground(purple = new Color(128, 0, 128));
+        buttonPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         add(buttonPanel, BorderLayout.EAST);
         add(gameBoard, BorderLayout.CENTER);
         setBackground(purple);
@@ -111,25 +111,25 @@ public class BuildView extends JPanel {
 
         //Action listeners
         addGizmoButton.addActionListener(e -> statusbar.setText("Add Gizmo"));
-        addGizmoButton.addActionListener(new AddGizmoListener(bumperList, model, gameBoard,this));
+        addGizmoButton.addActionListener(new AddGizmoListener(bumperList, model, gameBoard, this));
         flipperB.addActionListener(e -> statusbar.setText("Add Flipper"));
         flipperB.addActionListener(new AddFlipperListener(flipperList, model, gameBoard, this));
         addBall.addActionListener(e -> statusbar.setText("Add Ball"));
-        addBall.addActionListener(new AddBallListener(model,gameBoard,this));
+        addBall.addActionListener(new AddBallListener(model, gameBoard, this));
         addAbsorber.addActionListener(e -> statusbar.setText("Add Absorber"));
-        addAbsorber.addActionListener(new AddAbsorberListener(model, gameBoard,this));
+        addAbsorber.addActionListener(new AddAbsorberListener(model, gameBoard, this));
         moveB.addActionListener(e -> statusbar.setText("Move Gizmo"));
-        moveB.addActionListener(new MoveListener(model,gameBoard, this));
+        moveB.addActionListener(new MoveListener(model, gameBoard, this));
         rotateB.addActionListener(e -> statusbar.setText("Rotate Gizmo"));
         rotateB.addActionListener(new RotateListener(model, gameBoard));
         deleteB.addActionListener(e -> statusbar.setText("Delete Gizmo"));
-        deleteB.addActionListener(new DeleteListener(model,gameBoard));
+        deleteB.addActionListener(new DeleteListener(model, gameBoard));
         clearB.addActionListener(e -> statusbar.setText("Clear Board"));
-        clearB.addActionListener(new ClearBoardListener(model,this));
+        clearB.addActionListener(new ClearBoardListener(model, this));
         frictionB.addActionListener(e -> statusbar.setText("Change Friction"));
-        frictionB.addActionListener(new ChangeFrictionListener(model,this));
+        frictionB.addActionListener(new ChangeFrictionListener(model, this));
         gravityB.addActionListener(e -> statusbar.setText("Change Gravity"));
-        gravityB.addActionListener(new ChangeGravityListener(model,this));
+        gravityB.addActionListener(new ChangeGravityListener(model, this));
         connectB.addActionListener(listener);
         connectB.addActionListener(e -> statusbar.setText("Add Connection"));
         disconnectB.addActionListener(listener);
@@ -140,7 +140,7 @@ public class BuildView extends JPanel {
         keyDisconnectB.addActionListener(e -> statusbar.setText("Disconnect Key"));
     }
 
-    public void ballVelocityAlert(){
+    public void ballVelocityAlert() {
         JTextField vxField = new JTextField(5);
         JTextField vyField = new JTextField(5);
         JPanel myPanel = new JPanel();
@@ -153,48 +153,58 @@ public class BuildView extends JPanel {
 
         int result = JOptionPane.showConfirmDialog(null, myPanel, "Add ball", JOptionPane.OK_CANCEL_OPTION);
 
-        if(result == 0) {
+        if (result == 0) {
             xv = Double.parseDouble(vxField.getText());
             xy = Double.parseDouble(vyField.getText());
         }
     }
 
-    public double getBallxv(){
+    public double getBallxv() {
         return xv;
     }
 
-    public double getBallxy(){
+    public double getBallxy() {
         return xy;
     }
 
-    public int clearBoardAlert(){
-        int result = JOptionPane.showConfirmDialog(null,"Are you sure you want to clear the board?","Clear board",JOptionPane.YES_NO_OPTION);
+    public void invalidVelocityAlert(){
+        JOptionPane.showMessageDialog(null,"Your velocity values must be greater than 0.");
+    }
+
+    public int clearBoardAlert() {
+        int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to clear the board?", "Clear board", JOptionPane.YES_NO_OPTION);
         System.out.println(result);
         return result;
     }
 
-    public int changeGravityAlert(){
+    public int changeGravityAlert() {
         String result = JOptionPane.showInputDialog("Please enter a value for gravity: ");
-        if (result != null){
+        if (result != null) {
             int gravity = Integer.parseInt(result);
-            System.out.println(gravity);
             return gravity;
         }
         return 25;
     }
 
-    public double changeFrictionAlert(){
+    public double changeFrictionAlert() {
         String result = JOptionPane.showInputDialog("Please enter a value for friction: ");
-        if (result != null){
+        if (result != null) {
             double friction = Double.parseDouble(result);
-            System.out.println(friction);
             return friction;
         }
         return 0.025;
     }
 
-    public void occupiedSpaceAlert(){
-        JOptionPane.showMessageDialog(null,"This space is already occupied! Please choose an empty space.");
+    public void invalidGravityAlert(){
+        JOptionPane.showMessageDialog(null,"Your value for gravity must be greater than 0.");
+    }
+
+    public void invalidFrictionAlert(){
+        JOptionPane.showMessageDialog(null,"Your value for friction must be greater than 0.");
+    }
+
+    public void occupiedSpaceAlert() {
+        JOptionPane.showMessageDialog(null, "This space is already occupied! Please choose an empty space.");
     }
 
 }

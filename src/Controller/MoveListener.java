@@ -3,10 +3,12 @@ package Controller;
 import Model.Model;
 import Model.IGizmo;
 import View.GameBoard;
+
 import javax.swing.event.MouseInputListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+
 import Model.Square;
 import View.BuildView;
 
@@ -58,14 +60,10 @@ public class MoveListener implements ActionListener {
                         newX = e.getX() / 30;
                         newY = e.getY() / 30;
 
-                        Square gizmoCheck = new Square(newX, newY);
-                       // try{
-                        if(model.checkGizmoLocation(gizmoCheck)){
+
+                        if (model.checkGizmoLocation(newX, newY)) {
                             model.moveGizmo(gizmo, newX, newY);
-                        //}catch (IllegalStateException exception){
-                            //System.out.println("Gizmo already exists at the target location");
-                        }
-                        else{
+                        } else {
                             buildView.occupiedSpaceAlert();
                         }
                         gameBoard.removeMouseListener(this);

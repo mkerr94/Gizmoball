@@ -17,6 +17,11 @@ public class ChangeGravityListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         int result = buildView.changeGravityAlert();
-        model.setGravityValue(result);
+
+        if(result > 0) {
+            model.setGravityValue(result);
+        }else{
+            buildView.invalidGravityAlert();
+        }
     }
 }

@@ -40,11 +40,19 @@ public class AddBallListener implements ActionListener {
                 buildView.ballVelocityAlert();
                 xv = buildView.getBallxv();
                 xy = buildView.getBallxy();
-                System.out.println(xv);
-                System.out.println(xy);
-                x = e.getX();
-                y = e.getY();
-                model.addBall(x,y,xv,xy);
+
+                if(xv > 0 && xy > 0) {
+                    x = e.getX();
+                    y = e.getY();
+
+                    if (model.checkGizmoLocation(x, y)) {
+                        model.addBall(x, y, xv, xy);
+                    } else {
+                        buildView.occupiedSpaceAlert();
+                    }
+                }else{
+                    buildView.invalidVelocityAlert();
+                }
                 e.consume();
                 gameBoard.removeMouseListener(this);
             }
