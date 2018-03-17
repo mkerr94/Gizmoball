@@ -26,6 +26,7 @@ public class DeleteListener implements ActionListener{
                 y = e.getY() / 30; // L = 30
                 model.deleteGizmoOrBall(x, y);
                 e.consume();
+                gameBoard.removeMouseListener(this);
             }
 
             @Override

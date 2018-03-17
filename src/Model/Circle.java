@@ -72,4 +72,12 @@ public class Circle implements IGizmo {
     public void rotate() {
 
     }
+
+    public void updateX(int newX){
+        x = newX;
+    }
+
+    public void updateY(int newY){
+        y = newY;
+    }
 }
