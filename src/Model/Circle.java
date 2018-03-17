@@ -34,23 +34,23 @@ public class Circle implements IGizmo {
     }
 
     @Override
-    public int getX() {
+    public int getX1() {
         return x;
     }
 
     @Override
-    public int getY() {
+    public int getY1() {
         return y;
     }
 
     @Override
-    public void setX(int x) {
-        this.x = x;
+    public void setX1(int x1) {
+        this.x = x1;
     }
 
     @Override
-    public void setY(int y) {
-        this.y = y;
+    public void setY1(int y1) {
+        this.y = y1;
     }
 
     @Override

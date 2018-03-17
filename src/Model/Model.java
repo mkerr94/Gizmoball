@@ -160,7 +160,7 @@ public class Model extends Observable {
      */
     public boolean checkGizmoLocation(IGizmo gizmo) {
         for (IGizmo iGizmo : gizmos) {
-            if (iGizmo.getX() == gizmo.getX() && iGizmo.getY() == gizmo.getY()) { // if a gizmo already exists in that location
+            if (iGizmo.getX1() == gizmo.getX1() && iGizmo.getY1() == gizmo.getY1()) { // if a gizmo already exists in that location
                 return false;
             }
         }
@@ -185,7 +185,7 @@ public class Model extends Observable {
      */
     public void deleteGizmoOrBall(int x, int y) {
         for (IGizmo iGizmo : gizmos) {
-            if (iGizmo.getX() == x && iGizmo.getY() == y) {
+            if (iGizmo.getX1() == x && iGizmo.getY1() == y) {
                 gizmos.remove(iGizmo);
                 setChanged();
                 notifyObservers();
@@ -229,7 +229,7 @@ public class Model extends Observable {
      */
     public IGizmo getGizmo(int x, int y){
         for(IGizmo iGizmo: gizmos){
-            if(iGizmo.getX() == x && iGizmo.getY() == y){
+            if(iGizmo.getX1() == x && iGizmo.getY1() == y){
                 return iGizmo;
             }
         }
@@ -246,11 +246,11 @@ public class Model extends Observable {
     void captureBallsInAbsorber(double time, Ball ball, Absorber absorber){
         for (Ball b : balls) {
             if (time <= 0.1 && !ball.stopped()) {
-                //ball = new Ball(absorber.getWidth() - 1 * L, absorber.getHeight() - 0.5 * L, -10 * L, -10 * L);
+                //ball = new Ball(absorber.getX2() - 1 * L, absorber.getY2() - 0.5 * L, -10 * L, -10 * L);
                 System.out.println("Ball hit absorber");
                 b.stop();
-                b.setExactX(absorber.getWidth() - absorber.getX() - (L * 0.25));
-                b.setExactY(absorber.getY() - absorber.getHeight() + (L * 0.5));
+                b.setExactX(absorber.getX2() - absorber.getX1() - (L * 0.25));
+                b.setExactY(absorber.getY1() - absorber.getY2() + (L * 0.5));
                 fireQueue.add(b);
                 //balls.remove(b);
                 System.out.println("Balls to be fired" + fireQueue.size());
@@ -291,8 +291,8 @@ public class Model extends Observable {
     public void moveGizmo(IGizmo gizmo, int newX, int newY) {
         IGizmo iGizmo = getGizmo(newX, newY);
         if (iGizmo == null){
-            gizmo.setX(newX);
-            gizmo.setY(newY);
+            gizmo.setX1(newX);
+            gizmo.setY1(newY);
             setChanged();
             notifyObservers();
         }else{

@@ -57,7 +57,7 @@ class CollisionsEngine {
         // Handle gizmo collisions
         for (IGizmo gizmo : gizmos) {
             if(gizmo instanceof LeftFlipper) {
-                LeftFlipper flipper = new LeftFlipper(gizmo.getX() * L, gizmo.getY() * L);
+                LeftFlipper flipper = new LeftFlipper(gizmo.getX1() * L, gizmo.getY1() * L);
                 ArrayList<LineSegment> lineSegments1 = flipper.getLines();
                 for (LineSegment lineSegment : lineSegments1) {
                     time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
@@ -77,7 +77,7 @@ class CollisionsEngine {
 
                 }
                 ArrayList<PhysicsCircle> physicsCircles2 = flipper.getCircles();
-                Circle circle = new Circle((gizmo.getX() * L) + 15, (gizmo.getY() * L)+ 15);
+                Circle circle = new Circle((gizmo.getX1() * L) + 15, (gizmo.getY1() * L)+ 15);
                 for(PhysicsCircle physicsCircle : physicsCircles2){
                     time = Geometry.timeUntilCircleCollision(physicsCircle, ballCircle, ballVelocity);
                     if (time < shortestTime) {
@@ -87,7 +87,7 @@ class CollisionsEngine {
             }
 
             if(gizmo instanceof RightFlipper){
-                RightFlipper flipper = new RightFlipper(gizmo.getX() * L, gizmo.getY() * L);
+                RightFlipper flipper = new RightFlipper(gizmo.getX1() * L, gizmo.getY1() * L);
                 ArrayList<LineSegment> lineSegments1 = flipper.getLines();
                 for (LineSegment lineSegment : lineSegments1) {
                     time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
@@ -107,7 +107,7 @@ class CollisionsEngine {
 
                 }
                 ArrayList<PhysicsCircle> physicsCircles2 = flipper.getCircles();
-                Circle circle = new Circle((gizmo.getX() * L) + 15, (gizmo.getY() * L)+ 15);
+                Circle circle = new Circle((gizmo.getX1() * L) + 15, (gizmo.getY1() * L)+ 15);
                 for(PhysicsCircle physicsCircle : physicsCircles2){
                     time = Geometry.timeUntilCircleCollision(physicsCircle, ballCircle, ballVelocity);
                     if (time < shortestTime) {
@@ -118,7 +118,7 @@ class CollisionsEngine {
             }
             // Circle collisions
             if (gizmo instanceof Circle) {
-                Circle circle = new Circle((gizmo.getX() * L) + 15, (gizmo.getY() * L)+ 15);
+                Circle circle = new Circle((gizmo.getX1() * L) + 15, (gizmo.getY1() * L)+ 15);
                 PhysicsCircle physicsCircle = circle.getCircle();
                 time = Geometry.timeUntilCircleCollision(physicsCircle, ballCircle, ballVelocity);
                 if (time < shortestTime) {
@@ -128,7 +128,7 @@ class CollisionsEngine {
             }
             // Square collisions
             if (gizmo instanceof Square) {
-                Square square = new Square(gizmo.getX() * L, gizmo.getY() * L);
+                Square square = new Square(gizmo.getX1() * L, gizmo.getY1() * L);
                 ArrayList<LineSegment> lineSegments1 = square.getLines();
                 for (LineSegment lineSegment : lineSegments1) {
                     time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
@@ -149,7 +149,7 @@ class CollisionsEngine {
             }
             // Triangle collisions todo handle rotated triangle collisions
             if (gizmo instanceof Triangle) {
-                Triangle triangle = new Triangle(gizmo.getX() * L, gizmo.getY() * L);
+                Triangle triangle = new Triangle(gizmo.getX1() * L, gizmo.getY1() * L);
                 ArrayList<LineSegment> lineSegments1 = triangle.getLines();
                 for (LineSegment lineSegment : lineSegments1) {
                     time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
@@ -170,7 +170,7 @@ class CollisionsEngine {
             // Absorber collisions todo make sure absorber functions properly
             if (gizmo instanceof Absorber) {
                 for (Ball b : balls) {
-                    Absorber absorber = new Absorber(gizmo.getX() * L, gizmo.getY() * L, ((Absorber) gizmo).getWidth() * L, ((Absorber) gizmo).getHeight() * L);
+                    Absorber absorber = new Absorber(gizmo.getX1() * L, gizmo.getY1() * L, ((Absorber) gizmo).getX2() * L, ((Absorber) gizmo).getY2() * L);
                     LineSegment lineSegment = absorber.getCollisionLine();
                     time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
                     if (time < shortestTime) {

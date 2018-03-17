@@ -9,13 +9,13 @@ import java.util.ArrayList;
 
 public interface IGizmo {
 
-    int getX();
+    int getX1();
 
-    int getY();
+    int getY1();
 
-    void setX(int x);
+    void setX1(int x1);
 
-    void setY(int y);
+    void setY1(int y1);
 
     ArrayList<LineSegment> getLines();
 

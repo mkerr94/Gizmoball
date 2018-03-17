@@ -39,8 +39,8 @@ public class LoadFile {
 
     private void tokenizeFile(){
 
-        int x, y, x1, y1, x2, y2, kNo;
-        double d, d2;
+        int x = 0, y = 0, x1, y1, x2, y2, kNo;
+        double d, d1, d2, d3;
         String lineRead, gName, gConnect1, gConnect2, upDown;
 
         try {
@@ -105,16 +105,17 @@ public class LoadFile {
                         //System.out.println("-----------found ball----------");
                         gName = gizmoGroup[1];
                         d = Double.parseDouble(gizmoGroup[2]);
-                        d2 = Double.parseDouble(gizmoGroup[3]);
-                        x2 = ((int) d);
-                        y2 = ((int) d2);
-                        loadedGizmos.put(gName, new Circle(x2, y2));
-                        model.addGizmo(new Circle(x2, y2));
+                        d1 = Double.parseDouble(gizmoGroup[3]);
+                        d2 = Double.parseDouble(gizmoGroup[4]);
+                        d3 = Double.parseDouble(gizmoGroup[5]);
+                        //loadedGizmos.put(gName, new Circle(x2, y2));
+                        model.addBall(d, d1, d2, d3);
                         break;
                     case "Rotate":
                         System.out.println("found Rotate");
                         gName = gizmoGroup[1];
                         loadedGizmos.get(gName).rotate();
+                        model.rotateGizmo(model.getGizmo(x, y));
                         break;
                     case "KeyConnect":
                         System.out.println("found KeyConnect");

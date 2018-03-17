@@ -5,8 +5,6 @@ import Model.IGizmo;
 
 import javax.swing.*;
 import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class SaveFile {
 
@@ -54,8 +52,8 @@ public class SaveFile {
         }
         BufferedWriter writer = new BufferedWriter(fstream);
         for (IGizmo models : model.getGizmos()) {
-            x = models.getX();
-            y = models.getY();
+            x = models.getX1();
+            y = models.getY1();
             gType = models.getClass().getTypeName().substring(6);
             System.out.println("Gizmo: " + gType + " X: " + x + " Y:" + y);
             //writer.write(gType + " name " + x + " " + y);
@@ -63,8 +61,15 @@ public class SaveFile {
                 writer.write(gType + " " +gType.substring(0, 1) + " " + x + " " + (x+19) + " " + y + " " + y);
                 continue;
             }
-            if(gType.equals("ball")){
+            if(gType.equals("Ball")){
                 writer.write(gType + " " +gType.substring(0, 1) + " " + x + " " + y + " toDo gravity and velocity" );
+                continue;
+            }
+            if(gType.equals("Triangle") && models.getRotation() != 0){
+                writer.write(gType + " " +gType.substring(0, 1) + x + + y + " " + x + " " + y);
+                writer.newLine();
+                writer.write("Rotate " +gType.substring(0, 1) + x + + y);
+                writer.newLine();
                 continue;
             }
             writer.write(gType + " " +gType.substring(0, 1) + x + + y + " " + x + " " + y);

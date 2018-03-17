@@ -54,20 +54,20 @@ public class GameBoard extends JPanel implements Observer {
             assert gizmo != null;
             if (gizmo instanceof Square) {
                 g2.setColor(gizmo.getColour());
-                int x= (gizmo.getX() * L);
-                int y= (gizmo.getY() * L);
+                int x= (gizmo.getX1() * L);
+                int y= (gizmo.getY1() * L);
                 g2.fillRect(x, y, L, L);
             }
             if (gizmo instanceof Circle) {
                 g2.setColor(gizmo.getColour());
-                int x= (gizmo.getX() * L);
-                int y= (gizmo.getY() * L);
+                int x= (gizmo.getX1() * L);
+                int y= (gizmo.getY1() * L);
                 g2.fillOval(x, y, L, L);
             }
             if (gizmo instanceof Triangle) {
                 g2.setColor(gizmo.getColour());
-                int x= (gizmo.getX() * L);
-                int y= (gizmo.getY() * L);
+                int x= (gizmo.getX1() * L);
+                int y= (gizmo.getY1() * L);
                 if(gizmo.getRotation() == 0){
                     int x2Points[] = {x + L, x, x};
                     int y2Points[] = {y, y + L, y};
@@ -91,14 +91,14 @@ public class GameBoard extends JPanel implements Observer {
             }
             if (gizmo instanceof Absorber) {
                 g2.setColor(gizmo.getColour());
-                int x =(gizmo.getX() * L);
-                int y =(gizmo.getY() * L);
-                g2.fillRect(x, y, ((Absorber) gizmo).getWidth() * L , ((Absorber) gizmo).getHeight() * L );
+                int x =(gizmo.getX1() * L);
+                int y =(gizmo.getY1() * L);
+                g2.fillRect(x, y, ((Absorber) gizmo).getX2() * L , ((Absorber) gizmo).getY2() * L );
             }
             if (gizmo instanceof LeftFlipper) {
-                LeftFlipper leftFlipper = new LeftFlipper(gizmo.getX(), gizmo.getY());
-                int x = leftFlipper.getX() * L;
-                int y = leftFlipper.getY() * L;
+                LeftFlipper leftFlipper = new LeftFlipper(gizmo.getX1(), gizmo.getY1());
+                int x = leftFlipper.getX1() * L;
+                int y = leftFlipper.getY1() * L;
                 double angle = leftFlipper.getAngle();
                 Graphics2D g2d = (Graphics2D) g.create();
                 AffineTransform transform = new AffineTransform();
@@ -108,9 +108,9 @@ public class GameBoard extends JPanel implements Observer {
                 g2d.fillRoundRect(x, y, L/2, 2*L, 20, 20);
             }
             if (gizmo instanceof RightFlipper) {
-                RightFlipper rightFlipper = new RightFlipper(gizmo.getX(), gizmo.getY());
-                int x = rightFlipper.getX() * L;
-                int y = rightFlipper.getY() * L;
+                RightFlipper rightFlipper = new RightFlipper(gizmo.getX1(), gizmo.getY1());
+                int x = rightFlipper.getX1() * L;
+                int y = rightFlipper.getY1() * L;
                 double angle = rightFlipper.getAngle();
                 Graphics2D g2d = (Graphics2D) g.create();
                 AffineTransform transform = new AffineTransform();
