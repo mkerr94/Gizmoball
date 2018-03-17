@@ -296,7 +296,7 @@ public class Model extends Observable {
             setChanged();
             notifyObservers();
         }else{
-            throw new IllegalStateException("Gizmo already exists at target location");
+            throw new NullPointerException("Null gizmo moved to moveGizmo");
         }
     }
 

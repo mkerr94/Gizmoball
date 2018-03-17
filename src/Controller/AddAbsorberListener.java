@@ -47,6 +47,7 @@ public class AddAbsorberListener implements ActionListener {
                 System.out.println("dy = " + dy);
                 Absorber absorber = new Absorber(x1,y1,dx,dy);
 
+                //doesn't give error message - not sure how to fix
                 if (model.checkGizmoLocation(absorber)) {
                     model.addGizmo(absorber);
                 }else{

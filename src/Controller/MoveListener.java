@@ -7,6 +7,8 @@ import javax.swing.event.MouseInputListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import Model.Square;
+import View.BuildView;
 
 public class MoveListener implements ActionListener {
 
@@ -14,10 +16,12 @@ public class MoveListener implements ActionListener {
     private int x, y;
     private int newX, newY;
     private GameBoard gameBoard;
+    private BuildView buildView;
 
-    public MoveListener(Model model, GameBoard gameBoard) {
+    public MoveListener(Model model, GameBoard gameBoard, BuildView buildView) {
         this.model = model;
         this.gameBoard = gameBoard;
+        this.buildView = buildView;
     }
 
     @Override
@@ -53,10 +57,16 @@ public class MoveListener implements ActionListener {
                     public void mouseReleased(MouseEvent e) {
                         newX = e.getX() / 30;
                         newY = e.getY() / 30;
-                        try{
+
+                        Square gizmoCheck = new Square(newX, newY);
+                       // try{
+                        if(model.checkGizmoLocation(gizmoCheck)){
                             model.moveGizmo(gizmo, newX, newY);
-                        }catch (IllegalStateException exception){
-                            System.out.println("Gizmo already exists at the target location");
+                        //}catch (IllegalStateException exception){
+                            //System.out.println("Gizmo already exists at the target location");
+                        }
+                        else{
+                            buildView.occupiedSpaceAlert();
                         }
                         gameBoard.removeMouseListener(this);
                     }
