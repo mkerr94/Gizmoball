@@ -111,13 +111,13 @@ public class BuildView extends JPanel {
 
         //Action listeners
         addGizmoButton.addActionListener(e -> statusbar.setText("Add Gizmo"));
-        addGizmoButton.addActionListener(new AddGizmoListener(bumperList, model, gameBoard));
+        addGizmoButton.addActionListener(new AddGizmoListener(bumperList, model, gameBoard,this));
         flipperB.addActionListener(e -> statusbar.setText("Add Flipper"));
-        flipperB.addActionListener(new AddFlipperListener(flipperList, model, gameBoard));
+        flipperB.addActionListener(new AddFlipperListener(flipperList, model, gameBoard, this));
         addBall.addActionListener(e -> statusbar.setText("Add Ball"));
         addBall.addActionListener(new AddBallListener(model,gameBoard,this));
         addAbsorber.addActionListener(e -> statusbar.setText("Add Absorber"));
-        addAbsorber.addActionListener(new AddAbsorberListener(model, gameBoard));
+        addAbsorber.addActionListener(new AddAbsorberListener(model, gameBoard,this));
         moveB.addActionListener(e -> statusbar.setText("Move Gizmo"));
         moveB.addActionListener(new MoveListener(model,gameBoard));
         rotateB.addActionListener(e -> statusbar.setText("Rotate Gizmo"));
@@ -191,6 +191,10 @@ public class BuildView extends JPanel {
             return friction;
         }
         return 0.025;
+    }
+
+    public void occupiedSpaceAlert(){
+        JOptionPane.showMessageDialog(null,"This space is already occupied! Please choose an empty space.");
     }
 
 }

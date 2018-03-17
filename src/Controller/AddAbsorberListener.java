@@ -3,6 +3,7 @@ package Controller;
 import Model.Model;
 import Model.*;
 import View.GameBoard;
+import View.BuildView;
 
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
@@ -19,10 +20,12 @@ public class AddAbsorberListener implements ActionListener {
     private int x2;
     private int y1;
     private int y2;
+    private BuildView buildView;
 
-    public AddAbsorberListener(Model model, GameBoard gameBoard){
+    public AddAbsorberListener(Model model, GameBoard gameBoard, BuildView buildView){
         this.model = model;
         this.gameBoard = gameBoard;
+        this.buildView = buildView;
         mouseInputListener = new MouseInputListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -42,7 +45,13 @@ public class AddAbsorberListener implements ActionListener {
                 int dy = y2 - y1;
                 System.out.println("dx = " + dx);
                 System.out.println("dy = " + dy);
-                model.addGizmo(new Absorber(x1, y1, dx, dy));
+                Absorber absorber = new Absorber(x1,y1,dx,dy);
+
+                if (model.checkGizmoLocation(absorber)) {
+                    model.addGizmo(absorber);
+                }else{
+                    buildView.occupiedSpaceAlert();
+                }
                 gameBoard.removeMouseListener(this);
             }
 

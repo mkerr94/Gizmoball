@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Model;
 import View.GameBoard;
+import View.BuildView;
 
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
@@ -22,11 +23,13 @@ public class AddGizmoListener implements ActionListener {
     private MouseInputListener mouseInputListener;
     private Model model;
     private int x, y;
+    private BuildView buildView;
 
-    public AddGizmoListener(JComboBox gizmoList, Model model, GameBoard gameBoard){
+    public AddGizmoListener(JComboBox gizmoList, Model model, GameBoard gameBoard, BuildView buildView){
         this.gizmoList = gizmoList;
         this.model = model;
         this.gameBoard = gameBoard;
+        this.buildView = buildView;
         mouseInputListener = new MouseInputListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -51,7 +54,7 @@ public class AddGizmoListener implements ActionListener {
                         if (model.checkGizmoLocation(circle)){
                             model.addGizmo(circle);
                         } else{
-                            System.out.println("Gizmo already exists on that location");
+                            buildView.occupiedSpaceAlert();
                         }
                         break;
                     case "Square":
@@ -59,7 +62,7 @@ public class AddGizmoListener implements ActionListener {
                         if (model.checkGizmoLocation(square)){
                             model.addGizmo(square);
                         } else{
-                            System.out.println("Gizmo already exists on that location");
+
                         }
                         break;
                     case "Triangle":
@@ -67,7 +70,7 @@ public class AddGizmoListener implements ActionListener {
                         if (model.checkGizmoLocation(triangle)){
                             model.addGizmo(triangle);
                         } else{
-                            System.out.println("Gizmo already exists on that location");
+                            buildView.occupiedSpaceAlert();
                         }
                         break;
                 }
