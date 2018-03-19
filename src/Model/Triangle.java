@@ -4,7 +4,10 @@ import Physics.PhysicsCircle;
 import Physics.LineSegment;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Timer;
 
 public class Triangle implements IGizmo{
     private int xpos;
@@ -14,12 +17,14 @@ public class Triangle implements IGizmo{
     private Color colour;
     ArrayList<LineSegment> lines = new ArrayList<>();
     ArrayList<PhysicsCircle> endCircles = new ArrayList<>();
+    private boolean changeColour;
 
 
     public Triangle(int x, int y, int rotation) {
         xpos = x;
         ypos = y;
         this.rotation = rotation;
+        this.changeColour = false;
         width = 30;
         colour = Color.GREEN;
         createLines();
@@ -147,6 +152,9 @@ public class Triangle implements IGizmo{
             System.out.println("Circles: " + endCircles);
             //rotation = 1;
         }
+        else if(rotation >= 4) {
+            rotation = 0;
+        }
     }
 
     public int getX1() {
@@ -170,6 +178,7 @@ public class Triangle implements IGizmo{
     public int getWidth() {
         return width;
     }
+
 
     public Color getColour() {
         return colour;

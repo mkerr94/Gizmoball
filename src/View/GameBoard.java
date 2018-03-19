@@ -89,6 +89,11 @@ public class GameBoard extends JPanel implements Observer {
                     int y2Points1[] = {y+L, y, y + L};
                     g2.fillPolygon(x2Points1, y2Points1,3);
                 }
+                else {
+                    int x2Points[] = {x + L, x, x};
+                    int y2Points[] = {y, y + L, y};
+                    g2.fillPolygon(x2Points, y2Points,3);
+                }
             }
             if (gizmo instanceof Absorber) {
                 g2.setColor(gizmo.getColour());
