@@ -151,7 +151,7 @@ class CollisionsEngine {
                     }
                 }
             }
-            // Triangle collisions todo handle rotated triangle collisions
+            // Triangle collisions
             if (gizmo instanceof Triangle) {
                 Triangle triangle = new Triangle(gizmo.getX1() * L, gizmo.getY1() * L, gizmo.getRotation());
                 ArrayList<LineSegment> lineSegments1 = triangle.getLines();

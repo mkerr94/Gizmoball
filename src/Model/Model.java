@@ -147,6 +147,11 @@ public class Model extends Observable {
     public void addBall(double x, double y,double xv,double yv) {
         Ball ball = new Ball(x, y, xv, yv);
         balls.add(ball);
+        for (Ball ballson :
+                balls) {
+            System.out.println("ballson.getxOrdinate() = " + ballson.getxOrdinate());
+            System.out.println("ballson.getyOrdinate() = " + ballson.getyOrdinate());
+        }
         setChanged();
         notifyObservers();
     }
@@ -254,7 +259,9 @@ public class Model extends Observable {
             }
         }
         for(Ball ball : balls){
-            if (ball.getxOrdinate() == x && ball.getyOrdinate() == y) {
+            System.out.println("ball.getxOrdinate()/30 = " + ball.getxOrdinate()/30);
+            System.out.println("ball.getyOrdinate()/30 = " + ball.getyOrdinate()/30);
+            if (ball.getxOrdinate() / 30 == x && ball.getyOrdinate() / 30 == y) {
                 balls.remove(ball);
                 setChanged();
                 notifyObservers();
