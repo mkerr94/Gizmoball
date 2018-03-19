@@ -26,10 +26,6 @@ public class Triangle implements IGizmo{
         createCircles();
         getLines();
         getEndCircles();
-        System.out.println("Rotation: " + this.rotation);
-        System.out.println("Lines: " + lines);
-        System.out.println("Circles: " + endCircles);
-
     }
 
     public ArrayList<LineSegment> getLines() {
