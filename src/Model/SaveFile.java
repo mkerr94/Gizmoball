@@ -29,7 +29,7 @@ public class SaveFile {
         }
     }
     void getSaveFile() throws IOException {
-        int returnValue = fc.showOpenDialog(null);
+        int returnValue = fc.showSaveDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION){
             System.out.println("Success!");
             File file = fc.getSelectedFile();

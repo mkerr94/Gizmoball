@@ -12,9 +12,10 @@ public class RunView extends JPanel {
     private Color purple;
     private GameBoard gameBoard;
 
-    RunView(Model model, RunListener runListener) {
+    RunView(Model model, RunListener runListener, GameBoard gameBoard) {
         this.model = model;
-        gameBoard = new GameBoard(600, 600, model, Mode.RUN);
+        this.gameBoard = gameBoard;
+        this.gameBoard.setMode(Mode.RUN);
         this.runListener = runListener;
         init();
         purple = new Color(128,0,128);

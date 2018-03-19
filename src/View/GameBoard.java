@@ -1,7 +1,10 @@
 package View;
 
+import Controller.FlipperListener;
+import Controller.MagicKeyListener;
 import Model.*;
 import javax.swing.*;
+import javax.swing.Timer;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -16,6 +19,8 @@ public class GameBoard extends JPanel implements Observer {
     private int L = 30;
     private int width;
     private int height;
+    private List<Flipper> flippers;
+    private FlipperListener flipperListener;
 
     /***
      * Initialises a board, builds collisions walls on the board, registers the board
@@ -23,21 +28,36 @@ public class GameBoard extends JPanel implements Observer {
      * @param w width of the game board
      * @param h height of the game board
      * @param model reference of Model
-     * @param mode the mode the game is in, can either be BUILD or RUN. See View.Mode
      */
-    GameBoard(int w, int h, Model model, Mode mode){
+    GameBoard(int w, int h, Model model){
         this.setBorder(BorderFactory.createLineBorder(Color.black));
         this.model = model;
-        this.mode = mode;
         balls = model.getBalls();
         width = w;
         height = h;
         gizmos = model.getGizmos();
+        flippers = model.getFlippers();
         model.setWalls(new Walls(0, 0, this.width, this.height));
         model.addObserver(this);
+        registerAsFlipperObserver();
+        flipperListener = new FlipperListener(model, this);
+        MagicKeyListener magicKeyListener = new MagicKeyListener(flipperListener);
+        this.addKeyListener(magicKeyListener);
         setBorder(new EtchedBorder(Color.black, Color.black));
         setBackground(Color.white);
         requestFocus();
+    }
+
+    public void registerAsFlipperObserver() {
+        for (IGizmo gizmo : gizmos) {
+            if (gizmo instanceof LeftFlipper) {
+                LeftFlipper leftFlipper = new LeftFlipper(gizmo.getX1(), gizmo.getY1());
+                leftFlipper.addObserver(this);
+            } else if (gizmo instanceof RightFlipper) {
+                RightFlipper rightFlipper = new RightFlipper(gizmo.getX1(), gizmo.getY1());
+                rightFlipper.addObserver(this);
+            }
+        }
     }
 
     /***
@@ -96,33 +116,36 @@ public class GameBoard extends JPanel implements Observer {
                 int y =(gizmo.getY1() * L);
                 g2.fillRect(x, y, ((Absorber) gizmo).getX2() * L , ((Absorber) gizmo).getY2() * L );
             }
-            if (gizmo instanceof LeftFlipper) {
-                LeftFlipper leftFlipper = new LeftFlipper(gizmo.getX1(), gizmo.getY1());
-                int x = leftFlipper.getX1() * L;
-                int y = leftFlipper.getY1() * L;
-                double angle = leftFlipper.getAngle();
-                Graphics2D g2d = (Graphics2D) g.create();
-                AffineTransform transform = new AffineTransform();
-                transform.rotate(-Math.toRadians(angle), x + width/2, y + width/2);
-                g2d.setColor(leftFlipper.getColour());
-                g2d.setTransform(transform);
-                g2d.fillRoundRect(x, y, L/2, 2*L, 20, 20);
-            }
-            if (gizmo instanceof RightFlipper) {
-                RightFlipper rightFlipper = new RightFlipper(gizmo.getX1(), gizmo.getY1());
-                int x = rightFlipper.getX1() * L;
-                int y = rightFlipper.getY1() * L;
-                double angle = rightFlipper.getAngle();
-                Graphics2D g2d = (Graphics2D) g.create();
-                AffineTransform transform = new AffineTransform();
-                transform.rotate(-Math.toRadians(angle), x + width/2, y + width/2);
-                g2d.setColor(Color.red);
-                g2d.setTransform(transform);
-                g2d.fillRoundRect(x + L/2, y, L/2, 2*L, 20, 20);
-            }
         }
+        paintFlippers(g2);
         paintBalls(g2);
         if (mode == Mode.BUILD) paintGridLines(g2);
+    }
+
+    private void paintFlippers(Graphics2D g2) {
+        for (Flipper flipper : flippers) {
+            int x = flipper.getX1() * L;
+            int y = flipper.getY1() * L;
+            double angle = flipper.getAngle();
+            int width = L/2;
+            int height = 2*L;
+            if (flipper instanceof LeftFlipper) {
+                Graphics2D g2d = (Graphics2D) g2.create();
+                AffineTransform transform = new AffineTransform();
+                transform.rotate(-Math.toRadians(angle), x + width / 2, y);
+                g2d.setColor(Color.cyan);
+                g2d.setTransform(transform);
+                g2d.fillRoundRect(x, y, width, height, 20, 20);
+            }
+            if (flipper instanceof RightFlipper) {
+                Graphics2D g2d = (Graphics2D) g2.create();
+                AffineTransform transform = new AffineTransform();
+                transform.rotate(Math.toRadians(angle), x + L/2 + width / 2, y);
+                g2d.setColor(Color.cyan);
+                g2d.setTransform(transform);
+                g2d.fillRoundRect(x + L/2, y, width, height, 20, 20);
+            }
+        }
     }
 
     /**
@@ -174,7 +197,17 @@ public class GameBoard extends JPanel implements Observer {
         this.repaint();
     }
 
-    public Mode getMode(){
-        return mode;
+    void setMode(Mode mode){
+        this.mode = mode;
+    }
+
+    public void updateFlipperListener() {
+        if (flipperListener != null) {
+            flipperListener.update();
+        }
+    }
+
+    public void initFlipperListeners(Timer timer) {
+        flipperListener.setTimer(timer);
     }
 }

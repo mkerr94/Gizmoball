@@ -22,16 +22,12 @@ public class AddFlipperListener implements ActionListener {
     private MouseInputListener mouseInputListener;
     private int x, y;
     private BuildView buildView;
-    public static List<RightFlipper> rightflippers;
-    public static List<LeftFlipper> leftflippers;
 
     public AddFlipperListener(JComboBox flipperList, Model model, GameBoard gameBoard, BuildView buildView) {
         this.flipperList = flipperList;
         this.model = model;
         this.gameBoard = gameBoard;
         this.buildView = buildView;
-        rightflippers = new ArrayList<>();
-       leftflippers = new ArrayList<>();
         mouseInputListener = new MouseInputListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -56,8 +52,8 @@ public class AddFlipperListener implements ActionListener {
                         RightFlipper rightFlipper = new RightFlipper(x, y);
                         if (model.checkGizmoLocation(rightFlipper)){
                             model.addGizmo(rightFlipper);
-                            System.out.println("rightflipper: x - " + x + "; y - " + y);
-                            rightflippers.add(rightFlipper);
+                            gameBoard.updateFlipperListener();
+                            gameBoard.registerAsFlipperObserver();
                         }else{
                             buildView.occupiedSpaceAlert();
                         }
@@ -66,8 +62,8 @@ public class AddFlipperListener implements ActionListener {
                         LeftFlipper leftFlipper = new LeftFlipper(x, y);
                         if (model.checkGizmoLocation(leftFlipper)){
                             model.addGizmo(leftFlipper);
-                            System.out.println("leftflipper: x - " + x + "; y - " + y);
-                            leftflippers.add(leftFlipper);
+                            gameBoard.updateFlipperListener();
+                            gameBoard.registerAsFlipperObserver();
                         }else{
                             buildView.occupiedSpaceAlert();
                         }

@@ -68,7 +68,14 @@ class CollisionsEngine {
                     if (time < shortestTime) {
                         shortestTime = time;
                         newVelo = Geometry.reflectWall(lineSegment, ball.getVelo(), 1.0);
-
+                    }
+                }
+                for (LineSegment rotatingLine : lineSegments1) {
+                    Vect vect = new Vect(flipper.getX1() + 15 / 2, flipper.getY1());
+                    time = Geometry.timeUntilRotatingWallCollision(rotatingLine, vect, Math.toRadians(1080), ballCircle, ballVelocity);
+                    if (time < shortestTime) {
+                        shortestTime = time;
+                        newVelo = Geometry.reflectRotatingWall(rotatingLine, vect, Math.toRadians(1080), ballCircle, ball.getVelo());
                     }
                 }
                 ArrayList<PhysicsCircle> physicsCircles = flipper.getEndCircles();
@@ -89,7 +96,6 @@ class CollisionsEngine {
                         newVelo = Geometry.reflectCircle(physicsCircle.getCenter(), ballCircle.getCenter(), ball.getVelo(), 1);
                     }}
             }
-
             if(gizmo instanceof RightFlipper){
                 RightFlipper flipper = new RightFlipper((gizmo.getX1() * L) + 15, gizmo.getY1() * L);
                 ArrayList<LineSegment> lineSegments1 = flipper.getLines();

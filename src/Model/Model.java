@@ -7,6 +7,7 @@ public class Model extends Observable {
     private List<IGizmo> gizmos;
     private List<Ball> balls;
     private List<Ball> fireQueue;
+    private List<Flipper> flippers;
     private Walls walls;
     private final int L = 30;
     private int gravityValue;
@@ -17,6 +18,7 @@ public class Model extends Observable {
     public Model() {
         gizmos = new ArrayList<>();
         balls = new ArrayList<>();
+        flippers = new ArrayList<>();
         fireQueue = new ArrayList();
         walls = new Walls(0, 0, 600, 600);
         gravityValue = 25;
@@ -28,7 +30,6 @@ public class Model extends Observable {
     public List<IGizmo> getGizmos() {
         return gizmos;
     }
-
 
     Walls getWalls(){return walls;}
 
@@ -129,6 +130,9 @@ public class Model extends Observable {
     public void addGizmo(IGizmo gizmo) {
         if (gizmo != null) {
             gizmos.add(gizmo);
+            if (gizmo instanceof Flipper) {
+                flippers.add((Flipper)gizmo);
+            }
             setChanged();
             notifyObservers();
         } else {
@@ -331,7 +335,7 @@ public class Model extends Observable {
             if (ball.stopped()) {
                 ball.start();
                 fireQueue.remove(ball);
-                Vect ballFire = new Vect(0, -50 * 20);
+                Vect ballFire = new Vect(0, -25 * L);
                 ball.setVelo(ballFire);
             }
         }
@@ -375,6 +379,15 @@ public class Model extends Observable {
         }
     }
 
+    public void removeKeyConnection(int keyCode, IGizmo gizmoToDisconnect){
+        if(gizmoToDisconnect != null){
+            keyConnections.remove(keyCode, gizmoToDisconnect);
+        }else{
+            throw new NullPointerException("Null gizmo passed to removeKeyConnection()");
+        }
+    }
+
+
     private void printKeyConnections(){
         if (keyConnections.size() == 0) System.out.println("no key connections");
         for (Integer keycode : keyConnections.keySet()) {
@@ -385,5 +398,13 @@ public class Model extends Observable {
 
     public List<Ball> getBalls() {
         return balls;
+    }
+
+    public List<Flipper> getFlippers() {
+        return flippers;
+    }
+
+    public void clearFlippers() {
+        flippers.clear();
     }
 }

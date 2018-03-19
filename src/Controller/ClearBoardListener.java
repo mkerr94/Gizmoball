@@ -20,6 +20,7 @@ public class ClearBoardListener implements ActionListener {
         //if user clicks yes
         if (result == 0) {
             model.clearGizmos();
+            model.clearFlippers();
         }
     }
 }

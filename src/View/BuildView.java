@@ -21,10 +21,11 @@ public class BuildView extends JPanel {
     double xv;
     double xy;
 
-    BuildView(Model model) {
+    BuildView(Model model, GameBoard gameBoard) {
         this.model = model;
         listener = new BuildListener();
-        gameBoard = new GameBoard(600, 600, model, Mode.BUILD);
+        this.gameBoard = gameBoard;
+        this.gameBoard.setMode(Mode.BUILD);
         init();
         purple = new Color(128, 0, 128);
     }

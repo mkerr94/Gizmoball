@@ -26,10 +26,6 @@ public class Triangle implements IGizmo{
         createCircles();
         getLines();
         getEndCircles();
-        System.out.println("Rotation: " + this.rotation);
-        System.out.println("Lines: " + lines);
-        System.out.println("Circles: " + endCircles);
-
     }
 
     public ArrayList<LineSegment> getLines() {
@@ -127,29 +123,16 @@ public class Triangle implements IGizmo{
     public void rotate() {
         endCircles.clear();
         lines.clear();
-        rotation++;
         createCircles();
         createLines();
         if (rotation == 1) {
-            System.out.println("Rotation: " + rotation);
-            System.out.println("Lines: " + lines);
-            System.out.println("Circles: " + endCircles);
-            //rotation = 2;
+            rotation = 2;
         } else if (rotation == 2) {
-            System.out.println("Rotation: " + rotation);
-            System.out.println("Lines: " + lines);
-            System.out.println("Circles: " + endCircles);
-            //rotation = 3;
+            rotation = 3;
         } else if (rotation == 3) {
-            System.out.println("Rotation: " + rotation);
-            System.out.println("Lines: " + lines);
-            System.out.println("Circles: " + endCircles);
-            //rotation = 0;
+            rotation = 0;
         } else if (rotation == 0) {
-            System.out.println("Rotation: " + rotation);
-            System.out.println("Lines: " + lines);
-            System.out.println("Circles: " + endCircles);
-            //rotation = 1;
+            rotation = 1;
         }
     }
 

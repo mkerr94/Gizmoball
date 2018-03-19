@@ -5,8 +5,9 @@ import Physics.LineSegment;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Observable;
 
-public abstract class Flipper implements IGizmo {
+public abstract class Flipper extends Observable implements IGizmo {
     private Color color;
     private int x, y;
     private double angle;
@@ -75,11 +76,15 @@ public abstract class Flipper implements IGizmo {
 
 
     public void flip() {
-        angularMomentum = 5;
+        angularMomentum = 54;
+        setChanged();
+        notifyObservers();
     }
 
     public void unflip() {
-        angularMomentum = -5;
+        angularMomentum = -54;
+        setChanged();
+        notifyObservers();
     }
 
     @Override
@@ -128,6 +133,8 @@ public abstract class Flipper implements IGizmo {
             this.angle = getInitialAngle();
             angularMomentum = 0;
         }
+        setChanged();
+        notifyObservers();
     }
 
     private double getInitialAngle() {

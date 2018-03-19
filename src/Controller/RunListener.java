@@ -6,19 +6,19 @@ import javax.swing.Timer;
 import Model.Model;
 import View.GameBoard;
 import View.MainGUI;
-import View.Mode;
-import View.RunView;
 
 public class RunListener implements ActionListener {
 
     private Timer timer;
     private Model model;
     private MainGUI mainGUI;
+    private GameBoard gameBoard;
 
-    public RunListener(Model m, MainGUI mainGUI) {
+    public RunListener(Model m, MainGUI mainGUI, GameBoard gameBoard) {
         model = m;
         this.timer = new Timer(50, this);
         this.mainGUI = mainGUI;
+        this.gameBoard = gameBoard;
     }
 
     @Override
@@ -30,6 +30,8 @@ public class RunListener implements ActionListener {
                 case "Start":
                     if(model.getBalls().size() != 0){
                         timer.start();
+                        gameBoard.requestFocus();
+                        gameBoard.initFlipperListeners(timer);
                     }else{
                          mainGUI.noBallAlert();
                     }
@@ -38,7 +40,11 @@ public class RunListener implements ActionListener {
                     timer.stop();
                     break;
                 case "Tick":
-                    model.moveBall();
+                    if(model.getBalls().size() != 0) {
+                        model.moveBall();
+                    }else{
+                        mainGUI.noBallAlert();
+                    }
                     break;
                 case "Fire":
                     model.fireBall();
@@ -48,4 +54,5 @@ public class RunListener implements ActionListener {
     public void killTimer(){
         this.timer.stop();
     }
+
 }
