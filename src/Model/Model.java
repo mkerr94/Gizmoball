@@ -375,6 +375,14 @@ public class Model extends Observable {
         }
     }
 
+    public void removeKeyConnection(int keyCode, IGizmo gizmoToDisconnect){
+        if(gizmoToDisconnect != null){
+            keyConnections.remove(keyCode, gizmoToDisconnect);
+        }else{
+            throw new NullPointerException("Null gizmo passed to removeKeyConnection()");
+        }
+    }
+
     private void printKeyConnections(){
         if (keyConnections.size() == 0) System.out.println("no key connections");
         for (Integer keycode : keyConnections.keySet()) {

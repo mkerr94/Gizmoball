@@ -55,10 +55,12 @@ public class KeyConnectListener implements ActionListener {
                 IGizmo iGizmo = model.getGizmo(x, y);
                 if (iGizmo != null){
                     gizmoToConnect = iGizmo;
+                    System.out.println(iGizmo);
                 }else{
                     throw new NullPointerException("Null gizmo retrieved in mouseReleased()");
                 }
                 model.addKeyConnection(keyCode, gizmoToConnect);
+                System.out.println("key connected: " + keyCode);
                 gameBoard.removeMouseListener(this);
             }
 

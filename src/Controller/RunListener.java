@@ -38,7 +38,11 @@ public class RunListener implements ActionListener {
                     timer.stop();
                     break;
                 case "Tick":
-                    model.moveBall();
+                    if(model.getBalls().size() != 0) {
+                        model.moveBall();
+                    }else{
+                        mainGUI.noBallAlert();
+                    }
                     break;
                 case "Fire":
                     model.fireBall();
