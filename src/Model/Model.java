@@ -155,13 +155,42 @@ public class Model extends Observable {
      * Checks if a gizmo already exists at the location of the passed in gizmo.
      * Returns false if a gizmo already exists at the target location and returns true
      * if nothing exists at the target location
-     * @param gizmo gizmo to be added to the board
+     * @param gizmoToAdd gizmo to be added to the board
      * @return true if valid placement, false if invalid placement
      */
-    public boolean checkGizmoLocation(IGizmo gizmo) {
-        for (IGizmo iGizmo : gizmos) {
-            if (iGizmo.getX1() == gizmo.getX1() && iGizmo.getY1() == gizmo.getY1()) { // if a gizmo already exists in that location
+    public boolean checkGizmoLocation(IGizmo gizmoToAdd) {
+        for (IGizmo existingGizmo : gizmos) {
+            if (existingGizmo.getX1() == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) { // if a gizmo already exists in that location
                 return false;
+            }
+            // handle left flippers
+            if (existingGizmo instanceof LeftFlipper){
+                if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
+                    return false;
+                } else if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() + 1 == gizmoToAdd.getY1()) {
+                    return false;
+                }
+                if (gizmoToAdd instanceof RightFlipper){
+                    if (existingGizmo.getX1() + 2 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()){
+                        return false;
+                    } else if (existingGizmo.getX1() + 2 == gizmoToAdd.getX1() && existingGizmo.getY1() + 1== gizmoToAdd.getY1()){
+                        return false;
+                    }
+                }
+            } // handle right flippers
+            if (existingGizmo instanceof RightFlipper){
+                if (existingGizmo.getX1() - 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
+                    return false;
+                } else if (existingGizmo.getX1() - 1 == gizmoToAdd.getX1() && existingGizmo.getY1() + 1 == gizmoToAdd.getY1()) {
+                    return false;
+                }
+                if (gizmoToAdd instanceof LeftFlipper){
+                    if (existingGizmo.getX1() - 2 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()){
+                        return false;
+                    } else if (existingGizmo.getX1() - 2 == gizmoToAdd.getX1() && existingGizmo.getY1() + 1== gizmoToAdd.getY1()){
+                        return false;
+                    }
+                }
             }
         }
         return true;
@@ -197,6 +226,7 @@ public class Model extends Observable {
     /***
      * Deletes the gizmo or ball at the given location
      * todo update so this actually deletes balls
+     * todo make this delete flippers
      * @param x x ordinate of target gizmo/ball
      * @param y y ordinate of target gizmo/ball
      */

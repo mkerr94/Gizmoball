@@ -62,7 +62,7 @@ public class AddGizmoListener implements ActionListener {
                         if (model.checkGizmoLocation(square)){
                             model.addGizmo(square);
                         } else{
-
+                            buildView.occupiedSpaceAlert();
                         }
                         break;
                     case "Triangle":
