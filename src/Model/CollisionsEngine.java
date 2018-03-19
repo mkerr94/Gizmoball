@@ -153,7 +153,7 @@ class CollisionsEngine {
             }
             // Triangle collisions todo handle rotated triangle collisions
             if (gizmo instanceof Triangle) {
-                Triangle triangle = new Triangle(gizmo.getX1() * L, gizmo.getY1() * L);
+                Triangle triangle = new Triangle(gizmo.getX1() * L, gizmo.getY1() * L, gizmo.getRotation());
                 ArrayList<LineSegment> lineSegments1 = triangle.getLines();
                 for (LineSegment lineSegment : lineSegments1) {
                     time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);

@@ -74,8 +74,8 @@ public class LoadFile {
                         gName = gizmoGroup[1];
                         x = Integer.parseInt(gizmoGroup[2]);
                         y = Integer.parseInt(gizmoGroup[3]);
-                        loadedGizmos.put(gName, new Triangle(x, y));
-                        model.addGizmo(new Triangle(x, y));
+                        loadedGizmos.put(gName, new Triangle(x, y, 0));
+                        model.addGizmo(new Triangle(x, y, 0));
                         break;
                     case "RightFlipper":
                         //System.out.println("found");

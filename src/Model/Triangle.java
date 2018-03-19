@@ -16,17 +16,17 @@ public class Triangle implements IGizmo{
     ArrayList<PhysicsCircle> endCircles = new ArrayList<>();
 
 
-    public Triangle(int x, int y) {
+    public Triangle(int x, int y, int rotation) {
         xpos = x;
         ypos = y;
-        rotation = 0;
+        this.rotation = rotation;
         width = 30;
         colour = Color.GREEN;
         createLines();
         createCircles();
         getLines();
         getEndCircles();
-        System.out.println("Rotation: " + rotation);
+        System.out.println("Rotation: " + this.rotation);
         System.out.println("Lines: " + lines);
         System.out.println("Circles: " + endCircles);
 
@@ -128,38 +128,24 @@ public class Triangle implements IGizmo{
         endCircles.clear();
         lines.clear();
         rotation++;
+        createCircles();
+        createLines();
         if (rotation == 1) {
-            createCircles();
-            createLines();
-            getLines();
-            getEndCircles();
             System.out.println("Rotation: " + rotation);
             System.out.println("Lines: " + lines);
             System.out.println("Circles: " + endCircles);
             //rotation = 2;
         } else if (rotation == 2) {
-            createCircles();
-            createLines();
-            getLines();
-            getEndCircles();
             System.out.println("Rotation: " + rotation);
             System.out.println("Lines: " + lines);
             System.out.println("Circles: " + endCircles);
             //rotation = 3;
         } else if (rotation == 3) {
-            createCircles();
-            createLines();
-            getLines();
-            getEndCircles();
             System.out.println("Rotation: " + rotation);
             System.out.println("Lines: " + lines);
             System.out.println("Circles: " + endCircles);
             //rotation = 0;
         } else if (rotation == 0) {
-            createLines();
-            createCircles();
-            getLines();
-            getEndCircles();
             System.out.println("Rotation: " + rotation);
             System.out.println("Lines: " + lines);
             System.out.println("Circles: " + endCircles);
