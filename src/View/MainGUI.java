@@ -7,10 +7,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import Model.LoadFile;
+import Model.SaveFile;
 
 public class MainGUI extends JFrame {
     private Model model;
     private JPanel viewMode;
+    private LoadFile lf;
+    private SaveFile sf;
+
 
     public MainGUI(Model model){
         this.model = model;
@@ -38,9 +43,16 @@ public class MainGUI extends JFrame {
         file.add(exit);
         menuBar.add(file);
 
-        open.addActionListener(evt -> new LoadFile(model));
-        save.addActionListener(evt -> new SaveFile(model));
-        exit.addActionListener((ActionEvent event) -> System.exit(0));
+        open.addActionListener(evt -> lf = new LoadFile(model));
+        save.addActionListener(evt -> sf = new SaveFile(model));
+
+        exit.addActionListener((ActionEvent event) ->{
+            int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit? Don't forget to save your board!", "Quit", JOptionPane.YES_NO_OPTION);
+            System.out.println(result);
+            if(result == 0){
+                System.exit(0);
+            }
+        });
 
         ButtonGroup modeGroup = new ButtonGroup();
         JMenu modeMenu = new JMenu("Mode");
