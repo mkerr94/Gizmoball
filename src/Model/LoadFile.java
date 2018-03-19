@@ -41,7 +41,8 @@ public class LoadFile {
 
         int x = 0, y = 0, x1, y1, x2, y2, kNo;
         double d, d1, d2, d3;
-        String lineRead, gName, gConnect1, gConnect2, upDown;
+        String lineRead, gName, sConnect1, sConnect2, upDown;
+        IGizmo gConnect1, gConnect2;
 
         try {
             FileReader fileReader = new FileReader(fc.getSelectedFile());
@@ -121,12 +122,14 @@ public class LoadFile {
                         System.out.println("found KeyConnect");
                         kNo = Integer.parseInt(gizmoGroup[2]);
                         upDown = gizmoGroup[3];
-                        gConnect1 = gizmoGroup[4];
+                        gConnect1 = model.getGizmos().get(model.getGizmos().size()-1);;
+                        System.out.println("Should connect key " + kNo + " to gizmo " + gConnect1.toString());
+                        model.addKeyConnection(kNo, gConnect1);
                         break;
                     case "Connect":
                         System.out.println("found Connect");
-                        gConnect1 = gizmoGroup[1];
-                        gConnect2 = gizmoGroup[2];
+                        sConnect1 = gizmoGroup[1];
+                        sConnect2 = gizmoGroup[2];
                         break;
 
                 }
