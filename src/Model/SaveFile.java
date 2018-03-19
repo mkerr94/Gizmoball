@@ -56,6 +56,7 @@ public class SaveFile {
         }
     }
 
+
     void getGizmos (File fileToWrite) throws IOException {
         System.out.println("Entered SaveFile");
         FileWriter fstream = null;
@@ -72,13 +73,11 @@ public class SaveFile {
             System.out.println("Gizmo: " + gType + " X: " + x + " Y:" + y);
             //writer.write(gType + " name " + x + " " + y);
             if(gType.equals("Absorber")){
-                writer.write(gType + " " +gType.substring(0, 1) + " " + x + " " + (x+19) + " " + y + "Need to fix this");
+                Absorber newA = (Absorber) models;
+                x2 = newA.getX2();
+                y2 = newA.getY2();
+                writer.write(gType + " " +gType.substring(0, 1) + " " + x + " " + y + " " + x2 + " " + y2);
                 writer.newLine();
-                continue;
-            }
-            if(gType.equals("Ball")){
-                System.out.println("entered ball in save");
-                writer.write(gType + " " +gType.substring(0, 1) + " " + x + " " + y + " toDo gravity and velocity" );
                 continue;
             }
             if(gType.equals("Triangle") && models.getRotation() != 0){
@@ -86,10 +85,6 @@ public class SaveFile {
                 writer.newLine();
                 writer.write("Rotate " +gType.substring(0, 1) + x + + y);
                 writer.newLine();
-                continue;
-            }
-            if(gType.equals("Absorberx")){
-                writer.write(gType + " " +gType.substring(0, 1) + " " + x + " " + (x+19) + " " + y + " " + y);
                 continue;
             }
             writer.write(gType + " " +gType.substring(0, 1) + x + + y + " " + x + " " + y);
@@ -104,7 +99,6 @@ public class SaveFile {
             Matcher m = p.matcher(sVelocity);
             while(m.find()) {
                 String d = m.group(1);
-                System.out.println(d);
                 bV1 = bV1.concat(d);
                 bV1 = bV1.concat(" ");
 
