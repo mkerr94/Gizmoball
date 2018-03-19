@@ -164,6 +164,13 @@ public class Model extends Observable {
                 return false;
             }
             // handle left flippers
+            if (gizmoToAdd instanceof LeftFlipper){
+                if (existingGizmo.getX1() - 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
+                    return false;
+                } else if (existingGizmo.getX1() - 1 == gizmoToAdd.getX1() && existingGizmo.getY1() - 1 == gizmoToAdd.getY1()) {
+                    return false;
+                }
+            }
             if (existingGizmo instanceof LeftFlipper){
                 if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
                     return false;
@@ -177,7 +184,19 @@ public class Model extends Observable {
                         return false;
                     }
                 }
-            } // handle right flippers
+            }
+            // handle right flippers
+            if (gizmoToAdd instanceof RightFlipper){
+                System.out.println("existingGizmo.getX1() = " + existingGizmo.getX1());
+                System.out.println("existingGizmo.getY1() = " + existingGizmo.getY1());
+                System.out.println("gizmoToAdd.getX1() = " + gizmoToAdd.getX1());
+                System.out.println("gizmoToAdd.getY1() = " + gizmoToAdd.getY1());
+                if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
+                    return false;
+                } else if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() - 1 == gizmoToAdd.getY1()) {
+                    return false;
+                }
+            }
             if (existingGizmo instanceof RightFlipper){
                 if (existingGizmo.getX1() - 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
                     return false;
