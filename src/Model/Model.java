@@ -29,9 +29,6 @@ public class Model extends Observable {
         return gizmos;
     }
 
-    public List<Ball> getBalls() {
-        return balls;
-    }
 
     Walls getWalls(){return walls;}
 
@@ -387,5 +384,9 @@ public class Model extends Observable {
             System.out.print("keycode: " + keycode);
             System.out.println("gizmo: " + keyConnections.get(keycode).getClass().toString());
         }
+    }
+
+    public List<Ball> getBalls() {
+        return balls;
     }
 }
