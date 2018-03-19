@@ -9,6 +9,8 @@ import java.util.HashMap;
 
 public class LoadFile {
 
+    // todo handle rotations
+
     private JFileChooser fc;
     private static final String FILE_PATH = System.getProperty("user.home") + "/Documents";
     private Model model;

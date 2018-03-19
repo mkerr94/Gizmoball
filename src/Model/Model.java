@@ -169,6 +169,7 @@ public class Model extends Observable {
 
     /**
      * Checks if gizmo already exists at the x and y location passed in.
+     * todo account for surrounding space of flipper as well as ball placement
      * @param x
      * @param y
      * @return true if valid placement, false if invalid placement
@@ -195,6 +196,7 @@ public class Model extends Observable {
 
     /***
      * Deletes the gizmo or ball at the given location
+     * todo update so this actually deletes balls
      * @param x x ordinate of target gizmo/ball
      * @param y y ordinate of target gizmo/ball
      */
