@@ -87,7 +87,7 @@ class CollisionsEngine {
             }
 
             if(gizmo instanceof RightFlipper){
-                RightFlipper flipper = new RightFlipper(gizmo.getX1() * L, gizmo.getY1() * L);
+                RightFlipper flipper = new RightFlipper((gizmo.getX1() * L) + 15, gizmo.getY1() * L);
                 ArrayList<LineSegment> lineSegments1 = flipper.getLines();
                 for (LineSegment lineSegment : lineSegments1) {
                     time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
@@ -107,7 +107,7 @@ class CollisionsEngine {
 
                 }
                 ArrayList<PhysicsCircle> physicsCircles2 = flipper.getCircles();
-                Circle circle = new Circle((gizmo.getX1() * L) + 15, (gizmo.getY1() * L)+ 15);
+               // Circle circle = new Circle((gizmo.getX1() * L) + 15, (gizmo.getY1() * L)+ 15);
                 for(PhysicsCircle physicsCircle : physicsCircles2){
                     time = Geometry.timeUntilCircleCollision(physicsCircle, ballCircle, ballVelocity);
                     if (time < shortestTime) {

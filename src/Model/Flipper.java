@@ -26,7 +26,7 @@ public abstract class Flipper implements IGizmo {
         this.x = x;
         this.y = y;
         width= 15;
-        height=30;
+        height=60;
         getLines();
         getCircles();
         getEndCircles();
@@ -34,10 +34,10 @@ public abstract class Flipper implements IGizmo {
 
     public ArrayList<LineSegment> getLines() {
         ArrayList<LineSegment> lines = new ArrayList<LineSegment>();
-        LineSegment l1 = new LineSegment(x, y, x, y + height);
-        LineSegment l2 = new LineSegment(x + width, y, x + width, y + height);
-        LineSegment l3 = new LineSegment(x, y + height, x + width, y + height);
-        LineSegment l4 = new LineSegment(x, y, x + width, y);
+        LineSegment l1 = new LineSegment(x, y+7.5, x, y + height-7.5);
+        LineSegment l2 = new LineSegment(x + width, y+7.5, x + width, y + height-7.5);
+        LineSegment l3 = new LineSegment(x, y + height -7.5, x + width, y + height-7.5);
+        LineSegment l4 = new LineSegment(x, y+7.5, x + width, y+7.5);
         lines.add(l1);
         lines.add(l2);
         lines.add(l3);
@@ -47,21 +47,21 @@ public abstract class Flipper implements IGizmo {
 
     public ArrayList<PhysicsCircle> getCircles() {
         ArrayList<PhysicsCircle> Circles = new ArrayList<PhysicsCircle>();
-        PhysicsCircle c1 = new PhysicsCircle(x +7.5, y , 7.5);
-        PhysicsCircle c2 = new PhysicsCircle(x+7.5, y+height, 7.5);
+        PhysicsCircle c1 = new PhysicsCircle(x +7.5, y+7.5 , 7.5);
+        PhysicsCircle c2 = new PhysicsCircle(x+7.5, y+height-7.5, 7.5);
             return Circles;
         }
 
     public ArrayList<PhysicsCircle> getEndCircles() {
         ArrayList<PhysicsCircle> endCircles = new ArrayList<PhysicsCircle>();
-        PhysicsCircle c1 = new PhysicsCircle(x, y + height, 0);
-        PhysicsCircle c2 = new PhysicsCircle(x, y, 0);
-        PhysicsCircle c3 = new PhysicsCircle(x + width, y, 0);
-        PhysicsCircle c4 = new PhysicsCircle(x + width, y + height, 0);
-        PhysicsCircle c5 = new PhysicsCircle(x, y , 0);
-        PhysicsCircle c6 = new PhysicsCircle(x, y + height, 0);
-        PhysicsCircle c7 = new PhysicsCircle(x + width, y, 0);
-        PhysicsCircle c8 = new PhysicsCircle(x + width, y + height, 0);
+        PhysicsCircle c1 = new PhysicsCircle(x, y + height-7.5, 0);
+        PhysicsCircle c2 = new PhysicsCircle(x, y+7.5, 0);
+        PhysicsCircle c3 = new PhysicsCircle(x + width, y+7.5, 0);
+        PhysicsCircle c4 = new PhysicsCircle(x + width, y + height -7.5, 0);
+        PhysicsCircle c5 = new PhysicsCircle(x, y+7.5 , 0);
+        PhysicsCircle c6 = new PhysicsCircle(x, y + height-7.5, 0);
+        PhysicsCircle c7 = new PhysicsCircle(x + width, y+7.5, 0);
+        PhysicsCircle c8 = new PhysicsCircle(x + width, y + height -7.5 , 0);
         endCircles.add(c1);
         endCircles.add(c2);
         endCircles.add(c3);
