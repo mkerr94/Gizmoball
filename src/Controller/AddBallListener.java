@@ -41,8 +41,8 @@ public class AddBallListener implements ActionListener {
                 vy = buildView.getBallxy();
 
                 if(vx > -1000 && vx < 1000 && vy > -1000 && vx < 1000) {
-                    x = e.getX() / 30; // STOP DELETING THE /30
-                    y = e.getY() / 30;
+                    x = e.getX();
+                    y = e.getY();
 
                     if (model.checkGizmoLocation(x, y)) {
                         model.addBall(x, y, vx, vy);
