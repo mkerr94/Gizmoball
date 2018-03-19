@@ -43,8 +43,6 @@ public class AddAbsorberListener implements ActionListener {
                 y2 = (e.getY()/30) + 1; // L = 30
                 int dx = x2 - x1;
                 int dy = y2 - y1;
-                System.out.println("dx = " + dx);
-                System.out.println("dy = " + dy);
                 Absorber absorber = new Absorber(x1,y1,dx,dy);
 
                 //doesn't give error message - not sure how to fix
