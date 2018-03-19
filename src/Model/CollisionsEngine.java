@@ -44,14 +44,18 @@ class CollisionsEngine {
             }
         }
 
-        for (Ball b: balls) {
-            Ball b2 = new Ball(b.getExactX() * L, b.getExactY() * L,50,50);
+
+        if(balls.size() > 1){
+        for (Ball ball2: balls) {
+            Ball b2 = new Ball(ball2.getExactX() * L, ball2.getExactY() * L, ball2.getVelo().x(), ball2.getVelo().y());
+            if(ball2 != ball){
             PhysicsCircle physicsCircle = b2.getCircle();
-            time = Geometry.timeUntilCircleCollision(physicsCircle, ballCircle, ballVelocity);
+            time = Geometry.timeUntilBallBallCollision( ballCircle, ballVelocity, physicsCircle, b2.getVelo());
             if (time < shortestTime) {
                 shortestTime = time;
-                newVelo = Geometry.reflectCircle(physicsCircle.getCenter(), ballCircle.getCenter(), b.getVelo(), 1);
-            }
+                newVelo = Geometry.reflectCircle(physicsCircle.getCenter(), ballCircle.getCenter(), ball.getVelo(), 1);
+                //newVelo = Geometry.reflectBalls(physicsCircle.getCenter(),1, b2.getVelo(),  ballCircle.getCenter(),1, ball.getVelo());
+            }}}
         }
 
         // Handle gizmo collisions
