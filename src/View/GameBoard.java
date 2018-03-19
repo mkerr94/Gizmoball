@@ -132,8 +132,8 @@ public class GameBoard extends JPanel implements Observer {
     private void paintBalls(Graphics2D g2) {
         for (Ball b : balls) {
             g2.setColor(b.getColour());
-            int x = (int) b.getExactX() * L;
-            int y = (int) b.getExactY() * L;
+            int x = (int) b.getExactX() - L/4;
+            int y = (int) b.getExactY() - L/4;
             g2.fillOval(x, y, L/2, L/2);
         }
     }

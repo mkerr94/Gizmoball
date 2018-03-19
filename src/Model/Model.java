@@ -144,11 +144,6 @@ public class Model extends Observable {
     public void addBall(double x, double y,double xv,double yv) {
         Ball ball = new Ball(x, y, xv, yv);
         balls.add(ball);
-        for (Ball ballson :
-                balls) {
-            System.out.println("ballson.getxOrdinate() = " + ballson.getxOrdinate());
-            System.out.println("ballson.getyOrdinate() = " + ballson.getyOrdinate());
-        }
         setChanged();
         notifyObservers();
     }
@@ -161,6 +156,7 @@ public class Model extends Observable {
      * @return true if valid placement, false if invalid placement
      */
     public boolean checkGizmoLocation(IGizmo gizmoToAdd) {
+        // handle basic gizmos
         for (IGizmo existingGizmo : gizmos) {
             if (existingGizmo.getX1() == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) { // if a gizmo already exists in that location
                 return false;
@@ -209,6 +205,11 @@ public class Model extends Observable {
                     }
                 }
             }
+            // handle absorbers
+            if (gizmoToAdd instanceof Absorber) {
+
+            }
+
         }
         return true;
     }
@@ -241,8 +242,6 @@ public class Model extends Observable {
 
     /***
      * Deletes the gizmo or ball at the given location
-     * todo update so this actually deletes balls
-     * todo make this delete flippers (ok it does, just awkward due to the flipper painting glitch)
      * @param x x ordinate of target gizmo/ball
      * @param y y ordinate of target gizmo/ball
      */
@@ -256,8 +255,6 @@ public class Model extends Observable {
             }
         }
         for(Ball ball : balls){
-            System.out.println("ball.getxOrdinate()/30 = " + ball.getxOrdinate()/30);
-            System.out.println("ball.getyOrdinate()/30 = " + ball.getyOrdinate()/30);
             if (ball.getxOrdinate() / 30 == x && ball.getyOrdinate() / 30 == y) {
                 balls.remove(ball);
                 setChanged();
@@ -375,6 +372,14 @@ public class Model extends Observable {
             keyConnections.put(keyCode, gizmoToConnect);
         } else{
             throw new NullPointerException("Null gizmo passed to addKeyConnection()");
+        }
+    }
+
+    public void removeKeyConnection(int keyCode, IGizmo gizmoToDisconnect){
+        if(gizmoToDisconnect != null){
+            keyConnections.remove(keyCode, gizmoToDisconnect);
+        }else{
+            throw new NullPointerException("Null gizmo passed to removeKeyConnection()");
         }
     }
 

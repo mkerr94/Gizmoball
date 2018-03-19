@@ -2,7 +2,11 @@ package Model;
 
 import Model.Model;
 import Model.IGizmo;
+
 import Physics.Vect;
+
+import com.sun.org.apache.xpath.internal.SourceTree;
+
 
 import javax.swing.*;
 import java.io.*;
@@ -38,7 +42,8 @@ public class SaveFile {
         }
     }
     void getSaveFile() throws IOException {
-        int returnValue = fc.showOpenDialog(null);
+        int returnValue = fc.showSaveDialog(null);
+
         if (returnValue == JFileChooser.APPROVE_OPTION){
             System.out.println("Success!");
             File file = fc.getSelectedFile();
