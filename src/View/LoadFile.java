@@ -83,7 +83,7 @@ public class LoadFile {
                         x = Integer.parseInt(gizmoGroup[2]);
                         y = Integer.parseInt(gizmoGroup[3]);
                         loadedGizmos.put(gName, new RightFlipper(x, y));
-                        model.addGizmo(new RightFlipper(x, y));
+                        model.addGizmo(new RightFlipper(x + 1, y ));
                         break;
                     case "LeftFlipper":
                         //System.out.println("found");

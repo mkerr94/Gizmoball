@@ -22,11 +22,7 @@ public class DeleteListener implements ActionListener{
         gameBoard.addMouseListener(new MouseInputListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                x = e.getX() / 30; // L = 30
-                y = e.getY() / 30; // L = 30
-                model.deleteGizmoOrBall(x, y);
-                e.consume();
-                gameBoard.removeMouseListener(this);
+
             }
 
             @Override
@@ -36,7 +32,11 @@ public class DeleteListener implements ActionListener{
 
             @Override
             public void mouseReleased(MouseEvent e) {
-
+                x = e.getX() / 30; // L = 30
+                y = e.getY() / 30; // L = 30
+                model.deleteGizmoOrBall(x, y);
+                e.consume();
+                gameBoard.removeMouseListener(this);
             }
 
             @Override

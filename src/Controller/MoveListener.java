@@ -60,7 +60,6 @@ public class MoveListener implements ActionListener {
                         newX = e.getX() / 30;
                         newY = e.getY() / 30;
 
-
                         if (model.checkGizmoLocation(newX, newY)) {
                             model.moveGizmo(gizmo, newX, newY);
                         } else {
