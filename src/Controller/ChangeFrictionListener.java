@@ -20,7 +20,7 @@ public class ChangeFrictionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         double result = buildView.changeFrictionAlert();
 
-        if(result > 0) {
+        if(result >= 0 && result <=10) {
             model.setFrictionValue(result);
         }else{
             buildView.invalidFrictionAlert();

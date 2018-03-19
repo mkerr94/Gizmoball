@@ -387,7 +387,6 @@ public class Model extends Observable {
         }
     }
 
-
     private void printKeyConnections(){
         if (keyConnections.size() == 0) System.out.println("no key connections");
         for (Integer keycode : keyConnections.keySet()) {
@@ -406,5 +405,11 @@ public class Model extends Observable {
 
     public void clearFlippers() {
         flippers.clear();
+    }
+
+    public IGizmo findKeyConnections(IGizmo gizmoName){
+        if(this.keyConnections.containsValue(gizmoName))
+            return this.keyConnections.get(gizmoName);
+        return null;
     }
 }

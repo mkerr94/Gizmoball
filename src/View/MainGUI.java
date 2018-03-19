@@ -2,17 +2,20 @@ package View;
 
 import Controller.RunListener;
 import Model.Model;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import Model.LoadFile;
 import Model.SaveFile;
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ItemEvent;
 
 public class MainGUI extends JFrame {
     private Model model;
+    private JPanel viewMode;
     private LoadFile lf;
     private SaveFile sf;
-    private JPanel viewMode;
+
 
     public MainGUI(Model model){
         this.model = model;
@@ -42,6 +45,10 @@ public class MainGUI extends JFrame {
 
         open.addActionListener(evt -> lf = new LoadFile(model));
         save.addActionListener(evt -> sf = new SaveFile(model));
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7a4eb359090b5a4873e9eaa69cd1f81be3370e28
         exit.addActionListener((ActionEvent event) ->{
             int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit? Don't forget to save your board!", "Quit", JOptionPane.YES_NO_OPTION);
             System.out.println(result);

@@ -4,6 +4,7 @@ import java.awt.event.*;
 
 import Model.Model;
 import Model.IGizmo;
+import View.BuildView;
 import View.GameBoard;
 
 import javax.swing.event.MouseInputListener;
@@ -15,10 +16,12 @@ public class KeyConnectListener implements ActionListener {
     private MouseInputListener mouseInputListener;
     private int keyCode;
     private IGizmo gizmoToConnect;
+    private BuildView buildView;
 
-    public KeyConnectListener(Model model, GameBoard gameBoard){
+    public KeyConnectListener(Model model, GameBoard gameBoard, BuildView buildView){
         this.model = model;
         this.gameBoard = gameBoard;
+        this.buildView = buildView;
         keyListener = new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -55,10 +58,12 @@ public class KeyConnectListener implements ActionListener {
                 IGizmo iGizmo = model.getGizmo(x, y);
                 if (iGizmo != null){
                     gizmoToConnect = iGizmo;
+                    buildView.keyConnectAlert();
                 }else{
                     throw new NullPointerException("Null gizmo retrieved in mouseReleased()");
                 }
                 model.addKeyConnection(keyCode, gizmoToConnect);
+                System.out.println("key connected: " + keyCode);
                 gameBoard.removeMouseListener(this);
             }
 

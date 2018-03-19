@@ -135,7 +135,7 @@ public class BuildView extends JPanel {
         connectB.addActionListener(e -> statusbar.setText("Add Connection"));
         disconnectB.addActionListener(listener);
         disconnectB.addActionListener(e -> statusbar.setText("Disconnect Gizmo"));
-        keyConnectB.addActionListener(new KeyConnectListener(model, gameBoard));
+        keyConnectB.addActionListener(new KeyConnectListener(model, gameBoard, this));
         keyConnectB.addActionListener(e -> statusbar.setText("Add Key Connection"));
         keyDisconnectB.addActionListener(listener);
         keyDisconnectB.addActionListener(e -> statusbar.setText("Disconnect Key"));
@@ -206,6 +206,10 @@ public class BuildView extends JPanel {
 
     public void occupiedSpaceAlert() {
         JOptionPane.showMessageDialog(null, "This space is already occupied! Please choose an empty space.");
+    }
+
+    public void keyConnectAlert(){
+        JOptionPane.showMessageDialog(null,"Connection successful!");
     }
 
 }

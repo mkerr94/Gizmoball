@@ -109,6 +109,11 @@ public class GameBoard extends JPanel implements Observer {
                     int y2Points1[] = {y+L, y, y + L};
                     g2.fillPolygon(x2Points1, y2Points1,3);
                 }
+                else {
+                    int x2Points[] = {x + L, x, x};
+                    int y2Points[] = {y, y + L, y};
+                    g2.fillPolygon(x2Points, y2Points,3);
+                }
             }
             if (gizmo instanceof Absorber) {
                 g2.setColor(gizmo.getColour());
@@ -155,8 +160,8 @@ public class GameBoard extends JPanel implements Observer {
     private void paintBalls(Graphics2D g2) {
         for (Ball b : balls) {
             g2.setColor(b.getColour());
-            int x = (int) b.getExactX() - L/4;
-            int y = (int) b.getExactY() - L/4;
+            int x = (int) b.getExactX() * L;
+            int y = (int) b.getExactY() * L;
             g2.fillOval(x, y, L/2, L/2);
         }
     }

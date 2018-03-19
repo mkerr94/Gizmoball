@@ -18,7 +18,7 @@ public class ChangeGravityListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         int result = buildView.changeGravityAlert();
 
-        if(result > 0) {
+        if(result >= 0) {
             model.setGravityValue(result);
         }else{
             buildView.invalidGravityAlert();
