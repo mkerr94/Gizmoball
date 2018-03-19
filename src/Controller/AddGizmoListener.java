@@ -6,12 +6,9 @@ import View.BuildView;
 
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.Random;
 
 import Model.*;
 
@@ -62,11 +59,11 @@ public class AddGizmoListener implements ActionListener {
                         if (model.checkGizmoLocation(square)){
                             model.addGizmo(square);
                         } else{
-
+                            buildView.occupiedSpaceAlert();
                         }
                         break;
                     case "Triangle":
-                        Triangle triangle = new Triangle(x, y);
+                        Triangle triangle = new Triangle(x, y, 0);
                         if (model.checkGizmoLocation(triangle)){
                             model.addGizmo(triangle);
                         } else{

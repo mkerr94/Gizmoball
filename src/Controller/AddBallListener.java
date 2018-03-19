@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.Model;
-import Model.Ball;
 import View.GameBoard;
 
 import javax.swing.event.MouseInputListener;
@@ -16,7 +15,7 @@ public class AddBallListener implements ActionListener {
     private int x,y;
     private GameBoard gameBoard;
     private MouseInputListener mouseInputListener;
-    double xv,xy;
+    double vx, vy;
     BuildView buildView;
 
     public AddBallListener(Model model, GameBoard gameBoard, BuildView bv){
@@ -38,13 +37,21 @@ public class AddBallListener implements ActionListener {
             @Override
             public void mouseReleased(MouseEvent e) {
                 buildView.ballVelocityAlert();
-                xv = buildView.getBallxv();
-                xy = buildView.getBallxy();
-                System.out.println(xv);
-                System.out.println(xy);
-                x = e.getX();
-                y = e.getY();
-                model.addBall(x,y,xv,xy);
+                vx = buildView.getBallxv();
+                vy = buildView.getBallxy();
+
+                if(vx > -1000 && vx < 1000 && vy > -1000 && vx < 1000) {
+                    x = e.getX();
+                    y = e.getY();
+
+                    if (model.checkGizmoLocation(x, y)) {
+                        model.addBall(x, y, vx, vy);
+                    } else {
+                        buildView.occupiedSpaceAlert();
+                    }
+                }else{
+                    buildView.invalidVelocityAlert();
+                }
                 e.consume();
                 gameBoard.removeMouseListener(this);
             }

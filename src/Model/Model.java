@@ -29,9 +29,6 @@ public class Model extends Observable {
         return gizmos;
     }
 
-    public List<Ball> getBalls() {
-        return balls;
-    }
 
     Walls getWalls(){return walls;}
 
@@ -147,6 +144,11 @@ public class Model extends Observable {
     public void addBall(double x, double y,double xv,double yv) {
         Ball ball = new Ball(x, y, xv, yv);
         balls.add(ball);
+        for (Ball ballson :
+                balls) {
+            System.out.println("ballson.getxOrdinate() = " + ballson.getxOrdinate());
+            System.out.println("ballson.getyOrdinate() = " + ballson.getyOrdinate());
+        }
         setChanged();
         notifyObservers();
     }
@@ -155,12 +157,71 @@ public class Model extends Observable {
      * Checks if a gizmo already exists at the location of the passed in gizmo.
      * Returns false if a gizmo already exists at the target location and returns true
      * if nothing exists at the target location
-     * @param gizmo gizmo to be added to the board
+     * @param gizmoToAdd gizmo to be added to the board
      * @return true if valid placement, false if invalid placement
      */
-    public boolean checkGizmoLocation(IGizmo gizmo) {
-        for (IGizmo iGizmo : gizmos) {
-            if (iGizmo.getX1() == gizmo.getX1() && iGizmo.getY1() == gizmo.getY1()) { // if a gizmo already exists in that location
+    public boolean checkGizmoLocation(IGizmo gizmoToAdd) {
+        for (IGizmo existingGizmo : gizmos) {
+            if (existingGizmo.getX1() == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) { // if a gizmo already exists in that location
+                return false;
+            }
+            // handle left flippers
+            if (gizmoToAdd instanceof LeftFlipper){
+                if (existingGizmo.getX1() - 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
+                    return false;
+                } else if (existingGizmo.getX1() - 1 == gizmoToAdd.getX1() && existingGizmo.getY1() - 1 == gizmoToAdd.getY1()) {
+                    return false;
+                }
+            }
+            if (existingGizmo instanceof LeftFlipper){
+                if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
+                    return false;
+                } else if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() + 1 == gizmoToAdd.getY1()) {
+                    return false;
+                }
+                if (gizmoToAdd instanceof RightFlipper){
+                    if (existingGizmo.getX1() + 2 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()){
+                        return false;
+                    } else if (existingGizmo.getX1() + 2 == gizmoToAdd.getX1() && existingGizmo.getY1() + 1== gizmoToAdd.getY1()){
+                        return false;
+                    }
+                }
+            }
+            // handle right flippers
+            if (gizmoToAdd instanceof RightFlipper){
+                if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
+                    return false;
+                } else if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() - 1 == gizmoToAdd.getY1()) {
+                    return false;
+                }
+            }
+            if (existingGizmo instanceof RightFlipper){
+                if (existingGizmo.getX1() - 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
+                    return false;
+                } else if (existingGizmo.getX1() - 1 == gizmoToAdd.getX1() && existingGizmo.getY1() + 1 == gizmoToAdd.getY1()) {
+                    return false;
+                }
+                if (gizmoToAdd instanceof LeftFlipper){
+                    if (existingGizmo.getX1() - 2 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()){
+                        return false;
+                    } else if (existingGizmo.getX1() - 2 == gizmoToAdd.getX1() && existingGizmo.getY1() + 1== gizmoToAdd.getY1()){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Checks if gizmo already exists at the x and y location passed in.
+     * @param x
+     * @param y
+     * @return true if valid placement, false if invalid placement
+     */
+    public boolean checkGizmoLocation(int x, int y){
+        for(IGizmo iGizmo: gizmos){
+            if(iGizmo.getX1() == x && iGizmo.getY1() == y){
                 return false;
             }
         }
@@ -180,6 +241,8 @@ public class Model extends Observable {
 
     /***
      * Deletes the gizmo or ball at the given location
+     * todo update so this actually deletes balls
+     * todo make this delete flippers (ok it does, just awkward due to the flipper painting glitch)
      * @param x x ordinate of target gizmo/ball
      * @param y y ordinate of target gizmo/ball
      */
@@ -193,7 +256,9 @@ public class Model extends Observable {
             }
         }
         for(Ball ball : balls){
-            if (ball.getxOrdinate() == x && ball.getyOrdinate() == y) {
+            System.out.println("ball.getxOrdinate()/30 = " + ball.getxOrdinate()/30);
+            System.out.println("ball.getyOrdinate()/30 = " + ball.getyOrdinate()/30);
+            if (ball.getxOrdinate() / 30 == x && ball.getyOrdinate() / 30 == y) {
                 balls.remove(ball);
                 setChanged();
                 notifyObservers();
@@ -296,7 +361,7 @@ public class Model extends Observable {
             setChanged();
             notifyObservers();
         }else{
-            throw new IllegalStateException("Gizmo already exists at target location");
+            throw new NullPointerException("Null gizmo moved to moveGizmo");
         }
     }
 
@@ -319,5 +384,9 @@ public class Model extends Observable {
             System.out.print("keycode: " + keycode);
             System.out.println("gizmo: " + keyConnections.get(keycode).getClass().toString());
         }
+    }
+
+    public List<Ball> getBalls() {
+        return balls;
     }
 }

@@ -9,6 +9,8 @@ import java.util.HashMap;
 
 public class LoadFile {
 
+    // todo handle rotations
+
     private JFileChooser fc;
     private static final String FILE_PATH = System.getProperty("user.home") + "/Documents";
     private Model model;
@@ -72,8 +74,8 @@ public class LoadFile {
                         gName = gizmoGroup[1];
                         x = Integer.parseInt(gizmoGroup[2]);
                         y = Integer.parseInt(gizmoGroup[3]);
-                        loadedGizmos.put(gName, new Triangle(x, y));
-                        model.addGizmo(new Triangle(x, y));
+                        loadedGizmos.put(gName, new Triangle(x, y, 0));
+                        model.addGizmo(new Triangle(x, y, 0));
                         break;
                     case "RightFlipper":
                         //System.out.println("found");
@@ -81,7 +83,7 @@ public class LoadFile {
                         x = Integer.parseInt(gizmoGroup[2]);
                         y = Integer.parseInt(gizmoGroup[3]);
                         loadedGizmos.put(gName, new RightFlipper(x, y));
-                        model.addGizmo(new RightFlipper(x, y));
+                        model.addGizmo(new RightFlipper(x + 1, y ));
                         break;
                     case "LeftFlipper":
                         //System.out.println("found");

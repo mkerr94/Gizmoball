@@ -43,7 +43,8 @@ public class GameBoard extends JPanel implements Observer {
     /***
      * Paints all of the gizmos from the model. See Model.gizmos.
      * Also draws the ball (see paintBalls(g2)) and gridlines if the game
-     * is in buildmode. todo fix painting glitch where everything moves down an L between modes
+     * is in buildmode.
+     * todo fix painting glitch where flippers move half an L between modes
      * @param g Java2d Graphics object
      */
     public void paintComponent(Graphics g) {
@@ -171,5 +172,9 @@ public class GameBoard extends JPanel implements Observer {
     @Override
     public void update(Observable arg0, Object arg1) {
         this.repaint();
+    }
+
+    public Mode getMode(){
+        return mode;
     }
 }
