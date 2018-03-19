@@ -1,4 +1,4 @@
-package View;
+package Model;
 
 import Model.Model;
 import Model.IGizmo;
