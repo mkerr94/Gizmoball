@@ -10,13 +10,16 @@ public class RunView extends JPanel {
     private Model model;
     private RunListener runListener;
     private Color purple;
+    private GameBoard gameBoard;
 
-    RunView(Model model) {
+    RunView(Model model, RunListener runListener) {
         this.model = model;
-        runListener = new RunListener(model,this);
+        gameBoard = new GameBoard(600, 600, model, Mode.RUN);
+        this.runListener = runListener;
         init();
         purple = new Color(128,0,128);
     }
+
 
     private void init() {
         setLayout(new BorderLayout());
@@ -25,7 +28,7 @@ public class RunView extends JPanel {
         buttonPanel.setBackground(purple = new Color(128,0,128));
         makeButtons(buttonPanel);
         add(buttonPanel, BorderLayout.EAST);
-        add(new GameBoard(600, 600, model, Mode.RUN), BorderLayout.CENTER);
+        add(gameBoard, BorderLayout.CENTER);
         JLabel statusBar = new JLabel("Run Mode");
         statusBar.setBorder(BorderFactory.createEtchedBorder(purple, purple));
         setBackground(purple);

@@ -173,4 +173,8 @@ public class GameBoard extends JPanel implements Observer {
     public void update(Observable arg0, Object arg1) {
         this.repaint();
     }
+
+    public Mode getMode(){
+        return mode;
+    }
 }

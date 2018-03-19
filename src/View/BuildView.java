@@ -168,7 +168,7 @@ public class BuildView extends JPanel {
     }
 
     public void invalidVelocityAlert(){
-        JOptionPane.showMessageDialog(null,"Your velocity values must be greater than 0.");
+        JOptionPane.showMessageDialog(null,"Your velocity values must be within -1000 and 1000");
     }
 
     public int clearBoardAlert() {

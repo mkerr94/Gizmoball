@@ -1,5 +1,6 @@
 package View;
 
+import Controller.RunListener;
 import Model.Model;
 import javax.swing.*;
 import java.awt.*;
@@ -47,8 +48,11 @@ public class MainGUI extends JFrame {
         JRadioButtonMenuItem runMode = new JRadioButtonMenuItem("Run Mode");
         modeMenu.add(buildMode);
         modeMenu.add(runMode);
+
+        RunListener runListener = new RunListener(model, this);
         buildMode.addItemListener((ItemEvent e) -> { // if build mode has been selected
             if (e.getStateChange() == ItemEvent.SELECTED) {
+                runListener.killTimer();
                 setTitle("GizmoBall - Build Mode");
                 viewMode.setVisible(false);
                 viewMode = new BuildView(model);
@@ -60,7 +64,7 @@ public class MainGUI extends JFrame {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 setTitle("GizmoBall - Run Mode");
                 viewMode.setVisible(false);
-                viewMode = new RunView(model);
+                viewMode = new RunView(model, runListener);
                 viewMode.setVisible(true);
                 setContentPane(viewMode);
             }
@@ -69,5 +73,9 @@ public class MainGUI extends JFrame {
         modeGroup.add(runMode);
         menuBar.add(modeMenu);
         setJMenuBar(menuBar);
+    }
+
+    public void noBallAlert(){
+        JOptionPane.showMessageDialog(null,"Your board must contain at least one ball!");
     }
 }

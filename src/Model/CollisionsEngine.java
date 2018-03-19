@@ -174,6 +174,7 @@ class CollisionsEngine {
                     LineSegment lineSegment = absorber.getCollisionLine();
                     time = Geometry.timeUntilWallCollision(lineSegment, ballCircle, ballVelocity);
                     if (time < shortestTime) {
+                        System.out.println("absorber collision");
                         shortestTime = time;
                         newVelo = Geometry.reflectWall(lineSegment, b.getVelo(), 1.0);
                     }
