@@ -45,10 +45,7 @@ public class MainGUI extends JFrame {
 
         open.addActionListener(evt -> lf = new LoadFile(model));
         save.addActionListener(evt -> sf = new SaveFile(model));
-<<<<<<< HEAD
-=======
 
->>>>>>> 7a4eb359090b5a4873e9eaa69cd1f81be3370e28
         exit.addActionListener((ActionEvent event) ->{
             int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit? Don't forget to save your board!", "Quit", JOptionPane.YES_NO_OPTION);
             System.out.println(result);
