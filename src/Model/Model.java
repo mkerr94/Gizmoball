@@ -394,4 +394,10 @@ public class Model extends Observable {
     public List<Ball> getBalls() {
         return balls;
     }
+
+    public IGizmo findKeyConnections(IGizmo gizmoName){
+        if(this.keyConnections.containsValue(gizmoName))
+            return this.keyConnections.get(gizmoName);
+        return null;
+    }
 }
