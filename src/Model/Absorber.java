@@ -19,8 +19,12 @@ public class Absorber implements IGizmo {
         this.y1 = y1;
         this.x2 = x2;
         this.y2 = y2;
-        collisionLine = new LineSegment(x1 + 30, y1 + y2, x1 + x2, y1 + y2);
+        collisionLine = new LineSegment(x1 - 30, y1 + y2, x1 + x2, y1 + y2);
         color = Color.cyan;
+        System.out.println(x1);
+        System.out.println(x2);
+        System.out.println(y1);
+        System.out.println(y2);
     }
 
     @Override

@@ -228,7 +228,7 @@ public class Model extends Observable {
                 }
 
             }
-            //todo fix absorber checks
+            //todo fix absorber checks for the x2 and y2 value
             // handle absorbers
             if (gizmoToCheck instanceof Absorber) {
                 if (existingGizmo.getX1() >= gizmoToCheck.getX1() && existingGizmo.getY1() >= gizmoToCheck.getY1()) {
@@ -343,9 +343,10 @@ public class Model extends Observable {
             if (time <= 0.1 && !ball.stopped()) {
                 //ball = new Ball(absorber.getX2() - 1 * L, absorber.getY2() - 0.5 * L, -10 * L, -10 * L);
                 System.out.println("Ball hit absorber");
+                b.setVelo(new Vect(0,0));
                 b.stop();
                 b.setExactX(absorber.getX2() - b.getRadius());
-                b.setExactY(absorber.getY1());
+                b.setExactY(absorber.getY2() + (18.5 * L));
                 fireQueue.add(b);
                 //balls.remove(b);
                 System.out.println("Balls to be fired" + fireQueue.size());
