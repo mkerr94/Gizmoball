@@ -108,7 +108,7 @@ public class SaveFile {
             bY = models.getyOrdinate();
             velocity = models.getVelo();
             String sVelocity = velocity.toString();
-            Pattern p = Pattern.compile("(\\d+(?:\\.\\d+))");
+            Pattern p = Pattern.compile("(\\d+(?:\\.\\d))");
             Matcher m = p.matcher(sVelocity);
             while(m.find()) {
                 String d = m.group(1);
