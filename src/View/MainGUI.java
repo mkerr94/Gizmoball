@@ -43,7 +43,19 @@ public class MainGUI extends JFrame {
         file.add(exit);
         menuBar.add(file);
 
-        open.addActionListener(evt -> lf = new LoadFile(model));
+        GameBoard gameBoard = new GameBoard(600, 600, model);
+        RunListener runListener = new RunListener(model, this, gameBoard);
+
+        open.addActionListener(e -> {
+            if (viewMode instanceof Welcome) {
+                setTitle("GizmoBall - Build Mode");
+                viewMode.setVisible(false);
+                viewMode = new BuildView(model, gameBoard);
+                viewMode.setVisible(true);
+                setContentPane(viewMode);
+            }
+            lf = new LoadFile(model);
+        });
         save.addActionListener(evt -> sf = new SaveFile(model));
 
         exit.addActionListener((ActionEvent event) ->{
@@ -61,8 +73,7 @@ public class MainGUI extends JFrame {
         modeMenu.add(buildMode);
         modeMenu.add(runMode);
 
-        GameBoard gameBoard = new GameBoard(600, 600, model);
-        RunListener runListener = new RunListener(model, this, gameBoard);
+
         buildMode.addItemListener((ItemEvent e) -> { // if build mode has been selected
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 runListener.killTimer();
