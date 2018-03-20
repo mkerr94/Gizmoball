@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.Flipper;
+import Model.RightFlipper;
+import Model.LeftFlipper;
 import Model.IGizmo;
 import Model.Model;
 import View.GameBoard;
@@ -16,12 +18,17 @@ public class FlipperListener implements ActionListener, KeyListener{
     private Model model;
     private int x, y;
     private final List<Flipper> flippers;
-    private final int globalKeyTrigger = KeyEvent.VK_SPACE;
+    private final List<Flipper> leftflippers;
+    private final List<Flipper> rightflippers;
+    private final int globalKeyTrigger1 = KeyEvent.VK_Z;
+    private final int globalKeyTrigger2 = KeyEvent.VK_M;
     private List<IGizmo> gizmos;
     private Timer timer;
 
     public FlipperListener(Model model, GameBoard gameBoard){
         flippers = new ArrayList<>();
+        rightflippers = new ArrayList<>();
+        leftflippers = new ArrayList<>();
         this.model = model;
         this.gameBoard = gameBoard;
         gizmos = model.getGizmos();
@@ -29,8 +36,13 @@ public class FlipperListener implements ActionListener, KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == globalKeyTrigger){
-            for (Flipper flipper : flippers) {
+        if (e.getKeyCode() == globalKeyTrigger1){
+            for (Flipper flipper : leftflippers) {
+                flipper.flip();
+            }
+        }
+        if (e.getKeyCode() == globalKeyTrigger2){
+            for (Flipper flipper : rightflippers) {
                 flipper.flip();
             }
         }
@@ -38,8 +50,13 @@ public class FlipperListener implements ActionListener, KeyListener{
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == globalKeyTrigger){
-            for (Flipper flipper : flippers) {
+        if (e.getKeyCode() == globalKeyTrigger1){
+            for (Flipper flipper : leftflippers) {
+                flipper.unflip();
+            }
+        }
+        if (e.getKeyCode() == globalKeyTrigger2){
+            for (Flipper flipper : rightflippers) {
                 flipper.unflip();
             }
         }
@@ -67,6 +84,16 @@ public class FlipperListener implements ActionListener, KeyListener{
             if (gizmo instanceof Flipper) {
                 if (!flippers.contains(gizmo)) {
                     flippers.add((Flipper)gizmo);
+                }
+            }
+            if (gizmo instanceof RightFlipper) {
+                if (!rightflippers.contains(gizmo)) {
+                    rightflippers.add((Flipper)gizmo);
+                }
+            }
+            if (gizmo instanceof LeftFlipper) {
+                if (!leftflippers.contains(gizmo)) {
+                    leftflippers.add((Flipper)gizmo);
                 }
             }
         }
