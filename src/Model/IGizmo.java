@@ -1,6 +1,5 @@
 package Model;
 
-
 import Physics.LineSegment;
 import Physics.PhysicsCircle;
 
@@ -26,4 +25,5 @@ public interface IGizmo {
     void rotate();
 
     Color getColour();
+
 }

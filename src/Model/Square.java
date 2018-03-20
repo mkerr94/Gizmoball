@@ -4,7 +4,10 @@ import Physics.PhysicsCircle;
 import Physics.LineSegment;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Timer;
 
 
 public class Square implements IGizmo {
@@ -13,6 +16,7 @@ public class Square implements IGizmo {
     private int ypos;
     private int width;
     private Color colour;
+    private boolean triggered;
 
 
     public Square(int x, int y) {

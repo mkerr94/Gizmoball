@@ -19,7 +19,7 @@ public class Absorber implements IGizmo {
         this.y1 = y1;
         this.x2 = x2;
         this.y2 = y2;
-        collisionLine = new LineSegment(x1, y1 + y2, x1 + x2, y1 + y2);
+        collisionLine = new LineSegment(x1 + 30, y1 + y2, x1 + x2, y1 + y2);
         color = Color.cyan;
     }
 
@@ -59,9 +59,7 @@ public class Absorber implements IGizmo {
     }
 
     @Override
-    public void rotate() {
-        // cannot rotate an absorber
-    }
+    public void rotate() {}
 
     @Override
     public Color getColour() {

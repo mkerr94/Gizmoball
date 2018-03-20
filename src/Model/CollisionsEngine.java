@@ -187,8 +187,8 @@ class CollisionsEngine {
                         System.out.println("absorber collision");
                         shortestTime = time;
                         newVelo = Geometry.reflectWall(lineSegment, b.getVelo(), 1.0);
+                        model.captureBallsInAbsorber(time, ball, absorber);
                     }
-                    model.captureBallsInAbsorber(time, ball, absorber);
                 }
             }
 

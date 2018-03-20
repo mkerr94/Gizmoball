@@ -335,7 +335,7 @@ public class Model extends Observable {
             if (ball.stopped()) {
                 ball.start();
                 fireQueue.remove(ball);
-                Vect ballFire = new Vect(0, -25 * L);
+                Vect ballFire = new Vect(0, -30 * L);
                 ball.setVelo(ballFire);
             }
         }
