@@ -30,7 +30,7 @@ public class SaveFile {
     private String gName;
     private int rotate;
     private JFileChooser fc;
-    private static final String FILE_PATH = System.getProperty("user.home") + "/Documents";
+    private static final String FILE_PATH = System.getProperty("user.home") + "/Documents/load";
 
     public SaveFile(Model model) {
         fc = new JFileChooser(FILE_PATH);
@@ -86,6 +86,10 @@ public class SaveFile {
             if(gType.equals("Triangle") && models.getRotation() != 0){
                 writer.write(gType + " " + gName + x + + y + " " + x + " " + y);
                 writer.newLine();
+                if(models.getRotation() == 2) {
+                    writer.write("Rotate " + gName + x + +y);
+                    writer.newLine();
+                }
                 writer.write("Rotate " + gName + x + + y);
                 writer.newLine();
                 continue;
