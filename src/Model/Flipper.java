@@ -92,6 +92,9 @@ public abstract class Flipper extends Observable implements IGizmo {
 
     @Override
     public void rotate(){
+        getLines();
+        getCircles();
+        getEndCircles();
         rotation ++;
         if (rotation > 3) {
             rotation = 0;
