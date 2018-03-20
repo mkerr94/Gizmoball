@@ -18,7 +18,6 @@ public class FireBallListener implements KeyListener {
 
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == globalKeyTrigger) {
-            System.out.println("PRESSED and FIRED");
             m.fireBall();
         }
     }

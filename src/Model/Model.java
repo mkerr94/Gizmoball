@@ -231,8 +231,6 @@ public class Model extends Observable {
             // handle absorbers
             if (gizmoToCheck instanceof Absorber) {
                 Absorber absorber = (Absorber) gizmoToCheck;
-                System.out.println("absorber.getX2() = " + absorber.getX2());
-                System.out.println("absorber.getY2() = " + absorber.getY2());
                 if (existingGizmo.getX1() >= absorber.getX1() && existingGizmo.getX1() <= (absorber.getX1() + absorber.getX2())) {
                     if (existingGizmo.getY1() >= absorber.getY1() && existingGizmo.getY1() <= (absorber.getY1() + absorber.getY2()))
                     return false;
@@ -304,7 +302,6 @@ public class Model extends Observable {
             notifyObservers();
         } else if (gizmo instanceof Flipper) {
             //todo rotate flipper
-            System.out.println("Model.rotateGizmo");
             gizmo.rotate();
             setChanged();
             notifyObservers();

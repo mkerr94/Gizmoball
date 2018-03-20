@@ -55,12 +55,13 @@ public class MainGUI extends JFrame {
                 setContentPane(viewMode);
             }
             lf = new LoadFile(model);
+            gameBoard.updateFlipperListener();
+            gameBoard.registerAsFlipperObserver();
         });
         save.addActionListener(evt -> sf = new SaveFile(model));
 
         exit.addActionListener((ActionEvent event) ->{
             int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit? Don't forget to save your board!", "Quit", JOptionPane.YES_NO_OPTION);
-            System.out.println(result);
             if(result == 0){
                 System.exit(0);
             }

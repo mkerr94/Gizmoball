@@ -174,7 +174,6 @@ public class BuildView extends JPanel {
 
     public int clearBoardAlert() {
         int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to clear the board?", "Clear board", JOptionPane.YES_NO_OPTION);
-        System.out.println(result);
         return result;
     }
 

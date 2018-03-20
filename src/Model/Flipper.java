@@ -90,7 +90,6 @@ public abstract class Flipper extends Observable implements IGizmo {
 
     @Override
     public void rotate(){
-        System.out.println("Flipper.rotate");
         rotation ++;
         if (rotation > 3) {
             rotation = 0;
