@@ -477,9 +477,9 @@ public class Model extends Observable {
         flippers.clear();
     }
 
-    public String findKeyConnections(IGizmo gizmoName) {
+    public String stringKeyConnection(IGizmo gizmoName) {
         int x, y;
-        System.out.println("entered findKeyConnections method");
+        System.out.println("entered stringKeyConnection method");
         for (Integer keycode : keyConnections.keySet()) {
             if (this.keyConnections.containsValue(gizmoName)) {
                 x = gizmoName.getX1();
