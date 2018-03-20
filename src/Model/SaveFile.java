@@ -1,16 +1,10 @@
 package Model;
 
-import Model.Model;
-import Model.IGizmo;
-
 import Physics.Vect;
-
-import com.sun.org.apache.xpath.internal.SourceTree;
 
 
 import javax.swing.*;
 import java.io.*;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,6 +15,7 @@ public class SaveFile {
     private int y;
     private int x2;
     private int y2;
+    private int bIndex = 0;
     private double bX;
     private double bY;
     private Vect velocity;
@@ -30,7 +25,7 @@ public class SaveFile {
     private String gName;
     private int rotate;
     private JFileChooser fc;
-    private static final String FILE_PATH = System.getProperty("user.home") + "/Documents";
+    private static final String FILE_PATH = System.getProperty("user.home") + "/Documents/load";
 
     public SaveFile(Model model) {
         fc = new JFileChooser(FILE_PATH);
@@ -86,6 +81,10 @@ public class SaveFile {
             if(gType.equals("Triangle") && models.getRotation() != 0){
                 writer.write(gType + " " + gName + x + + y + " " + x + " " + y);
                 writer.newLine();
+                if(models.getRotation() == 2) {
+                    writer.write("Rotate " + gName + x + +y);
+                    writer.newLine();
+                }
                 writer.write("Rotate " + gName + x + + y);
                 writer.newLine();
                 continue;
@@ -93,18 +92,20 @@ public class SaveFile {
 
             writer.write(gType + " " + gName + x + + y + " " + x + " " + y);
             writer.newLine();
-            if(model.findKeyConnections(models) != null){
-                System.out.println("keyConnection found " + (model.findKeyConnections(models)));
-                writer.write(("Connect key " + model.findKeyConnections(models)));
+            if(model.stringKeyConnection(models) != null){
+                System.out.println("keyConnection found " + (model.stringKeyConnection(models)));
+                writer.write(("keyConnection " + model.stringKeyConnection(models)));
                 writer.newLine();
             }
         }
+
         for (Ball models : model.getBalls()) {
+
             bX = models.getxOrdinate();
             bY = models.getyOrdinate();
             velocity = models.getVelo();
             String sVelocity = velocity.toString();
-            Pattern p = Pattern.compile("(\\d+(?:\\.\\d+))");
+            Pattern p = Pattern.compile("(\\d+(?:\\.\\d))");
             Matcher m = p.matcher(sVelocity);
             while(m.find()) {
                 String d = m.group(1);
@@ -113,8 +114,10 @@ public class SaveFile {
 
             }
             gType = models.getClass().getTypeName().substring(6);
-            writer.write(gType + " " + gName + " " + bX + " " + bY + " " + bV1);
+            writer.write(gType + " B" + bIndex + " " + bX + " " + bY + " " + bV1);
             writer.newLine();
+            bV1 = "";
+            bIndex++;
             System.out.println("Ball: " + gType + " X: " + x + " Y:" + y + " Velocity = " + bV1);
             model.printKeyConnections();
         }
