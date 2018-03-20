@@ -138,7 +138,7 @@ public class GameBoard extends JPanel implements Observer {
                 Graphics2D g2d = (Graphics2D) g2.create();
                 AffineTransform transform = new AffineTransform();
                 transform.rotate(-Math.toRadians(angle), x + width / 2, y);
-                g2d.setColor(Color.cyan);
+                g2d.setColor(new Color (255,128,0));
                 g2d.setTransform(transform);
                 g2d.fillRoundRect(x, y, width, height, 20, 20);
             }
@@ -146,7 +146,7 @@ public class GameBoard extends JPanel implements Observer {
                 Graphics2D g2d = (Graphics2D) g2.create();
                 AffineTransform transform = new AffineTransform();
                 transform.rotate(Math.toRadians(angle), x + L/2 + width / 2, y);
-                g2d.setColor(Color.cyan);
+                g2d.setColor(new Color (255,128,0));
                 g2d.setTransform(transform);
                 g2d.fillRoundRect(x + L/2, y, width, height, 20, 20);
             }

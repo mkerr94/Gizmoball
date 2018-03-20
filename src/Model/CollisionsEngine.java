@@ -53,8 +53,8 @@ class CollisionsEngine {
             time = Geometry.timeUntilBallBallCollision( ballCircle, ballVelocity, physicsCircle, b2.getVelo());
             if (time < shortestTime) {
                 shortestTime = time;
-                newVelo = Geometry.reflectCircle(physicsCircle.getCenter(), ballCircle.getCenter(), ball.getVelo(), 1);
-                //newVelo = Geometry.reflectBalls(physicsCircle.getCenter(),1, b2.getVelo(),  ballCircle.getCenter(),1, ball.getVelo());
+              newVelo = Geometry.reflectCircle(physicsCircle.getCenter(), ballCircle.getCenter(), ball.getVelo(), 1);
+               // newVelo = Geometry.reflectBalls(physicsCircle.getCenter(),1, b2.getVelo(),  ballCircle.getCenter(),1, ball.getVelo());
             }}}
         }
 
