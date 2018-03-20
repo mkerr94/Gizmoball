@@ -44,7 +44,7 @@ public class AddBallListener implements ActionListener {
                     x = e.getX();
                     y = e.getY();
 
-                    if (model.checkGizmoLocation(x, y)) {
+                    if (model.checkGizmoLocation(x/30, y/30)) {
                         model.addBall(x, y, vx, vy);
                     } else {
                         buildView.occupiedSpaceAlert();

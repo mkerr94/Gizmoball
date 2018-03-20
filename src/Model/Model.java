@@ -175,6 +175,7 @@ public class Model extends Observable {
                 return false;
             }
         }
+
         // handle basic gizmos
         for (IGizmo existingGizmo : gizmos) {
             if (existingGizmo.getX1() == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) { // if a gizmo already exists in that location
