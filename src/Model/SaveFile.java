@@ -1,16 +1,10 @@
 package Model;
 
-import Model.Model;
-import Model.IGizmo;
-
 import Physics.Vect;
-
-import com.sun.org.apache.xpath.internal.SourceTree;
 
 
 import javax.swing.*;
 import java.io.*;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -98,9 +92,9 @@ public class SaveFile {
 
             writer.write(gType + " " + gName + x + + y + " " + x + " " + y);
             writer.newLine();
-            if(model.findKeyConnections(models) != null){
-                System.out.println("keyConnection found " + (model.findKeyConnections(models)));
-                writer.write(("Connect key " + model.findKeyConnections(models)));
+            if(model.stringKeyConnection(models) != null){
+                System.out.println("keyConnection found " + (model.stringKeyConnection(models)));
+                writer.write(("keyConnection " + model.stringKeyConnection(models)));
                 writer.newLine();
             }
         }
