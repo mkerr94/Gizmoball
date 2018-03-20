@@ -428,10 +428,15 @@ public class Model extends Observable {
 
     }
 
-    private void printKeyConnections() {
+    public void printKeyConnections() {
         for (Integer keycode : keyConnections.keySet()) {
+
                 System.out.print("keycode: " + keycode);
             System.out.println("gizmo: " + keyConnections.get(keycode).getClass().toString());
+
+            System.out.print("keycode: " + keycode);
+            System.out.println("gizmo: " + keyConnections.get(keycode));
+
         }
     }
 
@@ -456,9 +461,17 @@ public class Model extends Observable {
         flippers.clear();
     }
 
-    public IGizmo findKeyConnections(IGizmo gizmoName) {
-        if (this.keyConnections.containsValue(gizmoName))
-            return this.keyConnections.get(gizmoName);
+    public String findKeyConnections(IGizmo gizmoName) {
+        int x, y;
+        System.out.println("entered findKeyConnections method");
+        for (Integer keycode : keyConnections.keySet()) {
+            if (this.keyConnections.containsValue(gizmoName)) {
+                x = gizmoName.getX1();
+                y = gizmoName.getY1();
+
+                return keycode + " up " + this.keyConnections.get(keycode).toString().substring(6,7) + x + y;
+            }
+        }
         return null;
     }
 }
