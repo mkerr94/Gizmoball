@@ -2,8 +2,8 @@ package Controller;
 
 import Model.Model;
 import Model.IGizmo;
+import Model.*;
 import View.GameBoard;
-
 import javax.swing.event.MouseInputListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -59,11 +59,20 @@ public class MoveListener implements ActionListener {
                     public void mouseReleased(MouseEvent e) {
                         newX = e.getX() / 30;
                         newY = e.getY() / 30;
-
-                        if (model.checkGizmoLocation(newX, newY)) {
-                            model.moveGizmo(gizmo, newX, newY);
-                        } else {
-                            buildView.occupiedSpaceAlert();
+                        if (gizmo != null) {
+                            IGizmo gizmoToMove = null;
+                            if (gizmo instanceof Circle) {
+                                gizmoToMove = new Circle(newX, newY);
+                            } else if (gizmo instanceof Square) {
+                                gizmoToMove = new Square(newX, newY);
+                            } else if (gizmo instanceof Triangle) {
+                                gizmoToMove = new Triangle(newX, newY, gizmo.getRotation());
+                            }
+                            if (model.checkIfValidBallSpawn(gizmoToMove)) {
+                                model.moveGizmo(gizmo, newX, newY);
+                            } else{
+                                buildView.occupiedSpaceAlert();
+                            }
                         }
                         gameBoard.removeMouseListener(this);
                     }

@@ -9,8 +9,6 @@ import javax.swing.event.MouseInputListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.util.List;
-import java.util.*;
 
 import View.BuildView;
 
@@ -50,7 +48,7 @@ public class AddFlipperListener implements ActionListener {
                 switch (flipperType){
                     case "Right flipper":
                         RightFlipper rightFlipper = new RightFlipper(x, y);
-                        if (model.checkGizmoLocation(rightFlipper)){
+                        if (model.checkIfValidBallSpawn(rightFlipper)){
                             model.addGizmo(rightFlipper);
                             gameBoard.updateFlipperListener();
                             gameBoard.registerAsFlipperObserver();
@@ -60,7 +58,7 @@ public class AddFlipperListener implements ActionListener {
                         break;
                     case "Left flipper":
                         LeftFlipper leftFlipper = new LeftFlipper(x, y);
-                        if (model.checkGizmoLocation(leftFlipper)){
+                        if (model.checkIfValidBallSpawn(leftFlipper)){
                             model.addGizmo(leftFlipper);
                             gameBoard.updateFlipperListener();
                             gameBoard.registerAsFlipperObserver();

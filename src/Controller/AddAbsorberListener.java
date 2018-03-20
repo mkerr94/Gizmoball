@@ -5,7 +5,6 @@ import Model.*;
 import View.GameBoard;
 import View.BuildView;
 
-import javax.swing.*;
 import javax.swing.event.MouseInputListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,7 +45,7 @@ public class AddAbsorberListener implements ActionListener {
                 Absorber absorber = new Absorber(x1,y1,dx,dy);
 
                 //doesn't give error message - not sure how to fix
-                if (model.checkGizmoLocation(absorber)) {
+                if (model.checkIfValidBallSpawn(absorber)) {
                     model.addGizmo(absorber);
                 }else{
                     buildView.occupiedSpaceAlert();

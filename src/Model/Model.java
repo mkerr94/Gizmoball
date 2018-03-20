@@ -160,92 +160,91 @@ public class Model extends Observable {
      * Returns false if a gizmo already exists at the target location and returns true
      * if nothing exists at the target location
      *
-     * @param gizmoToAdd gizmo to be added to the board
+     * @param gizmoToCheck gizmo to be added to the board
      * @return true if valid placement, false if invalid placement
      */
-    public boolean checkGizmoLocation(IGizmo gizmoToAdd) {
+    public boolean checkIfValidBallSpawn(IGizmo gizmoToCheck) {
+        assert gizmoToCheck != null : "gizmo to check is null";
         // flippers at the edge of the gameboard
-        if (gizmoToAdd instanceof LeftFlipper) {
-            if (gizmoToAdd.getX1() == 19) {
+        if (gizmoToCheck instanceof LeftFlipper) {
+            if (gizmoToCheck.getX1() == 19) {
                 return false;
             }
         }
-        if (gizmoToAdd instanceof RightFlipper) {
-            if (gizmoToAdd.getX1() == 0) {
+        if (gizmoToCheck instanceof RightFlipper) {
+            if (gizmoToCheck.getX1() == 0) {
                 return false;
             }
         }
         // handle basic gizmos
         for (IGizmo existingGizmo : gizmos) {
-            if (existingGizmo.getX1() == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) { // if a gizmo already exists in that location
+            if (existingGizmo.getX1() == gizmoToCheck.getX1() && existingGizmo.getY1() == gizmoToCheck.getY1()) { // if a gizmo already exists in that location
                 return false;
             }
             // handle left flippers
-            if (gizmoToAdd instanceof LeftFlipper) {
-                if (existingGizmo.getX1() - 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
+            if (gizmoToCheck instanceof LeftFlipper) {
+                if (existingGizmo.getX1() - 1 == gizmoToCheck.getX1() && existingGizmo.getY1() == gizmoToCheck.getY1()) {
                     return false;
-                } else if (existingGizmo.getX1() - 1 == gizmoToAdd.getX1() && existingGizmo.getY1() - 1 == gizmoToAdd.getY1()) {
+                } else if (existingGizmo.getX1() - 1 == gizmoToCheck.getX1() && existingGizmo.getY1() - 1 == gizmoToCheck.getY1()) {
                     return false;
                 }
             }
             // handle right flippers
-            if (gizmoToAdd instanceof RightFlipper) {
-                if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
+            if (gizmoToCheck instanceof RightFlipper) {
+                if (existingGizmo.getX1() + 1 == gizmoToCheck.getX1() && existingGizmo.getY1() == gizmoToCheck.getY1()) {
                     return false;
-                } else if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() - 1 == gizmoToAdd.getY1()) {
+                } else if (existingGizmo.getX1() + 1 == gizmoToCheck.getX1() && existingGizmo.getY1() - 1 == gizmoToCheck.getY1()) {
                     return false;
                 }
             }
             // ensure gizmos aren't placed within the range of a rotating flipper
             if (existingGizmo instanceof LeftFlipper) {
-                if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
+                if (existingGizmo.getX1() + 1 == gizmoToCheck.getX1() && existingGizmo.getY1() == gizmoToCheck.getY1()) {
                     return false;
-                } else if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() + 1 == gizmoToAdd.getY1()) {
+                } else if (existingGizmo.getX1() + 1 == gizmoToCheck.getX1() && existingGizmo.getY1() + 1 == gizmoToCheck.getY1()) {
                     return false;
                 }
-                if (gizmoToAdd instanceof RightFlipper) {
-                    if (existingGizmo.getX1() + 2 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
+                if (gizmoToCheck instanceof RightFlipper) {
+                    if (existingGizmo.getX1() + 2 == gizmoToCheck.getX1() && existingGizmo.getY1() == gizmoToCheck.getY1()) {
                         return false;
-                    } else if (existingGizmo.getX1() + 2 == gizmoToAdd.getX1() && existingGizmo.getY1() + 1 == gizmoToAdd.getY1()) {
+                    } else if (existingGizmo.getX1() + 2 == gizmoToCheck.getX1() && existingGizmo.getY1() + 1 == gizmoToCheck.getY1()) {
                         return false;
                     }
                 }
             }
             if (existingGizmo instanceof RightFlipper) {
-                if (existingGizmo.getX1() - 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
+                if (existingGizmo.getX1() - 1 == gizmoToCheck.getX1() && existingGizmo.getY1() == gizmoToCheck.getY1()) {
                     return false;
-                } else if (existingGizmo.getX1() - 1 == gizmoToAdd.getX1() && existingGizmo.getY1() + 1 == gizmoToAdd.getY1()) {
+                } else if (existingGizmo.getX1() - 1 == gizmoToCheck.getX1() && existingGizmo.getY1() + 1 == gizmoToCheck.getY1()) {
                     return false;
                 }
-                if (gizmoToAdd instanceof LeftFlipper) {
-                    if (existingGizmo.getX1() - 2 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
+                if (gizmoToCheck instanceof LeftFlipper) {
+                    if (existingGizmo.getX1() - 2 == gizmoToCheck.getX1() && existingGizmo.getY1() == gizmoToCheck.getY1()) {
                         return false;
-                    } else if (existingGizmo.getX1() - 2 == gizmoToAdd.getX1() && existingGizmo.getY1() + 1 == gizmoToAdd.getY1()) {
+                    } else if (existingGizmo.getX1() - 2 == gizmoToCheck.getX1() && existingGizmo.getY1() + 1 == gizmoToCheck.getY1()) {
                         return false;
                     }
                 }
 
             }
-            //todo Get functionality of adding absorbers
+            //todo fix absorber checks
             // handle absorbers
-            if (gizmoToAdd instanceof Absorber) {
-                if (existingGizmo.getX1() >= gizmoToAdd.getX1() && existingGizmo.getY1() >= gizmoToAdd.getY1()) {
+            if (gizmoToCheck instanceof Absorber) {
+                if (existingGizmo.getX1() >= gizmoToCheck.getX1() && existingGizmo.getY1() >= gizmoToCheck.getY1()) {
                     return false;
                 }
             }
-
         }
         return true;
     }
 
     /**
      * Checks if gizmo already exists at the x and y location passed in.
-     *
-     * @param x
-     * @param y
+     * @param x x ordinate of location to check
+     * @param y y ordinate of location to check
      * @return true if valid placement, false if invalid placement
      */
-    public boolean checkGizmoLocation(int x, int y) {
+    public boolean checkIfValidBallSpawn(int x, int y) {
         for (IGizmo iGizmo : gizmos) {
             if (iGizmo.getX1() == x && iGizmo.getY1() == y) {
                 return false;
