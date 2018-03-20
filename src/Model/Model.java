@@ -322,6 +322,15 @@ public class Model extends Observable {
         return null;
     }
 
+    public Flipper getFlipper(int x, int y){
+        for(Flipper flipper : flippers){
+            if(flipper.getX1() == x && flipper.getY1() == y){
+                return flipper;
+            }
+        }
+        return null;
+    }
+
     /***
      * Method that's called inside CollisionsEngine.timeUntilCollision which handles the
      * behaviour of a ball colliding with an absorber.
@@ -330,14 +339,13 @@ public class Model extends Observable {
      * @param absorber the absorber to handle
      */
     void captureBallsInAbsorber(double time, Ball ball, Absorber absorber) {
-        //todo Fix ball spawn location within  the absorber (may not be within this method)
         for (Ball b : balls) {
             if (time <= 0.1 && !ball.stopped()) {
                 //ball = new Ball(absorber.getX2() - 1 * L, absorber.getY2() - 0.5 * L, -10 * L, -10 * L);
                 System.out.println("Ball hit absorber");
                 b.stop();
-                b.setExactX(absorber.getX2() - absorber.getX1() - (L * 0.25));
-                b.setExactY(absorber.getY1() - absorber.getY2() + (L * 0.5));
+                b.setExactX(absorber.getX2() - b.getRadius());
+                b.setExactY(absorber.getY1());
                 fireQueue.add(b);
                 //balls.remove(b);
                 System.out.println("Balls to be fired" + fireQueue.size());
@@ -388,6 +396,19 @@ public class Model extends Observable {
         }
     }
 
+    public void moveFlipper(Flipper flipper, int newX, int newY){
+        Flipper f = getFlipper(newX,newY);
+        if(f == null){
+            flipper.setX1(newX);
+            flipper.setY1(newY);
+            setChanged();
+            notifyObservers();
+        }
+        else{
+            throw new NullPointerException("Null flipper moved to moveFlipper");
+        }
+    }
+
     /***
      * connects a keyCode to a gizmo
      * @param keyCode keycode that will trigget the gizmo
@@ -409,7 +430,7 @@ public class Model extends Observable {
 
     private void printKeyConnections() {
         for (Integer keycode : keyConnections.keySet()) {
-            System.out.print("keycode: " + keycode);
+                System.out.print("keycode: " + keycode);
             System.out.println("gizmo: " + keyConnections.get(keycode).getClass().toString());
         }
     }
