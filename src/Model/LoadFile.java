@@ -1,10 +1,7 @@
 package Model;
 
-import Model.*;
-
 import javax.swing.*;
 import java.io.*;
-import java.util.HashMap;
 
 
 public class LoadFile {
@@ -35,8 +32,6 @@ public class LoadFile {
         }
     }
 
-    private HashMap<String, IGizmo> loadedGizmos = new HashMap<>();
-
     private void tokenizeFile(){
 
         int x = 0, y = 0, x1, y1, x2, y2, kNo;
@@ -53,43 +48,28 @@ public class LoadFile {
                 String[] gizmoGroup = lineRead.split(" ");
                 switch (gizmoGroup[0]) {
                     case "Square":
-                       // System.out.println("found");
-                        gName = gizmoGroup[1];
                         x = Integer.parseInt(gizmoGroup[2]);
                         y = Integer.parseInt(gizmoGroup[3]);
-                        loadedGizmos.put(gName, new Square(x, y));
                         model.addGizmo(new Square(x, y));
                         break;
                     case "Circle":
-                        //System.out.println("found");
-                        gName = gizmoGroup[1];
                         x = Integer.parseInt(gizmoGroup[2]);
                         y = Integer.parseInt(gizmoGroup[3]);
-                        loadedGizmos.put(gName, new Circle(x, y));
                         model.addGizmo(new Circle(x, y));
                         break;
                     case "Triangle":
-                        //System.out.println("found");
-                        gName = gizmoGroup[1];
                         x = Integer.parseInt(gizmoGroup[2]);
                         y = Integer.parseInt(gizmoGroup[3]);
-                        loadedGizmos.put(gName, new Triangle(x, y, 0));
                         model.addGizmo(new Triangle(x, y, 0));
                         break;
                     case "RightFlipper":
-                        //System.out.println("found");
-                        gName = gizmoGroup[1];
                         x = Integer.parseInt(gizmoGroup[2]);
                         y = Integer.parseInt(gizmoGroup[3]);
-                        loadedGizmos.put(gName, new RightFlipper(x, y));
                         model.addGizmo(new RightFlipper(x + 1, y ));
                         break;
                     case "LeftFlipper":
-                        //System.out.println("found");
-                        gName = gizmoGroup[1];
                         x = Integer.parseInt(gizmoGroup[2]);
                         y = Integer.parseInt(gizmoGroup[3]);
-                        loadedGizmos.put(gName, new LeftFlipper(x, y));
                         model.addGizmo(new LeftFlipper(x, y));
                         break;
                     case "Absorber":
@@ -99,25 +79,25 @@ public class LoadFile {
                         y1 = Integer.parseInt(gizmoGroup[3]);
                         x2 = Integer.parseInt(gizmoGroup[4]);
                         y2 = Integer.parseInt(gizmoGroup[5]);
-                        loadedGizmos.put(gName, new Absorber(x1, y1, x2, y2));
                         model.addGizmo(new Absorber(x1, y1, x2, y2));
                         break;
                     case "Ball":
-                        //System.out.println("-----------found ball----------");
                         gName = gizmoGroup[1];
                         d = Double.parseDouble(gizmoGroup[2]);
                         d1 = Double.parseDouble(gizmoGroup[3]);
                         d2 = Double.parseDouble(gizmoGroup[4]);
                         d3 = Double.parseDouble(gizmoGroup[5]);
-                        //loadedGizmos.put(gName, new Circle(x2, y2));
                         model.addBall(d, d1, d2, d3);
                         break;
                     case "Rotate":
                         System.out.println("found Rotate");
                         gName = gizmoGroup[1];
-                        loadedGizmos.get(gName).rotate();
                         model.rotateGizmo(model.getGizmo(x, y));
                         break;
+                        /*
+                        q 81    w 87    space 32
+
+                         */
                     case "KeyConnect":
                         System.out.println("found KeyConnect");
                         kNo = Integer.parseInt(gizmoGroup[2]);
@@ -141,10 +121,6 @@ public class LoadFile {
             System.out.println(e);
         }
 
-    }
-
-    HashMap<String, IGizmo> getLoadedGizmos() {
-        return loadedGizmos;
     }
 
 }
