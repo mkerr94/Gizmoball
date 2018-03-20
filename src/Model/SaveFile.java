@@ -115,6 +115,7 @@ public class SaveFile {
             gType = models.getClass().getTypeName().substring(6);
             writer.write(gType + " " + gName + " " + bX + " " + bY + " " + bV1);
             writer.newLine();
+            bV1 = "";
             System.out.println("Ball: " + gType + " X: " + x + " Y:" + y + " Velocity = " + bV1);
             model.printKeyConnections();
         }
