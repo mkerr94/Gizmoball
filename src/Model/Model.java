@@ -231,7 +231,11 @@ public class Model extends Observable {
             //todo fix absorber checks for the x2 and y2 value
             // handle absorbers
             if (gizmoToCheck instanceof Absorber) {
-                if (existingGizmo.getX1() >= gizmoToCheck.getX1() && existingGizmo.getY1() >= gizmoToCheck.getY1()) {
+                Absorber absorber = (Absorber) gizmoToCheck;
+                System.out.println("absorber.getX2() = " + absorber.getX2());
+                System.out.println("absorber.getY2() = " + absorber.getY2());
+                if (existingGizmo.getX1() >= absorber.getX1() && existingGizmo.getX1() <= (absorber.getX1() + absorber.getX2())) {
+                    if (existingGizmo.getY1() >= absorber.getY1() && existingGizmo.getY1() <= (absorber.getY1() + absorber.getY2()))
                     return false;
                 }
             }

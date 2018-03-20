@@ -122,33 +122,32 @@ public class GameBoard extends JPanel implements Observer {
                 g2.fillRect(x, y, ((Absorber) gizmo).getX2() * L , ((Absorber) gizmo).getY2() * L );
             }
         }
+        paintGridLines(g2);
         paintFlippers(g2);
         paintBalls(g2);
-        if (mode == Mode.BUILD) paintGridLines(g2);
     }
 
-    private void paintFlippers(Graphics2D g2) {
+    private void paintFlippers(Graphics g2) {
         for (Flipper flipper : flippers) {
             int x = flipper.getX1() * L;
             int y = flipper.getY1() * L;
             double angle = flipper.getAngle();
             int width = L/2;
             int height = 2*L;
+            AffineTransform transform = new AffineTransform();
             if (flipper instanceof LeftFlipper) {
-                Graphics2D g2d = (Graphics2D) g2.create();
-                AffineTransform transform = new AffineTransform();
-                transform.rotate(-Math.toRadians(angle), x + width / 2, y);
-                g2d.setColor(new Color (255,128,0));
-                g2d.setTransform(transform);
-                g2d.fillRoundRect(x, y, width, height, 20, 20);
+                Graphics2D graphics2D = (Graphics2D) g2.create();
+                transform.rotate(-Math.toRadians(angle), x + width/2, y + width/2);
+                graphics2D.setTransform(transform);
+                graphics2D.setColor(new Color (255,128,0));
+                graphics2D.fillRoundRect(x, y, width, height, 20, 20);
             }
             if (flipper instanceof RightFlipper) {
-                Graphics2D g2d = (Graphics2D) g2.create();
-                AffineTransform transform = new AffineTransform();
-                transform.rotate(Math.toRadians(angle), x + L/2 + width / 2, y);
-                g2d.setColor(new Color (255,128,0));
-                g2d.setTransform(transform);
-                g2d.fillRoundRect(x + L/2, y, width, height, 20, 20);
+                Graphics2D graphics2D = (Graphics2D) g2.create();
+                transform.rotate(Math.toRadians(angle), x + L/2 + width/2, y + width/2);
+                graphics2D.setTransform(transform);
+                graphics2D.setColor(new Color (255,128,0));
+                graphics2D.fillRoundRect(x + L/2, y, width, height, 20, 20);
             }
         }
     }
