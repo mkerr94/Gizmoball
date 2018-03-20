@@ -135,7 +135,6 @@ public class LoadFile {
                 }
                 lineRead = buffReader.readLine();
             }
-
         } catch (FileNotFoundException e) {
             System.out.println(e);
         } catch (IOException e) {

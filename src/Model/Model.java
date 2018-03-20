@@ -164,12 +164,22 @@ public class Model extends Observable {
      * @return true if valid placement, false if invalid placement
      */
     public boolean checkGizmoLocation(IGizmo gizmoToAdd) {
+        // flippers at the edge of the gameboard
+        if (gizmoToAdd instanceof LeftFlipper) {
+            if (gizmoToAdd.getX1() == 19) {
+                return false;
+            }
+        }
+        if (gizmoToAdd instanceof RightFlipper) {
+            if (gizmoToAdd.getX1() == 0) {
+                return false;
+            }
+        }
         // handle basic gizmos
         for (IGizmo existingGizmo : gizmos) {
             if (existingGizmo.getX1() == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) { // if a gizmo already exists in that location
                 return false;
             }
-            //todo able to add right flipper at very left of board where it can't swing. Same with left flipper
             // handle left flippers
             if (gizmoToAdd instanceof LeftFlipper) {
                 if (existingGizmo.getX1() - 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
@@ -178,6 +188,15 @@ public class Model extends Observable {
                     return false;
                 }
             }
+            // handle right flippers
+            if (gizmoToAdd instanceof RightFlipper) {
+                if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
+                    return false;
+                } else if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() - 1 == gizmoToAdd.getY1()) {
+                    return false;
+                }
+            }
+            // ensure gizmos aren't placed within the range of a rotating flipper
             if (existingGizmo instanceof LeftFlipper) {
                 if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
                     return false;
@@ -190,14 +209,6 @@ public class Model extends Observable {
                     } else if (existingGizmo.getX1() + 2 == gizmoToAdd.getX1() && existingGizmo.getY1() + 1 == gizmoToAdd.getY1()) {
                         return false;
                     }
-                }
-            }
-            // handle right flippers
-            if (gizmoToAdd instanceof RightFlipper) {
-                if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
-                    return false;
-                } else if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() - 1 == gizmoToAdd.getY1()) {
-                    return false;
                 }
             }
             if (existingGizmo instanceof RightFlipper) {
