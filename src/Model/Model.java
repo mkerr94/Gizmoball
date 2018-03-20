@@ -134,7 +134,7 @@ public class Model extends Observable {
         if (gizmo != null) {
             gizmos.add(gizmo);
             if (gizmo instanceof Flipper) {
-                flippers.add((Flipper)gizmo);
+                flippers.add((Flipper) gizmo);
             }
             setChanged();
             notifyObservers();
@@ -146,7 +146,7 @@ public class Model extends Observable {
     /***
      * Adds a new ball to the collection of balls
      * @param x x-ordinate of ball to add
-     * @param y y-ordinate of ball to ad
+     * @param y y-ordinate of ball to add
      */
     public void addBall(double x, double y, double xv, double yv) {
         Ball ball = new Ball(x, y, xv, yv);
@@ -233,7 +233,7 @@ public class Model extends Observable {
                 Absorber absorber = (Absorber) gizmoToCheck;
                 if (existingGizmo.getX1() >= absorber.getX1() && existingGizmo.getX1() <= (absorber.getX1() + absorber.getX2())) {
                     if (existingGizmo.getY1() >= absorber.getY1() && existingGizmo.getY1() <= (absorber.getY1() + absorber.getY2()))
-                    return false;
+                        return false;
                 }
             }
         }
@@ -242,6 +242,7 @@ public class Model extends Observable {
 
     /**
      * Checks if gizmo already exists at the x and y location passed in.
+     *
      * @param x x ordinate of location to check
      * @param y y ordinate of location to check
      * @return true if valid placement, false if invalid placement
@@ -289,6 +290,15 @@ public class Model extends Observable {
                 break;
             }
         }
+
+        for (Flipper flipper : flippers) {
+            if (flipper.getX1() == x && flipper.getY1() == y) {
+                flippers.remove(flipper);
+                setChanged();
+                notifyObservers();
+                break;
+            }
+        }
     }
 
     /***
@@ -301,7 +311,6 @@ public class Model extends Observable {
             setChanged();
             notifyObservers();
         } else if (gizmo instanceof Flipper) {
-            //todo rotate flipper
             gizmo.rotate();
             setChanged();
             notifyObservers();
@@ -331,9 +340,9 @@ public class Model extends Observable {
      * @param y y ordinate of target location
      * @return the target flipper
      */
-    public Flipper getFlipper(int x, int y){
-        for(Flipper flipper : flippers){
-            if(flipper.getX1() == x && flipper.getY1() == y){
+    public Flipper getFlipper(int x, int y) {
+        for (Flipper flipper : flippers) {
+            if (flipper.getX1() == x && flipper.getY1() == y) {
                 return flipper;
             }
         }
@@ -352,7 +361,7 @@ public class Model extends Observable {
             if (time <= 0.1 && !ball.stopped()) {
                 //ball = new Ball(absorber.getX2() - 1 * L, absorber.getY2() - 0.5 * L, -10 * L, -10 * L);
                 System.out.println("Ball hit absorber");
-                b.setVelo(new Vect(0,0));
+                b.setVelo(new Vect(0, 0));
                 b.stop();
                 b.setExactX(absorber.getX2() - b.getRadius());
                 b.setExactY(absorber.getY2() + (18.5 * L));
@@ -406,15 +415,14 @@ public class Model extends Observable {
         }
     }
 
-    public void moveFlipper(Flipper flipper, int newX, int newY){
-        Flipper f = getFlipper(newX,newY);
-        if(f == null){
+    public void moveFlipper(Flipper flipper, int newX, int newY) {
+        Flipper f = getFlipper(newX, newY);
+        if (f == null) {
             flipper.setX1(newX);
             flipper.setY1(newY);
             setChanged();
             notifyObservers();
-        }
-        else{
+        } else {
             throw new NullPointerException("Null flipper moved to moveFlipper");
         }
     }
@@ -433,15 +441,13 @@ public class Model extends Observable {
     }
 
     public void removeKeyConnection(int keyCode) {
-
         keyConnections.remove(keyCode);
-
     }
 
     public void printKeyConnections() {
         for (Integer keycode : keyConnections.keySet()) {
 
-                System.out.print("keycode: " + keycode);
+            System.out.print("keycode: " + keycode);
             System.out.println("gizmo: " + keyConnections.get(keycode).getClass().toString());
 
             System.out.print("keycode: " + keycode);
@@ -479,7 +485,7 @@ public class Model extends Observable {
                 x = gizmoName.getX1();
                 y = gizmoName.getY1();
 
-                return keycode + " up " + this.keyConnections.get(keycode).toString().substring(6,7) + x + y;
+                return keycode + " up " + this.keyConnections.get(keycode).toString().substring(6, 7) + x + y;
             }
         }
         return null;
