@@ -16,12 +16,12 @@ public class FlipperListener implements ActionListener, KeyListener{
     private GameBoard gameBoard;
     private JComboBox gizmoList;
     private Model model;
-    private int x, y;
     private final List<Flipper> flippers;
     private final List<Flipper> leftflippers;
     private final List<Flipper> rightflippers;
-    private final int globalKeyTrigger1 = KeyEvent.VK_Z;
-    private final int globalKeyTrigger2 = KeyEvent.VK_M;
+    private final int leftFlipperTrigger = KeyEvent.VK_Z;
+    private final int rightFlipperTrigger = KeyEvent.VK_M;
+    private final int globalFlipperTrigger = KeyEvent.VK_SPACE;
     private List<IGizmo> gizmos;
     private Timer timer;
 
@@ -36,13 +36,18 @@ public class FlipperListener implements ActionListener, KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == globalKeyTrigger1){
+        if (e.getKeyCode() == leftFlipperTrigger){
             for (Flipper flipper : leftflippers) {
                 flipper.flip();
             }
         }
-        if (e.getKeyCode() == globalKeyTrigger2){
+        if (e.getKeyCode() == rightFlipperTrigger){
             for (Flipper flipper : rightflippers) {
+                flipper.flip();
+            }
+        }
+        if (e.getKeyCode() == globalFlipperTrigger) {
+            for (Flipper flipper : flippers) {
                 flipper.flip();
             }
         }
@@ -50,13 +55,18 @@ public class FlipperListener implements ActionListener, KeyListener{
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == globalKeyTrigger1){
+        if (e.getKeyCode() == leftFlipperTrigger){
             for (Flipper flipper : leftflippers) {
                 flipper.unflip();
             }
         }
-        if (e.getKeyCode() == globalKeyTrigger2){
+        if (e.getKeyCode() == rightFlipperTrigger){
             for (Flipper flipper : rightflippers) {
+                flipper.unflip();
+            }
+        }
+        if (e.getKeyCode() == globalFlipperTrigger) {
+            for (Flipper flipper : flippers) {
                 flipper.unflip();
             }
         }
@@ -71,8 +81,7 @@ public class FlipperListener implements ActionListener, KeyListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == timer) {
-            for (Flipper flipper :
-                    flippers) {
+            for (Flipper flipper : flippers) {
                 flipper.setAngle(flipper.getAngle() + flipper.getAngularMomentum());
             }
         }
