@@ -41,7 +41,7 @@ public class KeyConnectListener implements ActionListener {
                     gameBoard.removeKeyListener(this);
                     gameBoard.addMouseListener(mouseInputListener);
                 }else{
-                    buildView.occupiedSpaceAlert();
+                    buildView.invalidKeyAlert();
                     gameBoard.removeKeyListener(this);
                 }
 

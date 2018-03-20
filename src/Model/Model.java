@@ -1,6 +1,7 @@
 package Model;
 
 import Physics.Vect;
+
 import java.util.*;
 
 public class Model extends Observable {
@@ -35,7 +36,9 @@ public class Model extends Observable {
         return gizmos;
     }
 
-    Walls getWalls(){return walls;}
+    Walls getWalls() {
+        return walls;
+    }
 
     public void setWalls(Walls walls) {
         this.walls = walls;
@@ -103,7 +106,7 @@ public class Model extends Observable {
      * @param time How often the timer updates. Aim for 20 times per second (0.05)
      */
     private void applyFriction(double time) {
-        for(Ball ball: balls) {
+        for (Ball ball : balls) {
             double mu = 0.025;
             double mu2 = frictionValue / L;
             double vxOld = ball.getVelo().x();
@@ -121,7 +124,7 @@ public class Model extends Observable {
      * @param time How often the timer updates. Aim for 20 times per second (0.05)
      */
     private void applyGravity(double time) {
-        for(Ball ball: balls) {
+        for (Ball ball : balls) {
             Vect gravityAlteredVelocity = new Vect(ball.getVelo().x(), (ball.getVelo().y() + (gravityValue * L * time)));
             ball.setVelo(gravityAlteredVelocity);
         }
@@ -135,12 +138,12 @@ public class Model extends Observable {
         if (gizmo != null) {
             gizmos.add(gizmo);
             if (gizmo instanceof LeftFlipper) {
-                leftflippers.add((Flipper)gizmo);
-                flippers.add((Flipper)gizmo);
+                leftflippers.add((Flipper) gizmo);
+                flippers.add((Flipper) gizmo);
             }
             if (gizmo instanceof RightFlipper) {
-                rightflippers.add((Flipper)gizmo);
-                flippers.add((Flipper)gizmo);
+                rightflippers.add((Flipper) gizmo);
+                flippers.add((Flipper) gizmo);
             }
             setChanged();
             notifyObservers();
@@ -154,7 +157,7 @@ public class Model extends Observable {
      * @param x x-ordinate of ball to add
      * @param y y-ordinate of ball to ad
      */
-    public void addBall(double x, double y,double xv,double yv) {
+    public void addBall(double x, double y, double xv, double yv) {
         Ball ball = new Ball(x, y, xv, yv);
         balls.add(ball);
         setChanged();
@@ -165,6 +168,7 @@ public class Model extends Observable {
      * Checks if a gizmo already exists at the location of the passed in gizmo.
      * Returns false if a gizmo already exists at the target location and returns true
      * if nothing exists at the target location
+     *
      * @param gizmoToAdd gizmo to be added to the board
      * @return true if valid placement, false if invalid placement
      */
@@ -176,45 +180,45 @@ public class Model extends Observable {
             }
             //todo able to add right flipper at very left of board where it can't swing. Same with left flipper
             // handle left flippers
-            if (gizmoToAdd instanceof LeftFlipper){
+            if (gizmoToAdd instanceof LeftFlipper) {
                 if (existingGizmo.getX1() - 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
                     return false;
                 } else if (existingGizmo.getX1() - 1 == gizmoToAdd.getX1() && existingGizmo.getY1() - 1 == gizmoToAdd.getY1()) {
                     return false;
                 }
             }
-            if (existingGizmo instanceof LeftFlipper){
+            if (existingGizmo instanceof LeftFlipper) {
                 if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
                     return false;
                 } else if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() + 1 == gizmoToAdd.getY1()) {
                     return false;
                 }
-                if (gizmoToAdd instanceof RightFlipper){
-                    if (existingGizmo.getX1() + 2 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()){
+                if (gizmoToAdd instanceof RightFlipper) {
+                    if (existingGizmo.getX1() + 2 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
                         return false;
-                    } else if (existingGizmo.getX1() + 2 == gizmoToAdd.getX1() && existingGizmo.getY1() + 1== gizmoToAdd.getY1()){
+                    } else if (existingGizmo.getX1() + 2 == gizmoToAdd.getX1() && existingGizmo.getY1() + 1 == gizmoToAdd.getY1()) {
                         return false;
                     }
                 }
             }
             // handle right flippers
-            if (gizmoToAdd instanceof RightFlipper){
+            if (gizmoToAdd instanceof RightFlipper) {
                 if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
                     return false;
                 } else if (existingGizmo.getX1() + 1 == gizmoToAdd.getX1() && existingGizmo.getY1() - 1 == gizmoToAdd.getY1()) {
                     return false;
                 }
             }
-            if (existingGizmo instanceof RightFlipper){
+            if (existingGizmo instanceof RightFlipper) {
                 if (existingGizmo.getX1() - 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
                     return false;
                 } else if (existingGizmo.getX1() - 1 == gizmoToAdd.getX1() && existingGizmo.getY1() + 1 == gizmoToAdd.getY1()) {
                     return false;
                 }
-                if (gizmoToAdd instanceof LeftFlipper){
-                    if (existingGizmo.getX1() - 2 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()){
+                if (gizmoToAdd instanceof LeftFlipper) {
+                    if (existingGizmo.getX1() - 2 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
                         return false;
-                    } else if (existingGizmo.getX1() - 2 == gizmoToAdd.getX1() && existingGizmo.getY1() + 1== gizmoToAdd.getY1()){
+                    } else if (existingGizmo.getX1() - 2 == gizmoToAdd.getX1() && existingGizmo.getY1() + 1 == gizmoToAdd.getY1()) {
                         return false;
                     }
                 }
@@ -223,7 +227,7 @@ public class Model extends Observable {
             //todo Get functionality of adding absorbers
             // handle absorbers
             if (gizmoToAdd instanceof Absorber) {
-                if(existingGizmo.getX1() >= gizmoToAdd.getX1() && existingGizmo.getY1() >= gizmoToAdd.getY1()){
+                if (existingGizmo.getX1() >= gizmoToAdd.getX1() && existingGizmo.getY1() >= gizmoToAdd.getY1()) {
                     return false;
                 }
             }
@@ -234,13 +238,14 @@ public class Model extends Observable {
 
     /**
      * Checks if gizmo already exists at the x and y location passed in.
+     *
      * @param x
      * @param y
      * @return true if valid placement, false if invalid placement
      */
-    public boolean checkGizmoLocation(int x, int y){
-        for(IGizmo iGizmo: gizmos){
-            if(iGizmo.getX1() == x && iGizmo.getY1() == y){
+    public boolean checkGizmoLocation(int x, int y) {
+        for (IGizmo iGizmo : gizmos) {
+            if (iGizmo.getX1() == x && iGizmo.getY1() == y) {
                 return false;
             }
         }
@@ -273,7 +278,7 @@ public class Model extends Observable {
             }
 
         }
-        for(Ball ball : balls){
+        for (Ball ball : balls) {
             if (ball.getxOrdinate() / 30 == x && ball.getyOrdinate() / 30 == y) {
                 balls.remove(ball);
                 setChanged();
@@ -287,17 +292,15 @@ public class Model extends Observable {
      * Rotates a gizmo around its square
      * @param gizmo the gizmo to rotate. Must be either a triangle or flipper to rotate
      */
-    public void rotateGizmo(IGizmo gizmo){
-        if (gizmo instanceof Triangle){
+    public void rotateGizmo(IGizmo gizmo) {
+        if (gizmo instanceof Triangle) {
             gizmo.rotate();
             setChanged();
             notifyObservers();
-        }
-        else if (gizmo instanceof Flipper){
+        } else if (gizmo instanceof Flipper) {
             //todo rotate flipper
             System.out.println("rotate flipper");
-        }
-        else{
+        } else {
             System.out.println("cannot rotate this gizmo");
         }
     }
@@ -308,9 +311,9 @@ public class Model extends Observable {
      * @param y y ordinate of location of target gizmo
      * @return the gizmo at the target location
      */
-    public IGizmo getGizmo(int x, int y){
-        for(IGizmo iGizmo: gizmos){
-            if(iGizmo.getX1() == x && iGizmo.getY1() == y){
+    public IGizmo getGizmo(int x, int y) {
+        for (IGizmo iGizmo : gizmos) {
+            if (iGizmo.getX1() == x && iGizmo.getY1() == y) {
                 return iGizmo;
             }
         }
@@ -324,7 +327,7 @@ public class Model extends Observable {
      * @param ball the ball to handle
      * @param absorber the absorber to handle
      */
-    void captureBallsInAbsorber(double time, Ball ball, Absorber absorber){
+    void captureBallsInAbsorber(double time, Ball ball, Absorber absorber) {
         //todo Fix ball spawn location within  the absorber (may not be within this method)
         for (Ball b : balls) {
             if (time <= 0.1 && !ball.stopped()) {
@@ -347,7 +350,7 @@ public class Model extends Observable {
      * the user triggers the fire option.
      */
     public void fireBall() {
-        for(Ball ball:balls) {
+        for (Ball ball : balls) {
             if (ball.stopped()) {
                 ball.start();
                 fireQueue.remove(ball);
@@ -358,7 +361,7 @@ public class Model extends Observable {
     }
 
     public void resetBall() {
-        for(Ball ball:balls) {
+        for (Ball ball : balls) {
             ball = new Ball(30, 30, 50, 50);
         }
     }
@@ -373,12 +376,12 @@ public class Model extends Observable {
     public void moveGizmo(IGizmo gizmo, int newX, int newY) {
         //todo Fix move gizmo over new gizmos (Absorber and flipper)
         IGizmo iGizmo = getGizmo(newX, newY);
-        if (iGizmo == null){
+        if (iGizmo == null) {
             gizmo.setX1(newX);
             gizmo.setY1(newY);
             setChanged();
             notifyObservers();
-        }else{
+        } else {
             throw new NullPointerException("Null gizmo moved to moveGizmo");
         }
     }
@@ -389,31 +392,29 @@ public class Model extends Observable {
      * @param gizmoToConnect gizmo to be connected to the keycode
      */
     public void addKeyConnection(int keyCode, IGizmo gizmoToConnect) {
-        if (gizmoToConnect != null){
+        if (gizmoToConnect != null) {
             keyConnections.put(keyCode, gizmoToConnect);
-        } else{
+        } else {
             throw new NullPointerException("Null gizmo passed to addKeyConnection()");
         }
     }
 
-    public void removeKeyConnection(int keyCode, IGizmo gizmoToDisconnect){
-        if(gizmoToDisconnect != null){
-            keyConnections.remove(keyCode, gizmoToDisconnect);
-        }else{
-            throw new NullPointerException("Null gizmo passed to removeKeyConnection()");
-        }
+    public void removeKeyConnection(int keyCode) {
+
+        keyConnections.remove(keyCode);
+
     }
 
-    private void printKeyConnections(){
+    private void printKeyConnections() {
         for (Integer keycode : keyConnections.keySet()) {
             System.out.print("keycode: " + keycode);
             System.out.println("gizmo: " + keyConnections.get(keycode).getClass().toString());
         }
     }
 
-    public boolean checkKeyConnection(int key){
+    public boolean checkKeyConnection(int key) {
         for (Integer keycode : keyConnections.keySet()) {
-            if(keycode == key){
+            if (keycode == key) {
                 return false;
             }
         }
@@ -427,9 +428,11 @@ public class Model extends Observable {
     public List<Flipper> getFlippers() {
         return flippers;
     }
+
     public List<Flipper> getRightFlippers() {
         return rightflippers;
     }
+
     public List<Flipper> getLeftFlippers() {
         return leftflippers;
     }
@@ -440,8 +443,8 @@ public class Model extends Observable {
         leftflippers.clear();
     }
 
-    public IGizmo findKeyConnections(IGizmo gizmoName){
-        if(this.keyConnections.containsValue(gizmoName))
+    public IGizmo findKeyConnections(IGizmo gizmoName) {
+        if (this.keyConnections.containsValue(gizmoName))
             return this.keyConnections.get(gizmoName);
         return null;
     }

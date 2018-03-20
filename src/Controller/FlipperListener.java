@@ -47,7 +47,6 @@ public class FlipperListener implements ActionListener, KeyListener{
                 flipper.flip();
             }
         }
-
         if (e.getKeyCode() == globalKeyTrigger1){
             for (Flipper flipper : leftflippers) {
                 flipper.flip();
