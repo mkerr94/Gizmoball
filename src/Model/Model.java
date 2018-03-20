@@ -32,7 +32,7 @@ public class Model extends Observable {
         return gizmos;
     }
 
-    Walls getWalls() {
+    public Walls getWalls() {
         return walls;
     }
 

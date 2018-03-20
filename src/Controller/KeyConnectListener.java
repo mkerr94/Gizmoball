@@ -9,7 +9,7 @@ import View.GameBoard;
 
 import javax.swing.event.MouseInputListener;
 
-public class KeyConnectListener implements ActionListener {
+public class    KeyConnectListener implements ActionListener {
     private Model model;
     private GameBoard gameBoard;
     private KeyListener keyListener;

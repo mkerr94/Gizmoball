@@ -51,6 +51,8 @@ public abstract class Flipper extends Observable implements IGizmo {
         ArrayList<PhysicsCircle> Circles = new ArrayList<PhysicsCircle>();
         PhysicsCircle c1 = new PhysicsCircle(x +7.5, y+7.5 , 7.5);
         PhysicsCircle c2 = new PhysicsCircle(x+7.5, y+height-7.5, 7.5);
+        Circles.add(c1);
+        Circles.add(c2);
             return Circles;
         }
 
@@ -90,6 +92,9 @@ public abstract class Flipper extends Observable implements IGizmo {
 
     @Override
     public void rotate(){
+        getLines();
+        getCircles();
+        getEndCircles();
         rotation ++;
         if (rotation > 3) {
             rotation = 0;
