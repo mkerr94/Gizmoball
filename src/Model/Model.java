@@ -209,11 +209,14 @@ public class Model extends Observable {
                         return false;
                     }
                 }
+
             }
             //todo Get functionality of adding absorbers
             // handle absorbers
             if (gizmoToAdd instanceof Absorber) {
-
+                if(existingGizmo.getX1() >= gizmoToAdd.getX1() && existingGizmo.getY1() >= gizmoToAdd.getY1()){
+                    return false;
+                }
             }
 
         }
