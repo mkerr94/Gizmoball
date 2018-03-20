@@ -153,12 +153,20 @@ public class GameBoard extends JPanel implements Observer {
                         graphics2D.fillRoundRect(x, y, width, height, 20, 20);
                         break;
                     case 1:
+                        transform.rotate(-Math.toRadians(angle), x + width + width/2, y + width/2);
+                        graphics2D.setTransform(transform);
+                        //noinspection SuspiciousNameCombination
                         graphics2D.fillRoundRect(x - L , y , height, width, 20, 20);
                         break;
                     case 2:
+                        transform.rotate(-Math.toRadians(angle), x + width/2, y + width + width/2);
+                        graphics2D.setTransform(transform);
                         graphics2D.fillRoundRect(x , y - L, width, height, 20, 20);
                         break;
                     case 3:
+                        transform.rotate(-Math.toRadians(angle), x + width/2, y + width/2);
+                        graphics2D.setTransform(transform);
+                        //noinspection SuspiciousNameCombination
                         graphics2D.fillRoundRect(x, y, height, width, 20, 20);
                 }
             }
@@ -173,13 +181,19 @@ public class GameBoard extends JPanel implements Observer {
                         graphics2D.fillRoundRect(x + L/2, y, width, height, 20, 20);
                         break;
                     case 1:
+                        transform.rotate(Math.toRadians(angle), x + L/2 + width/2, y + width/2);
+                        graphics2D.setTransform(transform);
                         //noinspection SuspiciousNameCombination
                         graphics2D.fillRoundRect(x - L, y, height, width, 20, 20);
                         break;
                     case 2:
+                        transform.rotate(Math.toRadians(angle), x + L/2 + width/2, y + width + width/2);
+                        graphics2D.setTransform(transform);
                         graphics2D.fillRoundRect(x + L/2, y - L, width, height, 20, 20);
                         break;
                     case 3:
+                        transform.rotate(Math.toRadians(angle), x + L/4, y + width/2);
+                        graphics2D.setTransform(transform);
                         //noinspection SuspiciousNameCombination
                         graphics2D.fillRoundRect(x, y, height, width, 20, 20);
                         break;

@@ -79,7 +79,7 @@ public class LoadFile {
                         y1 = Integer.parseInt(gizmoGroup[3]);
                         x2 = Integer.parseInt(gizmoGroup[4]);
                         y2 = Integer.parseInt(gizmoGroup[5]);
-                        model.addGizmo(new Absorber(x1, y1, x2, y2));
+                        model.addGizmo(new Absorber(x1, y1, x2-x1, y2-y1));
                         break;
                     case "Ball":
                         gName = gizmoGroup[1];
@@ -87,10 +87,14 @@ public class LoadFile {
                         d1 = Double.parseDouble(gizmoGroup[3]);
                         d2 = Double.parseDouble(gizmoGroup[4]);
                         d3 = Double.parseDouble(gizmoGroup[5]);
-                        model.addBall(d, d1, d2, d3);
+                        System.out.println("x = " + d);
+                        System.out.println("y = " + d1);
+                        System.out.println("vx = " + d2);
+                        System.out.println("vy = " + d3);
+                        model.addBall(d, d1, d2, d3); // without * 30 it wont scale to L
                         break;
                     case "Rotate":
-                        System.out.println("found Rotate");
+                       // System.out.println("found Rotate");
                         gName = gizmoGroup[1];
                         model.rotateGizmo(model.getGizmo(x, y));
                         break;
@@ -99,11 +103,11 @@ public class LoadFile {
 
                          */
                     case "KeyConnect":
-                        System.out.println("found KeyConnect");
+                        //System.out.println("found KeyConnect");
                         kNo = Integer.parseInt(gizmoGroup[2]);
                         upDown = gizmoGroup[3];
                         gConnect1 = model.getGizmos().get(model.getGizmos().size()-1);;
-                        System.out.println("Should connect key " + kNo + " to gizmo " + gConnect1.toString());
+                        //System.out.println("Should connect key " + kNo + " to gizmo " + gConnect1.toString());
                         model.addKeyConnection(kNo, gConnect1);
                         break;
                     case "Connect":
