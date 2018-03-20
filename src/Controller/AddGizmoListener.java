@@ -48,7 +48,7 @@ public class AddGizmoListener implements ActionListener {
                 switch (gizmoToAdd) {
                     case "Circle":
                         Circle circle = new Circle(x, y);
-                        if (model.checkIfValidBallSpawn(circle)){
+                        if (model.checkValidGizmoLocation(circle)){
                             model.addGizmo(circle);
                         } else{
                             buildView.occupiedSpaceAlert();
@@ -56,7 +56,7 @@ public class AddGizmoListener implements ActionListener {
                         break;
                     case "Square":
                         Square square = new Square(x, y);
-                        if (model.checkIfValidBallSpawn(square)){
+                        if (model.checkValidGizmoLocation(square)){
                             model.addGizmo(square);
                         } else{
                             buildView.occupiedSpaceAlert();
@@ -64,7 +64,7 @@ public class AddGizmoListener implements ActionListener {
                         break;
                     case "Triangle":
                         Triangle triangle = new Triangle(x, y, 0);
-                        if (model.checkIfValidBallSpawn(triangle)){
+                        if (model.checkValidGizmoLocation(triangle)){
                             model.addGizmo(triangle);
                         } else{
                             buildView.occupiedSpaceAlert();

@@ -68,7 +68,7 @@ public class MoveListener implements ActionListener {
                             } else if (gizmo instanceof Triangle) {
                                 gizmoToMove = new Triangle(newX, newY, gizmo.getRotation());
                             }
-                            if (model.checkIfValidBallSpawn(gizmoToMove)) {
+                            if (model.checkValidGizmoLocation(gizmoToMove)) {
                                 model.moveGizmo(gizmo, newX, newY);
                             } else{
                                 buildView.occupiedSpaceAlert();

@@ -48,7 +48,7 @@ public class AddFlipperListener implements ActionListener {
                 switch (flipperType){
                     case "Right flipper":
                         RightFlipper rightFlipper = new RightFlipper(x, y);
-                        if (model.checkIfValidBallSpawn(rightFlipper)){
+                        if (model.checkValidGizmoLocation(rightFlipper)){
                             model.addGizmo(rightFlipper);
                             gameBoard.updateFlipperListener();
                             gameBoard.registerAsFlipperObserver();
@@ -58,7 +58,7 @@ public class AddFlipperListener implements ActionListener {
                         break;
                     case "Left flipper":
                         LeftFlipper leftFlipper = new LeftFlipper(x, y);
-                        if (model.checkIfValidBallSpawn(leftFlipper)){
+                        if (model.checkValidGizmoLocation(leftFlipper)){
                             model.addGizmo(leftFlipper);
                             gameBoard.updateFlipperListener();
                             gameBoard.registerAsFlipperObserver();

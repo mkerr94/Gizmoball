@@ -45,7 +45,7 @@ public class AddAbsorberListener implements ActionListener {
                 Absorber absorber = new Absorber(x1,y1,dx,dy);
 
                 //doesn't give error message - not sure how to fix
-                if (model.checkIfValidBallSpawn(absorber)) {
+                if (model.checkValidGizmoLocation(absorber)) {
                     model.addGizmo(absorber);
                 }else{
                     buildView.occupiedSpaceAlert();

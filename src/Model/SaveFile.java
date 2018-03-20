@@ -44,7 +44,7 @@ public class SaveFile {
 
     private void getSaveFile() throws IOException {
         int returnValue = fc.showSaveDialog(null);
-
+        fc.setDialogTitle("Save as...");
         if (returnValue == JFileChooser.APPROVE_OPTION){
             System.out.println("Success!");
             File file = fc.getSelectedFile();
@@ -52,8 +52,8 @@ public class SaveFile {
         else if (returnValue == JFileChooser.CANCEL_OPTION){
             System.out.println("Cancelled");
         }
-        else {
-            System.out.println("Failed");
+        else if (JFileChooser.APPROVE_BUTTON_TEXT_CHANGED_PROPERTY == ""){
+            System.out.println("Failed to name your file");
         }
     }
 
@@ -73,7 +73,7 @@ public class SaveFile {
             y = models.getY1();
             gType = models.getClass().getTypeName().substring(6);
             gName = gType.substring(0, 1);
-            System.out.println("Gizmo: " + gType + " X: " + x + " Y:" + y);
+            System.out.println("Gizmo: " + gType + " X: " + x + " Y:" + y + " and the models is " + models);
             //writer.write(gType + " name " + x + " " + y);
             if(gType.equals("Absorber")){
                 Absorber newA = (Absorber) models;
@@ -90,11 +90,12 @@ public class SaveFile {
                 writer.newLine();
                 continue;
             }
+
             writer.write(gType + " " + gName + x + + y + " " + x + " " + y);
             writer.newLine();
             if(model.findKeyConnections(models) != null){
-                System.out.println("keyConnection found ");
-                writer.write(String.valueOf(model.findKeyConnections(models)));
+                System.out.println("keyConnection found " + (model.findKeyConnections(models)));
+                writer.write(("Connect key " + model.findKeyConnections(models)));
                 writer.newLine();
             }
         }
@@ -115,6 +116,7 @@ public class SaveFile {
             writer.write(gType + " " + gName + " " + bX + " " + bY + " " + bV1);
             writer.newLine();
             System.out.println("Ball: " + gType + " X: " + x + " Y:" + y + " Velocity = " + bV1);
+            model.printKeyConnections();
         }
         writer.close();
     }
