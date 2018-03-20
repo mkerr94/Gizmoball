@@ -7,6 +7,8 @@ public class Model extends Observable {
     private List<IGizmo> gizmos;
     private List<Ball> balls;
     private List<Ball> fireQueue;
+    private List<Flipper> leftflippers;
+    private List<Flipper> rightflippers;
     private List<Flipper> flippers;
     private Walls walls;
     private final int L = 30;
@@ -18,6 +20,8 @@ public class Model extends Observable {
     public Model() {
         gizmos = new ArrayList<>();
         balls = new ArrayList<>();
+        leftflippers = new ArrayList<>();
+        rightflippers = new ArrayList<>();
         flippers = new ArrayList<>();
         fireQueue = new ArrayList();
         walls = new Walls(0, 0, 600, 600);
@@ -130,7 +134,12 @@ public class Model extends Observable {
     public void addGizmo(IGizmo gizmo) {
         if (gizmo != null) {
             gizmos.add(gizmo);
-            if (gizmo instanceof Flipper) {
+            if (gizmo instanceof LeftFlipper) {
+                leftflippers.add((Flipper)gizmo);
+                flippers.add((Flipper)gizmo);
+            }
+            if (gizmo instanceof RightFlipper) {
+                rightflippers.add((Flipper)gizmo);
                 flippers.add((Flipper)gizmo);
             }
             setChanged();
@@ -407,9 +416,17 @@ public class Model extends Observable {
     public List<Flipper> getFlippers() {
         return flippers;
     }
+    public List<Flipper> getRightFlippers() {
+        return rightflippers;
+    }
+    public List<Flipper> getLeftFlippers() {
+        return leftflippers;
+    }
 
     public void clearFlippers() {
         flippers.clear();
+        rightflippers.clear();
+        leftflippers.clear();
     }
 
     public IGizmo findKeyConnections(IGizmo gizmoName){
