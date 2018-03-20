@@ -21,6 +21,7 @@ public class SaveFile {
     private int y;
     private int x2;
     private int y2;
+    private int bIndex = 0;
     private double bX;
     private double bY;
     private Vect velocity;
@@ -103,7 +104,9 @@ public class SaveFile {
                 writer.newLine();
             }
         }
+
         for (Ball models : model.getBalls()) {
+
             bX = models.getxOrdinate();
             bY = models.getyOrdinate();
             velocity = models.getVelo();
@@ -117,9 +120,10 @@ public class SaveFile {
 
             }
             gType = models.getClass().getTypeName().substring(6);
-            writer.write(gType + " " + gName + " " + bX + " " + bY + " " + bV1);
+            writer.write(gType + " B" + bIndex + " " + bX + " " + bY + " " + bV1);
             writer.newLine();
             bV1 = "";
+            bIndex++;
             System.out.println("Ball: " + gType + " X: " + x + " Y:" + y + " Velocity = " + bV1);
             model.printKeyConnections();
         }
