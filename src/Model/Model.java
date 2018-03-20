@@ -165,6 +165,7 @@ public class Model extends Observable {
             if (existingGizmo.getX1() == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) { // if a gizmo already exists in that location
                 return false;
             }
+            //todo able to add right flipper at very left of board where it can't swing. Same with left flipper
             // handle left flippers
             if (gizmoToAdd instanceof LeftFlipper){
                 if (existingGizmo.getX1() - 1 == gizmoToAdd.getX1() && existingGizmo.getY1() == gizmoToAdd.getY1()) {
@@ -209,6 +210,7 @@ public class Model extends Observable {
                     }
                 }
             }
+            //todo Get functionality of adding absorbers
             // handle absorbers
             if (gizmoToAdd instanceof Absorber) {
 
@@ -257,6 +259,7 @@ public class Model extends Observable {
                 notifyObservers();
                 break;
             }
+
         }
         for(Ball ball : balls){
             if (ball.getxOrdinate() / 30 == x && ball.getyOrdinate() / 30 == y) {
@@ -310,6 +313,7 @@ public class Model extends Observable {
      * @param absorber the absorber to handle
      */
     void captureBallsInAbsorber(double time, Ball ball, Absorber absorber){
+        //todo Fix ball spawn location within  the absorber (may not be within this method)
         for (Ball b : balls) {
             if (time <= 0.1 && !ball.stopped()) {
                 //ball = new Ball(absorber.getX2() - 1 * L, absorber.getY2() - 0.5 * L, -10 * L, -10 * L);
@@ -355,6 +359,7 @@ public class Model extends Observable {
      * @param newY y-ordinate of the target destination
      */
     public void moveGizmo(IGizmo gizmo, int newX, int newY) {
+        //todo Fix move gizmo over new gizmos (Absorber and flipper)
         IGizmo iGizmo = getGizmo(newX, newY);
         if (iGizmo == null){
             gizmo.setX1(newX);
