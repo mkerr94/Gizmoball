@@ -54,6 +54,7 @@ public class MainGUI extends JFrame {
                 viewMode.setVisible(true);
                 setContentPane(viewMode);
             }
+            runListener.killTimer();
             lf = new LoadFile(model);
             gameBoard.updateFlipperListener();
             gameBoard.registerAsFlipperObserver();

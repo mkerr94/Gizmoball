@@ -100,9 +100,8 @@ public class SaveFile {
         }
 
         for (Ball models : model.getBalls()) {
-
-            bX = models.getxOrdinate();
-            bY = models.getyOrdinate();
+            bX = models.getExactX();
+            bY = models.getExactY();
             velocity = models.getVelo();
             String sVelocity = velocity.toString();
             Pattern p = Pattern.compile("(\\d+(?:\\.\\d))");

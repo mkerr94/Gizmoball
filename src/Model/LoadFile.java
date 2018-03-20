@@ -23,6 +23,8 @@ public class LoadFile {
         int returnValue = fc.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION){
             System.out.println("Success!");
+            model.clearFlippers();
+            model.clearGizmos();
             tokenizeFile(); }
         else if (returnValue == JFileChooser.CANCEL_OPTION){
             System.out.println("Cancelled");
@@ -91,6 +93,10 @@ public class LoadFile {
                         System.out.println("y = " + d1);
                         System.out.println("vx = " + d2);
                         System.out.println("vy = " + d3);
+                        if (d < 20 || d1 < 20) {
+                            d = d * 30;
+                            d1 = d1 * 30;
+                        }
                         model.addBall(d, d1, d2, d3); // without * 30 it wont scale to L
                         break;
                     case "Rotate":

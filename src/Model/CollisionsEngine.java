@@ -44,7 +44,6 @@ class CollisionsEngine {
             }
         }
 
-
         if(balls.size() > 1){
         for (Ball ball2: balls) {
             Ball b2 = new Ball(ball2.getExactX() * L, ball2.getExactY() * L, ball2.getVelo().x(), ball2.getVelo().y());
@@ -71,11 +70,11 @@ class CollisionsEngine {
                     }
                 }
                 for (LineSegment rotatingLine : lineSegments1) {
-                    Vect vect = new Vect(flipper.getX1() + 15 / 2, flipper.getY1());
-                    time = Geometry.timeUntilRotatingWallCollision(rotatingLine, vect, Math.toRadians(1080), ballCircle, ballVelocity);
+                    Vect vect = new Vect(flipper.getX1() + L/2 + L/4, flipper.getY1() + L/4);
+                    time = Geometry.timeUntilRotatingWallCollision(rotatingLine, vect, -Math.toRadians(1080), ballCircle, ballVelocity);
                     if (time < shortestTime) {
                         shortestTime = time;
-                        newVelo = Geometry.reflectRotatingWall(rotatingLine, vect, Math.toRadians(1080), ballCircle, ball.getVelo());
+                        newVelo = Geometry.reflectRotatingWall(rotatingLine, vect, -Math.toRadians(1080), ballCircle, ball.getVelo());
                     }
                 }
                 ArrayList<PhysicsCircle> physicsCircles = flipper.getEndCircles();
