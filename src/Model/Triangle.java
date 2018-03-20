@@ -130,16 +130,8 @@ public class Triangle implements IGizmo{
         lines.clear();
         createCircles();
         createLines();
-        if (rotation == 1) {
-            rotation = 2;
-        } else if (rotation == 2) {
-            rotation = 3;
-        } else if (rotation == 3) {
-            rotation = 0;
-        } else if (rotation == 0) {
-            rotation = 1;
-        }
-        else if(rotation >= 4) {
+        rotation ++;
+        if (rotation > 3) {
             rotation = 0;
         }
     }

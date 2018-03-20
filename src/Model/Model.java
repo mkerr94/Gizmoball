@@ -228,7 +228,6 @@ public class Model extends Observable {
                 }
 
             }
-            //todo fix absorber checks for the x2 and y2 value
             // handle absorbers
             if (gizmoToCheck instanceof Absorber) {
                 Absorber absorber = (Absorber) gizmoToCheck;
@@ -305,9 +304,12 @@ public class Model extends Observable {
             notifyObservers();
         } else if (gizmo instanceof Flipper) {
             //todo rotate flipper
-            System.out.println("rotate flipper");
+            System.out.println("Model.rotateGizmo");
+            gizmo.rotate();
+            setChanged();
+            notifyObservers();
         } else {
-            System.out.println("cannot rotate this gizmo");
+            System.out.println("Error, cannot rotate this type of gizmo.");
         }
     }
 
@@ -326,6 +328,12 @@ public class Model extends Observable {
         return null;
     }
 
+    /***
+     * Get the flipper at the specified location
+     * @param x x ordinate of target location
+     * @param y y ordinate of target location
+     * @return the target flipper
+     */
     public Flipper getFlipper(int x, int y){
         for(Flipper flipper : flippers){
             if(flipper.getX1() == x && flipper.getY1() == y){

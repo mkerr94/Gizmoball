@@ -21,6 +21,7 @@ public abstract class Flipper extends Observable implements IGizmo {
     Flipper(int x, int y) {
         this.color = Color.black;
         angle = 0;
+        rotation = 0;
         initialAngle = (double) 0;
         finalAngle = 90;
         angularMomentum = 0;
@@ -89,13 +90,9 @@ public abstract class Flipper extends Observable implements IGizmo {
 
     @Override
     public void rotate(){
-        if (rotation == 0){
-            rotation = 1;
-        } else if (rotation == 1){
-            rotation = 2;
-        } else if (rotation == 2){
-            rotation = 3;
-        } else if (rotation == 3){
+        System.out.println("Flipper.rotate");
+        rotation ++;
+        if (rotation > 3) {
             rotation = 0;
         }
     }

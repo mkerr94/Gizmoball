@@ -34,6 +34,7 @@ public class RotateListener implements ActionListener{
                 x = e.getX() / 30;
                 y = e.getY() / 30;
                 IGizmo gizmo = model.getGizmo(x, y);
+                // todo check for flipper overlaps before rotating
                 model.rotateGizmo(gizmo);
                 gameBoard.removeMouseListener(this);
             }

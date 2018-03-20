@@ -48,6 +48,9 @@ public class GameBoard extends JPanel implements Observer {
         requestFocus();
     }
 
+    /***
+     * Registers this as an observer to each flipper
+     */
     public void registerAsFlipperObserver() {
         for (IGizmo gizmo : gizmos) {
             if (gizmo instanceof LeftFlipper) {
@@ -64,7 +67,7 @@ public class GameBoard extends JPanel implements Observer {
      * Paints all of the gizmos from the model. See Model.gizmos.
      * Also draws the ball (see paintBalls(g2)) and gridlines if the game
      * is in buildmode.
-     * todo fix painting glitch where flippers move half an L between modes
+     * todo fix painting glitch where flippers move half an L between modes (something to do with the transform)
      * @param g Java2d Graphics object
      */
     public void paintComponent(Graphics g) {
@@ -127,6 +130,10 @@ public class GameBoard extends JPanel implements Observer {
         paintBalls(g2);
     }
 
+    /***
+     * Draws all the flippers and their rotations
+     * @param g2 Java 2d Graphics object
+     */
     private void paintFlippers(Graphics g2) {
         for (Flipper flipper : flippers) {
             int x = flipper.getX1() * L;
@@ -137,17 +144,46 @@ public class GameBoard extends JPanel implements Observer {
             AffineTransform transform = new AffineTransform();
             if (flipper instanceof LeftFlipper) {
                 Graphics2D graphics2D = (Graphics2D) g2.create();
-                transform.rotate(-Math.toRadians(angle), x + width/2, y + width/2);
-                graphics2D.setTransform(transform);
                 graphics2D.setColor(new Color (255,128,0));
-                graphics2D.fillRoundRect(x, y, width, height, 20, 20);
+                int rotation = flipper.getRotation();
+                switch (rotation) {
+                    case 0:
+                        transform.rotate(-Math.toRadians(angle), x + width/2, y + width/2);
+                        graphics2D.setTransform(transform);
+                        graphics2D.fillRoundRect(x, y, width, height, 20, 20);
+                        break;
+                    case 1:
+                        graphics2D.fillRoundRect(x - L , y , height, width, 20, 20);
+                        break;
+                    case 2:
+                        graphics2D.fillRoundRect(x , y - L, width, height, 20, 20);
+                        break;
+                    case 3:
+                        graphics2D.fillRoundRect(x, y, height, width, 20, 20);
+                }
             }
             if (flipper instanceof RightFlipper) {
                 Graphics2D graphics2D = (Graphics2D) g2.create();
-                transform.rotate(Math.toRadians(angle), x + L/2 + width/2, y + width/2);
-                graphics2D.setTransform(transform);
                 graphics2D.setColor(new Color (255,128,0));
-                graphics2D.fillRoundRect(x + L/2, y, width, height, 20, 20);
+                int rotation = flipper.getRotation();
+                switch (rotation) {
+                    case 0:
+                        transform.rotate(Math.toRadians(angle), x + L/2 + width/2, y + width/2);
+                        graphics2D.setTransform(transform);
+                        graphics2D.fillRoundRect(x + L/2, y, width, height, 20, 20);
+                        break;
+                    case 1:
+                        //noinspection SuspiciousNameCombination
+                        graphics2D.fillRoundRect(x - L, y, height, width, 20, 20);
+                        break;
+                    case 2:
+                        graphics2D.fillRoundRect(x + L/2, y - L, width, height, 20, 20);
+                        break;
+                    case 3:
+                        //noinspection SuspiciousNameCombination
+                        graphics2D.fillRoundRect(x, y, height, width, 20, 20);
+                        break;
+                }
             }
         }
     }
