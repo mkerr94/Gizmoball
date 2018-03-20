@@ -212,4 +212,6 @@ public class BuildView extends JPanel {
         JOptionPane.showMessageDialog(null,"Connection successful!");
     }
 
+    public void invalidKeyAlert(){JOptionPane.showMessageDialog(null,"This key is already being used for another connection. Pleases try again."); }
+
 }

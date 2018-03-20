@@ -405,11 +405,19 @@ public class Model extends Observable {
     }
 
     private void printKeyConnections(){
-        if (keyConnections.size() == 0) System.out.println("no key connections");
         for (Integer keycode : keyConnections.keySet()) {
             System.out.print("keycode: " + keycode);
             System.out.println("gizmo: " + keyConnections.get(keycode).getClass().toString());
         }
+    }
+
+    public boolean checkKeyConnection(int key){
+        for (Integer keycode : keyConnections.keySet()) {
+            if(keycode == key){
+                return false;
+            }
+        }
+        return true;
     }
 
     public List<Ball> getBalls() {

@@ -36,6 +36,18 @@ public class FlipperListener implements ActionListener, KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
+
+        if(!model.checkKeyConnection(e.getKeyCode())){
+            for(Flipper flipper : rightflippers){
+                flipper.flip();
+            }
+        }
+        if(!model.checkKeyConnection(e.getKeyCode())){
+            for(Flipper flipper : leftflippers){
+                flipper.flip();
+            }
+        }
+
         if (e.getKeyCode() == globalKeyTrigger1){
             for (Flipper flipper : leftflippers) {
                 flipper.flip();
@@ -50,6 +62,20 @@ public class FlipperListener implements ActionListener, KeyListener{
 
     @Override
     public void keyReleased(KeyEvent e) {
+
+
+        if(!model.checkKeyConnection(e.getKeyCode())){
+            for(Flipper flipper : rightflippers){
+                flipper.unflip();
+            }
+        }
+
+        if(!model.checkKeyConnection(e.getKeyCode())){
+            for(Flipper flipper : leftflippers){
+                flipper.unflip();
+            }
+        }
+
         if (e.getKeyCode() == globalKeyTrigger1){
             for (Flipper flipper : leftflippers) {
                 flipper.unflip();
