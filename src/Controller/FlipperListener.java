@@ -11,7 +11,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FlipperListener implements ActionListener, KeyListener{
+public class FlipperListener implements ActionListener, KeyListener {
 
     private GameBoard gameBoard;
     private JComboBox gizmoList;
@@ -25,7 +25,7 @@ public class FlipperListener implements ActionListener, KeyListener{
     private List<IGizmo> gizmos;
     private Timer timer;
 
-    public FlipperListener(Model model, GameBoard gameBoard){
+    public FlipperListener(Model model, GameBoard gameBoard) {
         flippers = new ArrayList<>();
         rightflippers = new ArrayList<>();
         leftflippers = new ArrayList<>();
@@ -36,37 +36,72 @@ public class FlipperListener implements ActionListener, KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == leftFlipperTrigger){
+        if (e.getKeyCode() == globalFlipperTrigger) {
+            for (Flipper flipper : flippers) {
+                flipper.flip();
+            }
+        }
+        if (e.getKeyCode() == leftFlipperTrigger) {
             for (Flipper flipper : leftflippers) {
                 flipper.flip();
             }
         }
-        if (e.getKeyCode() == rightFlipperTrigger){
+        if (e.getKeyCode() == rightFlipperTrigger) {
             for (Flipper flipper : rightflippers) {
                 flipper.flip();
             }
         }
-        if (e.getKeyCode() == globalFlipperTrigger) {
-            for (Flipper flipper : flippers) {
+
+        // flipper connections
+        if (!model.checkKeyConnection(e.getKeyCode())) {
+            for (Flipper flipper : rightflippers) {
+                flipper.flip();
+            }
+        }
+        if (!model.checkKeyConnection(e.getKeyCode())) {
+            for (Flipper flipper : leftflippers) {
+                flipper.flip();
+            }
+        }
+        if (!model.checkKeyConnection(e.getKeyCode())) {
+            for (Flipper flipper : leftflippers) {
                 flipper.flip();
             }
         }
     }
 
+
     @Override
     public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == leftFlipperTrigger){
+        if (e.getKeyCode() == globalFlipperTrigger) {
+            for (Flipper flipper : flippers) {
+                flipper.unflip();
+            }
+        }
+        if (e.getKeyCode() == leftFlipperTrigger) {
             for (Flipper flipper : leftflippers) {
                 flipper.unflip();
             }
         }
-        if (e.getKeyCode() == rightFlipperTrigger){
+        if (e.getKeyCode() == rightFlipperTrigger) {
             for (Flipper flipper : rightflippers) {
                 flipper.unflip();
             }
         }
-        if (e.getKeyCode() == globalFlipperTrigger) {
-            for (Flipper flipper : flippers) {
+
+        // flipper connections
+        if (!model.checkKeyConnection(e.getKeyCode())) {
+            for (Flipper flipper : rightflippers) {
+                flipper.unflip();
+            }
+        }
+        if (!model.checkKeyConnection(e.getKeyCode())) {
+            for (Flipper flipper : leftflippers) {
+                flipper.unflip();
+            }
+        }
+        if (!model.checkKeyConnection(e.getKeyCode())) {
+            for (Flipper flipper : leftflippers) {
                 flipper.unflip();
             }
         }

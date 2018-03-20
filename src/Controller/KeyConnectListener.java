@@ -35,9 +35,16 @@ public class KeyConnectListener implements ActionListener {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                keyCode = e.getKeyCode();
-                gameBoard.removeKeyListener(this);
-                gameBoard.addMouseListener(mouseInputListener);
+
+                if(model.checkKeyConnection(e.getKeyCode())){
+                    keyCode = e.getKeyCode();
+                    gameBoard.removeKeyListener(this);
+                    gameBoard.addMouseListener(mouseInputListener);
+                }else{
+                    buildView.invalidKeyAlert();
+                    gameBoard.removeKeyListener(this);
+                }
+
             }
         };
         mouseInputListener = new MouseInputListener() {
