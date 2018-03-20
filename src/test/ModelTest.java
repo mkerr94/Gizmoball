@@ -220,10 +220,54 @@ public class ModelTest {
         assertEquals(model.getGizmos().size(), 0);
     }
 
-
     @Test
     public void getWallsTest() {
         assertEquals(model.getWalls(), model.getWalls());
+    }
+
+    @Test
+    public void checkValidLocationTest() {
+        Square square = new Square(400, 400);
+        Triangle triangle = new Triangle(400, 400, 1);
+        Absorber abs = new Absorber(20, 20, 19, 10);
+        Square square1 = new Square(20, 20);
+
+        model.addGizmo(square1);
+        model.checkValidGizmoLocation(square1);
+        model.addGizmo(abs);
+        model.checkValidGizmoLocation(abs);
+        model.addGizmo(square);
+        model.checkValidGizmoLocation(square);
+        model.checkValidGizmoLocation(triangle);
+        model.addGizmo(triangle);
+
+    }
+
+    @Test
+    public void checkValidLocationFlipperTest() {
+        Square square = new Square(10, 10);
+        Square square1 = new Square(6, 6);
+        RightFlipper rig2 = new RightFlipper(11, 10);
+        LeftFlipper lef2 = new LeftFlipper(5, 6);
+        LeftFlipper lef = new LeftFlipper(40, 40);
+        RightFlipper rig = new RightFlipper(11, 9);
+        LeftFlipper lef1 = new LeftFlipper(1, 1);
+        RightFlipper rig1 = new RightFlipper(19, 19);
+
+        model.addGizmo(lef);
+        model.addGizmo(rig);
+        model.addGizmo(lef1);
+        model.addGizmo(rig1);
+        model.addGizmo(square);
+        model.addGizmo(rig2);
+        model.addGizmo(lef2);
+        model.checkValidGizmoLocation(lef2);
+        model.checkValidGizmoLocation(rig2);
+        model.checkValidGizmoLocation(lef);
+        model.checkValidGizmoLocation(lef1);
+        model.checkValidGizmoLocation(rig);
+        model.checkValidGizmoLocation(rig1);
+
     }
 
 }
