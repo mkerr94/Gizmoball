@@ -63,11 +63,6 @@ public class FlipperListener implements ActionListener, KeyListener {
                 flipper.flip();
             }
         }
-        if (!model.checkKeyConnection(e.getKeyCode())) {
-            for (Flipper flipper : leftflippers) {
-                flipper.flip();
-            }
-        }
     }
 
 
@@ -92,11 +87,6 @@ public class FlipperListener implements ActionListener, KeyListener {
         // flipper connections
         if (!model.checkKeyConnection(e.getKeyCode())) {
             for (Flipper flipper : rightflippers) {
-                flipper.unflip();
-            }
-        }
-        if (!model.checkKeyConnection(e.getKeyCode())) {
-            for (Flipper flipper : leftflippers) {
                 flipper.unflip();
             }
         }
