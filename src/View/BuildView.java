@@ -207,7 +207,7 @@ public class BuildView extends JPanel {
         JOptionPane.showMessageDialog(null, "This space is already occupied! Please choose an empty space.");
     }
 
-     public void keyConnectAlert(){
+    public void keyConnectAlert(){
         JOptionPane.showMessageDialog(null,"Connect successful!");
     }
 

@@ -79,7 +79,7 @@ public class LoadFile {
                         y1 = Integer.parseInt(gizmoGroup[3]);
                         x2 = Integer.parseInt(gizmoGroup[4]);
                         y2 = Integer.parseInt(gizmoGroup[5]);
-                        model.addGizmo(new Absorber(x1, y1, x2, y2));
+                        model.addGizmo(new Absorber(x1, y1, x2-x1, y2-y1));
                         break;
                     case "Ball":
                         gName = gizmoGroup[1];

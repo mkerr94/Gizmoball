@@ -1,8 +1,8 @@
 import Model.Model;
+import Model.Absorber;
 import Model.Circle;
 import Model.Triangle;
 import Model.Square;
-import Model.Absorber;
 import Model.Flipper;
 import View.Mode;
 import org.junit.Test;
@@ -11,15 +11,17 @@ import Model.LeftFlipper;
 import Model.Ball;
 
 import java.awt.event.KeyEvent;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import static org.junit.Assert.*;
 
 
 public class ModelTest {
 
+    Model model = new Model();
+
     @Test
     public void addGizmoTest() {
-        Model model = new Model();
         Circle circle = new Circle(100, 100);
 
         model.addGizmo(circle);
@@ -28,7 +30,6 @@ public class ModelTest {
 
     @Test(expected = NullPointerException.class)
     public void addNullGizmoTest() {
-        Model model = new Model();
         Circle circle = null;
 
         model.addGizmo(circle);
@@ -37,7 +38,6 @@ public class ModelTest {
 
     @Test
     public void multipleGizmoTest() {
-        Model model = new Model();
         Circle circle = new Circle(100, 100);
         Triangle triangle = new Triangle(200, 200, 0);
         model.addGizmo(circle);
@@ -48,7 +48,6 @@ public class ModelTest {
 
     @Test
     public void deleteCircleGizmoTest() {
-        Model model = new Model();
         Circle circle = new Circle(100, 100);
         model.addGizmo(circle);
 
@@ -58,7 +57,6 @@ public class ModelTest {
 
     @Test
     public void deleteTriangleGizmoTest() {
-        Model model = new Model();
         Triangle triangle = new Triangle(100, 100,0);
         model.addGizmo(triangle);
 
@@ -68,7 +66,6 @@ public class ModelTest {
 
     @Test
     public void deleteSquareGizmoTest() {
-        Model model = new Model();
         Square square = new Square(100, 100);
         model.addGizmo(square);
 
@@ -78,7 +75,6 @@ public class ModelTest {
 
     @Test
     public void clearBoardTest() {
-        Model model = new Model();
         Circle circle = new Circle(100, 100);
         model.addGizmo(circle);
 
@@ -88,7 +84,6 @@ public class ModelTest {
 
     @Test
     public void addBall() {
-        Model model = new Model();
 
         model.addBall(10, 10, 50, 50);
         assertEquals(model.getBalls().size(), 1);
@@ -96,7 +91,6 @@ public class ModelTest {
 
     @Test
     public void deleteBall(){
-        Model model = new Model();
 
         model.addBall(10,10,50,50);
         model.deleteGizmoOrBall(10/30,10/30);
@@ -106,7 +100,6 @@ public class ModelTest {
 
     @Test
     public void addMultipleBalls() {
-        Model model = new Model();
 
         model.addBall(10, 10, 50, 50);
         model.addBall(20, 20, 50, 50);
@@ -116,7 +109,6 @@ public class ModelTest {
 
     @Test
     public void deleteRightFlipper(){
-        Model model = new Model();
 
         RightFlipper flipper = new RightFlipper(10,10);
         model.addGizmo(flipper);
@@ -127,7 +119,6 @@ public class ModelTest {
 
     @Test
     public void deleteLeftFlipper(){
-        Model model = new Model();
 
         LeftFlipper flipper = new LeftFlipper(10,10);
         model.addGizmo(flipper);
@@ -138,7 +129,6 @@ public class ModelTest {
 
     @Test
     public void rotateTriangle(){
-        Model model = new Model();
         Triangle triangle = new Triangle(10,10,0);
 
         model.rotateGizmo(triangle);
@@ -147,7 +137,6 @@ public class ModelTest {
 
     @Test
     public void rotateRightFlipper(){
-        Model model = new Model();
         RightFlipper flipper = new RightFlipper(10,10);
 
         model.rotateGizmo(flipper);
@@ -156,7 +145,6 @@ public class ModelTest {
 
     @Test
     public void rotateLeftFlipper(){
-        Model model = new Model();
         LeftFlipper flipper = new LeftFlipper(10,10);
 
         model.rotateGizmo(flipper);
@@ -165,7 +153,6 @@ public class ModelTest {
 
     @Test
     public void moveCircle(){
-        Model model = new Model();
         Circle circle = new Circle(10,10);
 
         model.moveGizmo(circle,20,20);
@@ -174,7 +161,6 @@ public class ModelTest {
 
     @Test
     public void moveSquare(){
-        Model model = new Model();
         Square square = new Square(10,10);
 
         model.moveGizmo(square,20,20);
@@ -183,7 +169,6 @@ public class ModelTest {
 
     @Test
     public void moveTriangle(){
-        Model model = new Model();
         Triangle triangle = new Triangle(10,10,0);
 
         model.moveGizmo(triangle,20,20);
@@ -192,7 +177,6 @@ public class ModelTest {
 
     @Test
     public void addKeyConnectionGizmoTest(){
-        Model model = new Model();
         int keyCode = KeyEvent.VK_SPACE;
         Circle circle = new Circle(10,10);
 
@@ -202,7 +186,6 @@ public class ModelTest {
 
     @Test
     public void addKeyConnectionFlipperTest(){
-        Model model = new Model();
         int keyCode = KeyEvent.VK_SPACE;
         RightFlipper flipper = new RightFlipper(10,10);
 
@@ -212,7 +195,6 @@ public class ModelTest {
 
     @Test
     public void deleteKeyConnectionGizmoTest(){
-        Model model = new Model();
         int keyCode = KeyEvent.VK_SPACE;
         Circle circle = new Circle(10,10);
 
@@ -223,7 +205,6 @@ public class ModelTest {
 
     @Test
     public void deleteKeyConnectionFlipperTest(){
-        Model model = new Model();
         int keyCode = KeyEvent.VK_SPACE;
         RightFlipper flipper = new RightFlipper(10,10);
 
@@ -231,6 +212,20 @@ public class ModelTest {
         model.removeKeyConnection(keyCode);
         assertTrue(model.checkKeyConnection(keyCode));
     }
+
+    @Test
+    public void addAbsorberTest(){
+        Absorber absorber = new Absorber(10, 10, 20, 1);
+
+        assertEquals(model.getGizmos().size(), 0);
+    }
+
+
+    @Test
+    public void getWallsTest() {
+        assertEquals(model.getWalls(), model.getWalls());
+    }
+
 }
 
 
