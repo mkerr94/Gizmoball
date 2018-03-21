@@ -4,6 +4,7 @@ import Model.Circle;
 import Model.Triangle;
 import Model.Square;
 import Model.Flipper;
+import Model.IGizmo;
 import View.Mode;
 import org.junit.Test;
 import Model.RightFlipper;
@@ -18,7 +19,7 @@ import static org.junit.Assert.*;
 
 public class ModelTest {
 
-    Model model = new Model();
+    private final Model model = new Model();
 
     @Test
     public void addGizmoTest() {
@@ -216,8 +217,10 @@ public class ModelTest {
     @Test
     public void addAbsorberTest(){
         Absorber absorber = new Absorber(10, 10, 20, 1);
-
-        assertEquals(model.getGizmos().size(), 0);
+        model.addGizmo(absorber);
+        for (IGizmo igizmo : model.getGizmos()) {
+            assertEquals(absorber, igizmo);
+        }
     }
 
     @Test
