@@ -278,7 +278,7 @@ public class Model extends Observable {
     public boolean checkIfValidBallSpawn(int x, int y) {
         for (IGizmo iGizmo : gizmos) {
             if (iGizmo.getX1() == x && iGizmo.getY1() == y) {
-                return false;
+                    return false;
             }
         }
         return true;
@@ -391,7 +391,7 @@ public class Model extends Observable {
                 b.setVelo(new Vect(0, 0));
                 b.stop();
                 b.setExactX(absorber.getX2() - b.getRadius());
-                b.setExactY(absorber.getY2() + absorber.getY1());
+                b.setExactY(absorber.getY2() + absorber.getY1() - b.getRadius());
                 fireQueue.add(b);
                 System.out.println("Balls to be fired" + fireQueue.size());
                 this.setChanged();
