@@ -47,10 +47,10 @@ public class AddAbsorberListener implements ActionListener {
                 //doesn't give error message - not sure how to fix
                 if (model.checkValidGizmoLocation(absorber)) {
                     model.addGizmo(absorber);
-                }else if(!(model.checkValidGizmoLocation(absorber))){
+                }else if(!(absorber.getY2() > 20) || !(absorber.getX2() > 20)){
                     buildView.occupiedSpaceAlert();
                 } else {
-                    if(!(absorber.getY2() > 20 ||absorber.getX2() > 20)){
+                    if(!model.checkValidGizmoLocation(absorber)){
                         buildView.absorberOutsideGrid();
                     }
                 }
