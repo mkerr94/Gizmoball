@@ -22,8 +22,7 @@ public class KeyDisconnectListener implements ActionListener {
         this.model = model;
         this.gameBoard = gameBoard;
         this.buildView = buildView;
-
-
+        
         keyListener = new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
