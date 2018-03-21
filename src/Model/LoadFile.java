@@ -1,6 +1,7 @@
 package Model;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 
 
@@ -20,6 +21,9 @@ public class LoadFile {
         }
     }
     private void getLoadFile() throws FileNotFoundException {
+        //Filter should work
+        //FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
+        //fc.setFileFilter(filter);
         int returnValue = fc.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION){
             System.out.println("Success!");
@@ -28,6 +32,11 @@ public class LoadFile {
             tokenizeFile(); }
         else if (returnValue == JFileChooser.CANCEL_OPTION){
             System.out.println("Cancelled");
+        }
+        else if (returnValue == JFileChooser.ERROR_OPTION){
+            JOptionPane.showMessageDialog(null, "Error",
+                    "Error",
+                    JOptionPane.OK_OPTION);
         }
         else {
             System.out.println("Failed");
