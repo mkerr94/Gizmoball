@@ -44,7 +44,7 @@ public class AddBallListener implements ActionListener {
                 if(vx > -1000 && vx < 1000 && vy > -1000 && vx < 1000) {
                     x = e.getX();
                     y = e.getY();
-                    if (model.checkIfValidBallSpawn(x/30, y/30) && x < 600 && y < 600) {
+                    if (model.checkIfValidBallSpawn(x/30, y/30) && x < 600 && x > 0 && y < 600 && y > 0) {
                         model.addBall(x, y, vx, vy);
                     } else {
                         buildView.occupiedSpaceAlert();
