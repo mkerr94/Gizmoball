@@ -69,10 +69,8 @@ public class MoveListener implements ActionListener {
                                 gizmoToMove = new Triangle(newX, newY, gizmo.getRotation());
                             } else if (gizmo instanceof LeftFlipper) {
                                 gizmoToMove = new LeftFlipper(newX, newY);
-                                System.out.println("we have a left flipper");
                             } else if (gizmo instanceof RightFlipper) {
                                 gizmoToMove = new RightFlipper(newX, newY);
-                                System.out.println("We have a right flipper");
                             }
                             if (model.checkValidGizmoLocation(gizmoToMove)) {
                                 model.moveGizmo(gizmo, newX, newY);

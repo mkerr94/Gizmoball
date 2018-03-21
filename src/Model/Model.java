@@ -5,22 +5,22 @@ import Physics.Vect;
 import java.util.*;
 
 public class Model extends Observable {
-    private List<IGizmo> gizmos;
-    private List<Ball> balls;
-    private List<Ball> fireQueue;
-    private List<Flipper> flippers;
+    private final List<IGizmo> gizmos;
+    private final List<Ball> balls;
+    private final List<Ball> fireQueue;
+    private final List<Flipper> flippers;
     private Walls walls;
     private final int L = 30;
     private int gravityValue;
     private double frictionValue;
-    private CollisionsEngine collisionsEngine;
-    private Map<Integer, IGizmo> keyConnections;
+    private final CollisionsEngine collisionsEngine;
+    private final Map<Integer, IGizmo> keyConnections;
 
     public Model() {
         gizmos = new ArrayList<>();
         balls = new ArrayList<>();
         flippers = new ArrayList<>();
-        fireQueue = new ArrayList();
+        fireQueue = new ArrayList<>();
         walls = new Walls(0, 0, 600, 600);
         gravityValue = 25;
         frictionValue = 0.025;
@@ -28,22 +28,58 @@ public class Model extends Observable {
         keyConnections = new HashMap<>();
     }
 
+    /***
+     * getter for this.gizmos
+     * @return this.gizmos
+     */
     public List<IGizmo> getGizmos() {
         return gizmos;
     }
 
+    /***
+     * getter for the walls
+     * @return this.walls
+     */
     public Walls getWalls() {
         return walls;
     }
 
+    /***
+     * getter for this.balls
+     * @return this.balls
+     */
+    public List<Ball> getBalls() {
+        return balls;
+    }
+
+    /***
+     * getter for this.flippers
+     * @return this.flippers
+     */
+    public List<Flipper> getFlippers() {
+        return flippers;
+    }
+
+    /***
+     * setter for the walls of the gameboard
+     * @param walls new walls
+     */
     public void setWalls(Walls walls) {
         this.walls = walls;
     }
 
+    /***
+     * setter for the gravity value in the game
+     * @param gravityValue new gravity value
+     */
     public void setGravityValue(int gravityValue) {
         this.gravityValue = gravityValue;
     }
 
+    /***
+     * setter for the friction value in the game
+     * @param frictionValue new friction value
+     */
     public void setFrictionValue(double frictionValue) {
         this.frictionValue = frictionValue;
     }
@@ -149,7 +185,6 @@ public class Model extends Observable {
      * @param y y-ordinate of ball to add
      */
     public void addBall(double x, double y, double xv, double yv) {
-
         Ball ball = new Ball(x, y, xv, yv);
         balls.add(ball);
         setChanged();
@@ -375,21 +410,6 @@ public class Model extends Observable {
     }
 
     /***
-     * Get the flipper at the specified location
-     * @param x x ordinate of target location
-     * @param y y ordinate of target location
-     * @return the target flipper
-     */
-    public Flipper getFlipper(int x, int y) {
-        for (Flipper flipper : flippers) {
-            if (flipper.getX1() == x && flipper.getY1() == y) {
-                return flipper;
-            }
-        }
-        return null;
-    }
-
-    /***
      * Method that's called inside CollisionsEngine.timeUntilCollision which handles the
      * behaviour of a ball colliding with an absorber.
      * @param time the tick time, should be 0.05 according to spec
@@ -446,18 +466,6 @@ public class Model extends Observable {
         }
     }
 
-    public void moveFlipper(Flipper flipper, int newX, int newY) {
-        Flipper f = getFlipper(newX, newY);
-        if (f == null) {
-            flipper.setX1(newX);
-            flipper.setY1(newY);
-            setChanged();
-            notifyObservers();
-        } else {
-            throw new NullPointerException("Null flipper moved to moveFlipper");
-        }
-    }
-
     /***
      * connects a keyCode to a gizmo
      * @param keyCode keycode that will trigget the gizmo
@@ -475,18 +483,11 @@ public class Model extends Observable {
         keyConnections.remove(keyCode);
     }
 
-    public void printKeyConnections() {
-        for (Integer keycode : keyConnections.keySet()) {
-
-            System.out.print("keycode: " + keycode);
-            System.out.println("gizmo: " + keyConnections.get(keycode).getClass().toString());
-
-            System.out.print("keycode: " + keycode);
-            System.out.println("gizmo: " + keyConnections.get(keycode));
-
-        }
-    }
-
+    /***
+     * checks if an int is a valid key connection
+     * @param key the key to validate
+     * @return true if valid, false otherwise
+     */
     public boolean checkKeyConnection(int key) {
         for (Integer keycode : keyConnections.keySet()) {
             if (keycode == key) {
@@ -496,21 +497,21 @@ public class Model extends Observable {
         return true;
     }
 
-    public List<Ball> getBalls() {
-        return balls;
-    }
 
-    public List<Flipper> getFlippers() {
-        return flippers;
-    }
-
+    /***
+     * Empties the collection of flippers. Used when clear board is called in the view
+     */
     public void clearFlippers() {
         flippers.clear();
     }
 
-    public String stringKeyConnection(IGizmo gizmoName) {
+    /***
+     * parses a gizmo's key connection to a string for use when saving a game to file
+     * @param gizmoName the gizmo who's connection to be parsed
+     * @return a parsed string ready to be written to file
+     */
+    String stringKeyConnection(IGizmo gizmoName) {
         int x, y;
-        System.out.println("entered stringKeyConnection method");
         for (Integer keycode : keyConnections.keySet()) {
             if (this.keyConnections.containsValue(gizmoName)) {
                 x = gizmoName.getX1();

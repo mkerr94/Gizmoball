@@ -79,13 +79,13 @@ public abstract class Flipper extends Observable implements IGizmo {
 
 
     public void flip() {
-        angularMomentum = 54;
+        angularMomentum = 54; // 1080 degrees in radians
         setChanged();
         notifyObservers();
     }
 
     public void unflip() {
-        angularMomentum = -54;
+        angularMomentum = -54; // -1080 degrees in radians
         setChanged();
         notifyObservers();
     }

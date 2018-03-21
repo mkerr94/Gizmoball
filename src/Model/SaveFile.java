@@ -123,7 +123,6 @@ public class SaveFile {
             writer.write(gType + " B" + i + " " + bX + " " + bY + " " + bV1);
             writer.newLine();
             i++;
-            model.printKeyConnections();
         }
         writer.close();
     }

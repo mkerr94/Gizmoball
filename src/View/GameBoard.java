@@ -14,15 +14,15 @@ import java.util.List;
 
 public class GameBoard extends JPanel implements Observer {
     private Mode mode;
-    private Model model;
-    private List<IGizmo> gizmos;
-    private List<Ball> balls;
-    private int L = 30;
-    private int width;
-    private int height;
-    private List<Flipper> flippers;
-    private FlipperListener flipperListener;
-    private FireBallListener fireListener;
+    private final Model model;
+    private final List<IGizmo> gizmos;
+    private final List<Ball> balls;
+    private final int L = 30;
+    private final int width;
+    private final int height;
+    private final List<Flipper> flippers;
+    private final FlipperListener flipperListener;
+    private final FireBallListener fireListener;
 
     /***
      * Initialises a board, builds collisions walls on the board, registers the board
