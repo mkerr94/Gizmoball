@@ -18,11 +18,10 @@ public class SaveFile {
         fc = new JFileChooser(FILE_PATH);
         this.model = model;
         try {
-            if(!model.getGizmos().isEmpty()) {
+            if(!model.getBalls().isEmpty()) {
                 getSaveFile();
             }
             else{
-                String icon = "";
                 JOptionPane.showMessageDialog(null, "Nothing to save");
                 System.out.println("Nothing to save");
             }
