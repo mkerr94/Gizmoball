@@ -106,8 +106,8 @@ public class SaveFile {
         }
         int i = 0;
         for (Ball models : model.getBalls()) {
-            double bX = models.getExactX();
-            double bY = models.getExactY();
+            double bX = models.getxOrdinate();
+            double bY = models.getxOrdinate();
             String bV1 = "";
             Vect velocity = models.getVelo();
             String sVelocity = velocity.toString();

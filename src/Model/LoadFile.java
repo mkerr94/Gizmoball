@@ -36,7 +36,7 @@ public class LoadFile {
         else if (returnValue == JFileChooser.ERROR_OPTION){
             JOptionPane.showMessageDialog(null, "Error",
                     "Error",
-                    JOptionPane.OK_OPTION);
+                    JOptionPane.ERROR_MESSAGE);
         }
         else {
             System.out.println("Failed");
