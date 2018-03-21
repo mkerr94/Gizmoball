@@ -92,7 +92,7 @@ public class SaveFile {
                 writer.newLine();
             }
         }
-
+        int i = 0;
         for (Ball models : model.getBalls()) {
             double bX = models.getExactX();
             double bY = models.getExactY();
@@ -108,8 +108,9 @@ public class SaveFile {
 
             }
             gType = models.getClass().getTypeName().substring(6);
-            writer.write(gType + " B" + bX + bY  + " " + bX + " " + bY + " " + bV1);
+            writer.write(gType + " B" + i + " " + bX + " " + bY + " " + bV1);
             writer.newLine();
+            i++;
             model.printKeyConnections();
         }
         writer.close();
