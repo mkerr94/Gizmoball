@@ -22,8 +22,8 @@ public class SaveFile {
                 getSaveFile();
             }
             else{
-                JOptionPane.showMessageDialog(null, "Nothing to save");
-                System.out.println("Nothing to save");
+                JOptionPane.showMessageDialog(null, "Need at least 1 ball to start/save","Nothing to save",
+                        JOptionPane.ERROR_MESSAGE);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -39,13 +39,15 @@ public class SaveFile {
         // Could extend into JFilechoose to implement more options
         if(fc.getSelectedFile().exists() && JOptionPane.showConfirmDialog(null,"Sorry, " + file.getName() + " already exists, overwrite?",
                 "File found",JOptionPane.YES_NO_OPTION)  != JOptionPane.YES_OPTION){
-                System.out.println("Canceled overwrite");
+            JOptionPane.showMessageDialog(null, "Cancelled overwrite","Cancelled",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
         else if (returnValue == JFileChooser.APPROVE_OPTION){
             System.out.println("Success, opening file!");
             getGizmos(file); }
         else if (returnValue == JFileChooser.CANCEL_OPTION){
-            System.out.println("Cancelled, failed to pick an option");
+            JOptionPane.showMessageDialog(null, "Cancelled, failed to pick an option","Cancelled",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -104,8 +106,8 @@ public class SaveFile {
         }
         int i = 0;
         for (Ball models : model.getBalls()) {
-            double bX = models.getExactX();
-            double bY = models.getExactY();
+            double bX = models.getxOrdinate();
+            double bY = models.getxOrdinate();
             String bV1 = "";
             Vect velocity = models.getVelo();
             String sVelocity = velocity.toString();
