@@ -23,7 +23,6 @@ public class BuildView extends JPanel {
 
     BuildView(Model model, GameBoard gameBoard) {
         this.model = model;
-        listener = new BuildListener();
         this.gameBoard = gameBoard;
         this.gameBoard.setMode(Mode.BUILD);
         init();

@@ -119,7 +119,7 @@ public class Model extends Observable {
      * slows down over time.
      * @param time How often the timer updates. Aim for 20 times per second (0.05)
      */
-    private void applyGravity(double time) {
+    public void applyGravity(double time) {
         for (Ball ball : balls) {
             Vect gravityAlteredVelocity = new Vect(ball.getVelo().x(), (ball.getVelo().y() + (gravityValue * L * time)));
             ball.setVelo(gravityAlteredVelocity);
@@ -320,7 +320,6 @@ public class Model extends Observable {
                 notifyObservers();
                 break;
             }
-
         }
         for (Ball ball : balls) {
             if (ball.getxOrdinate() / 30 == x && ball.getyOrdinate() / 30 == y) {
