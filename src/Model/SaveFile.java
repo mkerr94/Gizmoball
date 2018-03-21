@@ -26,6 +26,7 @@ public class SaveFile {
 
     private void getSaveFile() throws IOException {
         int returnValue = fc.showSaveDialog(null);
+        // Could extend into JFilechoose to implement more options
         fc.setDialogTitle("Save as...");
         if(fc.getSelectedFile().exists() && JOptionPane.showConfirmDialog(null,"The file exists, overwrite?",
                 "Existing file",JOptionPane.YES_NO_OPTION)  != JOptionPane.YES_OPTION){
