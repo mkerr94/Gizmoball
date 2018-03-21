@@ -40,12 +40,15 @@ public class SaveFile {
     private void getSaveFile() throws IOException {
         int returnValue = fc.showSaveDialog(null);
         fc.setDialogTitle("Save as...");
-        if (returnValue == JFileChooser.APPROVE_OPTION){
-            System.out.println("Success!");
+        if(fc.getSelectedFile().exists()){
+            System.out.println("Cancelled, file exists");
+        }
+        else if (returnValue == JFileChooser.APPROVE_OPTION){
+            System.out.println("Success, opening file!");
             File file = fc.getSelectedFile();
             getGizmos(file); }
         else if (returnValue == JFileChooser.CANCEL_OPTION){
-            System.out.println("Cancelled");
+            System.out.println("Cancelled, failed to pick an option");
         }
         else if (JFileChooser.APPROVE_BUTTON_TEXT_CHANGED_PROPERTY == ""){
             System.out.println("Failed to name your file");
