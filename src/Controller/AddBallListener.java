@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Model;
+
 import View.GameBoard;
 
 import javax.swing.event.MouseInputListener;
@@ -12,7 +13,7 @@ import View.BuildView;
 public class AddBallListener implements ActionListener {
 
     private Model model;
-    private int x,y;
+    private int x,y,x1,y1;
     private GameBoard gameBoard;
     private MouseInputListener mouseInputListener;
     double vx, vy;
@@ -43,7 +44,7 @@ public class AddBallListener implements ActionListener {
                 if(vx > -1000 && vx < 1000 && vy > -1000 && vx < 1000) {
                     x = e.getX();
                     y = e.getY();
-                    if (model.checkIfValidBallSpawn(x/30, y/30)) {
+                    if (model.checkIfValidBallSpawn(x/30, y/30) && x < 600 && y < 600) {
                         model.addBall(x, y, vx, vy);
                     } else {
                         buildView.occupiedSpaceAlert();
