@@ -34,9 +34,6 @@ public class SaveFile {
         fc.setDialogTitle("Choose a name to save the file");
         int returnValue = fc.showSaveDialog(null);
         File file = fc.getSelectedFile();
-        if(file.getName() == "")
-            JOptionPane.showMessageDialog(null, "blank is not a valid name");
-        // Could extend into JFilechoose to implement more options
         if(fc.getSelectedFile().exists() && JOptionPane.showConfirmDialog(null,"Sorry, " + file.getName() + " already exists, overwrite?",
                 "File found",JOptionPane.YES_NO_OPTION)  != JOptionPane.YES_OPTION){
             JOptionPane.showMessageDialog(null, "Cancelled overwrite","Cancelled",
