@@ -1,5 +1,6 @@
 package View;
 
+import Controller.FireBallListener;
 import Controller.FlipperListener;
 import Controller.MagicKeyListener;
 import Model.*;
@@ -21,6 +22,7 @@ public class GameBoard extends JPanel implements Observer {
     private int height;
     private List<Flipper> flippers;
     private FlipperListener flipperListener;
+    private FireBallListener fireListener;
 
     /***
      * Initialises a board, builds collisions walls on the board, registers the board
@@ -41,8 +43,11 @@ public class GameBoard extends JPanel implements Observer {
         model.addObserver(this);
         registerAsFlipperObserver();
         flipperListener = new FlipperListener(model, this);
+        fireListener = new FireBallListener(model, this);
         MagicKeyListener magicKeyListener = new MagicKeyListener(flipperListener);
+        MagicKeyListener magicKeyListener1 = new MagicKeyListener(fireListener);
         this.addKeyListener(magicKeyListener);
+        this.addKeyListener(magicKeyListener1);
         setBorder(new EtchedBorder(Color.black, Color.black));
         setBackground(Color.white);
         requestFocus();

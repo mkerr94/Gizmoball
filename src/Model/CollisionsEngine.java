@@ -176,7 +176,7 @@ class CollisionsEngine {
                     }
                 }
             }
-            // Absorber collisions todo make sure absorber functions properly
+            // Absorber collisions
             if (gizmo instanceof Absorber) {
                 for (Ball b : balls) {
                     Absorber absorber = new Absorber(gizmo.getX1() * L, gizmo.getY1() * L, ((Absorber) gizmo).getX2() * L, ((Absorber) gizmo).getY2() * L);

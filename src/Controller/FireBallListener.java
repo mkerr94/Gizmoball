@@ -1,15 +1,18 @@
 package Controller;
 import Model.Model;
+import View.GameBoard;
 import java.awt.event.*;
 
-public class FireBallListener implements KeyListener {
+public class FireBallListener implements KeyListener, ActionListener {
 
-    private final int globalKeyTrigger = KeyEvent.VK_SPACE;
+    private final int globalKeyTrigger = KeyEvent.VK_F;
 
     private Model m;
+    private GameBoard gameBoard;
 
-    public FireBallListener(Model m){
+    public FireBallListener(Model m, GameBoard gameBoard){
         this.m = m;
+        this.gameBoard = gameBoard;
     }
 
     @Override
@@ -23,8 +26,16 @@ public class FireBallListener implements KeyListener {
     }
 
     @Override
-    public void keyReleased(KeyEvent space) {
+    public void keyReleased(KeyEvent e) {
+        if (e.getKeyCode() == globalKeyTrigger) {
+            m.fireBall();
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
         m.fireBall();
+        System.out.println("F pressed");
     }
 }
 

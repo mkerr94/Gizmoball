@@ -52,15 +52,16 @@ public class RunView extends JPanel {
         tickB.setFont(new Font("Arial", Font.PLAIN, 24));
         tickB.setBackground(Color.white);
         tickB.addActionListener(runListener);
-        JButton resetB = new JButton("Fire");
-        resetB.setFont(new Font("Arial", Font.PLAIN, 24));
-        resetB.setBackground(Color.white);
-        resetB.setPreferredSize(new Dimension(247, 100));
-        resetB.addActionListener(runListener);
+        JButton fireB = new JButton("Fire");
+        fireB.setFont(new Font("Arial", Font.PLAIN, 24));
+        fireB.setBackground(Color.white);
+        fireB.setPreferredSize(new Dimension(247, 100));
+        fireB.addActionListener(runListener);
+
         panel.add(startB);
         panel.add(stopB);
         panel.add(tickB);
-        panel.add(resetB);
+        panel.add(fireB);
 
     }
 

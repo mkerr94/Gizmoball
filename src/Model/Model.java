@@ -277,7 +277,7 @@ public class Model extends Observable {
      */
     public boolean checkIfValidBallSpawn(int x, int y) {
         for (IGizmo iGizmo : gizmos) {
-            if (iGizmo.getX1() == x && iGizmo.getY1() == y || (iGizmo.getX1() * 30 > 20) || (iGizmo.getY1() * 30 > 20)) {
+            if (iGizmo.getX1() == x && iGizmo.getY1() == y) {
                     return false;
             }
         }
