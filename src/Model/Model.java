@@ -213,6 +213,28 @@ public class Model extends Observable {
             }
         }
 
+        if (gizmoToCheck instanceof LeftFlipper) {
+            if (gizmoToCheck.getX1() >= 20) {
+                return false;
+            }
+        }
+        if (gizmoToCheck instanceof RightFlipper) {
+            if (gizmoToCheck.getX1() >= 20) {
+                return false;
+            }
+        }
+
+        if (gizmoToCheck instanceof LeftFlipper) {
+            if (gizmoToCheck.getY1() >= 19) {
+                return false;
+            }
+        }
+        if (gizmoToCheck instanceof RightFlipper) {
+            if (gizmoToCheck.getY1() >= 19) {
+                return false;
+            }
+        }
+
         //Outside of grid
         if (gizmoToCheck instanceof Circle) {
             if (gizmoToCheck.getY1() >= 20 || gizmoToCheck.getX1() >= 20) {

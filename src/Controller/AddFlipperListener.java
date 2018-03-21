@@ -52,8 +52,13 @@ public class AddFlipperListener implements ActionListener {
                             model.addGizmo(rightFlipper);
                             gameBoard.updateFlipperListener();
                             gameBoard.registerAsFlipperObserver();
-                        }else{
+                        } else if(!(rightFlipper.getX1() >= 19) && !(rightFlipper.getY1() >= 20)){
                             buildView.occupiedSpaceAlert();
+                        }
+                        else{
+                            if (!model.checkValidGizmoLocation(rightFlipper)) {
+                                buildView.flipperOutsideGrid();
+                            }
                         }
                         break;
                     case "Left flipper":
@@ -62,8 +67,13 @@ public class AddFlipperListener implements ActionListener {
                             model.addGizmo(leftFlipper);
                             gameBoard.updateFlipperListener();
                             gameBoard.registerAsFlipperObserver();
-                        }else{
+                        }else if(!(leftFlipper.getX1() >= 19) && !(leftFlipper.getY1() >= 20)){
                             buildView.occupiedSpaceAlert();
+                        }
+                        else{
+                            if (!model.checkValidGizmoLocation(leftFlipper)) {
+                                buildView.flipperOutsideGrid();
+                            }
                         }
                         break;
                 }

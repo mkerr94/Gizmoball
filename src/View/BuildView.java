@@ -218,6 +218,9 @@ public class BuildView extends JPanel {
         JOptionPane.showMessageDialog(null, "You are trying to place a gizmo outside the grid. Please stay within the board");
     }
 
+    public void flipperOutsideGrid() {
+        JOptionPane.showMessageDialog(null, "You are trying to place a flipper outside the grid. Please stay within the board");
+    }
     public void keyConnectAlert(){
         JOptionPane.showMessageDialog(null,"Connect successful!");
     }
