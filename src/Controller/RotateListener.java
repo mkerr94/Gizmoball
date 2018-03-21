@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import Model.Model;
 import Model.*;
+import View.BuildView;
 import View.GameBoard;
 
 import javax.swing.event.MouseInputListener;
@@ -14,10 +15,12 @@ public class RotateListener implements ActionListener{
     private GameBoard gameBoard;
     private MouseInputListener mouseInputListener;
     private int x, y;
+    private BuildView buildView;
 
-    public RotateListener(Model model, GameBoard gameBoard){
+    public RotateListener(Model model, GameBoard gameBoard, BuildView buildView){
         this.model = model;
         this.gameBoard = gameBoard;
+        this.buildView = buildView;
         mouseInputListener = new MouseInputListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -34,8 +37,17 @@ public class RotateListener implements ActionListener{
                 x = e.getX() / 30;
                 y = e.getY() / 30;
                 IGizmo gizmo = model.getGizmo(x, y);
-                // todo check for flipper overlaps before rotating
-                model.rotateGizmo(gizmo);
+                if (gizmo != null) {
+                    if (gizmo instanceof Flipper) {
+                        if (model.checkValidFlipperRotation(gizmo)) {
+                            model.rotateGizmo(gizmo);
+                        } else {
+                            buildView.occupiedSpaceAlert();
+                        }
+                    } else {
+                        model.rotateGizmo(gizmo);
+                    }
+                }
                 gameBoard.removeMouseListener(this);
             }
 

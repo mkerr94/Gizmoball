@@ -122,7 +122,7 @@ public class BuildView extends JPanel {
         moveB.addActionListener(e -> statusbar.setText("Move Gizmo"));
         moveB.addActionListener(new MoveListener(model, gameBoard, this));
         rotateB.addActionListener(e -> statusbar.setText("Rotate Gizmo"));
-        rotateB.addActionListener(new RotateListener(model, gameBoard));
+        rotateB.addActionListener(new RotateListener(model, gameBoard, this));
         deleteB.addActionListener(e -> statusbar.setText("Delete Gizmo"));
         deleteB.addActionListener(new DeleteListener(model, gameBoard));
         clearB.addActionListener(e -> statusbar.setText("Clear Board"));

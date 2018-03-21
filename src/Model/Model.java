@@ -510,10 +510,74 @@ public class Model extends Observable {
             if (this.keyConnections.containsValue(gizmoName)) {
                 x = gizmoName.getX1();
                 y = gizmoName.getY1();
-
                 return keycode + " up " + this.keyConnections.get(keycode).toString().substring(6, 7) + x + y;
             }
         }
         return null;
+    }
+
+    /***
+     * Checks if there any gizmos in the way before rotating a flipper
+     * @param rotatingFlipper the flipper to be rotated
+     * @return true if the flipper can rotate, false if there are gizmos obstructing the rotate
+     */
+    public boolean checkValidFlipperRotation(IGizmo rotatingFlipper) {
+        int rotation = rotatingFlipper.getRotation();
+        rotation = (rotation > 2) ? 0 : rotation + 1;
+        System.out.println("Model.checkValidFlipperRotation");
+        System.out.println("rotation = " + rotation);
+        for (IGizmo existingGizmo : gizmos) {
+            switch (rotation) {
+                // going from rotation 3 to rotation 0 (unrotated)
+                case 0:
+                    if (rotatingFlipper instanceof LeftFlipper) {
+                        if (existingGizmo.getX1() == rotatingFlipper.getX1() && existingGizmo.getY1() == rotatingFlipper.getY1() + 1) {
+                            return false;
+                        }
+                    } else if (rotatingFlipper instanceof RightFlipper) {
+                        if (existingGizmo.getX1() == rotatingFlipper.getX1() && existingGizmo.getY1() == rotatingFlipper.getY1() + 1) {
+                            return false;
+                        }
+                    }
+                    break;
+                // going from rotation 0 (unrotated) to rotation 1
+                case 1:
+                    if (rotatingFlipper instanceof LeftFlipper) {
+                        if (existingGizmo.getX1() == rotatingFlipper.getX1() - 1 && existingGizmo.getY1() == rotatingFlipper.getY1()) {
+                            return false;
+                        }
+                    } else if (rotatingFlipper instanceof RightFlipper) {
+                        if (existingGizmo.getX1() == rotatingFlipper.getX1() - 1 && existingGizmo.getY1() == rotatingFlipper.getY1()) {
+                            return false;
+                        }
+                    }
+                    break;
+                // going from rotation 1 to rotation 2
+                case 2:
+                    if (rotatingFlipper instanceof LeftFlipper) {
+                        if (existingGizmo.getX1() == rotatingFlipper.getX1() && existingGizmo.getY1() == rotatingFlipper.getY1() - 1) {
+                            return false;
+                        }
+                    } else if (rotatingFlipper instanceof RightFlipper) {
+                        if (existingGizmo.getX1() == rotatingFlipper.getX1() && existingGizmo.getY1() == rotatingFlipper.getY1() - 1) {
+                            return false;
+                        }
+                    }
+                    break;
+                // going from rotation 2 to rotation 3
+                case 3:
+                    if (rotatingFlipper instanceof LeftFlipper) {
+                        if (existingGizmo.getX1() == rotatingFlipper.getX1() + 1 && existingGizmo.getY1() == rotatingFlipper.getY1()) {
+                            return false;
+                        }
+                    } else if (rotatingFlipper instanceof RightFlipper) {
+                        if (existingGizmo.getX1() == rotatingFlipper.getX1() + 1 && existingGizmo.getY1() == rotatingFlipper.getY1()) {
+                            return false;
+                        }
+                    }
+                    break;
+            }
+        }
+        return true;
     }
 }

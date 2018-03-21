@@ -130,7 +130,7 @@ public class GameBoard extends JPanel implements Observer {
                 g2.fillRect(x, y, ((Absorber) gizmo).getX2() * L , ((Absorber) gizmo).getY2() * L );
             }
         }
-        if (mode == Mode.BUILD) paintGridLines(g2);
+        paintGridLines(g2);
         paintFlippers(g2);
         paintBalls(g2);
     }
