@@ -161,7 +161,6 @@ public class Model extends Observable {
      * Checks if a gizmo already exists at the location of the passed in gizmo.
      * Returns false if a gizmo already exists at the target location and returns true
      * if nothing exists at the target location
-     *
      * @param gizmoToCheck gizmo to be added to the board
      * @return true if valid placement, false if invalid placement
      */
@@ -224,12 +223,18 @@ public class Model extends Observable {
                 } else if (existingGizmo.getX1() - 1 == gizmoToCheck.getX1() && existingGizmo.getY1() - 1 == gizmoToCheck.getY1()) {
                     return false;
                 }
+                if (existingGizmo.getX1() == gizmoToCheck.getX1() && existingGizmo.getY1() == gizmoToCheck.getY1() + 1) {
+                    return false;
+                }
             }
             // handle right flippers
             if (gizmoToCheck instanceof RightFlipper) {
                 if (existingGizmo.getX1() + 1 == gizmoToCheck.getX1() && existingGizmo.getY1() == gizmoToCheck.getY1()) {
                     return false;
                 } else if (existingGizmo.getX1() + 1 == gizmoToCheck.getX1() && existingGizmo.getY1() - 1 == gizmoToCheck.getY1()) {
+                    return false;
+                }
+                if (existingGizmo.getX1() == gizmoToCheck.getX1() && existingGizmo.getY1() == gizmoToCheck.getY1() + 1) {
                     return false;
                 }
             }

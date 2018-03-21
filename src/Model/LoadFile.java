@@ -37,7 +37,7 @@ public class LoadFile {
     private void tokenizeFile(){
 
         int x = 0, y = 0, x1, y1, x2, y2, kNo;
-        double d, d1, d2, d3;
+        double ball_x, ball_y, ball_vx, ball_vy;
         String lineRead;
         IGizmo gConnect1;
 
@@ -82,19 +82,15 @@ public class LoadFile {
                         model.addGizmo(new Absorber(x1, y1, x2-x1, y2-y1));
                         break;
                     case "Ball":
-                        d = Double.parseDouble(gizmoGroup[2]);
-                        d1 = Double.parseDouble(gizmoGroup[3]);
-                        d2 = Double.parseDouble(gizmoGroup[4]);
-                        d3 = Double.parseDouble(gizmoGroup[5]);
-                        System.out.println("x = " + d);
-                        System.out.println("y = " + d1);
-                        System.out.println("vx = " + d2);
-                        System.out.println("vy = " + d3);
-                        if (d < 20 || d1 < 20) {
-                            d = d * 30;
-                            d1 = d1 * 30;
+                        ball_x = Double.parseDouble(gizmoGroup[2]);
+                        ball_y = Double.parseDouble(gizmoGroup[3]);
+                        ball_vx = Double.parseDouble(gizmoGroup[4]);
+                        ball_vy = Double.parseDouble(gizmoGroup[5]);
+                        if (ball_x < 20 || ball_y < 20) {
+                            ball_x = ball_x * 30;
+                            ball_y = ball_y * 30;
                         }
-                        model.addBall(d, d1, d2, d3); // without * 30 it wont scale to L
+                        model.addBall(ball_x, ball_y, ball_vx, ball_vy); // without * 30 it wont scale to L
                         break;
                     case "Rotate":
                         model.rotateGizmo(model.getGizmo(x, y));
