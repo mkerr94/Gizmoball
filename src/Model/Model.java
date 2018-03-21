@@ -155,7 +155,7 @@ public class Model extends Observable {
      * slows down over time.
      * @param time How often the timer updates. Aim for 20 times per second (0.05)
      */
-    private void applyGravity(double time) {
+    public void applyGravity(double time) {
         for (Ball ball : balls) {
             Vect gravityAlteredVelocity = new Vect(ball.getVelo().x(), (ball.getVelo().y() + (gravityValue * L * time)));
             ball.setVelo(gravityAlteredVelocity);
@@ -242,13 +242,6 @@ public class Model extends Observable {
         for (IGizmo existingGizmo : gizmos) {
             if (existingGizmo.getX1() == gizmoToCheck.getX1() && existingGizmo.getY1() == gizmoToCheck.getY1()) { // if a gizmo already exists in that location
                 return false;
-            }
-            if (existingGizmo instanceof Absorber) {
-                Absorber absorber = (Absorber) existingGizmo;
-                if (gizmoToCheck.getX1() >= absorber.getX1() && gizmoToCheck.getX1() <= (absorber.getX1() + absorber.getX2())) {
-                    if (gizmoToCheck.getY1() >= absorber.getY1() && gizmoToCheck.getY1() <= (absorber.getY1() + absorber.getY2()))
-                        return false;
-                }
             }
 
             // handle left flippers
@@ -341,7 +334,6 @@ public class Model extends Observable {
         setChanged();
         notifyObservers();
     }
-
     /***
      * Deletes the gizmo or ball at the given location
      * @param x x ordinate of target gizmo/ball
@@ -355,7 +347,6 @@ public class Model extends Observable {
                 notifyObservers();
                 break;
             }
-
         }
         for (Ball ball : balls) {
             if (ball.getxOrdinate() / 30 == x && ball.getyOrdinate() / 30 == y) {

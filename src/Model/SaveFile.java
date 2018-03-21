@@ -90,10 +90,7 @@ public class SaveFile {
                 continue;
             }
             if (models instanceof RightFlipper){
-                System.out.println("hjghgfghjghfhgfjhfjhghgjhghgghhghghgghhghg");
                 x = x -1;
-                writer.write(gType + " " + gName + x + +y + " " + x + " " + y);
-                writer.newLine();
             }
 
             writer.write(gType + " " + gName + x + +y + " " + x + " " + y);

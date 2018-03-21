@@ -46,8 +46,11 @@ public class AddBallListener implements ActionListener {
                     y = e.getY();
                     if (model.checkIfValidBallSpawn(x/30, y/30) && x < 600 && x > 0 && y < 600 && y > 0) {
                         model.addBall(x, y, vx, vy);
-                    } else {
+                    } else if(!(model.checkIfValidBallSpawn(x/30, y/30)))
                         buildView.occupiedSpaceAlert();
+                    else {
+                        if (!(model.checkIfValidBallSpawn(x/30, y/30) && x < 600 && x > 0 && y < 600 && y > 0));
+                        buildView.ballOutsideGridZoneAlert();
                     }
                 }else{
                     buildView.invalidVelocityAlert();

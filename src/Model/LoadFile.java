@@ -25,7 +25,12 @@ public class LoadFile {
         //FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
         //fc.setFileFilter(filter);
         int returnValue = fc.showOpenDialog(null);
-        if (returnValue == JFileChooser.APPROVE_OPTION){
+        if(!fc.getSelectedFile().exists()){
+            JOptionPane.showMessageDialog(null, "Load file doesn't exist",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        else if (returnValue == JFileChooser.APPROVE_OPTION){
             System.out.println("Success!");
             model.clearFlippers();
             model.clearGizmos();

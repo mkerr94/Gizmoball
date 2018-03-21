@@ -50,24 +50,36 @@ public class AddGizmoListener implements ActionListener {
                         Circle circle = new Circle(x, y);
                         if (model.checkValidGizmoLocation(circle)){
                             model.addGizmo(circle);
-                        } else{
+                        } else if(!(circle.getX1() >= 20) && !(circle.getY1() >= 20)){
                             buildView.occupiedSpaceAlert();
+                        } else {
+                            if (!model.checkValidGizmoLocation(circle)) {
+                                buildView.gizmoOutsideGrid();
+                            }
                         }
                         break;
                     case "Square":
                         Square square = new Square(x, y);
                         if (model.checkValidGizmoLocation(square)){
                             model.addGizmo(square);
-                        } else{
+                        } else if(!(square.getX1() >= 20) && !(square.getY1() >= 20)){
                             buildView.occupiedSpaceAlert();
+                        } else {
+                            if (!model.checkValidGizmoLocation(square)) {
+                                buildView.gizmoOutsideGrid();
+                            }
                         }
                         break;
                     case "Triangle":
                         Triangle triangle = new Triangle(x, y, 0);
                         if (model.checkValidGizmoLocation(triangle)){
                             model.addGizmo(triangle);
-                        } else{
+                        } else if(!(triangle.getX1() >= 20) && !(triangle.getY1() >= 20)){
                             buildView.occupiedSpaceAlert();
+                        } else {
+                            if (!model.checkValidGizmoLocation(triangle)) {
+                                buildView.gizmoOutsideGrid();
+                            }
                         }
                         break;
                 }

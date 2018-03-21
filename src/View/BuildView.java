@@ -23,7 +23,6 @@ public class BuildView extends JPanel {
 
     BuildView(Model model, GameBoard gameBoard) {
         this.model = model;
-        listener = new BuildListener();
         this.gameBoard = gameBoard;
         this.gameBoard.setMode(Mode.BUILD);
         init();
@@ -205,6 +204,18 @@ public class BuildView extends JPanel {
 
     public void occupiedSpaceAlert() {
         JOptionPane.showMessageDialog(null, "This space is already occupied! Please choose an empty space.");
+    }
+
+    public void ballOutsideGridZoneAlert() {
+        JOptionPane.showMessageDialog(null, "You are trying to place a ball outside the grid. Please stay within the board");
+    }
+
+    public void absorberOutsideGrid() {
+        JOptionPane.showMessageDialog(null, "The absorber can not be larger than the grid");
+    }
+
+    public void gizmoOutsideGrid() {
+        JOptionPane.showMessageDialog(null, "You are trying to place a gizmo outside the grid. Please stay within the board");
     }
 
     public void keyConnectAlert(){
