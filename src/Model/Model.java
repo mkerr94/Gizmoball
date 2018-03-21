@@ -198,6 +198,12 @@ public class Model extends Observable {
             }
         }
 
+        if(gizmoToCheck instanceof Absorber) {
+            if( ((Absorber) gizmoToCheck).getY2() > 20 || ((Absorber) gizmoToCheck).getX2() > 20) {
+                return false;
+            }
+        }
+
         // handle basic gizmos
         for (IGizmo existingGizmo : gizmos) {
             if (existingGizmo.getX1() == gizmoToCheck.getX1() && existingGizmo.getY1() == gizmoToCheck.getY1()) { // if a gizmo already exists in that location
