@@ -71,7 +71,7 @@ public class SaveFile {
                 Absorber newA = (Absorber) models;
                 int x2 = newA.getX2();
                 int y2 = newA.getY2();
-                writer.write(gType + " " + gName + " " + x + " " + y + " " + x2 + " " + y2);
+                writer.write(gType + " " + gName + " " + x + " " + y + " " + (x2 - x) + " " + (y2 + y));
                 writer.newLine();
                 continue;
             }
@@ -101,7 +101,7 @@ public class SaveFile {
         int i = 0;
         for (Ball models : model.getBalls()) {
             double bX = models.getxOrdinate();
-            double bY = models.getxOrdinate();
+            double bY = models.getExactY();
             String bV1 = "";
             Vect velocity = models.getVelo();
             String sVelocity = velocity.toString();
@@ -114,7 +114,7 @@ public class SaveFile {
 
             }
             gType = models.getClass().getTypeName().substring(6);
-            writer.write(gType + " B" + i + " " + bX + " " + bY + " " + bV1);
+            writer.write(gType + " B" + i + " " + bX + " " + (bY + 5) + " " + bV1);
             writer.newLine();
             i++;
         }

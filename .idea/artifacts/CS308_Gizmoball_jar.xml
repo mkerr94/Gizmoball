@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CS308-Gizmoball:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CS308_Gizmoball_jar</output-path>
+    <root id="archive" name="CS308-Gizmoball.jar">
+      <element id="module-output" name="CS308-Gizmoball" />
+    </root>
+  </artifact>
+</component>

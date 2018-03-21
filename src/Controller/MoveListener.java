@@ -71,6 +71,8 @@ public class MoveListener implements ActionListener {
                                 gizmoToMove = new LeftFlipper(newX, newY);
                             } else if (gizmo instanceof RightFlipper) {
                                 gizmoToMove = new RightFlipper(newX, newY);
+                            } else if (gizmo instanceof Absorber){
+                                gizmoToMove = new Absorber(newX, newY, ((Absorber) gizmo).getX2(), ((Absorber) gizmo).getY2());
                             }
                             if (model.checkValidGizmoLocation(gizmoToMove)) {
                                 model.moveGizmo(gizmo, newX, newY);
