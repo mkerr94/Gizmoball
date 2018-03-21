@@ -46,7 +46,7 @@ public class SaveFile {
         System.out.println("Entered SaveFile");
         FileWriter fstream = null;
         try {
-            fstream = new FileWriter(fileToWrite, true);
+            fstream = new FileWriter(fileToWrite, false);
         } catch (IOException e) {
             e.printStackTrace();
         }
