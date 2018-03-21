@@ -209,6 +209,13 @@ public class Model extends Observable {
             if (existingGizmo.getX1() == gizmoToCheck.getX1() && existingGizmo.getY1() == gizmoToCheck.getY1()) { // if a gizmo already exists in that location
                 return false;
             }
+            if (existingGizmo instanceof Absorber) {
+                Absorber absorber = (Absorber) existingGizmo;
+                if (gizmoToCheck.getX1() >= absorber.getX1() && gizmoToCheck.getX1() <= (absorber.getX1() + absorber.getX2())) {
+                    if (gizmoToCheck.getY1() >= absorber.getY1() && gizmoToCheck.getY1() <= (absorber.getY1() + absorber.getY2()))
+                        return false;
+                }
+            }
 
             // handle left flippers
             if (gizmoToCheck instanceof LeftFlipper) {
@@ -423,7 +430,6 @@ public class Model extends Observable {
      * @param newY y-ordinate of the target destination
      */
     public void moveGizmo(IGizmo gizmo, int newX, int newY) {
-        //todo Fix move gizmo over new gizmos (Absorber and flipper)
         IGizmo iGizmo = getGizmo(newX, newY);
         if (iGizmo == null) {
             gizmo.setX1(newX);
