@@ -34,18 +34,18 @@ public class SaveFile {
         fc.setDialogTitle("Choose a name to save the file");
         int returnValue = fc.showSaveDialog(null);
         File file = fc.getSelectedFile();
-        if(fc.getSelectedFile().exists() && JOptionPane.showConfirmDialog(null,"Sorry, " + file.getName() + " already exists, overwrite?",
+        if (returnValue == JFileChooser.CANCEL_OPTION){
+            JOptionPane.showMessageDialog(null, "Cancelled, failed to pick an option","Cancelled",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if(fc.getSelectedFile().exists() && JOptionPane.showConfirmDialog(null,"Sorry, " + file.getName() + " already exists, overwrite?",
                 "File found",JOptionPane.YES_NO_OPTION)  != JOptionPane.YES_OPTION){
             JOptionPane.showMessageDialog(null, "Cancelled overwrite","Cancelled",
                     JOptionPane.INFORMATION_MESSAGE);
         }
-        else if (returnValue == JFileChooser.APPROVE_OPTION){
+        else {
             System.out.println("Success, opening file!");
             getGizmos(file); }
-        else if (returnValue == JFileChooser.CANCEL_OPTION){
-            JOptionPane.showMessageDialog(null, "Cancelled, failed to pick an option","Cancelled",
-                    JOptionPane.INFORMATION_MESSAGE);
-        }
     }
 
 

@@ -25,7 +25,10 @@ public class LoadFile {
         //FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
         //fc.setFileFilter(filter);
         int returnValue = fc.showOpenDialog(null);
-        if(!fc.getSelectedFile().exists()){
+        if (returnValue == JFileChooser.CANCEL_OPTION){
+            System.out.println("Cancelled");
+        }
+        else if(!fc.getSelectedFile().exists()){
             JOptionPane.showMessageDialog(null, "Load file doesn't exist",
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
@@ -35,9 +38,6 @@ public class LoadFile {
             model.clearFlippers();
             model.clearGizmos();
             tokenizeFile(); }
-        else if (returnValue == JFileChooser.CANCEL_OPTION){
-            System.out.println("Cancelled");
-        }
         else if (returnValue == JFileChooser.ERROR_OPTION){
             JOptionPane.showMessageDialog(null, "Error",
                     "Error",
