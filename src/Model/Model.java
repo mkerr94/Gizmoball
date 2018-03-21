@@ -149,11 +149,13 @@ public class Model extends Observable {
      * @param y y-ordinate of ball to add
      */
     public void addBall(double x, double y, double xv, double yv) {
+
         Ball ball = new Ball(x, y, xv, yv);
         balls.add(ball);
         setChanged();
         notifyObservers();
     }
+
 
     /**
      * Checks if a gizmo already exists at the location of the passed in gizmo.
@@ -177,11 +179,31 @@ public class Model extends Observable {
             }
         }
 
+        //Outside of grid
+        if (gizmoToCheck instanceof Circle) {
+            if (gizmoToCheck.getY1() >= 20 || gizmoToCheck.getX1() >= 20) {
+                return false;
+            }
+        }
+
+        if (gizmoToCheck instanceof Square) {
+            if (gizmoToCheck.getY1() >= 20 || gizmoToCheck.getX1() >= 20) {
+                return false;
+            }
+        }
+
+        if (gizmoToCheck instanceof Triangle) {
+            if (gizmoToCheck.getY1() >= 20 || gizmoToCheck.getX1() >= 20) {
+                return false;
+            }
+        }
+
         // handle basic gizmos
         for (IGizmo existingGizmo : gizmos) {
             if (existingGizmo.getX1() == gizmoToCheck.getX1() && existingGizmo.getY1() == gizmoToCheck.getY1()) { // if a gizmo already exists in that location
                 return false;
             }
+
             // handle left flippers
             if (gizmoToCheck instanceof LeftFlipper) {
                 if (existingGizmo.getX1() - 1 == gizmoToCheck.getX1() && existingGizmo.getY1() == gizmoToCheck.getY1()) {
@@ -359,14 +381,12 @@ public class Model extends Observable {
     void captureBallsInAbsorber(double time, Ball ball, Absorber absorber) {
         for (Ball b : balls) {
             if (time <= 0.1 && !ball.stopped()) {
-                //ball = new Ball(absorber.getX2() - 1 * L, absorber.getY2() - 0.5 * L, -10 * L, -10 * L);
                 System.out.println("Ball hit absorber");
                 b.setVelo(new Vect(0, 0));
                 b.stop();
                 b.setExactX(absorber.getX2() - b.getRadius());
-                b.setExactY(absorber.getY2() + (18.5 * L));
+                b.setExactY(absorber.getY2() + absorber.getY1());
                 fireQueue.add(b);
-                //balls.remove(b);
                 System.out.println("Balls to be fired" + fireQueue.size());
                 this.setChanged();
                 this.notifyObservers();
@@ -386,12 +406,6 @@ public class Model extends Observable {
                 Vect ballFire = new Vect(0, -30 * L);
                 ball.setVelo(ballFire);
             }
-        }
-    }
-
-    public void resetBall() {
-        for (Ball ball : balls) {
-            ball = new Ball(30, 30, 50, 50);
         }
     }
 
