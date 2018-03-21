@@ -144,8 +144,8 @@ class CollisionsEngine {
                     if (time < shortestTime) {
                         shortestTime = time;
                         newVelo = Geometry.reflectWall(lineSegment, ball.getVelo(), 1.0);
-
                     }
+
                 }
                 ArrayList<PhysicsCircle> physicsCircles = square.getEndCircles();
                 for (PhysicsCircle physicsCircle : physicsCircles) {

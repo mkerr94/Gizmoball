@@ -206,6 +206,18 @@ public class BuildView extends JPanel {
         JOptionPane.showMessageDialog(null, "This space is already occupied! Please choose an empty space.");
     }
 
+    public void ballOutsideGridZoneAlert() {
+        JOptionPane.showMessageDialog(null, "You are trying to place a ball outside the grid. Please stay within the board");
+    }
+
+    public void absorberOutsideGrid() {
+        JOptionPane.showMessageDialog(null, "The absorber can not be larger than the grid");
+    }
+
+    public void gizmoOutsideGrid() {
+        JOptionPane.showMessageDialog(null, "You are trying to place a gizmo outside the grid. Please stay within the board");
+    }
+
     public void keyConnectAlert(){
         JOptionPane.showMessageDialog(null,"Connect successful!");
     }

@@ -47,8 +47,12 @@ public class AddAbsorberListener implements ActionListener {
                 //doesn't give error message - not sure how to fix
                 if (model.checkValidGizmoLocation(absorber)) {
                     model.addGizmo(absorber);
-                }else{
+                }else if(!(model.checkValidGizmoLocation(absorber))){
                     buildView.occupiedSpaceAlert();
+                } else {
+                    if(!(absorber.getY2() > 20 ||absorber.getX2() > 20)){
+                        buildView.absorberOutsideGrid();
+                    }
                 }
                 gameBoard.removeMouseListener(this);
             }
@@ -72,8 +76,12 @@ public class AddAbsorberListener implements ActionListener {
             public void mouseMoved(MouseEvent e) {
 
             }
+
             };
+
+
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {

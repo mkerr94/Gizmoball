@@ -15,7 +15,6 @@ public class Model extends Observable {
     private double frictionValue;
     private CollisionsEngine collisionsEngine;
     private Map<Integer, IGizmo> keyConnections;
-
     public Model() {
         gizmos = new ArrayList<>();
         balls = new ArrayList<>();
@@ -208,13 +207,6 @@ public class Model extends Observable {
             if (existingGizmo.getX1() == gizmoToCheck.getX1() && existingGizmo.getY1() == gizmoToCheck.getY1()) { // if a gizmo already exists in that location
                 return false;
             }
-            if (existingGizmo instanceof Absorber) {
-                Absorber absorber = (Absorber) existingGizmo;
-                if (gizmoToCheck.getX1() >= absorber.getX1() && gizmoToCheck.getX1() <= (absorber.getX1() + absorber.getX2())) {
-                    if (gizmoToCheck.getY1() >= absorber.getY1() && gizmoToCheck.getY1() <= (absorber.getY1() + absorber.getY2()))
-                        return false;
-                }
-            }
 
             // handle left flippers
             if (gizmoToCheck instanceof LeftFlipper) {
@@ -306,7 +298,6 @@ public class Model extends Observable {
         setChanged();
         notifyObservers();
     }
-
     /***
      * Deletes the gizmo or ball at the given location
      * @param x x ordinate of target gizmo/ball
