@@ -18,23 +18,31 @@ public class SaveFile {
         fc = new JFileChooser(FILE_PATH);
         this.model = model;
         try {
-            getSaveFile();
+            if(!model.getBalls().isEmpty()) {
+                getSaveFile();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Nothing to save");
+                System.out.println("Nothing to save");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private void getSaveFile() throws IOException {
+        fc.setDialogTitle("Choose a name to save the file");
         int returnValue = fc.showSaveDialog(null);
+        File file = fc.getSelectedFile();
+        if(file.getName() == "")
+            JOptionPane.showMessageDialog(null, "blank is not a valid name");
         // Could extend into JFilechoose to implement more options
-        fc.setDialogTitle("Save as...");
-        if(fc.getSelectedFile().exists() && JOptionPane.showConfirmDialog(null,"The file exists, overwrite?",
-                "Existing file",JOptionPane.YES_NO_OPTION)  != JOptionPane.YES_OPTION){
-                System.out.println("Canceled");
+        if(fc.getSelectedFile().exists() && JOptionPane.showConfirmDialog(null,"Sorry, " + file.getName() + " already exists, overwrite?",
+                "File found",JOptionPane.YES_NO_OPTION)  != JOptionPane.YES_OPTION){
+                System.out.println("Canceled overwrite");
         }
         else if (returnValue == JFileChooser.APPROVE_OPTION){
             System.out.println("Success, opening file!");
-            File file = fc.getSelectedFile();
             getGizmos(file); }
         else if (returnValue == JFileChooser.CANCEL_OPTION){
             System.out.println("Cancelled, failed to pick an option");
@@ -46,7 +54,7 @@ public class SaveFile {
         System.out.println("Entered SaveFile");
         FileWriter fstream = null;
         try {
-            fstream = new FileWriter(fileToWrite, true);
+            fstream = new FileWriter(fileToWrite, false);
         } catch (IOException e) {
             e.printStackTrace();
         }
